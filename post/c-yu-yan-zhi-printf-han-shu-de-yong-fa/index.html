@@ -1,0 +1,385 @@
+<html>
+      <head>
+        <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1,initial-scale=1,user-scalable=no" />
+        <meta charset="utf-8">
+        <meta name="referrer" content="never">
+        <title>C语言之printf函数的用法 | TechZone</title>
+        <link rel="stylesheet" href="https://cdn.staticfile.org/KaTeX/0.11.1/katex.min.css">
+        <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://harriswilde.github.io/styles/main.css">
+          <script src="https://harriswilde.github.io/media/scripts/mdui.min.js"></script>
+        <link rel="stylesheet" href="https://at.alicdn.com/t/font_1306644_jwtuc2zzbrd.css">
+        <link href="https://fonts.googleapis.com/css?family=Dancing+Script|Ma+Shan+Zheng&display=swap" rel="stylesheet">
+        <script src="https://cdn.bootcss.com/highlight.js/9.15.10/highlight.min.js"></script>
+        <script src="https://harriswilde.github.io/media/scripts/script.js"></script>
+        <script >hljs.initHighlightingOnLoad();</script>
+        
+
+    </head>
+    <body class="mdui-theme-primary-purple mdui-theme-accent-purple">
+        <header class="index-img mdui-m-b-3"  style="background-image: url(https://s2.ax1x.com/2019/12/11/Qr259J.jpg);" >
+                          <button class="mdui-btn  mdui-btn-icon mdui-btn-dense mdui-color-theme-500 mdui-ripple yinying mdui-m-t-1 mdui-m-l-1" mdui-menu="{target: '#demo-attr-cascade'}"><i class="mdui-icon material-icons">&#xe5d2;</i></button>
+                <ul class="mdui-menu" id="demo-attr-cascade">
+                
+                        <li class="mdui-menu-item">
+                          <a href="/" class="mdui-ripple">首页</a>
+                        </li>
+                
+                        <li class="mdui-menu-item">
+                          <a href="/archives" class="mdui-ripple">归档</a>
+                        </li>
+                
+                        <li class="mdui-menu-item">
+                          <a href="/tags" class="mdui-ripple">标签</a>
+                        </li>
+                
+                        <li class="mdui-menu-item">
+                          <a href="/post/about" class="mdui-ripple">关于</a>
+                        </li>
+                
+                        <li class="mdui-menu-item">
+                          <a href="https://www.jianshu.com/u/766d2f134900" class="mdui-ripple">我的简书</a>
+                        </li>
+                
+                      </ul>
+
+        </header>
+        <div class="mdui-container post">
+                <div class="mdui-row">
+                        <div class="mdui-col-md-8 mdui-col-offset-md-2 ">
+                         <article class="mdui-shadow-10 mdui-p-a-2 post-list">
+                           <div class="mdui-typo-display-1 mdui-m-b-3">C语言之printf函数的用法</div>
+                           <a  class="index-list-biaoqian ">2019-10-13</a>
+                           <div class="mdui-typo mdui-m-t-3 post-neirong"><h2 id="techzoneharris">——TechZone(Harris)</h2>
+<hr>
+<p>​		printf，即<strong>格式化输出</strong>，是C语言中常用的输出函数。本节内容咱们就来讲讲关于这个函数的一些用法。</p>
+<p>​		我们在《<a href="https://www.jianshu.com/p/7c1e13f21335">第一个C语言程序</a>》中有粗略地提到了printf函数，小伙伴们应该也对这个函数有了一个大致的了解，大概知道了是用来<strong>输出数据</strong>用的。但是，我们既然说它是个函数，那么就应该有挺多丰富的用法等着我们来发掘。那我们就一起来看看到底有哪些方法。</p>
+<h3 id="初窥门径">初窥门径</h3>
+<p>​		我们还是从那个最简单的C语言程序开始：</p>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+int main(void)
+{
+    printf(&quot;Hello, world!\n&quot;);
+    return 0;
+}
+</code></pre>
+<p>printf函数有个括号，那么这个函数的<strong>所有参数</strong>都是放在这个括号里面的。什么意思呢，printf这个函数就像是一个工具，这个工具有许许多多的功能。如何去设置这个工具，让它达到我们想要的效果，就只需要把我们的想法写在括号里就完事儿啦。</p>
+<p>​		但是呢，这个工具并没有搭载目前最新最火的人工智能，比如你这么写<br>
+<code>printf(让&quot;Hello, world!\n&quot;这个东西给劳资居中)</code>，这样肯定不行，因为printf看不懂呀。只有写出它看得懂的东西，它才会听话，乖乖给我们工作。你要是说些它听不懂的，那它就直接罢工不干啦，你就跟老板解释去吧！(printf：别说人话了，我听不懂)</p>
+<h3 id="正式开始">正式开始</h3>
+<p>​		既然想要函数听懂我们在说什么，就要遵循它的方式。那么我们先来了解下printf的通式：</p>
+<p><code>printf(输出框架*格式化设置,附加参数)</code></p>
+<h4 id="参数解析">参数解析</h4>
+<ul>
+<li>
+<p>输出框架</p>
+<p>​		我们上面那个<code>printf(&quot;Hello, world!\n&quot;)</code>中，就只用到了<strong>输出框架</strong>这一个参数。有的小伙伴可能会问了，我们看到的全部内容不就是引号里面的吗？咋叫框架呢？</p>
+<p>​		其实不然，我们还只用了一个参数，别急，后面大家就知道啦。</p>
+</li>
+<li>
+<p>格式化设置</p>
+<p>​		这个<strong>星号</strong>其实是没有的，这里只是告诉大家这两个参数之间是<strong>连接起来</strong>的，<strong>不</strong>需要空格。</p>
+<p>​		此处的语法通式为：<br>
+<code>%[标志] [宽度] [精度] [长度修饰符] 转换字符</code></p>
+<p>​		其中，带中括号的是<strong>可选参数</strong>，<strong>不</strong>带的是<strong>必选参数</strong>。</p>
+<ol>
+<li>
+<p>转换字符：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">字符</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">c</td>
+<td style="text-align:left">char；字符</td>
+</tr>
+<tr>
+<td style="text-align:center">d</td>
+<td style="text-align:left">int；带符号的十进制整数</td>
+</tr>
+<tr>
+<td style="text-align:center">i</td>
+<td style="text-align:left">同上</td>
+</tr>
+<tr>
+<td style="text-align:center">e</td>
+<td style="text-align:left">double；以指数形式输出单、双精度浮点数</td>
+</tr>
+<tr>
+<td style="text-align:center">E</td>
+<td style="text-align:left">同上</td>
+</tr>
+<tr>
+<td style="text-align:center">f</td>
+<td style="text-align:left">double；以小数的形式输出单、双精度浮点数（指数显示小写e）</td>
+</tr>
+<tr>
+<td style="text-align:center">g</td>
+<td style="text-align:left">double；以%f或%e中较短的一种方式输出单、双精度浮点数（指数显示小写e）</td>
+</tr>
+<tr>
+<td style="text-align:center">G</td>
+<td style="text-align:left">同上，指数显示大写E</td>
+</tr>
+<tr>
+<td style="text-align:center">o</td>
+<td style="text-align:left">unsigned int；无符号八进制（无前导0）</td>
+</tr>
+<tr>
+<td style="text-align:center">s</td>
+<td style="text-align:left">char；字符串</td>
+</tr>
+<tr>
+<td style="text-align:center">u</td>
+<td style="text-align:left">int；无符号十进制</td>
+</tr>
+<tr>
+<td style="text-align:center">x</td>
+<td style="text-align:left">unsigned int；无符号十六进制（无前导0x）</td>
+</tr>
+<tr>
+<td style="text-align:center">X</td>
+<td style="text-align:left">同上（无前导0X）</td>
+</tr>
+<tr>
+<td style="text-align:center">p</td>
+<td style="text-align:left">void；指针值</td>
+</tr>
+<tr>
+<td style="text-align:center">n</td>
+<td style="text-align:left">int；用于存放已写字符的个数到变量，不用于输出</td>
+</tr>
+<tr>
+<td style="text-align:center">%</td>
+<td style="text-align:left">不进行参数转换；%本身</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>标志：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">标志</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">-</td>
+<td style="text-align:left">指定被转换的参数在其字段内左对齐（默认是右对齐）</td>
+</tr>
+<tr>
+<td style="text-align:center">+</td>
+<td style="text-align:left">给数加上正负号</td>
+</tr>
+<tr>
+<td style="text-align:center">[空格]</td>
+<td style="text-align:left">若非负数则加上空格</td>
+</tr>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:left">对于数值转换，当输出长度小于字段宽度时，添加前导0补充</td>
+</tr>
+<tr>
+<td style="text-align:center">#</td>
+<td style="text-align:left">指定另一种输出方式<br>1. 若转换字符为o，则第一个数为0<br>2. 若转换字符为x或X，则在输出的非零值前加0x或0X<br>3. 对于转换字符为e、E、f、g或G，则输出的数总包含一个小数点。<br>另外，对于转换字符g或G，还将尾部无意义的0保留</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>宽度：</p>
+<p>转换后的参数输出宽度<strong>至少</strong>达到这个值，若不足则在<strong>左边或右边</strong>填补空格或者0。具体看标志的设置，<strong>若无，默认左边填充空格。</strong></p>
+</li>
+<li>
+<p>精度：</p>
+<p>这里要声明一下，只有这个参数前面是要加点号&quot;<strong>.</strong>&quot;来分隔的，</p>
+<p>对于<strong>字符串</strong>，它指定打印的字符的<strong>最大个数</strong>。</p>
+<p>对于<strong>整数</strong>，它指定打印字符的<strong>位数</strong>，必要时加0来填补。</p>
+<p>对于<strong>转换字符为e、E或f</strong>，它指定打印的<strong>小数点后</strong>的数字位数。</p>
+<p>对于<strong>转换字符为g或G</strong>，它指定打印的<strong>有效数字</strong>位数。</p>
+</li>
+<li>
+<p>长度修饰符：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">修饰符</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">hh</td>
+<td style="text-align:left">按signed char或unsigned char类型输出</td>
+</tr>
+<tr>
+<td style="text-align:center">h</td>
+<td style="text-align:left">按short或unsignedshort输出</td>
+</tr>
+<tr>
+<td style="text-align:center">l</td>
+<td style="text-align:left">按long或unsigned long输出</td>
+</tr>
+<tr>
+<td style="text-align:center">ll</td>
+<td style="text-align:left">按long long或者unsigned long long输出</td>
+</tr>
+<tr>
+<td style="text-align:center">L</td>
+<td style="text-align:left">按long double类型输出</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+</li>
+<li>
+<p>附加参数</p>
+<p>所谓附加参数，笔者也不做过多解释。假设我有一个变量c，在<code>int c=3</code>之后，我想要输出c的值，该怎么办呢？</p>
+<p>有的小伙伴很聪明，立马说，Harris！我知道，这样不就行了：</p>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+int main(void)
+{
+    int c=3;
+    printf(&quot;C=3\n&quot;);
+    return 0;
+}
+</code></pre>
+<p>是的，这样做没错。我们的确正确输出了整型变量c的值。但是，我们写程序，很多时候时为了方便<strong>不懂程序的人</strong>来使用的。我们知道c的值，那是因为我们看得懂代码。</p>
+<p>如果我要你输出刚才用户输入的值，你怎么办呢？那么这个时候，<strong>附加参数</strong>就大显神威了。</p>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+int main(void)
+{
+    int c=3;//这里假定用户已经输入了值
+    printf(&quot;C的值为%d&quot;,c);
+    return 0;
+}
+</code></pre>
+<p>看到了吧。这里就把<strong>动态的变量c</strong>嵌入到语句里面输出了。</p>
+<p>看到这里我相信小伙伴们应该也明白了为啥我之前说引号里面的是<strong>框架</strong>了。这就是所谓的<strong>格式化输出</strong>，是不是有点只可意会不可言传的感觉呢？</p>
+<p>今天的内容基本就到这里结束啦。不过Harris在这里给大家留个悬念，大家可以自己回去自己的编译器上实验一下，看看能不能理解输出的结果？具体原理以后会讲，所以不理解没关系，学好上面的内容就很棒啦！</p>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+int main(void)
+{
+    char C = 'c';
+    printf(&quot;%c=%d&quot;,C,C);
+    return 0;
+}
+</code></pre>
+</li>
+</ul>
+</div>
+                              <div class="mdui-divider mdui-m-t-3"></div>
+                              <div class="mdui-row-xs-2 mdui-m-t-2">
+  <div class="mdui-col"> <div class="mdui-text-left"><a href="https://harriswilde.github.io/post/jin-zhi-zhuan-huan-yi-ji-yuan-fan-bu-ma">进制转换以及原、反、补码</a></div></div>
+ <div class="mdui-col"><div class="mdui-text-right "><a href="https://harriswilde.github.io/post/c-yu-yan-de-yi-xie-ji-ben-zhi-shi">C语言的一些基本知识</a></div> </div>
+                                </div>
+                                <div class="mdui-divider mdui-m-t-2"></div>
+   
+ <script src="https://harriswilde.github.io/media/scripts/Valine.min.js"></script>
+ <div class="comment"></div>
+
+<script>
+      new Valine({
+            el: '.comment',
+
+
+
+            path: window.location.pathname,
+            pageSize: 30,
+            avatar:'mm', 
+       })
+
+    </script> 
+<script>
+    if(window.location.hash){
+        var checkExist = setInterval(function() {
+           if ($(window.location.hash).length) {
+              $('html, body').animate({scrollTop: $(window.location.hash).offset().top-90}, 1000);
+              clearInterval(checkExist);
+           }
+        }, 100);
+    }
+</script>
+                         </article>
+                 <div class="toc-container mdui-float-right">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#techzoneharris">——TechZone(Harris)</a>
+<ul>
+<li><a href="#%E5%88%9D%E7%AA%A5%E9%97%A8%E5%BE%84">初窥门径</a></li>
+<li><a href="#%E6%AD%A3%E5%BC%8F%E5%BC%80%E5%A7%8B">正式开始</a>
+<ul>
+<li><a href="#%E5%8F%82%E6%95%B0%E8%A7%A3%E6%9E%90">参数解析</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+
+                        </div>
+                 </div>
+          
+        </div>
+        <script data-no-instant>
+    (function ($) {
+        $.extend({
+            adamsOverload: function () {
+                $.viewImage({
+                    'target'  : '.post-neirong img',
+                    'exclude' : '.vsmile-icons img , .song-links-item img',
+                    'delay'   : 300
+                });
+            }
+        });
+    })(jQuery);
+    jQuery.adamsOverload();
+</script>
+        <footer class="footer mdui-m-t-5 mdui-text-center">
+               <nav class="social-links">
+                      <ul>
+                      
+                            
+                           
+                            
+                           
+                            
+                           
+                            
+                           
+                            
+                           
+                            
+                           
+                            
+                           
+                            
+                           
+                            
+                           
+                            
+                           
+                            
+                           
+                            
+                           
+                      </ul>
+                    </nav>
+                    <div class="copyright">
+                      <p>Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea × HarrisWilde</a> <br/> Theme by HarrisWilde × Shanbufun</a></p>
+                  </div>
+              </footer>
+    </body>
+</html>

@@ -1,0 +1,213 @@
+<html>
+      <head>
+        <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1,initial-scale=1,user-scalable=no" />
+        <meta charset="utf-8">
+        <meta name="referrer" content="never">
+        <title>第一个C语言程序 | TechZone</title>
+        <link rel="stylesheet" href="https://cdn.staticfile.org/KaTeX/0.11.1/katex.min.css">
+        <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://harriswilde.github.io/styles/main.css">
+          <script src="https://harriswilde.github.io/media/scripts/mdui.min.js"></script>
+        <link rel="stylesheet" href="https://at.alicdn.com/t/font_1306644_jwtuc2zzbrd.css">
+        <link href="https://fonts.googleapis.com/css?family=Dancing+Script|Ma+Shan+Zheng&display=swap" rel="stylesheet">
+        <script src="https://cdn.bootcss.com/highlight.js/9.15.10/highlight.min.js"></script>
+        <script src="https://harriswilde.github.io/media/scripts/script.js"></script>
+        <script >hljs.initHighlightingOnLoad();</script>
+        
+
+    </head>
+    <body class="mdui-theme-primary-purple mdui-theme-accent-purple">
+        <header class="index-img mdui-m-b-3"  style="background-image: url(https://s2.ax1x.com/2019/12/11/Qr2ElR.jpg);" >
+                          <button class="mdui-btn  mdui-btn-icon mdui-btn-dense mdui-color-theme-500 mdui-ripple yinying mdui-m-t-1 mdui-m-l-1" mdui-menu="{target: '#demo-attr-cascade'}"><i class="mdui-icon material-icons">&#xe5d2;</i></button>
+                <ul class="mdui-menu" id="demo-attr-cascade">
+                
+                        <li class="mdui-menu-item">
+                          <a href="/" class="mdui-ripple">首页</a>
+                        </li>
+                
+                        <li class="mdui-menu-item">
+                          <a href="/archives" class="mdui-ripple">归档</a>
+                        </li>
+                
+                        <li class="mdui-menu-item">
+                          <a href="/tags" class="mdui-ripple">标签</a>
+                        </li>
+                
+                        <li class="mdui-menu-item">
+                          <a href="/post/about" class="mdui-ripple">关于</a>
+                        </li>
+                
+                        <li class="mdui-menu-item">
+                          <a href="https://www.jianshu.com/u/766d2f134900" class="mdui-ripple">我的简书</a>
+                        </li>
+                
+                      </ul>
+
+        </header>
+        <div class="mdui-container post">
+                <div class="mdui-row">
+                        <div class="mdui-col-md-8 mdui-col-offset-md-2 ">
+                         <article class="mdui-shadow-10 mdui-p-a-2 post-list">
+                           <div class="mdui-typo-display-1 mdui-m-b-3">第一个C语言程序</div>
+                           <a  class="index-list-biaoqian ">2019-10-11</a>
+                           <div class="mdui-typo mdui-m-t-3 post-neirong"><h2 id="techzoneharris">——TechZone(Harris)</h2>
+<p>​		是不是小伙伴们学习C语言，首先把教材摊开，电脑上装好环境，打开编辑器，对照着书本上第一段代码一丝不苟地敲起来，然后Run……Awesome！这是我独享的moment……</p>
+<p>​		如有雷同，我声明我没有监视你们的电脑屏幕&lt;(￣ c￣)y▂ξ。</p>
+<p>​		好啦，言归正传。既然是针对初学者（我也是初学者，不管你信不信﹏），那么当然是要从最基础的开始讲起。</p>
+<p>​		曾经看到过一个段子：</p>
+<blockquote>
+<p>一程序猿写代码厌倦了，于是开始改行练书法。当程序猿铺好纸后，两眼一闭，大笔一挥，写下“Hello, world!”。</p>
+</blockquote>
+<p>​		段子虽然有点冷，但是其实说明了一个事实：在入门一门语言的时候，Hello, world!一定是你会见到的一句话。倒不是说一定就要用这句话，但是这句话的涵义，就是让你写的程序给世界问个好，声明自己已经诞生（于你手里）了。相信以前如果没有接触过编程的同学，当你见到自己写的第一个程序向你问好的时候，心里或多或少是有点点激动滴。</p>
+<p>​		完了之后，老实点的同学就会开始看看这些代码是啥意思，或者是继续往下看看；不老实的同学嘛……用这段自己尚不太懂的代码，开始各种恶搞、花式表白……</p>
+<p>（是不是又被我说中了呢:-)）</p>
+<p>​		好啦，废话不多说了，再说可能有小伙伴要生气了（哼！浪费劳资时间！我课很多的知不知道！）。直接上代码：</p>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+int main(void)
+{
+    printf(&quot;Hello, world!\n&quot;);
+    return 0;
+}
+</code></pre>
+<p>​		嗯，就这么多。如果你学过Python，那你可能会觉得，怎么这么多……</p>
+<p>​		没错，这就是面向过程的一种风格。每一步你都要告诉系统该怎么去做。那我们来看看每一行代码都到底是什么意思。</p>
+<p>​		首先看看第一行：</p>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+</code></pre>
+<p>​		首先第一个知识点：<strong>预处理命令</strong>。C语言中，以#号开头的，叫做预处理命令。预处理命令是告诉编译器应该在编译代码之前做哪些准备。预处理命令粗略分类可以分为3种：宏定义、文件包含和条件编译。英文学的好的同学应该猜到了，此处使用的是文件包含。</p>
+<p>​		那么这句代码具体是在干什么呢？C语言中的函数，实际上都是存储在“<strong>头文件</strong>”中的，代码中的<strong>stdio.h</strong>其实就是一个<strong>头文件</strong>。头文件一般以h为后缀。那么我们看看上面代码，我们使用了一个功能（函数），就是输出（printf）。那么这个功能是怎么实现的呢？实现方法就存储在stdio.h中。</p>
+<p>​		好的！既然已经有了解决方法了，如何让编译器来用，那就需要我们来告诉它。不得不说，C语言的编译器有点傻，你必须一步步告诉它，它才不会迷路。如果你学过Python，你会觉得C语言的编译器真的好傻，怎么啥都不知道。</p>
+<p>​		如果说预处理命令是前戏，那么接下来的就是正片了。我们来看看下一句：</p>
+<pre><code class="language-c">int main(void)
+</code></pre>
+<p>这句又是啥意思呢？</p>
+<p>​		其实，<strong>main</strong>函数是C语言的<strong>主函数</strong>。主函数就是整个程序的主体，程序若想执行，就必须写在主函数的框架内。那么这句代码的意思，就是定义主函数，方便后面代码的书写。<strong>int</strong>的意思是整数类型，<strong>void</strong>就是空的意思。在C99标准的定义中，规定主函数必须要是整数型且一定要有返回值，也就是第五行代码：</p>
+<pre><code class="language-c">		return 0;
+</code></pre>
+<p>也就是说，main函数是一个程序的入口，系统通过main函数来执行代码，当main函数执行完了之后，会给系统返回一个整型值，这里是<strong>0</strong>，表示程序正常退出。</p>
+<p>​		可能有的小伙伴又有问题了：你说标准中规定主函数必须是整型也就算了，这个return为啥要用0呢？难道也规定必须返回0给系统才行吗？</p>
+<p>​		其实不然，返回0表示程序正常退出，而返回其他值也是可以的（当然必须要是整型），只不过代表可能有异常的非正常退出罢了。在这个简单的程序中，使用另外的值返回是没有问题的，小伙伴们可以试试。</p>
+<p>​		其实在旧标准中也有一种不规范的写法，在C99标准中已经规定其为错误，这里展示一下，各位小伙伴不要用这样的语句。因为函数都必须要有返回值，所以直接定义为空型，就不用写return 0了（<strong>这现在是错的写法了！不要效仿！</strong>）：</p>
+<pre><code class="language-c">void main(void)
+</code></pre>
+<p>​		好的，咱们继续：</p>
+<pre><code class="language-c">{
+</code></pre>
+<p>​		？？？</p>
+<p>​		大括号有啥好讲的？</p>
+<p>​		虽然很多小伙伴都已经理解了，但是这里还是多唠叨几句。C语言是使用大括号来控制代码块的，大括号里面的语句是一个整体，此处表明这些语句全是归为main函数里面的。</p>
+<pre><code class="language-c">	printf(&quot;Hello, world!\n&quot;);
+</code></pre>
+<p>​		这个就是本程序的核心部分了。双引号内的是表示要输出的内容，那么后面为什么要有个**\n**呢？</p>
+<p>​		在C语言中，输出默认是不换行的。也就是说，不用\n的话，每次输出的内容都不会换行。这个\n也不是一定要加的，看个人的需求来选用。</p>
+<p>​		那么可能有的小伙伴会问了，打印就打印嘛，后面加个f干啥？</p>
+<p>​		printf后面的f，实际上是formatted的首字母，所以printf的中文名叫<code>格式化输出</code>。既然是格式化输出，那么功能肯定不止这么点啦。关于printf的详细用法，后期会写一篇博客来专门讲解(*￣3￣)╭</p>
+<p>​		第一个C语言程序的讲解就这么多了。也许有细心的小伙伴已经发现了，为啥有的语句后面有分号，有的没有呢？</p>
+<p>​		其实，在C语言中，分号代表一个语句的结束，所以大多数语句都是要加分号的。但是有两种情况不用加：</p>
+<blockquote>
+<ol>
+<li>预处理命令</li>
+<li>后面可以跟大括号的语句</li>
+</ol>
+</blockquote>
+<p>​		再回去看看，是不是这么回事呢？</p>
+<p>​		好啦，第一个程序就讲这么多了，赶快去恶搞或者花式表白吧(ˇ∀ˇ)</p>
+</div>
+                              <div class="mdui-divider mdui-m-t-3"></div>
+                              <div class="mdui-row-xs-2 mdui-m-t-2">
+  <div class="mdui-col"> <div class="mdui-text-left"><a href="https://harriswilde.github.io/post/c-yu-yan-de-yi-xie-ji-ben-zhi-shi">C语言的一些基本知识</a></div></div>
+ <div class="mdui-col"><div class="mdui-text-right "><a href="https://harriswilde.github.io/post/c-yu-yan-xue-xi-kai-chang-bai">C语言学习开场白</a></div> </div>
+                                </div>
+                                <div class="mdui-divider mdui-m-t-2"></div>
+   
+ <script src="https://harriswilde.github.io/media/scripts/Valine.min.js"></script>
+ <div class="comment"></div>
+
+<script>
+      new Valine({
+            el: '.comment',
+
+
+
+            path: window.location.pathname,
+            pageSize: 30,
+            avatar:'mm', 
+       })
+
+    </script> 
+<script>
+    if(window.location.hash){
+        var checkExist = setInterval(function() {
+           if ($(window.location.hash).length) {
+              $('html, body').animate({scrollTop: $(window.location.hash).offset().top-90}, 1000);
+              clearInterval(checkExist);
+           }
+        }, 100);
+    }
+</script>
+                         </article>
+                 <div class="toc-container mdui-float-right">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#techzoneharris">——TechZone(Harris)</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+
+                        </div>
+                 </div>
+          
+        </div>
+        <script data-no-instant>
+    (function ($) {
+        $.extend({
+            adamsOverload: function () {
+                $.viewImage({
+                    'target'  : '.post-neirong img',
+                    'exclude' : '.vsmile-icons img , .song-links-item img',
+                    'delay'   : 300
+                });
+            }
+        });
+    })(jQuery);
+    jQuery.adamsOverload();
+</script>
+        <footer class="footer mdui-m-t-5 mdui-text-center">
+               <nav class="social-links">
+                      <ul>
+                      
+                            
+                           
+                            
+                           
+                            
+                           
+                            
+                           
+                            
+                           
+                            
+                           
+                            
+                           
+                            
+                           
+                            
+                           
+                            
+                           
+                            
+                           
+                            
+                           
+                      </ul>
+                    </nav>
+                    <div class="copyright">
+                      <p>Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea × HarrisWilde</a> <br/> Theme by HarrisWilde × Shanbufun</a></p>
+                  </div>
+              </footer>
+    </body>
+</html>
