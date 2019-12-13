@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://harriswilde.github.io</id>
     <title>TechZone</title>
-    <updated>2019-12-11T04:38:05.763Z</updated>
+    <updated>2019-12-13T10:13:29.636Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://harriswilde.github.io"/>
     <link rel="self" href="https://harriswilde.github.io/atom.xml"/>
@@ -2722,7 +2722,7 @@ int main(void)
 <p>​		虽然很多小伙伴都已经理解了，但是这里还是多唠叨几句。C语言是使用大括号来控制代码块的，大括号里面的语句是一个整体，此处表明这些语句全是归为main函数里面的。</p>
 <pre><code class="language-c">	printf(&quot;Hello, world!\n&quot;);
 </code></pre>
-<p>​		这个就是本程序的核心部分了。双引号内的是表示要输出的内容，那么后面为什么要有个**\n**呢？</p>
+<p>​		这个就是本程序的核心部分了。双引号内的是表示要输出的内容，那么后面为什么要有个<code>\n</code>呢？</p>
 <p>​		在C语言中，输出默认是不换行的。也就是说，不用\n的话，每次输出的内容都不会换行。这个\n也不是一定要加的，看个人的需求来选用。</p>
 <p>​		那么可能有的小伙伴会问了，打印就打印嘛，后面加个f干啥？</p>
 <p>​		printf后面的f，实际上是formatted的首字母，所以printf的中文名叫<code>格式化输出</code>。既然是格式化输出，那么功能肯定不止这么点啦。关于printf的详细用法，后期会写一篇博客来专门讲解(*￣3￣)╭</p>
