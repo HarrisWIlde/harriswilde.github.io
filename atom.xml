@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://harriswilde.github.io</id>
     <title>TechZone</title>
-    <updated>2019-12-22T02:36:37.414Z</updated>
+    <updated>2019-12-24T10:14:53.004Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://harriswilde.github.io"/>
     <link rel="self" href="https://harriswilde.github.io/atom.xml"/>
@@ -2711,8 +2711,8 @@ int main(void)
 <p>也就是说，main函数是一个程序的入口，系统通过main函数来执行代码，当main函数执行完了之后，会给系统返回一个整型值，这里是<strong>0</strong>，表示程序正常退出。</p>
 <p>​		可能有的小伙伴又有问题了：你说标准中规定主函数必须是整型也就算了，这个return为啥要用0呢？难道也规定必须返回0给系统才行吗？</p>
 <p>​		其实不然，返回0表示程序正常退出，而返回其他值也是可以的（当然必须要是整型），只不过代表可能有异常的非正常退出罢了。在这个简单的程序中，使用另外的值返回是没有问题的，小伙伴们可以试试。</p>
-<p>​		其实在旧标准中也有一种不规范的写法，在C99标准中已经规定其为错误，这里展示一下，各位小伙伴不要用这样的语句。因为函数都必须要有返回值，所以直接定义为空型，就不用写return 0了（<strong>这现在是错的写法了！不要效仿！</strong>）：</p>
-<pre><code class="language-c">void main(void)
+<p>​		其实在旧标准中也有一种不规范的写法，在C99标准中已经规定其为错误，这里展示一下，各位小伙伴不要用这样的语句。因为主函数都必须要有返回值，所以直接定义为空型，就不用写return 0了（<strong>这现在是错的写法了！不要效仿！</strong>）：</p>
+<pre><code class="language-c">void main()
 </code></pre>
 <p>​		好的，咱们继续：</p>
 <pre><code class="language-c">{
