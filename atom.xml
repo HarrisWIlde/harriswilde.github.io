@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://harriswilde.github.io</id>
     <title>TechZone</title>
-    <updated>2019-12-29T15:09:30.702Z</updated>
+    <updated>2019-12-29T15:15:36.107Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://harriswilde.github.io"/>
     <link rel="self" href="https://harriswilde.github.io/atom.xml"/>
@@ -12,8 +12,8 @@
     <rights>All rights reserved 2019, TechZone</rights>
     <entry>
         <title type="html"><![CDATA[C语言之数组]]></title>
-        <id>https://harriswilde.github.io/post/c-yu-yan-zhi-shu-zu</id>
-        <link href="https://harriswilde.github.io/post/c-yu-yan-zhi-shu-zu">
+        <id>https://harriswilde.github.io/post/CArray</id>
+        <link href="https://harriswilde.github.io/post/CArray">
         </link>
         <updated>2019-12-07T15:29:32.000Z</updated>
         <content type="html"><![CDATA[<h2 id="techzoneharris">——TechZone(Harris)</h2>
@@ -400,8 +400,8 @@ void f()
     </entry>
     <entry>
         <title type="html"><![CDATA[杂谈·一个神一般的随机算法]]></title>
-        <id>https://harriswilde.github.io/post/za-tan-yi-ge-shen-yi-ban-de-sui-ji-suan-fa</id>
-        <link href="https://harriswilde.github.io/post/za-tan-yi-ge-shen-yi-ban-de-sui-ji-suan-fa">
+        <id>https://harriswilde.github.io/post/GreatRandom</id>
+        <link href="https://harriswilde.github.io/post/GreatRandom">
         </link>
         <updated>2019-11-15T02:31:28.000Z</updated>
         <content type="html"><![CDATA[<h2 id="techzoneharris">——TechZone(Harris)</h2>
@@ -479,8 +479,8 @@ void f()
     </entry>
     <entry>
         <title type="html"><![CDATA[C语言的分支与循环]]></title>
-        <id>https://harriswilde.github.io/post/c-yu-yan-de-fen-zhi-yu-xun-huan</id>
-        <link href="https://harriswilde.github.io/post/c-yu-yan-de-fen-zhi-yu-xun-huan">
+        <id>https://harriswilde.github.io/post/CBranchCycle</id>
+        <link href="https://harriswilde.github.io/post/CBranchCycle">
         </link>
         <updated>2019-11-07T02:24:12.000Z</updated>
         <content type="html"><![CDATA[<h2 id="techzoneharris">——TechZone(Harris)</h2>
@@ -1039,8 +1039,8 @@ int main(void)
     </entry>
     <entry>
         <title type="html"><![CDATA[C语言运算符优先级及ASCII对照表]]></title>
-        <id>https://harriswilde.github.io/post/c-yu-yan-yun-suan-fu-you-xian-ji-ji-ascii-dui-zhao-biao</id>
-        <link href="https://harriswilde.github.io/post/c-yu-yan-yun-suan-fu-you-xian-ji-ji-ascii-dui-zhao-biao">
+        <id>https://harriswilde.github.io/post/COperatorASCII</id>
+        <link href="https://harriswilde.github.io/post/COperatorASCII">
         </link>
         <updated>2019-11-04T11:21:06.000Z</updated>
         <content type="html"><![CDATA[<h2 id="techzoneharris">——TechZone(Harris)</h2>
@@ -1996,8 +1996,8 @@ int main(void)
     </entry>
     <entry>
         <title type="html"><![CDATA[小数表示法(定点法、浮点法)]]></title>
-        <id>https://harriswilde.github.io/post/xiao-shu-biao-shi-fa-ding-dian-fa-fu-dian-fa</id>
-        <link href="https://harriswilde.github.io/post/xiao-shu-biao-shi-fa-ding-dian-fa-fu-dian-fa">
+        <id>https://harriswilde.github.io/post/FixedFloatPoint</id>
+        <link href="https://harriswilde.github.io/post/FixedFloatPoint">
         </link>
         <updated>2019-10-22T14:17:03.000Z</updated>
         <content type="html"><![CDATA[<h2 id="techzoneharris">——TechZone(Harris)</h2>
@@ -2094,8 +2094,8 @@ int main(void)
     </entry>
     <entry>
         <title type="html"><![CDATA[进制转换以及原、反、补码]]></title>
-        <id>https://harriswilde.github.io/post/jin-zhi-zhuan-huan-yi-ji-yuan-fan-bu-ma</id>
-        <link href="https://harriswilde.github.io/post/jin-zhi-zhuan-huan-yi-ji-yuan-fan-bu-ma">
+        <id>https://harriswilde.github.io/post/CodeTrans</id>
+        <link href="https://harriswilde.github.io/post/CodeTrans">
         </link>
         <updated>2019-10-15T11:13:22.000Z</updated>
         <content type="html"><![CDATA[<h2 id="techzoneharris">——TechZone(Harris)</h2>
@@ -2314,8 +2314,8 @@ int main(void)
     </entry>
     <entry>
         <title type="html"><![CDATA[C语言之printf函数的用法]]></title>
-        <id>https://harriswilde.github.io/post/c-yu-yan-zhi-printf-han-shu-de-yong-fa</id>
-        <link href="https://harriswilde.github.io/post/c-yu-yan-zhi-printf-han-shu-de-yong-fa">
+        <id>https://harriswilde.github.io/post/CPrintf</id>
+        <link href="https://harriswilde.github.io/post/CPrintf">
         </link>
         <updated>2019-10-13T13:11:27.000Z</updated>
         <content type="html"><![CDATA[<h2 id="techzoneharris">——TechZone(Harris)</h2>
@@ -2547,8 +2547,8 @@ int main(void)
     </entry>
     <entry>
         <title type="html"><![CDATA[C语言的一些基本知识]]></title>
-        <id>https://harriswilde.github.io/post/c-yu-yan-de-yi-xie-ji-ben-zhi-shi</id>
-        <link href="https://harriswilde.github.io/post/c-yu-yan-de-yi-xie-ji-ben-zhi-shi">
+        <id>https://harriswilde.github.io/post/CPreStudy</id>
+        <link href="https://harriswilde.github.io/post/CPreStudy">
         </link>
         <updated>2019-10-13T07:08:46.000Z</updated>
         <content type="html"><![CDATA[<h2 id="techzoneharris">——TechZone(Harris)</h2>
