@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://harriswilde.github.io</id>
     <title>TechZone</title>
-    <updated>2019-12-24T10:14:53.004Z</updated>
+    <updated>2019-12-29T13:56:35.309Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://harriswilde.github.io"/>
     <link rel="self" href="https://harriswilde.github.io/atom.xml"/>
@@ -2670,8 +2670,8 @@ int main(void)
     </entry>
     <entry>
         <title type="html"><![CDATA[第一个C语言程序]]></title>
-        <id>https://harriswilde.github.io/post/di-yi-ge-c-yu-yan-cheng-xu</id>
-        <link href="https://harriswilde.github.io/post/di-yi-ge-c-yu-yan-cheng-xu">
+        <id>https://harriswilde.github.io/post/FirstCProgram</id>
+        <link href="https://harriswilde.github.io/post/FirstCProgram">
         </link>
         <updated>2019-10-11T03:58:32.000Z</updated>
         <content type="html"><![CDATA[<h2 id="techzoneharris">——TechZone(Harris)</h2>
@@ -2740,8 +2740,8 @@ int main(void)
     </entry>
     <entry>
         <title type="html"><![CDATA[C语言学习开场白]]></title>
-        <id>https://harriswilde.github.io/post/c-yu-yan-xue-xi-kai-chang-bai</id>
-        <link href="https://harriswilde.github.io/post/c-yu-yan-xue-xi-kai-chang-bai">
+        <id>https://harriswilde.github.io/post/CBeginner</id>
+        <link href="https://harriswilde.github.io/post/CBeginner">
         </link>
         <updated>2019-10-10T14:06:52.000Z</updated>
         <content type="html"><![CDATA[<h2 id="techzoneharris">——TechZone(Harris)</h2>
