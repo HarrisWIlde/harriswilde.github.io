@@ -3,7 +3,7 @@
       <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <title>TechZone</title>
-<link rel="shortcut icon" href="https://harriswilde.github.io/favicon.ico?v=1577716493118">
+<link rel="shortcut icon" href="https://harriswilde.github.io/favicon.ico?v=1577717737746">
 <link rel="stylesheet" href="https://harriswilde.github.io/styles/main.css">
 <meta name="description" content="HarrisWilde祝诸君元旦快乐🎉" />
 
@@ -460,8 +460,7 @@ window.addEventListener('load', function() {
 </header>
 </div>
               <div class="post-body next-md-body" id="post_body">
-                <pre><code>    printf，即**格式化输出**，是C语言中常用的输出函数。本节内容咱们就来讲讲关于这个函数的一些用法。
-</code></pre>
+                <p>printf，即<strong>格式化输出</strong>，是C语言中常用的输出函数。本节内容咱们就来讲讲关于这个函数的一些用法。</p>
 <p>​		我们在《<a href="https://harriswilde.github.io/post/FirstCProgram">第一个C语言程序</a>》中有粗略地提到了printf函数，小伙伴们应该也对这个函数有了一个大致的了解，大概知道了是用来<strong>输出数据</strong>用的。但是，我们既然说它是个函数，那么就应该有挺多丰富的用法等着我们来发掘。那我们就一起来看看到底有哪些方法。</p>
 <h1 id="初窥门径">初窥门径</h1>
 <p>​		我们还是从那个最简单的C语言程序开始：</p>
@@ -472,8 +471,7 @@ int main(void)
     return 0;
 }
 </code></pre>
-<pre><code>    printf函数有个括号，那么这个函数的**所有参数**都是放在这个括号里面的。什么意思呢，printf这个函数就像是一个工具，这个工具有许许多多的功能。如何去设置这个工具，让它达到我们想要的效果，就只需要把我们的想法写在括号里就完事儿啦。
-</code></pre>
+<p>printf函数有个括号，那么这个函数的<strong>所有参数</strong>都是放在这个括号里面的。什么意思呢，printf这个函数就像是一个工具，这个工具有许许多多的功能。如何去设置这个工具，让它达到我们想要的效果，就只需要把我们的想法写在括号里就完事儿啦。</p>
 <p>​		但是呢，这个工具并没有搭载目前最新最火的人工智能，比如你这么写<br>
 <code>printf(让&quot;Hello, world!\n&quot;这个东西给劳资居中)</code>，这样肯定不行，因为printf看不懂呀。只有写出它看得懂的东西，它才会听话，乖乖给我们工作。你要是说些它听不懂的，那它就直接罢工不干啦，你就跟老板解释去吧！(printf：别说人话了，我听不懂)</p>
 <h1 id="正式开始">正式开始</h1>

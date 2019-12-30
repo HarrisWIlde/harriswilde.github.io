@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://harriswilde.github.io</id>
     <title>TechZone</title>
-    <updated>2019-12-30T14:35:00.572Z</updated>
+    <updated>2019-12-30T14:55:59.642Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://harriswilde.github.io"/>
     <link rel="self" href="https://harriswilde.github.io/atom.xml"/>
@@ -1099,7 +1099,7 @@ int main(void)
 </tr>
 <tr>
 <td>11</td>
-<td>位运算符 OR：<code>\|</code></td>
+<td>位运算符 OR：<code>|</code></td>
 <td>从左到右</td>
 </tr>
 <tr>
@@ -1109,7 +1109,7 @@ int main(void)
 </tr>
 <tr>
 <td>13</td>
-<td>逻辑运算符 OR：<code>\|\|</code></td>
+<td>逻辑运算符 OR：<code>||</code></td>
 <td>从左到右</td>
 </tr>
 <tr>
@@ -1119,7 +1119,7 @@ int main(void)
 </tr>
 <tr>
 <td>15</td>
-<td>赋值运算符：     <code>=</code>     <code>+=</code>     <code>-=</code>    <code>*=</code>    <code>/=</code>    <code>%=</code>    <code>&amp;=</code>    <code>^=</code>    <code>\|=</code>      <code>&lt;&lt;=</code>    <code>&gt;&gt;=</code></td>
+<td>赋值运算符：     <code>=</code>     <code>+=</code>     <code>-=</code>    <code>*=</code>    <code>/=</code>    <code>%=</code>    <code>&amp;=</code>    <code>^=</code>    <code>|=</code>      <code>&lt;&lt;=</code>    <code>&gt;&gt;=</code></td>
 <td>从右到左</td>
 </tr>
 <tr>
@@ -2091,12 +2091,9 @@ int main(void)
         <link href="https://harriswilde.github.io/post/CodeTrans">
         </link>
         <updated>2019-10-15T11:13:22.000Z</updated>
-        <content type="html"><![CDATA[<pre><code>    可能有的小伙伴不理解了：为啥这节讲这些呢，不应该先把语法什么的学习一下吗？
-
-    在之前的文章里面讲过，C语言的学习是需要了解一点计算机工作原理的。可能在初学时期用不到，但是如果真的要深入研究的话，是绝对避免不了的。况且这节的内容其实比较简单，我们不如先把它了解了，方便日后我们的进阶学习。
-
-    学习编程，尤其是底层编程，进制转换是一个避免不了的话题。其实我们仔细去观察，发现其实是有不少规律可循的。
-</code></pre>
+        <content type="html"><![CDATA[<p>可能有的小伙伴不理解了：为啥这节讲这些呢，不应该先把语法什么的学习一下吗？</p>
+<p>在之前的文章里面讲过，C语言的学习是需要了解一点计算机工作原理的。可能在初学时期用不到，但是如果真的要深入研究的话，是绝对避免不了的。况且这节的内容其实比较简单，我们不如先把它了解了，方便日后我们的进阶学习。</p>
+<p>学习编程，尤其是底层编程，进制转换是一个避免不了的话题。其实我们仔细去观察，发现其实是有不少规律可循的。</p>
 <hr>
 <h1 id="进制转换">进制转换</h1>
 <ol>
@@ -2269,36 +2266,22 @@ int main(void)
 </li>
 </ol>
 <h1 id="原码">原码</h1>
-<pre><code>    在了解这些码之前呢，我们先来了解一下基本知识。
-
-    首先，我们要知道，计算机中，存放一个数据最小的单位是bit（位，也称比特），而在TCP/IP协议中，规定`1Byte = 8bit`，Byte（字节）是最小的容量单位。因此，**一个字节里面就有8个位**。那么如果使用一个字节来表示数字的话，就是$2^8$个数。那么为了表示数字的符号，我们又规定，一个字节中的**最高位**（也就是最左边的那一位）是**符号位**，符号位为0表示的是**非负数**（记住，是正数和0），1则表示的是**负数**。
-
-    原码，实际上就是将十进制数转化成二进制的形式，然后把符号位加上即可。比如说5的原码，先转化为二进制，即`101`，再填充至7位，即`000 0101`，然后因为是非负数，符号位为`0`，那么5的原码就是`0000 0101`。
-
-    明白了吧，是不是觉得特别简单呢？那么-5的原码又是啥呢？
-
-    聪明的你一定想到了，就直接把符号位变为`1`就行啦，即`1000 0101`。
-
-    简直完美啊，如此简洁地表达了数字在存储器中的表示方式。直观形象又好记！
-
-    But！现在该说但是了。请问5和-5相加等于多少呢？
-
-    0啊！当然是0！这难道还要思考吗？？
-
-    是的，没错，但是你用两个数的原码加起来看看等于几？
-</code></pre>
+<p>在了解这些码之前呢，我们先来了解一下基本知识。</p>
+<p>首先，我们要知道，计算机中，存放一个数据最小的单位是bit（位，也称比特），而在TCP/IP协议中，规定<code>1Byte = 8bit</code>，Byte（字节）是最小的容量单位。因此，<strong>一个字节里面就有8个位</strong>。那么如果使用一个字节来表示数字的话，就是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>2</mn><mn>8</mn></msup></mrow><annotation encoding="application/x-tex">2^8</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">8</span></span></span></span></span></span></span></span></span></span></span>个数。那么为了表示数字的符号，我们又规定，一个字节中的<strong>最高位</strong>（也就是最左边的那一位）是<strong>符号位</strong>，符号位为0表示的是<strong>非负数</strong>（记住，是正数和0），1则表示的是<strong>负数</strong>。</p>
+<p>原码，实际上就是将十进制数转化成二进制的形式，然后把符号位加上即可。比如说5的原码，先转化为二进制，即<code>101</code>，再填充至7位，即<code>000 0101</code>，然后因为是非负数，符号位为<code>0</code>，那么5的原码就是<code>0000 0101</code>。</p>
+<p>明白了吧，是不是觉得特别简单呢？那么-5的原码又是啥呢？</p>
+<p>聪明的你一定想到了，就直接把符号位变为<code>1</code>就行啦，即<code>1000 0101</code>。</p>
+<p>简直完美啊，如此简洁地表达了数字在存储器中的表示方式。直观形象又好记！</p>
+<p>But！现在该说但是了。请问5和-5相加等于多少呢？</p>
+<p>0啊！当然是0！这难道还要思考吗？？</p>
+<p>是的，没错，但是你用两个数的原码加起来看看等于几？</p>
 <p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0000</mn><mo separator="true">,</mo><mn>0101</mn><mo>+</mo><mn>1000</mn><mo separator="true">,</mo><mn>0101</mn><mo>=</mo><mn>1000</mn><mo separator="true">,</mo><mn>1010</mn></mrow><annotation encoding="application/x-tex">0000,0101 + 1000,0101 = 1000,1010</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8388800000000001em;vertical-align:-0.19444em;"></span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">0</span><span class="mord">1</span><span class="mord">0</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8388800000000001em;vertical-align:-0.19444em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">0</span><span class="mord">1</span><span class="mord">0</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8388800000000001em;vertical-align:-0.19444em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">1</span><span class="mord">0</span></span></span></span></p>
-<pre><code>    咦？咋就不等于0了呢……
-
-    没错，问题就在这。如果用这种所谓的直观的形式去表达，既有悖于我们的常识，又不方便计算机的电路设计，于是我们的先人们开始了探索。
-</code></pre>
+<p>咦？咋就不等于0了呢……</p>
+<p>没错，问题就在这。如果用这种所谓的直观的形式去表达，既有悖于我们的常识，又不方便计算机的电路设计，于是我们的先人们开始了探索。</p>
 <h1 id="反码">反码</h1>
-<pre><code>    我们从上面的例子了解到，负数在表达的时候，不能这么图方便，不然可能会造成一些冲突和错误。先人们就开始折腾。结果弄出来反码这个东西。
-
-    我们说了，只是负数的表达除了问题，所以**正数无论是原码，反码还是后面我们讲的补码，都是不变的**。要变的只有负数。
-
-    负数原码转反码的方法很简单，符号位单独**不变**，只需要把其他的**按位取反**即可。什么叫按位取反呢，说成人话，就是0变1，1变0。还是拿刚刚的-5作为栗子。-5的原码为
-</code></pre>
+<p>我们从上面的例子了解到，负数在表达的时候，不能这么图方便，不然可能会造成一些冲突和错误。先人们就开始折腾。结果弄出来反码这个东西。</p>
+<p>我们说了，只是负数的表达除了问题，所以<strong>正数无论是原码，反码还是后面我们讲的补码，都是不变的</strong>。要变的只有负数。</p>
+<p>负数原码转反码的方法很简单，符号位单独<strong>不变</strong>，只需要把其他的<strong>按位取反</strong>即可。什么叫按位取反呢，说成人话，就是0变1，1变0。还是拿刚刚的-5作为栗子。-5的原码为</p>
 <blockquote>
 <p>1000 0101</p>
 </blockquote>
@@ -2310,20 +2293,14 @@ int main(void)
 <p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0000</mn><mo separator="true">,</mo><mn>0101</mn><mo>+</mo><mn>1111</mn><mo separator="true">,</mo><mn>1010</mn><mo>=</mo><mn>1111</mn><mo separator="true">,</mo><mn>1111</mn></mrow><annotation encoding="application/x-tex">0000,0101 + 1111,1010 = 1111,1111</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8388800000000001em;vertical-align:-0.19444em;"></span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">0</span><span class="mord">1</span><span class="mord">0</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8388800000000001em;vertical-align:-0.19444em;"></span><span class="mord">1</span><span class="mord">1</span><span class="mord">1</span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">1</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8388800000000001em;vertical-align:-0.19444em;"></span><span class="mord">1</span><span class="mord">1</span><span class="mord">1</span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mord">1</span><span class="mord">1</span><span class="mord">1</span></span></span></span></p>
 <p>我们发现，得到了一个8bit能表示的最大的值。这个路子能否成功，就看临门一脚了。距离成功仅一步之遥。</p>
 <h1 id="补码">补码</h1>
-<pre><code>    这个“临门一脚”就交给补码啦。补码的出现，相反数相加不为0的情况才被彻底解决。那么补码又是个啥东东呢？
-
-    正数的补码还是原码，这个刚刚说过了。而负数的补码，则是在反码的基础上加个1。可为啥是1呢？上面那个反码的例子，我相信大家是有些想法了，如果给`1111 1111`这个数加个1，那么等于多少呢？
-</code></pre>
+<p>这个“临门一脚”就交给补码啦。补码的出现，相反数相加不为0的情况才被彻底解决。那么补码又是个啥东东呢？</p>
+<p>正数的补码还是原码，这个刚刚说过了。而负数的补码，则是在反码的基础上加个1。可为啥是1呢？上面那个反码的例子，我相信大家是有些想法了，如果给<code>1111 1111</code>这个数加个1，那么等于多少呢？</p>
 <p>答案是<code>1 0000 0000</code>。</p>
-<pre><code>    又的小伙伴可能会抬杠了，那还是不等于0呀。我们注意观察，这个数已经达到9位了，最高位已经**溢出**一个Byte，那么对于一个Byte所表示的数字，计算机可以将最高位直接**舍弃**，bingo！不就变成`0000 0000`了吗？
-
-    是不是很奇妙呢？不得不说，先人们着实厉害呀，在这里向他们致敬！
-
-    另外，还要提醒一点，就是**补码的补码就是原码**，至于为什么大家可以回去自己试试，这里就不多赘述咯('')
-
-    最后，在这篇文章结束前，我还想提醒一句：**正数是三码归一！！**别到时候别人给你一个正数叫你转换，你还按位取反啥啥啥的，那样就丢人啦！
-
-    今天的博客就到此结束啦，如果你喜欢笔者的文章，记得点个赞哦(≧∇≦)ﾉ</code></pre>
+<p>又的小伙伴可能会抬杠了，那还是不等于0呀。我们注意观察，这个数已经达到9位了，最高位已经<strong>溢出</strong>一个Byte，那么对于一个Byte所表示的数字，计算机可以将最高位直接<strong>舍弃</strong>，bingo！不就变成<code>0000 0000</code>了吗？</p>
+<p>是不是很奇妙呢？不得不说，先人们着实厉害呀，在这里向他们致敬！</p>
+<p>另外，还要提醒一点，就是<strong>补码的补码就是原码</strong>，至于为什么大家可以回去自己试试，这里就不多赘述咯('')</p>
+<p>最后，在这篇文章结束前，我还想提醒一句：**正数是三码归一！！**别到时候别人给你一个正数叫你转换，你还按位取反啥啥啥的，那样就丢人啦！</p>
+<p>今天的博客就到此结束啦，如果你喜欢笔者的文章，记得点个赞哦(≧∇≦)ﾉ</p>
 ]]></content>
     </entry>
     <entry>
@@ -2332,8 +2309,7 @@ int main(void)
         <link href="https://harriswilde.github.io/post/CPrintf">
         </link>
         <updated>2019-10-13T13:11:27.000Z</updated>
-        <content type="html"><![CDATA[<pre><code>    printf，即**格式化输出**，是C语言中常用的输出函数。本节内容咱们就来讲讲关于这个函数的一些用法。
-</code></pre>
+        <content type="html"><![CDATA[<p>printf，即<strong>格式化输出</strong>，是C语言中常用的输出函数。本节内容咱们就来讲讲关于这个函数的一些用法。</p>
 <p>​		我们在《<a href="https://harriswilde.github.io/post/FirstCProgram">第一个C语言程序</a>》中有粗略地提到了printf函数，小伙伴们应该也对这个函数有了一个大致的了解，大概知道了是用来<strong>输出数据</strong>用的。但是，我们既然说它是个函数，那么就应该有挺多丰富的用法等着我们来发掘。那我们就一起来看看到底有哪些方法。</p>
 <h1 id="初窥门径">初窥门径</h1>
 <p>​		我们还是从那个最简单的C语言程序开始：</p>
@@ -2344,8 +2320,7 @@ int main(void)
     return 0;
 }
 </code></pre>
-<pre><code>    printf函数有个括号，那么这个函数的**所有参数**都是放在这个括号里面的。什么意思呢，printf这个函数就像是一个工具，这个工具有许许多多的功能。如何去设置这个工具，让它达到我们想要的效果，就只需要把我们的想法写在括号里就完事儿啦。
-</code></pre>
+<p>printf函数有个括号，那么这个函数的<strong>所有参数</strong>都是放在这个括号里面的。什么意思呢，printf这个函数就像是一个工具，这个工具有许许多多的功能。如何去设置这个工具，让它达到我们想要的效果，就只需要把我们的想法写在括号里就完事儿啦。</p>
 <p>​		但是呢，这个工具并没有搭载目前最新最火的人工智能，比如你这么写<br>
 <code>printf(让&quot;Hello, world!\n&quot;这个东西给劳资居中)</code>，这样肯定不行，因为printf看不懂呀。只有写出它看得懂的东西，它才会听话，乖乖给我们工作。你要是说些它听不懂的，那它就直接罢工不干啦，你就跟老板解释去吧！(printf：别说人话了，我听不懂)</p>
 <h1 id="正式开始">正式开始</h1>
@@ -2565,8 +2540,7 @@ int main(void)
         <link href="https://harriswilde.github.io/post/CPreStudy">
         </link>
         <updated>2019-10-13T07:08:46.000Z</updated>
-        <content type="html"><![CDATA[<pre><code>    在正式开始学习C语言之前，我们先带大家来熟悉一下C语言的一些基本知识。只有熟悉了这些基本知识，后期的学习和实践中才不会因为一些简单的问题而卡格。
-</code></pre>
+        <content type="html"><![CDATA[<p>在正式开始学习C语言之前，我们先带大家来熟悉一下C语言的一些基本知识。只有熟悉了这些基本知识，后期的学习和实践中才不会因为一些简单的问题而卡格。</p>
 <h1 id="编译型语言和解释性语言的区别">编译型语言和解释性语言的区别</h1>
 <p>​		我们之前说过，C语言是一种编译型语言，而像Python，Ruby这种就属于解释性语言。</p>
 <p>​		所谓编译型语言，就是将写好的代码先转化为<strong>汇编语言</strong>，然后再由<strong>编译器</strong>转化为<strong>机器码</strong>，最后交给CPU执行。而解释型语言则是先把写好的代码转化为<strong>字节码</strong>，然后交给<strong>解释器</strong>，最后由CPU来执行。也就是说，编译型语言是一次性翻译完，然后再执行，解释型是一边翻译一边运行。</p>
@@ -2687,8 +2661,7 @@ int main(void)
         <link href="https://harriswilde.github.io/post/FirstCProgram">
         </link>
         <updated>2019-10-11T03:58:32.000Z</updated>
-        <content type="html"><![CDATA[<pre><code>    是不是小伙伴们学习C语言，首先把教材摊开，电脑上装好环境，打开编辑器，对照着书本上第一段代码一丝不苟地敲起来，然后Run……Awesome！这是我独享的moment……
-</code></pre>
+        <content type="html"><![CDATA[<p>是不是小伙伴们学习C语言，首先把教材摊开，电脑上装好环境，打开编辑器，对照着书本上第一段代码一丝不苟地敲起来，然后Run……Awesome！这是我独享的moment……</p>
 <p>​		如有雷同，我声明我没有监视你们的电脑屏幕&lt;(￣ c￣)y▂ξ。</p>
 <p>​		好啦，言归正传。既然是针对初学者（我也是初学者，不管你信不信﹏），那么当然是要从最基础的开始讲起。</p>
 <p>​		曾经看到过一个段子：</p>
@@ -2757,8 +2730,7 @@ int main(void)
         <link href="https://harriswilde.github.io/post/CBeginner">
         </link>
         <updated>2019-10-10T14:06:52.000Z</updated>
-        <content type="html"><![CDATA[<pre><code>    很多想学习计算机的小伙伴都会用C语言来进行入门。至于为什么，想必很多还在入门阶段的萌新不太明白。其实，学习C语言，你需要掌握的，不仅仅是软件上的知识，对硬件也要有些了解。但其实，我个人不太建议使用C语言来打开自己学习计算机软件的大门，也正是因为上述原因——太过繁杂。个人观点觉得，学习一个东西，首要的是兴趣和激情。C语言上来就是许许多多的变量、类型、数据结构、指针等等。学习中觉得头大的萌新也不在少数。
-</code></pre>
+        <content type="html"><![CDATA[<p>很多想学习计算机的小伙伴都会用C语言来进行入门。至于为什么，想必很多还在入门阶段的萌新不太明白。其实，学习C语言，你需要掌握的，不仅仅是软件上的知识，对硬件也要有些了解。但其实，我个人不太建议使用C语言来打开自己学习计算机软件的大门，也正是因为上述原因——太过繁杂。个人观点觉得，学习一个东西，首要的是兴趣和激情。C语言上来就是许许多多的变量、类型、数据结构、指针等等。学习中觉得头大的萌新也不在少数。</p>
 <p>​		在很多小伙伴问我如何入门计算机的时候，我经常会推荐使用<strong>Python</strong>语言去入门计算机。首先<strong>第一点</strong>，语法简单，语言化。其实Python的语法很接近我们自然交流时候的语法，这对于初学者的思维转变起到过渡的作用。<strong>第二</strong>，Python语法中，有个很棒的操作——直接把缩进规定到语法里面。这样的话，初学者一开始就可以形成代码块缩进的良好习惯，对后续学习其他语言的代码规范化有着很大的作用。<strong>第三</strong>，Python的实用性确实非常强。学习Python对于日后的学习提升无疑有着很大的帮助，尤其在一些高新领域，Python所做的工作都是十分广泛的。<strong>第四</strong>，C语言中的很多概念其实在Python里面都有提到，但是Python不需要深究其原理，C语言大多需要，至少要浅尝。在Python中对其作用略有了解后再去C语言中深入学习，其实没有那么突兀、难理解。</p>
 <p>​		说了Python这么多，C语言的优势也是很多的，比如代码直接编译，运行速度是Python没法比的，而且也是老牌语言，在嵌入式开发、底层开发等等领域有着自己的优势。既然看到很多小伙伴在学习C语言的时候或多或少有些困难，那么笔者决定开创这一个博客，来专门写写学习编程时的一些想法。受限于笔者自身水平，如有错误或者更好的方法，欢迎指出。</p>
 <p>​		C语言隶属于面向过程的编译型语言，Python面向对象的解释型语言。具体这俩是啥意思，我用两种语言的输出Hello, world!的代码来展现，大家先自己感受下，日后的学习中，我们会继续深入理解和切身感受。</p>
