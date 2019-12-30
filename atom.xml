@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://harriswilde.github.io</id>
     <title>TechZone</title>
-    <updated>2019-12-30T14:58:20.867Z</updated>
+    <updated>2019-12-30T15:15:15.025Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://harriswilde.github.io"/>
     <link rel="self" href="https://harriswilde.github.io/atom.xml"/>
@@ -10,6 +10,22 @@
     <logo>https://harriswilde.github.io/images/avatar.png</logo>
     <icon>https://harriswilde.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, TechZone</rights>
+    <entry>
+        <title type="html"><![CDATA[Python学习开场白]]></title>
+        <id>https://harriswilde.github.io/post/PythonBeginner</id>
+        <link href="https://harriswilde.github.io/post/PythonBeginner">
+        </link>
+        <updated>2019-12-31T15:02:06.000Z</updated>
+        <content type="html"><![CDATA[<p>在2019年的最后一天，写一篇小短文来正式开启我的Python学习的版面。</p>
+<p>Python语言，用我的话来说，就是通识语言。基本上只要你会一点点英语，那么这门语言对于你来说，就毫无难度。语法几乎就是英语，你甚至不需要知道那些艰深晦涩的原理，就可以快速地达到你想达到的目的。无论你是文科还是理科，无论你是否有计算机基础，你都可以学习这门语言。我甚至有一种预感，这门语言未来将不再是程序员们的专属，可能会成为一门普适性的语言，现在已经又这种趋势了。</p>
+<p>当然，Python也有许多令人诟病的地方，比如版本更新兼容性差，性能低，函数语法太过冗杂等等。咱们就来避重就轻，感受一下这门语言的魅力。</p>
+<p>Python和大数据、人工智能、机器学习等名词连起来出现已经见怪不怪了，还是那句话，你不需要很专业，也不需要很痛苦，静下心来学习，你会发现，编程已经成为了一种享受，就像和计算机对话一样。</p>
+<p>但是，如果你是计算机类专业的学生，或者打算从事这方面的工作，就千万别局限于Python，也别听那些什么机构吹的东西，Python虽然简单，但是用Python来解决的问题往往不简单，过硬的实力是必不可少的。</p>
+<p>最后，祝诸君鼠年大吉，学业有成、事业攀升！</p>
+<pre><code class="language-python">print(&quot;新年快乐！&quot;)
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[C语言之数组]]></title>
         <id>https://harriswilde.github.io/post/CArray</id>
@@ -2719,31 +2735,6 @@ int main(void)
 </blockquote>
 <p>​		再回去看看，是不是这么回事呢？</p>
 <p>​		好啦，第一个程序就讲这么多了，赶快去恶搞或者花式表白吧(ˇ∀ˇ)</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[C语言学习开场白]]></title>
-        <id>https://harriswilde.github.io/post/CBeginner</id>
-        <link href="https://harriswilde.github.io/post/CBeginner">
-        </link>
-        <updated>2019-10-10T14:06:52.000Z</updated>
-        <content type="html"><![CDATA[<p>很多想学习计算机的小伙伴都会用C语言来进行入门。至于为什么，想必很多还在入门阶段的萌新不太明白。其实，学习C语言，你需要掌握的，不仅仅是软件上的知识，对硬件也要有些了解。但其实，我个人不太建议使用C语言来打开自己学习计算机软件的大门，也正是因为上述原因——太过繁杂。个人观点觉得，学习一个东西，首要的是兴趣和激情。C语言上来就是许许多多的变量、类型、数据结构、指针等等。学习中觉得头大的萌新也不在少数。</p>
-<p>​		在很多小伙伴问我如何入门计算机的时候，我经常会推荐使用<strong>Python</strong>语言去入门计算机。首先<strong>第一点</strong>，语法简单，语言化。其实Python的语法很接近我们自然交流时候的语法，这对于初学者的思维转变起到过渡的作用。<strong>第二</strong>，Python语法中，有个很棒的操作——直接把缩进规定到语法里面。这样的话，初学者一开始就可以形成代码块缩进的良好习惯，对后续学习其他语言的代码规范化有着很大的作用。<strong>第三</strong>，Python的实用性确实非常强。学习Python对于日后的学习提升无疑有着很大的帮助，尤其在一些高新领域，Python所做的工作都是十分广泛的。<strong>第四</strong>，C语言中的很多概念其实在Python里面都有提到，但是Python不需要深究其原理，C语言大多需要，至少要浅尝。在Python中对其作用略有了解后再去C语言中深入学习，其实没有那么突兀、难理解。</p>
-<p>​		说了Python这么多，C语言的优势也是很多的，比如代码直接编译，运行速度是Python没法比的，而且也是老牌语言，在嵌入式开发、底层开发等等领域有着自己的优势。既然看到很多小伙伴在学习C语言的时候或多或少有些困难，那么笔者决定开创这一个博客，来专门写写学习编程时的一些想法。受限于笔者自身水平，如有错误或者更好的方法，欢迎指出。</p>
-<p>​		C语言隶属于面向过程的编译型语言，Python面向对象的解释型语言。具体这俩是啥意思，我用两种语言的输出Hello, world!的代码来展现，大家先自己感受下，日后的学习中，我们会继续深入理解和切身感受。</p>
-<p>C语言：</p>
-<pre><code class="language-c">#include &lt;stdio.h&gt;
-int main(void)
-{
-    printf(&quot;Hello, World!\n&quot;);
-    return 0;
-}
-</code></pre>
-<p>Python语言：</p>
-<pre><code class="language-python">print('Hello, world!')
-</code></pre>
-<p>​		不过多作评论，开场白就到这，太啰嗦也不好。日后我有空就会写一些学习编程的小短文，在帮助大家学习的同时，也帮助我自己学习（没错，我也在学习(✿◕‿◕✿)）。</p>
-<p>​		好啦，时间不早了，我要睡觉了。晚安，各位。</p>
 ]]></content>
     </entry>
 </feed>
