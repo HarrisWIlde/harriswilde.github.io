@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://harriswilde.github.io</id>
     <title>TechZone</title>
-    <updated>2019-12-30T13:18:44.162Z</updated>
+    <updated>2019-12-30T13:26:37.917Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://harriswilde.github.io"/>
     <link rel="self" href="https://harriswilde.github.io/atom.xml"/>
@@ -16,8 +16,7 @@
         <link href="https://harriswilde.github.io/post/CArray">
         </link>
         <updated>2019-12-07T15:29:32.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="techzoneharris">——TechZone(Harris)</h2>
-<hr>
+        <content type="html"><![CDATA[<p>[toc]</p>
 <p>学完了前面几种基础语法之后，你可能会渐渐发现，现有的数据的记录方式，已经无法很好地解决我们接下来要解决的问题。比如有一天，老师找你计算一下全班同学的平均成绩。那么你就会开始思考如何存储全班的成绩。按照之前学习的知识，我们可以定义<code>a1</code> <code>a2</code> <code>a3</code> <code>……</code>。但是，这样未免也太麻烦了，如果要记录全省人民的身高数据呢？如果下个学期班里学生人数有变化呢？</p>
 <p>你会发现，种种原因，导致了我们编写的程序很繁杂，不够灵活。那么这样，编程也就没有太大的必要了。好在，C语言提供了一种存储数据的方式，叫做<strong>数组</strong>。</p>
 <hr>
