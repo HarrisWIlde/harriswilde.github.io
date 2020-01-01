@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://harriswilde.github.io</id>
     <title>TechZone</title>
-    <updated>2020-01-01T14:26:49.015Z</updated>
+    <updated>2020-01-01T14:27:17.286Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://harriswilde.github.io"/>
     <link rel="self" href="https://harriswilde.github.io/atom.xml"/>
@@ -10,133 +10,6 @@
     <logo>https://harriswilde.github.io/images/avatar.png</logo>
     <icon>https://harriswilde.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, TechZone</rights>
-    <entry>
-        <title type="html"><![CDATA[Python的安装以及环境配置]]></title>
-        <id>https://harriswilde.github.io/post/PythonInstall</id>
-        <link href="https://harriswilde.github.io/post/PythonInstall">
-        </link>
-        <updated>2020-01-09T02:54:02.000Z</updated>
-        <content type="html"><![CDATA[<p>在学习Python之前，我们需要安装Python才能够进行程序的编写。在这里，笔者就拿Python的官方发行版本来进行说明。对于早期的学习来说，官方的IDLE基本可以满足，如果真的要走上Python开发，或者是想要获得更高级的体验的话，后期可以自己尝试安装PyCharm、Visual Studio之类的IDE。</p>
-<p>废话不多说，咱们开始。</p>
-<hr>
-<h1 id="windows环境">Windows环境</h1>
-<h2 id="下载安装">下载安装</h2>
-<p>Windows应该是咱们小伙伴最常用的一个系统了，应该对这个比较熟悉。那么其实直接去官网：<a href="https://www.python.org/downloads/">点我直达</a></p>
-<p>在里面找到你想要下载的版本（如果你不知道你想要下载什么版本，那就下载<strong>最新</strong>的版本），点进去之后，翻到页面最底部，就可以看到所有的发行版文件。找到适用于Win的，然后找到后缀是<code>executable installer</code>的文件下载。如果你是<strong>64位</strong>的系统，那就找到含有<code>X86-64</code>关键字的文件下载，如果是<strong>32位</strong>就找<code>X86</code>。</p>
-<p>下载好了之后应该是一个exe文件，双击安装即可。</p>
-<p>安装完成了之后，在开始菜单里面，找到Python文件夹，如果能够看到Python IDLE并且能够正常打开的话，那么就说明安装成功了，接下来就要进行环境配置。</p>
-<h2 id="环境配置">环境配置</h2>
-<p>虽然现在你已经可以开始写程序了，但是我们还是把环境变量先配置一下，方便以后安装拓展等等。</p>
-<p>这里以Windows10为例，其他的操作系统也大同小异。</p>
-<ol>
-<li>右键此电脑，打开<code>属性</code><br>
-<img src="https://s2.ax1x.com/2019/12/31/l1mAk8.png" alt="" loading="lazy"></li>
-<li>选择<code>高级系统设置</code><br>
-<img src="https://s2.ax1x.com/2019/12/31/l1mw0x.png" alt="" loading="lazy"></li>
-<li>点击<code>高级</code>选项卡，进入<code>环境变量</code><br>
-<img src="https://s2.ax1x.com/2019/12/31/l1mbcj.png" alt="" loading="lazy"></li>
-<li>点击<code>Path</code>，<code>编辑</code><br>
-<img src="https://s2.ax1x.com/2019/12/31/l1nzqI.png" alt="" loading="lazy"></li>
-<li>点击<code>新建</code><br>
-<img src="https://s2.ax1x.com/2019/12/31/l1uii8.png" alt="" loading="lazy"></li>
-<li>找到你的Python安装的路径，将它和它的<code>Scripts</code>子目录也添加进去，像下面这样<br>
-<img src="https://s2.ax1x.com/2019/12/31/l1u9dP.png" alt="" loading="lazy"><br>
-添加完成，确定了之后，运行<code>cmd</code>，输入<code>Python</code>，如果出来的是这样的：</li>
-</ol>
-<pre><code>Microsoft Windows [Version 10.0.18363.535]
-(c) 2019 Microsoft Corporation. All rights reserved.
-
-C:\Users\Harris Wilde&gt;Python
-Python 3.7.5 (tags/v3.7.5:5c02a39a0b, Oct 15 2019, 00:11:34) [MSC v.1916 64 bit (AMD64)] on win32
-Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
-&gt;&gt;&gt;_
-</code></pre>
-<p>那么恭喜你，你已经成功了！</p>
-<p>如果是这样的：</p>
-<pre><code>Microsoft Windows [Version 10.0.18363.535]
-(c) 2019 Microsoft Corporation. All rights reserved.
-
-C:\Users\Harris Wilde&gt;Python
-'Python' is not recognized as an internal or external command,
-operable program or batch file.
-</code></pre>
-<p>那么你可能中间有些步骤不对，回去再好好检查下吧。</p>
-<hr>
-<h1 id="linux和unix">Linux和Unix</h1>
-<p>绝大部分的Linux和Unix系统（包括MacOS）都是内置Python解释器的，你只需要打开终端提示符，输入以下命令：</p>
-<pre><code>$ python
-</code></pre>
-<p>这会启动Python交互解释器，同时也应该有下面这样的输出：</p>
-<pre><code>Python 2.5.1 (r251:54869, Apr 18 2007, 22:08:04)
-[GCC 4.0.1 (Apple Computer, Inc . build 5367)] on darwin
-Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
-&gt;&gt;&gt;▮
-</code></pre>
-<p>如果没有安装的话，可能会得到下面的错误：</p>
-<pre><code>bash: python: command not found
-</code></pre>
-<p>那么，你就要自己安装了。</p>
-<h2 id="使用包管理器">使用包管理器</h2>
-<p>Linux系统家族存在多种包管理系他和安装机制。如果你使用的是Linux是有某种某种形式的包管理系统，那么你可以通过它很轻松地安装Python。</p>
-<blockquote>
-<p>注意，在Linux中使用包管理安装器安装Python的时候可能需要具备系统管理员（root账户）权限。</p>
-</blockquote>
-<p>例如，如果使用的操作系统位Debian Linux，那么可以使用下面的命令来安装Python：</p>
-<pre><code>$ apt-get install python
-</code></pre>
-<p>如果是Gentoo Linux，则可以使用：</p>
-<pre><code>$ emerge python
-</code></pre>
-<blockquote>
-<p>许多包管理器都有自动下载的功能，包括Yum、Synaptic（Unbuntu Linux专有的包管理器）以及其他Debian样式的管理器。你能够通过这些管理器获得Python的最新版本。</p>
-</blockquote>
-<h2 id="从源文件编译">从源文件编译</h2>
-<p>如果你没有包管理器，或者不想用的话，也可以尝试自己编译Python。当然也有可能是你没有管理员权限，这个方法也适用，十分灵活。你可以在<strong>任何位置</strong>安装Python，甚至可以安装在用户的主目录都是没问题的。那么接下来就来开始：</p>
-<ol>
-<li>访问官网的下载页：<a href="https://www.python.org/downloads/">点我直达</a></li>
-<li>按照说明下载源代码</li>
-<li>下载拓展名为<code>.tgz</code>的文件，将其保存在临时的位置。假设你想将Python安装在自己的主目录，那么可以将它放置在类似于<code>~/python</code>的目录中。进入这个目录（比如使用<code>cd ~/python</code>命令）。</li>
-<li>使用<code>tar -xzvf Python-3.7.tgz</code>(3.7是版本号)解压缩文件。如果使用的tar版本不支持<code>z</code>选项，那么可以先使用gunzip进行解压，然后再使用<code>tar -xvf</code>命令。如果解压缩的过程中出错，那你就试试重新下载，因为下载的时候也有可能会出错。</li>
-<li>进入解压好的文件夹：<pre><code>$ cd Python-3.7
-</code></pre>
-执行下面的命令：<pre><code>./configue --perfix=$(pwd)
-make
-make install
-</code></pre>
-最后应该可以再当前文件夹内找到一个名为python的可执行文件（如果上面的步骤无效的话，那就看看包含在发布版中的README文件）。将当前文件夹的路径包含在环境变量PATH中，这样安装就大功告成了！<br>
-如果要看看其他的配置命令，那么就使用以下的命令：<pre><code>./configue --help
-</code></pre>
-</li>
-</ol>
-<hr>
-<h1 id="macos">MacOS</h1>
-<p>MacOS是有自带的Python解释器的。你只需要打开终端，输入python命令就可以运行。即使打算安装更新的版本，也应该保留这个默认的安装，因为操作系统需要用到它。读者可以使用<a href="http://macports.org">MacPorts</a>或者<a href="http://finkproject.org">Fink</a>进行安装，或者按照以下的步骤从Python官网获取最新的版本。</p>
-<ol>
-<li>访问官网下载：<a href="https://www.python.org/downloads/">点我直达</a></li>
-<li>点击MacOS Installer的链接，应该会跳转到MacPython的下载页面，上面会有更多的信息。MacPython页面也有针对旧版MacOS的Python。</li>
-<li>下载了<code>.dmg</code>安装文件之后，它有可能会自动挂载。如果没有，双击该文件。已经挂载的磁盘映像中，可以找到安装包文件<code>.mpkg</code>。如果双击该文件，，就会打开安装向导，引领你完成安装的步骤。</li>
-</ol>
-<hr>
-<p>安装完成了之后，你可以使用命令或者Win下打开IDLE，输入</p>
-<pre><code class="language-python">print(&quot;Hello, world!&quot;)
-</code></pre>
-<p>应该解释器就会给你打招呼啦：</p>
-<pre><code>Python 3.7.5 (tags/v3.7.5:5c02a39a0b, Oct 15 2019, 00:11:34) [MSC v.1916 64 bit (AMD64)] on win32
-Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license()&quot; for more information.
-&gt;&gt;&gt; print(&quot;Hello, world!&quot;)
-Hello, world!
-&gt;&gt;&gt; _
-</code></pre>
-<p>那么这时候，你也可以试着输入其他的指令看看：</p>
-<pre><code>&gt;&gt;&gt; 你好吗？
-SyntaxError: invalid character in identifier
-&gt;&gt;&gt; _
-</code></pre>
-<p>这是因为你还不会和解释器进行交流，自然它就听不懂你在说什么了。</p>
-<p>不过要是不会交流，还是挺没意思的吧？</p>
-<p>如果你已经看到了这里，那么今天的基础工作应该做的差不多了，那咱们就开始吧。</p>
-]]></content>
-    </entry>
     <entry>
         <title type="html"><![CDATA[积分变限函数的求导方法]]></title>
         <id>https://harriswilde.github.io/post/P-CkgTjqZ</id>
@@ -2729,6 +2602,127 @@ int main(void)
 </code></pre>
 </li>
 </ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[C语言的一些基本知识]]></title>
+        <id>https://harriswilde.github.io/post/CPreStudy</id>
+        <link href="https://harriswilde.github.io/post/CPreStudy">
+        </link>
+        <updated>2019-10-13T07:08:46.000Z</updated>
+        <content type="html"><![CDATA[<p>在正式开始学习C语言之前，我们先带大家来熟悉一下C语言的一些基本知识。只有熟悉了这些基本知识，后期的学习和实践中才不会因为一些简单的问题而卡格。</p>
+<h1 id="编译型语言和解释性语言的区别">编译型语言和解释性语言的区别</h1>
+<p>​		我们之前说过，C语言是一种编译型语言，而像Python，Ruby这种就属于解释性语言。</p>
+<p>​		所谓编译型语言，就是将写好的代码先转化为<strong>汇编语言</strong>，然后再由<strong>编译器</strong>转化为<strong>机器码</strong>，最后交给CPU执行。而解释型语言则是先把写好的代码转化为<strong>字节码</strong>，然后交给<strong>解释器</strong>，最后由CPU来执行。也就是说，编译型语言是一次性翻译完，然后再执行，解释型是一边翻译一边运行。</p>
+<p>​		但是现在的语言，编译型和解释型的概念已经越来越模糊。现在已经不太适合用单一的方式来归类一些语言，上述仅供了解即可。</p>
+<h1 id="字符串中的转义字符">字符串中的转义字符</h1>
+<p>​		C语言里，有一些用来<strong>表示特定含义</strong>的标识符，叫做转义字符。上一篇文章也提到了&quot;\n&quot;这个转义字符，下面列出详细的列表供大家学习和参考。不用一次性全部记住，多查表多实践，自然就会信手拈来啦！</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">转义字符</th>
+<th style="text-align:center">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">\a</td>
+<td style="text-align:center">响铃</td>
+</tr>
+<tr>
+<td style="text-align:center">\b</td>
+<td style="text-align:center">退格，将当前位置移动到前一列</td>
+</tr>
+<tr>
+<td style="text-align:center">\f</td>
+<td style="text-align:center">换页，将当前位置移动到下页开头</td>
+</tr>
+<tr>
+<td style="text-align:center">\n</td>
+<td style="text-align:center">换行，将当前位置移动到下一行开头</td>
+</tr>
+<tr>
+<td style="text-align:center">\r</td>
+<td style="text-align:center">回车，将当前位置移动到本行开头</td>
+</tr>
+<tr>
+<td style="text-align:center">\t</td>
+<td style="text-align:center">水平制表，跳到下一个Tab位置</td>
+</tr>
+<tr>
+<td style="text-align:center">\v</td>
+<td style="text-align:center">垂直制表</td>
+</tr>
+<tr>
+<td style="text-align:center">\\</td>
+<td style="text-align:center">表示反斜杠本身</td>
+</tr>
+<tr>
+<td style="text-align:center">\'</td>
+<td style="text-align:center">表示单引号</td>
+</tr>
+<tr>
+<td style="text-align:center">\&quot;</td>
+<td style="text-align:center">表示双引号</td>
+</tr>
+<tr>
+<td style="text-align:center">\?</td>
+<td style="text-align:center">表示问号</td>
+</tr>
+<tr>
+<td style="text-align:center">\0</td>
+<td style="text-align:center">表示空字符(Null)</td>
+</tr>
+<tr>
+<td style="text-align:center">\ddd</td>
+<td style="text-align:center">1~3位八进制数所代表的任意字符</td>
+</tr>
+<tr>
+<td style="text-align:center">\xhh</td>
+<td style="text-align:center">1~2位十六进制所代表的任意字符</td>
+</tr>
+</tbody>
+</table>
+<h1 id="c语言中的保留关键字">C语言中的保留关键字</h1>
+<p>​		在所有语言中，都会有自己的<strong>保留字</strong>。这些保留字用于<strong>构建语言的语法</strong>，从而<strong>不能</strong>被用户自定义来使用。其实这些保留字后面学习的时候都会慢慢接触，但是在语法还没有学完之前，笔者还是来总结下这些保留字，方便大家日后的查询。</p>
+<p>ANSIC标准中的保留字：</p>
+<blockquote>
+<p>auto, break, case, char, const, continue, default, do, double, else, enum, extern, float, for, goto, if, int, long, register, return, short, signed, sizeof, static, struct, switch, typedef, union, unsigned, void, volatile, while</p>
+</blockquote>
+<p>C99标准中增加的：</p>
+<blockquote>
+<p>inline, restrict, _Bool, _Complex, _Imaginary</p>
+</blockquote>
+<p>C11标准中增加：</p>
+<blockquote>
+<p>_Alignas, _Alignof, _Atomic, _Static_assert, _Noreturn, _Thread_local, _Generic</p>
+</blockquote>
+<h1 id="c语言中的一些小知识">C语言中的一些小知识</h1>
+<h2 id="c语言基本数据类型">C语言基本数据类型</h2>
+<blockquote>
+<ul>
+<li>char —— 字符型，占用一个字节</li>
+<li>int —— 整型，通常反应了所用机器中整数的自然长度</li>
+<li>float —— 单精度浮点型</li>
+<li>double —— 双精度浮点型</li>
+</ul>
+</blockquote>
+<h2 id="定义变量的格式">定义变量的格式</h2>
+<p><code>数据类型 变量名</code></p>
+<p>例如：<code>int a</code></p>
+<p>即定义变量a为整型变量</p>
+<h2 id="注释">注释</h2>
+<pre><code class="language-c">//单行注释
+</code></pre>
+<pre><code class="language-c">/*
+多
+行
+注
+释
+*/
+</code></pre>
+<hr>
+<p>​		这期文章干货比较多，但都是一些常识性的东西，几乎没有理解难度。大家一次性记不下来没关系，多翻回来看看用着用着就记得啦！下期再见咯( •̀ ω •́ )y</p>
 ]]></content>
     </entry>
 </feed>
