@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://harriswilde.github.io</id>
     <title>TechZone</title>
-    <updated>2020-01-08T11:01:23.369Z</updated>
+    <updated>2020-01-09T11:57:58.572Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://harriswilde.github.io"/>
     <link rel="self" href="https://harriswilde.github.io/atom.xml"/>
@@ -84,7 +84,10 @@ y^\prime
 <p>Windows应该是咱们小伙伴最常用的一个系统了，应该对这个比较熟悉。那么其实直接去官网：<a href="https://www.python.org/downloads/">点我直达</a></p>
 <p>在里面找到你想要下载的版本（如果你不知道你想要下载什么版本，那就下载<strong>最新</strong>的版本），点进去之后，翻到页面最底部，就可以看到所有的发行版文件。找到适用于Win的，然后找到后缀是<code>executable installer</code>的文件下载。如果你是<strong>64位</strong>的系统，那就找到含有<code>X86-64</code>关键字的文件下载，如果是<strong>32位</strong>就找<code>X86</code>。</p>
 <p>下载好了之后应该是一个exe文件，双击安装即可。</p>
-<p>安装完成了之后，在开始菜单里面，找到Python文件夹，如果能够看到Python IDLE并且能够正常打开的话，那么就说明安装成功了，接下来就要进行环境配置。</p>
+<p>安装的时候，注意在刚开始的时候把<code>Add Python to PATH</code>勾选上，它就会自动将Python添加到环境变量里面，如图：<br>
+<img src="https://s2.ax1x.com/2020/01/09/lfpvsH.png" alt="勾选红色方框内的选项" loading="lazy"></p>
+<p>如果你不知道你的Python是否添加了环境变量，那么只需要打开<code>CMD</code>，输入Python回车，如果提示“Python不是系统命令”的话，那就是没有添加。如果命令正常执行，Python交互解释器启动，那就已经添加完成了。</p>
+<p>如果你是安装的Visual Studio这类IDE，或者在安装官方Python的时候忘记勾选，那么请看下面的教程手动添加。</p>
 <h2 id="环境配置">环境配置</h2>
 <p>虽然现在你已经可以开始写程序了，但是我们还是把环境变量先配置一下，方便以后安装拓展等等。</p>
 <p>这里以Windows10为例，其他的操作系统也大同小异。</p>
