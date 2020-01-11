@@ -1141,6 +1141,10 @@ blockquote:before {
     display: none;
   }
 }
+@font-face {
+  font-family: SourceCodePro-Light;
+  src: url("./SourceCodePro-Light.ttf");
+}
 .next-md-body .octicon {
   display: inline-block;
   fill: currentColor;
@@ -1433,7 +1437,7 @@ blockquote:before {
 }
 .next-md-body code,
 .next-md-body pre {
-  font-family: SFMono-Regular, Cascadia Code, Liberation Mono, Menlo, Courier, monospace;
+  font-family: SFMono-Regular, Cascadia Code, Liberation Mono, Menlo, SourceCodePro-Light, monospace;
   font-size: 12px;
 }
 .next-md-body pre {
