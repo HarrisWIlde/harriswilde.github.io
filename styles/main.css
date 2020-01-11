@@ -1433,7 +1433,7 @@ blockquote:before {
 }
 .next-md-body code,
 .next-md-body pre {
-  font-family: SFMono-Regular, Cascadia Code, Liberation Mono, Menlo, Courier, monospace;
+  font-family: SFMono-Regular, Cascadia Code, Liberation Mono, Menlo, Consolas, monospace;
   font-size: 12px;
 }
 .next-md-body pre {
