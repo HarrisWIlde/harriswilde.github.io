@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://harriswilde.github.io</id>
+    <id>http://localhost:4000</id>
     <title>TechZone</title>
-    <updated>2020-01-11T12:42:47.093Z</updated>
+    <updated>2020-01-11T12:44:53.559Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://harriswilde.github.io"/>
-    <link rel="self" href="https://harriswilde.github.io/atom.xml"/>
+    <link rel="alternate" href="http://localhost:4000"/>
+    <link rel="self" href="http://localhost:4000/atom.xml"/>
     <subtitle>HarrisWilde祝诸君元旦快乐🎉</subtitle>
-    <logo>https://harriswilde.github.io/images/avatar.png</logo>
-    <icon>https://harriswilde.github.io/favicon.ico</icon>
+    <logo>http://localhost:4000/images/avatar.png</logo>
+    <icon>http://localhost:4000/favicon.ico</icon>
     <rights>All rights reserved 2020, TechZone</rights>
     <entry>
         <title type="html"><![CDATA[积分变限函数的求导方法]]></title>
-        <id>https://harriswilde.github.io/post/P-CkgTjqZ</id>
-        <link href="https://harriswilde.github.io/post/P-CkgTjqZ">
+        <id>http://localhost:4000/post/P-CkgTjqZ</id>
+        <link href="http://localhost:4000/post/P-CkgTjqZ">
         </link>
         <updated>2020-01-01T14:24:10.000Z</updated>
         <content type="html"><![CDATA[<p>所谓<strong>积分变限函数</strong>，就是<s>能够将你所学知识变现的函数</s> 在积分的上下限中加入了一个函数。由于函数的值在自变量不同的时候也不同，因此这个上下限也是不定的，故曰此名。</p>
@@ -72,8 +72,8 @@ y^\prime
     </entry>
     <entry>
         <title type="html"><![CDATA[Python的安装以及环境配置]]></title>
-        <id>https://harriswilde.github.io/post/PythonInstall</id>
-        <link href="https://harriswilde.github.io/post/PythonInstall">
+        <id>http://localhost:4000/post/PythonInstall</id>
+        <link href="http://localhost:4000/post/PythonInstall">
         </link>
         <updated>2019-12-31T15:54:02.000Z</updated>
         <content type="html"><![CDATA[<p>在学习Python之前，我们需要安装Python才能够进行程序的编写。在这里，笔者就拿Python的官方发行版本来进行说明。对于早期的学习来说，官方的IDLE基本可以满足，如果真的要走上Python开发，或者是想要获得更高级的体验的话，后期可以自己尝试安装PyCharm、Visual Studio之类的IDE。</p>
@@ -202,8 +202,8 @@ SyntaxError: invalid character in identifier
     </entry>
     <entry>
         <title type="html"><![CDATA[Python学习开场白]]></title>
-        <id>https://harriswilde.github.io/post/PythonBeginner</id>
-        <link href="https://harriswilde.github.io/post/PythonBeginner">
+        <id>http://localhost:4000/post/PythonBeginner</id>
+        <link href="http://localhost:4000/post/PythonBeginner">
         </link>
         <updated>2019-12-31T15:02:06.000Z</updated>
         <content type="html"><![CDATA[<p>在2019年的最后一天，写一篇小短文来正式开启我的Python学习的版面。</p>
@@ -218,8 +218,8 @@ SyntaxError: invalid character in identifier
     </entry>
     <entry>
         <title type="html"><![CDATA[C语言之数组]]></title>
-        <id>https://harriswilde.github.io/post/CArray</id>
-        <link href="https://harriswilde.github.io/post/CArray">
+        <id>http://localhost:4000/post/CArray</id>
+        <link href="http://localhost:4000/post/CArray">
         </link>
         <updated>2019-12-07T15:29:32.000Z</updated>
         <content type="html"><![CDATA[<p>学完了前面几种基础语法之后，你可能会渐渐发现，现有的数据的记录方式，已经无法很好地解决我们接下来要解决的问题。比如有一天，老师找你计算一下全班同学的平均成绩。那么你就会开始思考如何存储全班的成绩。按照之前学习的知识，我们可以定义<code>a1</code> <code>a2</code> <code>a3</code> <code>……</code>。但是，这样未免也太麻烦了，如果要记录全省人民的身高数据呢？如果下个学期班里学生人数有变化呢？</p>
@@ -604,8 +604,8 @@ void f()
     </entry>
     <entry>
         <title type="html"><![CDATA[杂谈·一个神一般的随机算法]]></title>
-        <id>https://harriswilde.github.io/post/GreatRandom</id>
-        <link href="https://harriswilde.github.io/post/GreatRandom">
+        <id>http://localhost:4000/post/GreatRandom</id>
+        <link href="http://localhost:4000/post/GreatRandom">
         </link>
         <updated>2019-11-15T02:31:28.000Z</updated>
         <content type="html"><![CDATA[<p>这篇文章，我们从一个经典的面试题开始讲起。这个题目，可能会有很多形式，但是背后的逻辑是一样的：<strong>如何写出一个公平的洗牌算法</strong>。</p>
@@ -687,8 +687,8 @@ void f()
     </entry>
     <entry>
         <title type="html"><![CDATA[C语言的分支与循环]]></title>
-        <id>https://harriswilde.github.io/post/CBranchCycle</id>
-        <link href="https://harriswilde.github.io/post/CBranchCycle">
+        <id>http://localhost:4000/post/CBranchCycle</id>
+        <link href="http://localhost:4000/post/CBranchCycle">
         </link>
         <updated>2019-11-07T02:24:12.000Z</updated>
         <content type="html"><![CDATA[<p>如果说我们之前写过的代码都是“直男”，也就是说不管三七二十一，一路走到黑，那么今天我们就来见识下“多虑”型的还有“徘徊”型的代码。（你没有看错，代码不仅可以犹豫，还可以徘徊）</p>
@@ -1245,8 +1245,8 @@ int main(void)
     </entry>
     <entry>
         <title type="html"><![CDATA[C语言运算符优先级及ASCII对照表]]></title>
-        <id>https://harriswilde.github.io/post/COperatorASCII</id>
-        <link href="https://harriswilde.github.io/post/COperatorASCII">
+        <id>http://localhost:4000/post/COperatorASCII</id>
+        <link href="http://localhost:4000/post/COperatorASCII">
         </link>
         <updated>2019-11-04T11:21:06.000Z</updated>
         <content type="html"><![CDATA[<h1 id="运算符优先级">运算符优先级</h1>
@@ -2200,8 +2200,8 @@ int main(void)
     </entry>
     <entry>
         <title type="html"><![CDATA[小数表示法(定点法、浮点法)]]></title>
-        <id>https://harriswilde.github.io/post/FixedFloatPoint</id>
-        <link href="https://harriswilde.github.io/post/FixedFloatPoint">
+        <id>http://localhost:4000/post/FixedFloatPoint</id>
+        <link href="http://localhost:4000/post/FixedFloatPoint">
         </link>
         <updated>2019-10-22T14:17:03.000Z</updated>
         <content type="html"><![CDATA[<p>在计算机的数据存储里面，常规思路来看，是只能表示<strong>有限位数</strong>的<strong>整数</strong>的。但是，无论是在日常生活中，还是在科学研究领域，小数(<strong>严格来讲应该是分数</strong>)都是不可或缺的部分。那么，如何让计算机能够存储并使用小数呢？这篇文章就带大家一起来了解下两种常用的小数表示法：<strong>定点法</strong>和<strong>浮点法</strong>。</p>
@@ -2337,8 +2337,8 @@ Exp&amp;=E+Bias\\
     </entry>
     <entry>
         <title type="html"><![CDATA[进制转换以及原、反、补码]]></title>
-        <id>https://harriswilde.github.io/post/CodeTrans</id>
-        <link href="https://harriswilde.github.io/post/CodeTrans">
+        <id>http://localhost:4000/post/CodeTrans</id>
+        <link href="http://localhost:4000/post/CodeTrans">
         </link>
         <updated>2019-10-15T11:13:22.000Z</updated>
         <content type="html"><![CDATA[<p>可能有的小伙伴不理解了：为啥这节讲这些呢，不应该先把语法什么的学习一下吗？</p>
@@ -2577,8 +2577,8 @@ M为此数的最高位权
     </entry>
     <entry>
         <title type="html"><![CDATA[C语言之printf函数的用法]]></title>
-        <id>https://harriswilde.github.io/post/CPrintf</id>
-        <link href="https://harriswilde.github.io/post/CPrintf">
+        <id>http://localhost:4000/post/CPrintf</id>
+        <link href="http://localhost:4000/post/CPrintf">
         </link>
         <updated>2019-10-13T13:11:27.000Z</updated>
         <content type="html"><![CDATA[<p>printf，即<strong>格式化输出</strong>，是C语言中常用的输出函数。本节内容咱们就来讲讲关于这个函数的一些用法。</p>
