@@ -1308,7 +1308,7 @@ blockquote:before {
 .next-md-body code,
 .next-md-body kbd,
 .next-md-body pre {
-  font-family: monospace,monospace;
+  font-family: 'Cascadia Code', 'Cascadia Code';
   font-size: 1em;
 }
 .next-md-body hr {
@@ -1433,7 +1433,7 @@ blockquote:before {
 }
 .next-md-body code,
 .next-md-body pre {
-  font-family: SFMono-Regular, Cascadia Code, Liberation Mono, Menlo, Source Code Pro, monospace;
+  font-family: SFMono-Regular, Cascadia Code, Liberation Mono, Menlo, SourceCodePro-Light, monospace;
   font-size: 12px;
 }
 .next-md-body pre {
