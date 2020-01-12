@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://harriswilde.github.io</id>
     <title>TechZone</title>
-    <updated>2020-01-11T14:17:08.185Z</updated>
+    <updated>2020-01-12T14:19:42.609Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://harriswilde.github.io"/>
     <link rel="self" href="https://harriswilde.github.io/atom.xml"/>
@@ -10,6 +10,651 @@
     <logo>https://harriswilde.github.io/images/avatar.png</logo>
     <icon>https://harriswilde.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, TechZone</rights>
+    <entry>
+        <title type="html"><![CDATA[C语言之指针]]></title>
+        <id>https://harriswilde.github.io/post/CPointer</id>
+        <link href="https://harriswilde.github.io/post/CPointer">
+        </link>
+        <updated>2020-01-12T14:18:53.000Z</updated>
+        <content type="html"><![CDATA[<p>说到指针，估计还是有很多小伙伴都还是云里雾里的，有点“知其然，而不知其所以然”。但是，不得不说，学了指针，C语言才能算是入门了。指针是C语言的精华，可以说，对对指针的掌握程度，直接决定了你C语言的编程能力。</p>
+<hr>
+<p>在讲指针之前，我们先来了解下变量在内存中是如何存放的。</p>
+<p>在程序中定义一个变量，那么在程序编译的过程中，系统会根据你定义变量的类型来分配相应尺寸的内存空间。那么如果要使用这个变量，只需要用变量名去访问即可。</p>
+<p>通过变量名来访问变量，是一种相对安全的方式。因为只有你定义了它，你才能够访问相应的变量。这就是对内存的基本认知。但是，如果光知道这一点的话，其实你还是不知道内存是如何存放变量的，因为底层是如何工作的，你依旧不清楚。</p>
+<p>那么如果要继续深究的话，你就需要把变量在内存中真正的样子是什么搞清楚。内存的最小索引单元是<code>1字节</code>，那么你其实可以把内存比作一个超级大的字符型数组。在上一节我们讲过，数组是有下标的，我们是通过数组名和下标来访问数组中的元素。那么内存也是一样，只不过我们给它起了个新名字：<code>地址</code>。每个地址可以存放1字节的数据，所以如果我们需要定义一个整型变量，就需要占据4个内存单元。</p>
+<p>那么，看到这里你可能就明白了：其实在程序运行的过程中，完全不需要变量名的参与。变量名只是方便我们进行代码的编写和阅读，只有程序员和编译器知道这个东西的存在。而编译器还知道具体的变量名对应的内存地址，这个是我们不知道的，因此编译器就像一个桥梁。当读取某一个变量的时候，编译器就会找到变量名所对应的地址，读取对应的值。</p>
+<h1 id="初识指针和指针变量">初识指针和指针变量</h1>
+<p>那么我们现在就来切入正题，指针是个什么东西呢？</p>
+<p>所谓指针，就是内存地址（下文简称地址）。C语言中设立了专门的指针变量来存储指针，和普通变量不一样的是，指针变量存储的是地址。</p>
+<h2 id="定义指针">定义指针</h2>
+<p>指针变量也有类型，实际上取决于地址指向的值的类型。那么如何定义指针变量呢：</p>
+<p>很简单：<code>类型名* 指针变量名</code></p>
+<pre><code class="language-c">char* pa;//定义一个字符变量的指针，名称为pa
+int* pb;//定义一个整型变量的指针，名称为pb
+float* pc;//定义一个浮点型变量的指针，名称为pc
+</code></pre>
+<p>注意，指针变量一定要和指向的变量的类型一样，不然类型不同可能在内存中所占的位置不同，如果定义错了就可能导致出错。</p>
+<h2 id="取地址运算符和取值运算符">取地址运算符和取值运算符</h2>
+<p>获取某个变量的地址，使用取地址运算符<code>&amp;</code>，如：</p>
+<pre><code class="language-c">char* pa = &amp;a;
+int* pb = &amp;f;
+</code></pre>
+<p>如果反过来，你要访问指针变量指向的数据，那么你就要使用取值运算符<code>*</code>，如：</p>
+<pre><code class="language-c">printf(&quot;%c, %d\n&quot;, *pa, *pb);
+</code></pre>
+<p>这里你可能发现，定义指针的时候也使用了<code>*</code>，这里属于符号的重用，也就是说这种符号在不同的地方就有不同的用意：在定义的时候表示定义一个指针变量，在其他的时候则用来获取指针变量指向的变量的值。</p>
+<p>直接通过变量名来访问变量的值称之为<code>直接访问</code>，通过指针这样的形式访问称之为<code>间接访问</code>，因此取值运算符有时候也成为间接运算符。</p>
+<p>比如：</p>
+<pre><code class="language-c">//Example 01
+//代码来源于网络，非个人原创
+#include &lt;stdio.h&gt;
+int main(void)
+{
+    char a = 'f';
+    int f = 123;
+    char* pa = &amp;a;
+    int* pf = &amp;f;
+    
+    printf(&quot;a = %c\n&quot;, *pa);
+    printf(&quot;f = %d\n&quot;, *pf);
+    
+    *pa = 'c';
+    *pf += 1;
+    
+    printf(&quot;now, a = %c\n&quot;, *pa);
+    printf(&quot;now, f = %d\n&quot;, *pf);
+    
+    printf(&quot;sizeof pa = %d\n&quot;, sizeof(pa));
+    printf(&quot;sizeof pf = %d\n&quot;, sizeof(pf));
+    
+    printf(&quot;the addr of a is: %p\n&quot;, pa);
+    printf(&quot;the addr of f is: %p\n&quot;, pf);
+    
+    return 0;
+}
+</code></pre>
+<p>程序实现如下：</p>
+<pre><code>//Consequence 01
+a = f
+f = 123
+now, a = c
+now, f = 124
+sizeof pa = 4
+sizeof pf = 4
+the addr of a is: 00EFF97F
+the addr of f is: 00EFF970
+</code></pre>
+<h2 id="避免访问未初始化的指针">避免访问未初始化的指针</h2>
+<pre><code class="language-c">void f()
+{
+    int* a;
+    *a = 10;
+}
+</code></pre>
+<p>像这样的代码是十分危险的。因为指针a到底指向哪里，我们不知道。就和访问未初始化的普通变量一样，会返回一个随机值。但是如果是在指针里面，那么就有可能覆盖到其他的内存区域，甚至可能是系统正在使用的关键区域，十分危险。不过这种情况，系统一般会驳回程序的运行，此时程序会被中止并报错。要是万一中奖的话，覆盖到一个合法的地址，那么接下来的赋值就会导致一些有用的数据被莫名其妙地修改，这样的bug是十分不好排查的，因此使用指针的时候一定要注意初始化。</p>
+<h1 id="指针和数组">指针和数组</h1>
+<p>有些读者可能会有些奇怪，指针和数组又有什么关系？这俩货明明八竿子打不着井水不犯河水。别着急，接着往下看，你的观点有可能会改变。</p>
+<h2 id="数组的地址">数组的地址</h2>
+<p>我们刚刚说了，指针实际上就是变量在内存中的地址，那么如果有细心的小伙伴就可能会想到，像数组这样的一大摞变量的集合，它的地址是啥呢？</p>
+<p>我们知道，从标准输入流中读取一个值到变量中，用的是<code>scanf</code>函数，一般貌似在后面都要加上<code>&amp;</code>，这个其实就是我们刚刚说的取地址运算符。如果你存储的位置是指针变量的话，那就不需要。</p>
+<pre><code class="language-c">//Example 02
+int main(void)
+{
+    int a;
+    int* p = &amp;a;
+    
+    printf(&quot;请输入一个整数：&quot;);
+    scanf(&quot;%d&quot;, &amp;a);//此处需要&amp;
+    printf(&quot;a = %d\n&quot;, a);
+    
+    printf(&quot;请再输入一个整数：&quot;);
+    scanf(&quot;%d&quot;, p);//此处不需要&amp;
+    printf(&quot;a = %d\n&quot;, a);
+    
+    return 0;
+}
+</code></pre>
+<p>程序运行如下：</p>
+<pre><code>//Consequence 02
+请输入一个整数：1
+a = 1
+请再输入一个整数：2
+a = 2
+</code></pre>
+<p>在普通变量读取的时候，程序需要知道这个变量在内存中的地址，因此需要<code>&amp;</code>来取地址完成这个任务。而对于指针变量来说，本身就是另外一个普通变量的地址信息，因此直接给出指针的值就可以了。</p>
+<p>试想一下，我们在使用<code>scanf</code>函数的时候，是不是也有不需要使用<code>&amp;</code>的时候？就是在读取字符串的时候：</p>
+<pre><code class="language-c">//Example 03
+#include &lt;stdio.h&gt;
+int main(void)
+{
+    char url[100];
+    url[99] = '\0';
+    printf(&quot;请输入TechZone的域名：&quot;);
+    scanf(&quot;%s&quot;, url);//此处也不用&amp;
+    printf(&quot;你输入的域名是：%s\n&quot;, url);
+    return 0;
+}
+</code></pre>
+<p>程序执行如下：</p>
+<pre><code>//Consequence 03
+请输入TechZone的域名：www.techzone.ltd
+你输入的域名是：www.techzone.ltd
+</code></pre>
+<p>因此很好推理：数组名其实就是一个地址信息，实际上就是数组第一个元素的地址。咱们试试把第一个元素的地址和数组的地址做个对比就知道了：</p>
+<pre><code class="language-c">//Example 03 V2
+#include &lt;stdio.h&gt;
+int main(void)
+{
+    char url[100];
+    printf(&quot;请输入TechZone的域名：&quot;);
+    url[99] = '\0';
+    scanf(&quot;%s&quot;, url);
+    printf(&quot;你输入的域名是：%s\n&quot;, url);
+
+    printf(&quot;url的地址为：%p\n&quot;, url);
+    printf(&quot;url[0]的地址为：%p\n&quot;, &amp;url[0]);
+
+    if (url == &amp;url[0])
+    {
+        printf(&quot;两者一致！&quot;);
+    }
+    else
+    {
+        printf(&quot;两者不一致！&quot;);
+    }
+    return 0;
+}
+</code></pre>
+<p>程序运行结果为：</p>
+<pre><code>//Comsequense 03 V2
+请输入TechZone的域名：www.techzone.ltd
+你输入的域名是：www.techzone.ltd
+url的地址为：0063F804
+url[0]的地址为：0063F804
+两者一致！
+</code></pre>
+<p>这么看，应该是实锤了。那么数组后面的元素也就是依次往后放置，有兴趣的也可以自己写代码尝试把它们输出看看。</p>
+<h2 id="指向数组的指针">指向数组的指针</h2>
+<p>刚刚我们验证了数组的地址就是数组第一个元素的地址。那么指向数组的指针自然也就有两种定义的方法：</p>
+<pre><code class="language-c">...
+char* p;
+//方法1
+p = a;
+//方法2
+p = &amp;a[0];
+</code></pre>
+<h2 id="指针的运算">指针的运算</h2>
+<p>当指针指向数组元素的时候，可以对指针变量进行加减运算，<code>+n</code>表示指向p指针所指向的元素的下一个元素，<code>-n</code>表示指向p指针所指向的元素的上一个元素。并不是将地址加1。</p>
+<p>如：</p>
+<pre><code class="language-c">//Example 04
+#include &lt;stdio.h&gt;
+int main(void)
+{
+    int a[] = { 1,2,3,4,5 };
+    int* p = a;
+    printf(&quot;*p = %d, *(p+1) = %d, *(p+2) = %d\n&quot;, *p, *(p + 1), *(p + 2));
+    printf(&quot;*p -&gt; %p, *(p+1) -&gt; %p, *(p+2) -&gt; %p\n&quot;, p, p + 1, p + 2);
+    return 0;
+}
+</code></pre>
+<p>执行结果如下：</p>
+<pre><code>//Consequence 04
+*p = 1, *(p+1) = 2, *(p+2) = 3
+*p -&gt; 00AFF838, *(p+1) -&gt; 00AFF83C, *(p+2) -&gt; 00AFF840
+</code></pre>
+<p>有的小伙伴可能会想，编译器是怎么知道访问下一个元素而不是地址直接加1呢？</p>
+<p>其实就在我们定义指针变量的时候，就已经告诉编译器了。如果我们定义的是整型数组的指针，那么指针加1，实际上就是加上一个<code>sizeof(int)</code>的距离。相对于标准的下标访问，使用指针来间接访问数组元素的放分钟叫做<code>指针法</code>。</p>
+<p>其实使用指针法来访问数组的元素，不一定需要定义一个指向数组的单独的指针变量，因为数组名自身就是指向数组第一个元素的指针，因此指针法可以直接作用于数组名：</p>
+<pre><code class="language-c">...
+printf(&quot;p -&gt; %p, p+1 -&gt; %p, p+2 -&gt; %p\n&quot;, a, a+1, a+2);
+printf(&quot;a = %d, a+1 = %d, a+2 = %d&quot;, *a, *(a+1), *(a+2));
+...
+</code></pre>
+<p>执行结果如下：</p>
+<pre><code class="language-c">p -&gt; 00AFF838, p+1 -&gt; 00AFF83C, p+2 -&gt; 00AFF840
+b = 1, b+1 = 2, b+2 = 3
+</code></pre>
+<p>现在你是不是感觉，数组和指针有点像了呢？不过笔者先提醒，数组和指针虽然非常像，但是绝对不是一种东西。</p>
+<p>甚至你还可以直接用指针来定义字符串，然后用下标法来读取每一个元素：</p>
+<pre><code class="language-c">//Example 05
+//代码来源于网络
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+int main(void)
+{
+    char* str = &quot;I love TechZone!&quot;;
+    int i, length;
+    
+    length = strlen(str);
+    
+    for (i = 0; i &lt; length, i++)
+    {
+        printf(&quot;%c&quot;, str[i]);
+    }
+    printf(&quot;\n&quot;);
+    
+    return 0;
+}
+</code></pre>
+<p>程序运行如下：</p>
+<pre><code>//Consequence 05
+I love TechZone!
+</code></pre>
+<p>在刚刚的代码里面，我们定义了一个字符指针变量，并且初始化成指向一个字符串。后来的操作，不仅在它身上可以使用字符串处理函数，还可以用下标法访问字符串中的每一个字符。</p>
+<p>当然，循环部分这样写也是没毛病的：</p>
+<pre><code class="language-c">...
+for (i = 0, i &lt; length, i++)
+{
+    printf(&quot;%c&quot;, *(str + i));
+}
+</code></pre>
+<p>这就相当于利用了指针法来读取。</p>
+<h2 id="指针和数组的区别">指针和数组的区别</h2>
+<p>刚刚说了许多指针和数组相互替换的例子，可能有的小伙伴又开始说：“这俩货不就是一个东西吗？”</p>
+<p>随着你对指针和数组越来越了解，你会发现，C语言的创始人不会这么无聊去创建两种一样的东西，还叫上不同的名字。指针和数组终究是不一样的。</p>
+<p>比如笔者之前看过的一个例子：</p>
+<pre><code class="language-c">//Example 06
+//代码来源于网络
+#include &lt;stdio.h&gt;
+int main(void)
+{
+    char str[] = &quot;I love TechZone!&quot;;
+    int count = 0;
+    
+    while (*str++ != '\0')
+    {
+        count++;
+    }
+    printf(&quot;总共有%d个字符。\n&quot;, count);
+    
+    return 0;
+}
+</code></pre>
+<p>当编译器报错的时候，你可能会开始怀疑你学了假的C语言语法：</p>
+<pre><code>//Error in Example 06
+错误(活动)	E0137	表达式必须是可修改的左值
+错误	C2105	“++”需要左值
+</code></pre>
+<p>我们知道，<code>*str++ != ‘\0’</code>是一个复合表达式，那么就要遵循运算符优先级来看。具体可以回顾<a href="http://www.techzone.ltd/post/COperatorASCII/">《C语言运算符优先级及ASCII对照表》</a>。</p>
+<p><code>str++</code>比<code>*str</code>的优先级更高，但是自增运算符要在下一条语句的时候才能生效。所以这个语句的理解就是，先取出<code>str</code>所指向的值，判断是否为<code>\0</code>，若是，则跳出循环，然后<code>str</code>指向下一个字符的位置。</p>
+<p>看上去貌似没啥毛病，但是，看看编译器告诉我们的东西：<code>表达式必须是可修改的左值</code></p>
+<p><code>++</code>的操作对象是<code>str</code>，那么<code>str</code>到底是不是左值呢？</p>
+<p>如果是左值的话，那么就必须满足左值的条件。</p>
+<blockquote>
+<ol>
+<li>拥有用于识别和定位一个存储位置的标识符</li>
+<li>存储值可修改</li>
+</ol>
+</blockquote>
+<p>第一点，数组名<code>str</code>是可以满足的，因为数组名实际上就是定位数组第一个元素的位置。但是第二点就不满足了，数组名实际上是一个地址，地址是不可以修改的，它是一个常量。如果非要利用上面的思路来实现的话，可以将代码改成这样：</p>
+<pre><code class="language-c">//Example 06 V2
+//代码来源于网络
+#include &lt;stdio.h&gt;
+int main(void)
+{
+    char str[] = &quot;I love TechZone!&quot;;
+    char* target = str;
+    int count = 0;
+    
+    while (*target++ != '\0')
+    {
+        count++;
+    }
+    printf(&quot;总共有%d个字符。\n&quot;, count);
+    
+    return 0;
+}
+</code></pre>
+<p>这样就可以正常执行了：</p>
+<pre><code>//Consequence 06 V2
+总共有16个字符。
+</code></pre>
+<p>这样我们就可以得出：数组名只是一个地址，而指针是一个左值。</p>
+<h2 id="指针数组数组指针">指针数组？数组指针？</h2>
+<p>看下面的例子，你能分辨出哪个是指针数组，哪个是数组指针吗？</p>
+<pre><code class="language-c">int* p1[5];
+int(*p2)[5];
+</code></pre>
+<p>单个的我们都可以判断，但是组合起来就有些难度了。</p>
+<p>答案：</p>
+<pre><code class="language-c">int* p1[5];//指针数组
+int(*p2)[5];//数组指针
+</code></pre>
+<p>我们挨个来分析。</p>
+<h3 id="指针数组">指针数组</h3>
+<p>数组下标<code>[]</code>的优先级是最高的，因此<code>p1</code>是一个有5个元素的数组。那么这个数组的类型是什么呢？答案就是<code>int*</code>，是指向整型变量的指针。因此这是一个指针数组。</p>
+<p>那么这样的数组应该怎么样去初始化呢？</p>
+<p>你可以定义5个变量，然后挨个取地址来初始化。</p>
+<p>不过这样太繁琐了，但是，并不是说指针数组就没什么用。</p>
+<p>比如：</p>
+<pre><code class="language-c">//Example 07
+#include &lt;stdio.h&gt;
+int main(void)
+{
+    char* p1[5] = {
+        &quot;人生苦短，我用Python。&quot;,
+        &quot;PHP是世界上最好的语言！&quot;,
+        &quot;One more thing...&quot;,
+        &quot;一个好的程序员应该是那种过单行线都要往两边看的人。&quot;,
+        &quot;C语言很容易让你犯错误；C++看起来好一些，但当你用它时，你会发现会死的更惨。&quot;
+    };
+    int i;
+    for (i = 0; i &lt; 5; i++)
+    {
+        printf(&quot;%s\n&quot;, p1[i]);
+    }
+    return 0;
+}
+</code></pre>
+<p>结果如下：</p>
+<pre><code>//Consequence 07
+人生苦短，我用Python。
+PHP是世界上最好的语言！
+One more thing...
+一个好的程序员应该是那种过单行线都要往两边看的人。
+C语言很容易让你犯错误；C++看起来好一些，但当你用它时，你会发现会死的更惨。
+</code></pre>
+<p>这样是不是比二维数组来的更加直接更加通俗呢？</p>
+<h3 id="数组指针">数组指针</h3>
+<p><code>()</code>和<code>[]</code>在优先级里面属于同级，那么就按照先后顺序进行。</p>
+<p><code>int(*p2)</code>将<code>p2</code>定义为指针，后面跟随着一个5个元素的数组，<code>p2</code>就指向这个数组。因此，数组指针是一个指针，它指向的是一个数组。</p>
+<p>但是，如果想对数组指针初始化的时候，千万要小心，比如：</p>
+<pre><code class="language-c">//Example 08
+#include &lt;stdio.h&gt;
+int main(void)
+{
+    int(*p2)[5] = {1, 2, 3, 4, 5};
+    int i;
+    for (i = 0; i &lt; 5; i++)
+    {
+        printf(&quot;%d\n&quot;, *(p2 + i));
+    }
+    return 0;
+}
+</code></pre>
+<p>Visual Studio 2019报出以下的错误：</p>
+<pre><code>//Error and Warning in Example 08
+错误(活动)	E0146	初始值设定项值太多
+错误	C2440	“初始化”: 无法从“initializer list”转换为“int (*)[5]”
+警告	C4477	“printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 1 拥有了类型“int *”
+</code></pre>
+<p>这其实是一个非常典型的错误使用指针的案例，编译器提示说这里有一个整数赋值给指针变量的问题，因为<code>p2</code>归根结底还是指针，所以应该给它传递一个地址才行，更改一下：</p>
+<pre><code class="language-c">//Example 08 V2
+#include &lt;stdio.h&gt;
+int main(void)
+{
+    int temp[5] = {1, 2, 3, 4, 5};
+    int(*p2)[5] = temp;
+    int i;
+    for (i = 0; i &lt; 5; i++)
+    {
+        printf(&quot;%d\n&quot;, *(p2 + i));
+    }
+    return 0;
+}
+</code></pre>
+<pre><code>//Error and Warning in Example 08 V2
+错误(活动)	E0144	&quot;int *&quot; 类型的值不能用于初始化 &quot;int (*)[5]&quot; 类型的实体
+错误	C2440	“初始化”: 无法从“int [5]”转换为“int (*)[5]”
+警告	C4477	“printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 1 拥有了类型“int *”
+</code></pre>
+<p>可是怎么还是有问题呢？</p>
+<p>我们回顾一下，指针是如何指向数组的。</p>
+<pre><code class="language-c">int temp[5] = {1, 2, 3, 4, 5};
+int* p = temp;
+</code></pre>
+<p>我们原本以为，指针<code>p</code>是指向数组的指针，但是实际上并不是。仔细想想就会发现，这个指针实际上是指向的数组的第一个元素，而不是指向数组。因为数组里面的元素在内存中都是挨着个儿存放的，因此只需要知道第一个元素的地址，就可以访问到后面的所有元素。</p>
+<p>但是，这么来看的话，指针<code>p</code>指向的就是一个整型变量的指针，并不是指向数组的指针。而刚刚我们用的数组指针，才是指向数组的指针。因此，应该将数组的地址传递给数组指针，而不是将第一个元素的地址传入，尽管它们值相同，但是含义确实不一样：</p>
+<pre><code class="language-c">//Example 08 V3
+//Example 08 V2
+#include &lt;stdio.h&gt;
+int main(void)
+{
+    int temp[5] = {1, 2, 3, 4, 5};
+    int(*p2)[5] = &amp;temp;//此处取地址
+    int i;
+    for (i = 0; i &lt; 5; i++)
+    {
+        printf(&quot;%d\n&quot;, *(*p2 + i));
+    }
+    return 0;
+}
+</code></pre>
+<p>程序运行如下：</p>
+<pre><code>//Consequence 08
+1
+2
+3
+4
+5
+</code></pre>
+<h2 id="指针和二维数组">指针和二维数组</h2>
+<p>在上一节<a href="http://www.techzone.ltd/post/CArray/">《C语言之数组》</a>我们讲过二维数组的概念，并且我们也知道，C语言的二维数组其实在内存中也是线性存放的。</p>
+<p>假设我们定义了：<code>int array[4][5]</code></p>
+<h3 id="array">array</h3>
+<p>array作为数组的名称，显然应该表示的是数组的首地址。由于二维数组实际上就是一维数组的线性拓展，因此array应该就是指的<code>指向包含5个元素的数组的指针</code>。</p>
+<p>如果你用<code>sizeof()</code>去测试<code>array</code>和<code>array+1</code>的话，就可以测试出来这样的结论。</p>
+<h3 id="array1">*(array+1)</h3>
+<p>首先从刚刚的问题我们可以得出，<code>array+1</code>同样也是指的<code>指向包含5个元素的数组的指针</code>，因此<code>*(array+1)</code>就是相当于<code>array[1]</code>，而这刚好相当于<code>array[1][0]</code>的数组名。因此<code>*(array+1)</code>就是指第二行子数组的第一个元素的地址。</p>
+<h3 id="array12">*(*(array+1)+2)</h3>
+<p>有了刚刚的结论，我们就不难推理出，这个实际上就是<code>array[1][2]</code>。是不是感觉非常简单呢？</p>
+<p>总结一下，就是下面的这些结论，记住就好，理解那当然更好：</p>
+<pre><code class="language-c">*(array + i) == array[i]
+*(*(array + i) + j) == array[i][j]
+*(*(*(array + i) + j) + k) == array[i][j][k]
+...
+</code></pre>
+<h2 id="数组指针和二维数组">数组指针和二维数组</h2>
+<p>我们在上一节里面讲过，在初始化二维数组的时候是可以偷懒的：</p>
+<pre><code class="language-C">int array[][3] = {
+    {1, 2, 3},
+    {4, 5, 6}
+};
+</code></pre>
+<p>刚刚我们又说过，定义一个数组指针是这样的：</p>
+<pre><code class="language-c">int(*p)[3];
+</code></pre>
+<p>那么组合起来是什么意思呢？</p>
+<pre><code class="language-c">int(*p)[3] = array;
+</code></pre>
+<p>通过刚刚的说明，我们可以知道，<code>array</code>是指向一个3个元素的数组的指针，所以这里完全可以将<code>array</code>的值赋值给<code>p</code>。</p>
+<p>其实C语言的指针非常灵活，同样的代码用不同的角度去解读，就可以有不同的应用。</p>
+<p>那么如何使用指针来访问二维数组呢？没错，就是使用数组指针：</p>
+<pre><code class="language-c">//Example 09
+#include &lt;stdio.h&gt;
+int main(void)
+{
+    int array[3][4] = {
+        {0, 1, 2, 3},
+        {4, 5, 6, 7},
+        {8, 9, 10, 11}
+    };
+    int(*p)[4];
+    int i, j;
+    p = array;
+    for (i = 0, i &lt; 3, i++)
+    {
+        for (j = 0, j &lt; 4, j++)
+        {
+            printf(&quot;%2d &quot;, *(*(p+i) + j)); 
+        }
+        printf(&quot;\n&quot;);
+    }
+    return 0;
+}
+</code></pre>
+<p>运行结果：</p>
+<pre><code>//Consequence 09
+0 1 2 3 
+4 5 6 7 
+8 9 10 11 
+</code></pre>
+<h1 id="void指针">void指针</h1>
+<p><code>void</code>实际上是<code>无类型</code>的意思。如果你尝试用它来定义一个变量，编译器肯定会报错，因为不同类型所占用的内存有可能不一样。但是如果定义的是一个指针，那就没问题。<code>void</code>类型中指针可以指向任何一个类型的数据，也就是说，任何类型的指针都可以赋值给<code>void</code>指针。</p>
+<p>将任何类型的指针转换为<code>void</code>是没有问题的。但是如果你要反过来，那就需要强制类型转换。此外，不要对<code>void</code>指针直接解引用，因为编译器其实并不知道<code>void</code>指针会存放什么样的类型。</p>
+<pre><code class="language-c">//Example 10
+#include &lt;stdio.h&gt;
+int main(void)
+{
+    int num = 1024;
+    int* pi = &amp;num;
+    char* ps = &quot;TechZone&quot;;
+    void* pv;
+    
+    pv = pi;
+    printf(&quot;pi:%p,pv:%p\n&quot;, pi, pv);
+    printf(&quot;*pv:%d\n&quot;, *pv);
+    
+    pv = ps;
+    printf(&quot;ps:%p,pv:%p\n&quot;, ps, pv);
+    printf(&quot;*pv:%s\n&quot;, *pv);
+}
+</code></pre>
+<p>这样会报错：</p>
+<pre><code>//Error in Example 10
+错误	C2100	非法的间接寻址
+错误	C2100	非法的间接寻址
+</code></pre>
+<p>如果一定要这么做，那么可以用强制类型转换：</p>
+<pre><code class="language-c">//Example 10 V2
+#include &lt;stdio.h&gt;
+int main(void)
+{
+    int num = 1024;
+    int* pi = &amp;num;
+    char* ps = &quot;TechZone&quot;;
+    void* pv;
+
+    pv = pi;
+    printf(&quot;pi:%p,pv:%p\n&quot;, pi, pv);
+    printf(&quot;*pv:%d\n&quot;, *(int*)pv);
+
+    pv = ps;
+    printf(&quot;ps:%p,pv:%p\n&quot;, ps, pv);
+    printf(&quot;*pv:%s\n&quot;, pv);
+}
+</code></pre>
+<p>当然，使用void指针一定要小心，由于void指针几乎可以通吃所有类型，所以间接使得不同类型的指针转换变得合法，如果代码中存在不合理的转换，编译器也不会报错。</p>
+<p>因此，void指针能不用则不用，后面讲函数的时候，还可以解锁更多新的玩法。</p>
+<h1 id="null指针">NULL指针</h1>
+<p>在C语言中，如果一个指针不指向任何数据，那么就称之为空指针，用NULL来表示。NULL其实是一个宏定义：</p>
+<pre><code class="language-c">#define NULL ((void *)0)
+</code></pre>
+<p>在大部分的操作系统中，地址0通常是一个不被使用的地址，所以如果一个指针指向NULL，就意味着不指向任何东西。为什么一个指针要指向NULL呢？</p>
+<p>其实这反而是一种比较指的推荐的编程风格——当你暂时还不知道该指向哪儿的时候，就让它指向NULL，以后不会有太多的麻烦，比如：</p>
+<pre><code class="language-c">//Example 11
+#include &lt;stdio.h&gt;
+int main(void)
+{
+    int* p1;
+    int* p2 = NULL;
+    printf(&quot;%d\n&quot;, *p1);
+    printf(&quot;%d\n&quot;, *p2);
+    return 0;
+}
+</code></pre>
+<p>第一个指针未被初始化。在有的编译器里面，这样未初始化的变量就会被赋予随机值。这样指针被称为迷途指针，野指针或者悬空指针。如果后面的代码对这类指针解引用，而这个地址又刚好是合法的话，那么就会产生莫名其妙的结果，甚至导致程序的崩溃。因此养成良好的习惯，在暂时不清楚的情况下使用NULL，可以节省大量的后期调试的时间。</p>
+<h1 id="指向指针的指针">指向指针的指针</h1>
+<p>开始套娃了。其实只要你理解了指针的概念，也就没什么大不了的。</p>
+<pre><code class="language-c">//Example 12
+#include &lt;stdio.h&gt;
+int main(void)
+{
+    int num = 1;
+    int* p = &amp;num;
+    int** pp = &amp;p;
+    
+    printf(&quot;num: %d\n&quot;, num);
+    printf(&quot;*p: %d\n&quot;, *p);
+    printf(&quot;**p: %d\n&quot;, **pp);
+    printf(&quot;&amp;p: %p, pp: %p\n&quot;, &amp;p, pp);
+    printf(&quot;&amp;num: %p, p: %p, *pp: %p\n&quot;, &amp;num, p, *pp);
+    return 0;
+}
+</code></pre>
+<p>程序结果如下：</p>
+<pre><code>//Consequence 12
+num: 1
+*p: 1
+**p: 1
+&amp;p: 004FF960, pp: 004FF960
+&amp;num: 004FF96C, p: 004FF96C, *pp: 004FF96C
+</code></pre>
+<p>当然你也可以无限地套娃，一直指下去。不过这样会让代码可读性变得很差，过段时间可能你自己都看不懂你写的代码了。</p>
+<h1 id="指针数组和指向指针的指针">指针数组和指向指针的指针</h1>
+<p>那么，指向指针的指针有什么用呢？</p>
+<p>它可不是为了去创造混乱代码，在一个经典的实例里面，就可以体会到它的用处：</p>
+<pre><code class="language-c">char* Books[] = {
+    &quot;《C专家编程》&quot;,
+    &quot;《C和指针》&quot;,
+    &quot;《C的陷阱与缺陷》&quot;,
+    &quot;《C Primer Plus》&quot;,
+    &quot;《Python基础教程（第三版）》&quot;
+};
+</code></pre>
+<p>然后我们需要将这些书进行分类。我们发现，其中有一本是写Python的，其他都是C语言的。这时候指向指针的指针就派上用场了。首先，我们刚刚定义了一个指针数组，也就是说，里面的所有元素的类型都是指针，而数组名却又可以用指针的形式来访问因此就可以使用指向指针的指针来指向指针数组：</p>
+<pre><code class="language-c">...
+char** Python;
+char** CLang[4];
+
+Python = &amp;Books[5];
+CLang[0] = &amp;Books[0];
+CLang[1] = &amp;Books[1];
+CLang[2] = &amp;Books[2];
+CLang[3] = &amp;Books[3];
+...
+</code></pre>
+<p>因为字符串的取地址值实际上就是其首地址，也就是一个指向字符指针的指针，所以可以这样赋值。</p>
+<p>这样，我们就利用指向指针的指针完成了对书籍的分类，这样既避免了浪费多余的内存，而且当其中的书名要修改，只需要改一次即可，代码的灵活性和安全性都得到了提升。</p>
+<h1 id="常量和指针">常量和指针</h1>
+<p>常量，在我们目前的认知里面，应该是这样的：</p>
+<pre><code>520, 'a'
+</code></pre>
+<p>或者是这样的：</p>
+<pre><code class="language-c">#define MAX 1000
+#define B 'b'
+</code></pre>
+<p>常量和变量最大的区别，就是前者不能够被修改，后者可以。那么在C语言中，可以将变量变成像具有常量一样的特性，利用<code>const</code>即可。</p>
+<pre><code class="language-c">const int max = 1000;
+const char a = 'a';
+</code></pre>
+<p>在<code>const</code>关键字的作用下，变量就会失去本来具有的可修改的特性，变成“只读”的属性。</p>
+<h1 id="指向常量的指针">指向常量的指针</h1>
+<p>强大的指针当然也是可以指向被<code>const</code>修饰过的变量，但这就意味着不能通过指针来修改它所引用的值。总结一下，就是以下4点：</p>
+<blockquote>
+<ol>
+<li>指针可以修改为指向不同的变量</li>
+<li>指针可以修改为指向不同的常量</li>
+<li>可以通过解引用来读取指针指向的数据</li>
+<li>不可以通过解引用来修改指针指向的数据</li>
+</ol>
+</blockquote>
+<h1 id="常量指针">常量指针</h1>
+<h2 id="指向非常量的常量指针">指向非常量的常量指针</h2>
+<p>指针本身作为一种变量，也是可以修改的。因此，指针也是可以被<code>const</code>修饰的，只不过位置稍稍发生了点变化：</p>
+<pre><code class="language-c">...
+int* const p = &amp;num;
+...
+</code></pre>
+<p>这样的指针有如下的特性：</p>
+<blockquote>
+<ol>
+<li>指针自身不能够被修改</li>
+<li>指针指向的值可以被修改</li>
+</ol>
+</blockquote>
+<h2 id="指向常量的常量指针">指向常量的常量指针</h2>
+<p>在定义普通变量的时候也用<code>const</code>修饰，就得到了这样的指针。不过由于限制太多，一般很少用到：</p>
+<pre><code class="language-c">...
+int num = 100;
+const int cnum = 200;
+const int* const p = &amp;cnum;
+...
+</code></pre>
+<hr>
+<p>这期博客就到此结束了，没学会的反复咀嚼，学会了的自己去实战，相信你的C语言编程能力会越来越强。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[积分变限函数的求导方法]]></title>
         <id>https://harriswilde.github.io/post/P-CkgTjqZ</id>
@@ -2573,237 +3218,6 @@ M为此数的最高位权
 <p>另外，还要提醒一点，就是<strong>补码的补码就是原码</strong>，至于为什么大家可以回去自己试试，这里就不多赘述咯('')</p>
 <p>最后，在这篇文章结束前，我还想提醒一句：**正数是三码归一！！**别到时候别人给你一个正数叫你转换，你还按位取反啥啥啥的，那样就丢人啦！</p>
 <p>今天的博客就到此结束啦，如果你喜欢笔者的文章，记得点个赞哦(≧∇≦)ﾉ</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[C语言之printf函数的用法]]></title>
-        <id>https://harriswilde.github.io/post/CPrintf</id>
-        <link href="https://harriswilde.github.io/post/CPrintf">
-        </link>
-        <updated>2019-10-13T13:11:27.000Z</updated>
-        <content type="html"><![CDATA[<p>printf，即<strong>格式化输出</strong>，是C语言中常用的输出函数。本节内容咱们就来讲讲关于这个函数的一些用法。</p>
-<p>​		我们在《<a href="https://harriswilde.github.io/post/FirstCProgram">第一个C语言程序</a>》中有粗略地提到了printf函数，小伙伴们应该也对这个函数有了一个大致的了解，大概知道了是用来<strong>输出数据</strong>用的。但是，我们既然说它是个函数，那么就应该有挺多丰富的用法等着我们来发掘。那我们就一起来看看到底有哪些方法。</p>
-<h1 id="初窥门径">初窥门径</h1>
-<p>​		我们还是从那个最简单的C语言程序开始：</p>
-<pre><code class="language-c">#include &lt;stdio.h&gt;
-int main(void)
-{
-    printf(&quot;Hello, world!\n&quot;);
-    return 0;
-}
-</code></pre>
-<p>printf函数有个括号，那么这个函数的<strong>所有参数</strong>都是放在这个括号里面的。什么意思呢，printf这个函数就像是一个工具，这个工具有许许多多的功能。如何去设置这个工具，让它达到我们想要的效果，就只需要把我们的想法写在括号里就完事儿啦。</p>
-<p>​		但是呢，这个工具并没有搭载目前最新最火的人工智能，比如你这么写<br>
-<code>printf(让&quot;Hello, world!\n&quot;这个东西给劳资居中)</code>，这样肯定不行，因为printf看不懂呀。只有写出它看得懂的东西，它才会听话，乖乖给我们工作。你要是说些它听不懂的，那它就直接罢工不干啦，你就跟老板解释去吧！(printf：别说人话了，我听不懂)</p>
-<h1 id="正式开始">正式开始</h1>
-<p>​		既然想要函数听懂我们在说什么，就要遵循它的方式。那么我们先来了解下printf的通式：</p>
-<p><code>printf(输出框架*格式化设置,附加参数)</code></p>
-<h2 id="参数解析">参数解析</h2>
-<ul>
-<li>
-<p>输出框架</p>
-<p>​		我们上面那个<code>printf(&quot;Hello, world!\n&quot;)</code>中，就只用到了<strong>输出框架</strong>这一个参数。有的小伙伴可能会问了，我们看到的全部内容不就是引号里面的吗？咋叫框架呢？</p>
-<p>​		其实不然，我们还只用了一个参数，别急，后面大家就知道啦。</p>
-</li>
-<li>
-<p>格式化设置</p>
-<p>​		这个<strong>星号</strong>其实是没有的，这里只是告诉大家这两个参数之间是<strong>连接起来</strong>的，<strong>不</strong>需要空格。</p>
-<p>​		此处的语法通式为：<br>
-<code>%[标志] [宽度] [精度] [长度修饰符] 转换字符</code></p>
-<p>​		其中，带中括号的是<strong>可选参数</strong>，<strong>不</strong>带的是<strong>必选参数</strong>。</p>
-<ol>
-<li>
-<p>转换字符：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">字符</th>
-<th style="text-align:left">含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">c</td>
-<td style="text-align:left">char；字符</td>
-</tr>
-<tr>
-<td style="text-align:center">d</td>
-<td style="text-align:left">int；带符号的十进制整数</td>
-</tr>
-<tr>
-<td style="text-align:center">i</td>
-<td style="text-align:left">同上</td>
-</tr>
-<tr>
-<td style="text-align:center">e</td>
-<td style="text-align:left">double；以指数形式输出单、双精度浮点数</td>
-</tr>
-<tr>
-<td style="text-align:center">E</td>
-<td style="text-align:left">同上</td>
-</tr>
-<tr>
-<td style="text-align:center">f</td>
-<td style="text-align:left">double；以小数的形式输出单、双精度浮点数（指数显示小写e）</td>
-</tr>
-<tr>
-<td style="text-align:center">g</td>
-<td style="text-align:left">double；以%f或%e中较短的一种方式输出单、双精度浮点数（指数显示小写e）</td>
-</tr>
-<tr>
-<td style="text-align:center">G</td>
-<td style="text-align:left">同上，指数显示大写E</td>
-</tr>
-<tr>
-<td style="text-align:center">o</td>
-<td style="text-align:left">unsigned int；无符号八进制（无前导0）</td>
-</tr>
-<tr>
-<td style="text-align:center">s</td>
-<td style="text-align:left">char；字符串</td>
-</tr>
-<tr>
-<td style="text-align:center">u</td>
-<td style="text-align:left">int；无符号十进制</td>
-</tr>
-<tr>
-<td style="text-align:center">x</td>
-<td style="text-align:left">unsigned int；无符号十六进制（无前导0x）</td>
-</tr>
-<tr>
-<td style="text-align:center">X</td>
-<td style="text-align:left">同上（无前导0X）</td>
-</tr>
-<tr>
-<td style="text-align:center">p</td>
-<td style="text-align:left">void；指针值</td>
-</tr>
-<tr>
-<td style="text-align:center">n</td>
-<td style="text-align:left">int；用于存放已写字符的个数到变量，不用于输出</td>
-</tr>
-<tr>
-<td style="text-align:center">%</td>
-<td style="text-align:left">不进行参数转换；%本身</td>
-</tr>
-</tbody>
-</table>
-</li>
-<li>
-<p>标志：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">标志</th>
-<th style="text-align:left">含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">-</td>
-<td style="text-align:left">指定被转换的参数在其字段内左对齐（默认是右对齐）</td>
-</tr>
-<tr>
-<td style="text-align:center">+</td>
-<td style="text-align:left">给数加上正负号</td>
-</tr>
-<tr>
-<td style="text-align:center">[空格]</td>
-<td style="text-align:left">若非负数则加上空格</td>
-</tr>
-<tr>
-<td style="text-align:center">0</td>
-<td style="text-align:left">对于数值转换，当输出长度小于字段宽度时，添加前导0补充</td>
-</tr>
-<tr>
-<td style="text-align:center">#</td>
-<td style="text-align:left">指定另一种输出方式<br>1. 若转换字符为o，则第一个数为0<br>2. 若转换字符为x或X，则在输出的非零值前加0x或0X<br>3. 对于转换字符为e、E、f、g或G，则输出的数总包含一个小数点。<br>另外，对于转换字符g或G，还将尾部无意义的0保留</td>
-</tr>
-</tbody>
-</table>
-</li>
-<li>
-<p>宽度：</p>
-<p>转换后的参数输出宽度<strong>至少</strong>达到这个值，若不足则在<strong>左边或右边</strong>填补空格或者0。具体看标志的设置，<strong>若无，默认左边填充空格。</strong></p>
-</li>
-<li>
-<p>精度：</p>
-<p>这里要声明一下，只有这个参数前面是要加点号&quot;<strong>.</strong>&quot;来分隔的，</p>
-<p>对于<strong>字符串</strong>，它指定打印的字符的<strong>最大个数</strong>。</p>
-<p>对于<strong>整数</strong>，它指定打印字符的<strong>位数</strong>，必要时加0来填补。</p>
-<p>对于<strong>转换字符为e、E或f</strong>，它指定打印的<strong>小数点后</strong>的数字位数。</p>
-<p>对于<strong>转换字符为g或G</strong>，它指定打印的<strong>有效数字</strong>位数。</p>
-</li>
-<li>
-<p>长度修饰符：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">修饰符</th>
-<th style="text-align:left">含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">hh</td>
-<td style="text-align:left">按signed char或unsigned char类型输出</td>
-</tr>
-<tr>
-<td style="text-align:center">h</td>
-<td style="text-align:left">按short或unsignedshort输出</td>
-</tr>
-<tr>
-<td style="text-align:center">l</td>
-<td style="text-align:left">按long或unsigned long输出</td>
-</tr>
-<tr>
-<td style="text-align:center">ll</td>
-<td style="text-align:left">按long long或者unsigned long long输出</td>
-</tr>
-<tr>
-<td style="text-align:center">L</td>
-<td style="text-align:left">按long double类型输出</td>
-</tr>
-</tbody>
-</table>
-</li>
-</ol>
-</li>
-<li>
-<p>附加参数</p>
-<p>所谓附加参数，笔者也不做过多解释。假设我有一个变量c，在<code>int c=3</code>之后，我想要输出c的值，该怎么办呢？</p>
-<p>有的小伙伴很聪明，立马说，Harris！我知道，这样不就行了：</p>
-<pre><code class="language-c">#include &lt;stdio.h&gt;
-int main(void)
-{
-    int c=3;
-    printf(&quot;C=3\n&quot;);
-    return 0;
-}
-</code></pre>
-<p>是的，这样做没错。我们的确正确输出了整型变量c的值。但是，我们写程序，很多时候时为了方便<strong>不懂程序的人</strong>来使用的。我们知道c的值，那是因为我们看得懂代码。</p>
-<p>如果我要你输出刚才用户输入的值，你怎么办呢？那么这个时候，<strong>附加参数</strong>就大显神威了。</p>
-<pre><code class="language-c">#include &lt;stdio.h&gt;
-int main(void)
-{
-    int c=3;//这里假定用户已经输入了值
-    printf(&quot;C的值为%d&quot;,c);
-    return 0;
-}
-</code></pre>
-<p>看到了吧。这里就把<strong>动态的变量c</strong>嵌入到语句里面输出了。</p>
-<p>看到这里我相信小伙伴们应该也明白了为啥我之前说引号里面的是<strong>框架</strong>了。这就是所谓的<strong>格式化输出</strong>，是不是有点只可意会不可言传的感觉呢？</p>
-<p>今天的内容基本就到这里结束啦。不过Harris在这里给大家留个悬念，大家可以自己回去自己的编译器上实验一下，看看能不能理解输出的结果？具体原理以后会讲，所以不理解没关系，学好上面的内容就很棒啦！</p>
-<pre><code class="language-c">#include &lt;stdio.h&gt;
-int main(void)
-{
-    char C = 'c';
-    printf(&quot;%c=%d&quot;,C,C);
-    return 0;
-}
-</code></pre>
-</li>
-</ul>
 ]]></content>
     </entry>
 </feed>
