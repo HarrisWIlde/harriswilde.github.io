@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://harriswilde.github.io</id>
     <title>TechZone</title>
-    <updated>2020-01-13T15:09:00.622Z</updated>
+    <updated>2020-01-14T02:27:47.792Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://harriswilde.github.io"/>
     <link rel="self" href="https://harriswilde.github.io/atom.xml"/>
@@ -10,6 +10,164 @@
     <logo>https://harriswilde.github.io/images/avatar.png</logo>
     <icon>https://harriswilde.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, TechZone</rights>
+    <entry>
+        <title type="html"><![CDATA[初识Python，多多关照]]></title>
+        <id>https://harriswilde.github.io/post/PythonBasic</id>
+        <link href="https://harriswilde.github.io/post/PythonBasic">
+        </link>
+        <updated>2020-01-14T02:27:02.000Z</updated>
+        <content type="html"><![CDATA[<p>在开始之前，我们先来认识认识Python的一些基本信息。</p>
+<p>在上一节里面，我们已经带大家安装好了Python的官方IDLE，并且教给大家了一个命令，那就是<code>print(&quot;新年快乐！&quot;)</code>，那么这节我们就来大致了解下Python以及利用Python进行的程序设计。</p>
+<hr>
+<h1 id="算法是什么">算法是什么</h1>
+<p>在开始编程之前，我们先来了解下什么是<strong>计算机程序设计</strong>。简单地说，计算机虽然能够做很多事情，而且速度很快，但是它好像浑身冒着一股不太聪明的亚子，不太擅长自己思考。只有我们告诉它要干什么，它才会去给我们效力。那么，这样的话，我们设计程序的时候，就需要告诉计算机每一步该怎么做，那么这些步骤按照顺序编排起来，就称之为<code>算法</code>。因此算法没啥大不了，不过就是做事情的步骤罢了。比如我要煎牛排，但是我不知道怎么做，那么我去请一位师傅，他就会这样告诉我：</p>
+<pre><code>准备好炊具，食材
+把锅烧热
+放入黄油
+将牛排放入其中
+将火候调整为适中
+每30秒翻一次面
+检查牛排表面，若颜色呈金黄有焦香，则盛出
+若没有，则重复翻面步骤
+</code></pre>
+<p>这就是做牛排的一种算法。计算机就是这样，每一步的任何细节你都要告诉它，否则它就无法判断，就会罢工。比如把<code>每30秒翻一次面</code>改为<code>每隔一会儿翻一次面</code>的话，计算机就不会了。</p>
+<h1 id="对象">对象</h1>
+<p>正所谓，万物皆对象。在Python里面，一个数，一个字符(串)等等都属于对象。</p>
+<h2 id="查看对象的地址">查看对象的地址</h2>
+<p>具体的每一个常量在Python中都是一个对象。每个对象，在内存中都有一个自己的地址，这就是它的<strong>身份</strong>。我们想要知道它的地址，只需要使用<code>id()</code>函数即可。</p>
+<pre><code class="language-python">&gt;&gt;&gt; id(4)
+140705889218928
+&gt;&gt;&gt; id(3.14)
+1923954506000
+&gt;&gt;&gt; id(&quot;a&quot;)
+1923945858224
+&gt;&gt;&gt; id(&quot;TechZone&quot;)
+1923955766256
+</code></pre>
+<h2 id="查看对象类型">查看对象类型</h2>
+<p>每一个对象也都有自己的<strong>类型</strong>，这是它们的种族。我们只需要使用函数<code>type()</code>就可以知道每一个对象的类型。</p>
+<pre><code class="language-python">&gt;&gt;&gt; type(4)
+&lt;class 'int'&gt;
+&gt;&gt;&gt; type(3.14)
+&lt;class 'float'&gt;
+&gt;&gt;&gt; type(&quot;a&quot;)
+&lt;class 'str'&gt;
+&gt;&gt;&gt; type(&quot;TechZone&quot;)
+&lt;class 'str'&gt;
+</code></pre>
+<h1 id="数与四则运算">数与四则运算</h1>
+<p>在Python里面，支持4中类型的数，分别是<code>int(有符号整型)</code> <code>long(长整型)</code> <code>float(浮点型)</code> <code>complex(复数)</code>。</p>
+<p>四则运算和我们平时使用的计算机差不多：<code>+加</code> <code>-减</code> <code>*乘</code> <code>/除</code>。</p>
+<p>不过，除法还有一种，就是<code>//整除</code>。也就是<strong>取整除法</strong>。</p>
+<pre><code class="language-python">&gt;&gt;&gt; 1+2
+3
+&gt;&gt;&gt; 33+54
+87
+&gt;&gt;&gt; 1-3
+-2
+&gt;&gt;&gt; 99*99
+9801
+&gt;&gt;&gt; 3/2
+1.5
+&gt;&gt;&gt; 3//2
+1
+</code></pre>
+<h1 id="语句和语句块">语句和语句块</h1>
+<p>Python和大部分的语言不同，就在于它的语句块是使用<strong>缩进</strong>来控制的，而<strong>不是</strong>使用大括号。并且语句的结束<strong>没有</strong>分号，不使用转行符<code>\</code>的情况下，回车就代表语句的结束。</p>
+<p>比如下面的一个程序，我分别使用C++和Python来写。</p>
+<p>C++：</p>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+using namespace std;
+ 
+int main (void)
+{
+   int a = 100;
+ 
+   if( a &lt; 20 )
+   {
+       cout &lt;&lt; &quot;a 小于 20&quot; &lt;&lt; endl;
+   }
+   else
+   {
+       cout &lt;&lt; &quot;a 大于 20&quot; &lt;&lt; endl;
+   }
+   cout &lt;&lt; &quot;a 的值是 &quot; &lt;&lt; a &lt;&lt; endl;
+ 
+   return 0;
+}
+</code></pre>
+<p>Python：</p>
+<pre><code class="language-python">a = int(100)
+if a &lt; int(20):
+    print(&quot;a小于20&quot;)
+else:
+    print(&quot;a大于20&quot;)
+print(f&quot;a的值是{a}&quot;)
+</code></pre>
+<p>那么换行符<code>\</code>怎么用呢？看例子：</p>
+<p>这是一行写完的：</p>
+<pre><code class="language-python">...
+total = item1 + item2 + item3
+...
+</code></pre>
+<p>这是换行：</p>
+<pre><code class="language-python">...
+total = iten1 + \
+iten2 + \
+item3
+...
+</code></pre>
+<h1 id="变量">变量</h1>
+<p>如果你数学不好，也不用害怕。这里的变量，就是指的一个名字而已。比如：</p>
+<pre><code class="language-python">score = int(100)
+</code></pre>
+<p>这里，我就把整数100赋值给了变量<code>score</code>，如果以后有改动，<code>score</code>还可以重新赋值，因此称之为变量。</p>
+<p>变量的类型就是被赋值元素的类型，比如这里<code>score</code>的类型就是<code>int</code>。</p>
+<p>变量的名称可以包含<strong>数字、字母和下划线</strong>。但是数字<strong>不能</strong>够作为变量名的开头。</p>
+<h2 id="多变量赋值">多变量赋值</h2>
+<p>Python里面赋值还有一种方法，就是多变量赋值，比如：</p>
+<p>多个变量的值相同：</p>
+<pre><code class="language-python">a = b = c = 1
+</code></pre>
+<p>多个变量的值不同：</p>
+<pre><code class="language-python">a, b, c = 1, 2, &quot;TechZone&quot;
+</code></pre>
+<p>或者你还可以交换两个变量的值：</p>
+<pre><code class="language-python">a, b = b, a
+</code></pre>
+<p>还是很方便的，对吧？</p>
+<h1 id="注释">注释</h1>
+<p>注释，简单来说就是写一些方便人类对代码阅读的一些提示性语言，但是解释器在运行的时候是<strong>不会</strong>去理会这些东西的。</p>
+<h2 id="单行注释">单行注释</h2>
+<p>单行注释用<code>#</code>号，也就是说，<code>#</code>号后面的任何文字，解释器都不会去理会。</p>
+<pre><code class="language-python">...
+print(&quot;Hello, world!&quot;) #输出Hello,world!
+...
+</code></pre>
+<h2 id="多行注释">多行注释</h2>
+<p>多行注释使用三引号，具体使用三个单引号或者三个双引号都可以。</p>
+<pre><code class="language-python">'''
+这是一个多行注释，
+你可以在这里面长篇大论
+写篇小说也是没有问题
+'''
+</code></pre>
+<pre><code class="language-python">&quot;&quot;&quot;
+这也是多行注释，
+随便你用哪种，
+喜欢就好
+&quot;&quot;&quot;
+</code></pre>
+<p>当然，三引号的作用还有别的，我们以后再讲。</p>
+<h1 id="python中的保留字">Python中的保留字</h1>
+<p>这些保留字，不能够用于<strong>任何</strong>常量，变量和标识符名称。这些是Python自身语法要用的字，并且只包含<strong>小写</strong>。</p>
+<blockquote>
+<p>and, exec, not, assert, finally, or, break, for, pass, class, from, print, continue, global, raise, def, if, return, del, import, try, elif, in, while, else, is, with, except, lambda, yield.</p>
+</blockquote>
+<hr>
+<p>初识Python，希望它的简洁和优雅能够给你带来舒适和快乐！</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[C语言之指针]]></title>
         <id>https://harriswilde.github.io/post/CPointer</id>
@@ -184,7 +342,7 @@ p = a;
 p = &amp;a[0];
 </code></pre>
 <h2 id="指针的运算">指针的运算</h2>
-<p>当指针指向数组元素的时候，可以对指针变量进行<strong>加减</strong>运算，<code>+n</code>表示指向p指针所指向的元素的<strong>下一个元素</strong>，<code>-n</code>表示指向p指针所指向的元素的<strong>上一个元素</strong>。并不是将地址加1。</p>
+<p>当指针指向数组元素的时候，可以对指针变量进行<strong>加减</strong>运算，<code>+n</code>表示指向p指针所指向的元素的<strong>下n个元素</strong>，<code>-n</code>表示指向p指针所指向的元素的<strong>上n个元素</strong>。并不是将地址加1。</p>
 <p>如：</p>
 <pre><code class="language-c">//Example 04
 #include &lt;stdio.h&gt;
@@ -2978,246 +3136,6 @@ Exp&amp;=E+Bias\\
 <p>其实还是挺简单的，对吧？</p>
 <hr>
 <p>​		好啦，今天的博客就到此结束了。这期实在是有点丰富，所以，一次性理解不了没关系，多自己在纸上写写，也许就开窍了呢？</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[进制转换以及原、反、补码]]></title>
-        <id>https://harriswilde.github.io/post/CodeTrans</id>
-        <link href="https://harriswilde.github.io/post/CodeTrans">
-        </link>
-        <updated>2019-10-15T11:13:22.000Z</updated>
-        <content type="html"><![CDATA[<p>可能有的小伙伴不理解了：为啥这节讲这些呢，不应该先把语法什么的学习一下吗？</p>
-<p>在之前的文章里面讲过，C语言的学习是需要了解一点计算机工作原理的。可能在初学时期用不到，但是如果真的要深入研究的话，是绝对避免不了的。况且这节的内容其实比较简单，我们不如先把它了解了，方便日后我们的进阶学习。</p>
-<p>学习编程，尤其是底层编程，进制转换是一个避免不了的话题。其实我们仔细去观察，发现其实是有不少规律可循的。</p>
-<hr>
-<h1 id="进制转换">进制转换</h1>
-<ol>
-<li>
-<p>二进制 -&gt; 十进制</p>
-<p>这个方法就四个字：<code>按权相加</code></p>
-<p>数学公式来表示就是：</p>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mi>M</mi></munderover><mstyle mathcolor="CadetBlue"><mi>k</mi></mstyle><mo>⋅</mo><msup><mstyle mathcolor="red"><mi>n</mi></mstyle><mi>i</mi></msup><mo separator="true">;</mo><mspace width="1em"/><mrow><mo fence="true">{</mo><mtable><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mstyle mathcolor="CadetBlue"><mi>k</mi><mi mathvariant="normal">为</mi><mi mathvariant="normal">位</mi><mi mathvariant="normal">权</mi><mi>i</mi><mi mathvariant="normal">上</mi><mi mathvariant="normal">对</mi><mi mathvariant="normal">应</mi><mi mathvariant="normal">的</mi><mi mathvariant="normal">数</mi><mi mathvariant="normal">字</mi></mstyle></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mstyle mathcolor="red"><mi>n</mi><mi mathvariant="normal">为</mi><mi mathvariant="normal">进</mi><mi mathvariant="normal">制</mi><mi mathvariant="normal">所</mi><mi mathvariant="normal">对</mi><mi mathvariant="normal">应</mi><mi mathvariant="normal">的</mi><mi mathvariant="normal">数</mi><msub><mi mathvariant="normal">字</mi><mrow><mo fence="true">(</mo><mi mathvariant="normal">如</mi><mi mathvariant="normal">二</mi><mi mathvariant="normal">进</mi><mi mathvariant="normal">制</mi><mi mathvariant="normal">为</mi><mn>2</mn><mo fence="true">)</mo></mrow></msub></mstyle></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>M</mi><mi mathvariant="normal">为</mi><mi mathvariant="normal">此</mi><mi mathvariant="normal">数</mi><mi mathvariant="normal">的</mi><mi mathvariant="normal">最</mi><mi mathvariant="normal">高</mi><mi mathvariant="normal">位</mi><mi mathvariant="normal">权</mi></mrow></mstyle></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">\sum^{M}_{i=0}{\color{CadetBlue} k}\cdot {\color{red}n}^i;\quad 
-\begin{cases}
-\color{CadetBlue}k为位权i上对应的数字\\
-\color{red}n为进制所对应的数字_{\left(如二进制为2\right)}\\
-M为此数的最高位权
-\end{cases}
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:3.106005em;vertical-align:-1.277669em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.8283360000000002em;"><span style="top:-1.872331em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">0</span></span></span></span><span style="top:-3.050005em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.3000050000000005em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.10903em;">M</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.277669em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03148em;color:CadetBlue;">k</span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:4.32em;vertical-align:-1.9099999999999997em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="color:red;">n</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8746639999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span></span></span></span><span class="mpunct">;</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace" style="margin-right:1em;"></span><span class="minner"><span class="mopen"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.35002em;"><span style="top:-2.19999em;"><span class="pstrut" style="height:3.15em;"></span><span class="delimsizinginner delim-size4"><span>⎩</span></span></span><span style="top:-2.19999em;"><span class="pstrut" style="height:3.15em;"></span><span class="delimsizinginner delim-size4"><span>⎪</span></span></span><span style="top:-3.1500100000000004em;"><span class="pstrut" style="height:3.15em;"></span><span class="delimsizinginner delim-size4"><span>⎨</span></span></span><span style="top:-4.30001em;"><span class="pstrut" style="height:3.15em;"></span><span class="delimsizinginner delim-size4"><span>⎪</span></span></span><span style="top:-4.60002em;"><span class="pstrut" style="height:3.15em;"></span><span class="delimsizinginner delim-size4"><span>⎧</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.8500199999999998em;"><span></span></span></span></span></span></span><span class="mord"><span class="mtable"><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.41em;"><span style="top:-4.41em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03148em;color:CadetBlue;">k</span><span class="mord cjk_fallback" style="color:CadetBlue;">为</span><span class="mord cjk_fallback" style="color:CadetBlue;">位</span><span class="mord cjk_fallback" style="color:CadetBlue;">权</span><span class="mord mathdefault" style="color:CadetBlue;">i</span><span class="mord cjk_fallback" style="color:CadetBlue;">上</span><span class="mord cjk_fallback" style="color:CadetBlue;">对</span><span class="mord cjk_fallback" style="color:CadetBlue;">应</span><span class="mord cjk_fallback" style="color:CadetBlue;">的</span><span class="mord cjk_fallback" style="color:CadetBlue;">数</span><span class="mord cjk_fallback" style="color:CadetBlue;">字</span></span></span><span style="top:-2.97em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord mathdefault" style="color:red;">n</span><span class="mord cjk_fallback" style="color:red;">为</span><span class="mord cjk_fallback" style="color:red;">进</span><span class="mord cjk_fallback" style="color:red;">制</span><span class="mord cjk_fallback" style="color:red;">所</span><span class="mord cjk_fallback" style="color:red;">对</span><span class="mord cjk_fallback" style="color:red;">应</span><span class="mord cjk_fallback" style="color:red;">的</span><span class="mord cjk_fallback" style="color:red;">数</span><span class="mord" style="color:red;"><span class="mord cjk_fallback" style="color:red;">字</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.34480000000000005em;"><span style="top:-2.5198em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight" style="color:red;"><span class="mord mtight" style="color:red;"><span class="minner mtight" style="color:red;"><span class="mopen mtight delimcenter" style="color:red;top:0em;"><span class="mtight" style="color:red;">(</span></span><span class="mord cjk_fallback mtight" style="color:red;">如</span><span class="mord cjk_fallback mtight" style="color:red;">二</span><span class="mord cjk_fallback mtight" style="color:red;">进</span><span class="mord cjk_fallback mtight" style="color:red;">制</span><span class="mord cjk_fallback mtight" style="color:red;">为</span><span class="mord mtight" style="color:red;">2</span><span class="mclose mtight delimcenter" style="color:red;top:0em;"><span class="mtight" style="color:red;">)</span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3551999999999999em;"><span></span></span></span></span></span></span></span></span><span style="top:-1.5300000000000002em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mord cjk_fallback">为</span><span class="mord cjk_fallback">此</span><span class="mord cjk_fallback">数</span><span class="mord cjk_fallback">的</span><span class="mord cjk_fallback">最</span><span class="mord cjk_fallback">高</span><span class="mord cjk_fallback">位</span><span class="mord cjk_fallback">权</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.9099999999999997em;"><span></span></span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
-<p>我们先来了解下<strong>位权</strong>的概念，举个栗子你就明白啦：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">二进制数</th>
-<th style="text-align:center">00101011</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">对应位权</td>
-<td style="text-align:center">76543210</td>
-</tr>
-</tbody>
-</table>
-<p>于是就有了方法：</p>
-<blockquote>
-<p>十进制 = 依次将每个二进制位的值乘以2的位权次方再相加</p>
-</blockquote>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0010101</mn><msub><mn>1</mn><mrow><mo>(</mo><mn>2</mn><mo>)</mo></mrow></msub></mrow><annotation encoding="application/x-tex">00101011_{(2)}
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9996399999999999em;vertical-align:-0.3551999999999999em;"></span><span class="mord">0</span><span class="mord">0</span><span class="mord">1</span><span class="mord">0</span><span class="mord">1</span><span class="mord">0</span><span class="mord">1</span><span class="mord"><span class="mord">1</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.34480000000000005em;"><span style="top:-2.5198em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mtight">2</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3551999999999999em;"><span></span></span></span></span></span></span></span></span></span></span></p>
-</li>
-</ol>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mtable><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mn>0</mn><mo>∗</mo><msup><mn>2</mn><mn>7</mn></msup><mo>+</mo><mn>0</mn><mo>∗</mo><msup><mn>2</mn><mn>6</mn></msup><mo>+</mo><mn>1</mn><mo>∗</mo><msup><mn>2</mn><mn>5</mn></msup><mo>+</mo><mn>0</mn><mo>∗</mo><msup><mn>2</mn><mn>4</mn></msup><mo>+</mo><mn>1</mn><mo>∗</mo><msup><mn>2</mn><mn>3</mn></msup><mo>+</mo><mn>0</mn><mo>∗</mo><msup><mn>2</mn><mn>2</mn></msup><mo>+</mo><mn>1</mn><mo>∗</mo><msup><mn>2</mn><mn>1</mn></msup><mo>+</mo><mn>1</mn><mo>∗</mo><msup><mn>2</mn><mn>0</mn></msup></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mn>42</mn></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
-&amp;= 0*2^7 + 0*2^6 + 1*2^5 + 0*2^4 + 1*2^3 + 0*2^2 + 1*2^1 + 1*2^0\\
-&amp;= 42
-\end{aligned}
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:3.024108em;vertical-align:-1.262054em;"></span><span class="mord"><span class="mtable"><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.762054em;"><span style="top:-3.762054em;"><span class="pstrut" style="height:2.864108em;"></span><span class="mord"></span></span><span style="top:-2.262054em;"><span class="pstrut" style="height:2.864108em;"></span><span class="mord"></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.262054em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.762054em;"><span style="top:-3.897946em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">7</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">6</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">5</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">4</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span></span></span></span></span></span></span><span style="top:-2.397946em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord">4</span><span class="mord">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.262054em;"><span></span></span></span></span></span></span></span></span></span></span></span></p>
-<p>另外说明一下：按权相加适用于<strong>任何进制</strong>的数到<strong>十进制</strong>的数的转换哟！</p>
-<ol start="2">
-<li>
-<p>二进制(补码) -&gt; 十进制</p>
-<p>如果<strong>符号位</strong>为0，那就和上面一种情况一样。</p>
-<p>如果<strong>符号位</strong>为1，则此时符号位的<strong>位权不变</strong>，但该位的<strong>权值</strong>应该乘以**-1**，如：</p>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1011110</mn><msub><mn>0</mn><mrow><mo>(</mo><mn>2</mn><mo>)</mo></mrow></msub></mrow><annotation encoding="application/x-tex">10111100_{(2)}
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9996399999999999em;vertical-align:-0.3551999999999999em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">1</span><span class="mord">1</span><span class="mord">1</span><span class="mord">1</span><span class="mord">0</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.34480000000000005em;"><span style="top:-2.5198em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mtight">2</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3551999999999999em;"><span></span></span></span></span></span></span></span></span></span></span></p>
-</li>
-</ol>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mtable><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mo>−</mo><mn>1</mn><mo>∗</mo><msup><mn>2</mn><mn>7</mn></msup><mo>+</mo><mn>0</mn><mo>∗</mo><msup><mn>2</mn><mn>6</mn></msup><mo>+</mo><mn>1</mn><mo>∗</mo><msup><mn>2</mn><mn>5</mn></msup><mo>+</mo><mn>1</mn><mo>∗</mo><msup><mn>2</mn><mn>4</mn></msup><mo>+</mo><mn>1</mn><mo>∗</mo><msup><mn>2</mn><mn>3</mn></msup><mo>+</mo><mn>1</mn><mo>∗</mo><msup><mn>2</mn><mn>2</mn></msup><mo>+</mo><mn>0</mn><mo>∗</mo><msup><mn>2</mn><mn>1</mn></msup><mo>+</mo><mn>0</mn><mo>∗</mo><msup><mn>2</mn><mn>0</mn></msup></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mo>−</mo><mn>68</mn></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
-&amp;= -1*2^{7} + 0*2^{6} + 1*2^{5} + 1*2^{4} + 1*2^{3} + 1*2^{2} + 0*2^{1} + 0*2^{0}\\
-&amp;= -68
-\end{aligned}
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:3.024108em;vertical-align:-1.262054em;"></span><span class="mord"><span class="mtable"><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.762054em;"><span style="top:-3.762054em;"><span class="pstrut" style="height:2.864108em;"></span><span class="mord"></span></span><span style="top:-2.262054em;"><span class="pstrut" style="height:2.864108em;"></span><span class="mord"></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.262054em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.762054em;"><span style="top:-3.897946em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord">−</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">7</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">6</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">5</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">4</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">0</span></span></span></span></span></span></span></span></span></span></span><span style="top:-2.397946em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord">−</span><span class="mord">6</span><span class="mord">8</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.262054em;"><span></span></span></span></span></span></span></span></span></span></span></span></p>
-<p>大家可能看懵了，啥是<strong>符号位</strong>？<strong>补码</strong>又是啥？别急，后面且听我娓娓道来。</p>
-<ol start="3">
-<li>
-<p>十进制 -&gt; 二进制</p>
-<p>这好像大家高中的时候学过吧，这里我总结下：</p>
-<blockquote>
-<p>将待转换的十进制数不断地除以2，直到商为零，然后将每次除得的余数倒序拼凑即可。</p>
-</blockquote>
-</li>
-<li>
-<p>二进制 &lt;-&gt; 八进制</p>
-<p>这个很简单，只需要把数字从0位权开始<strong>三个一组</strong>分开，然后分别转化成八进制数再拼接起来即可。这里提供个表格，方便不想转换的同学查表。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">二进制</th>
-<th style="text-align:center">八进制</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">000</td>
-<td style="text-align:center">0</td>
-</tr>
-<tr>
-<td style="text-align:center">001</td>
-<td style="text-align:center">1</td>
-</tr>
-<tr>
-<td style="text-align:center">010</td>
-<td style="text-align:center">2</td>
-</tr>
-<tr>
-<td style="text-align:center">011</td>
-<td style="text-align:center">3</td>
-</tr>
-<tr>
-<td style="text-align:center">100</td>
-<td style="text-align:center">4</td>
-</tr>
-<tr>
-<td style="text-align:center">101</td>
-<td style="text-align:center">5</td>
-</tr>
-<tr>
-<td style="text-align:center">110</td>
-<td style="text-align:center">6</td>
-</tr>
-<tr>
-<td style="text-align:center">111</td>
-<td style="text-align:center">7</td>
-</tr>
-</tbody>
-</table>
-</li>
-<li>
-<p>二进制 &lt;-&gt; 十六进制</p>
-<p>这个就更简单了，只需要记住如下的表格，然后将二进制数从0位权开始<strong>四个一组</strong>分开，分别对应后再重新拼凑即可。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">二进制</th>
-<th style="text-align:center">十六进制</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">0000</td>
-<td style="text-align:center">0</td>
-</tr>
-<tr>
-<td style="text-align:center">0001</td>
-<td style="text-align:center">1</td>
-</tr>
-<tr>
-<td style="text-align:center">0010</td>
-<td style="text-align:center">2</td>
-</tr>
-<tr>
-<td style="text-align:center">0011</td>
-<td style="text-align:center">3</td>
-</tr>
-<tr>
-<td style="text-align:center">0100</td>
-<td style="text-align:center">4</td>
-</tr>
-<tr>
-<td style="text-align:center">0101</td>
-<td style="text-align:center">5</td>
-</tr>
-<tr>
-<td style="text-align:center">0110</td>
-<td style="text-align:center">6</td>
-</tr>
-<tr>
-<td style="text-align:center">0111</td>
-<td style="text-align:center">7</td>
-</tr>
-<tr>
-<td style="text-align:center">1000</td>
-<td style="text-align:center">8</td>
-</tr>
-<tr>
-<td style="text-align:center">1001</td>
-<td style="text-align:center">9</td>
-</tr>
-<tr>
-<td style="text-align:center">1010</td>
-<td style="text-align:center">A</td>
-</tr>
-<tr>
-<td style="text-align:center">1011</td>
-<td style="text-align:center">B</td>
-</tr>
-<tr>
-<td style="text-align:center">1100</td>
-<td style="text-align:center">C</td>
-</tr>
-<tr>
-<td style="text-align:center">1101</td>
-<td style="text-align:center">D</td>
-</tr>
-<tr>
-<td style="text-align:center">1110</td>
-<td style="text-align:center">E</td>
-</tr>
-<tr>
-<td style="text-align:center">1111</td>
-<td style="text-align:center">F</td>
-</tr>
-</tbody>
-</table>
-</li>
-</ol>
-<h1 id="原码">原码</h1>
-<p>在了解这些码之前呢，我们先来了解一下基本知识。</p>
-<p>首先，我们要知道，计算机中，存放一个数据最小的单位是bit（位，也称比特），而在TCP/IP协议中，规定<code>1Byte = 8bit</code>，Byte（字节）是最小的容量单位。因此，<strong>一个字节里面就有8个位</strong>。那么如果使用一个字节来表示数字的话，就是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>2</mn><mn>8</mn></msup></mrow><annotation encoding="application/x-tex">2^8</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">8</span></span></span></span></span></span></span></span></span></span></span>个数。那么为了表示数字的符号，我们又规定，一个字节中的<strong>最高位</strong>（也就是最左边的那一位）是<strong>符号位</strong>，符号位为0表示的是<strong>非负数</strong>（记住，是正数和0），1则表示的是<strong>负数</strong>。</p>
-<p>原码，实际上就是将十进制数转化成二进制的形式，然后把符号位加上即可。比如说5的原码，先转化为二进制，即<code>101</code>，再填充至7位，即<code>000 0101</code>，然后因为是非负数，符号位为<code>0</code>，那么5的原码就是<code>0000 0101</code>。</p>
-<p>明白了吧，是不是觉得特别简单呢？那么-5的原码又是啥呢？</p>
-<p>聪明的你一定想到了，就直接把符号位变为<code>1</code>就行啦，即<code>1000 0101</code>。</p>
-<p>简直完美啊，如此简洁地表达了数字在存储器中的表示方式。直观形象又好记！</p>
-<p>But！现在该说但是了。请问5和-5相加等于多少呢？</p>
-<p>0啊！当然是0！这难道还要思考吗？？</p>
-<p>是的，没错，但是你用两个数的原码加起来看看等于几？</p>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0000</mn><mo separator="true">,</mo><mn>0101</mn><mo>+</mo><mn>1000</mn><mo separator="true">,</mo><mn>0101</mn><mo>=</mo><mn>1000</mn><mo separator="true">,</mo><mn>1010</mn></mrow><annotation encoding="application/x-tex">0000,0101 + 1000,0101 = 1000,1010
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8388800000000001em;vertical-align:-0.19444em;"></span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">0</span><span class="mord">1</span><span class="mord">0</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8388800000000001em;vertical-align:-0.19444em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">0</span><span class="mord">1</span><span class="mord">0</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8388800000000001em;vertical-align:-0.19444em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">1</span><span class="mord">0</span></span></span></span></span></p>
-<p>咦？咋就不等于0了呢……</p>
-<p>没错，问题就在这。如果用这种所谓的直观的形式去表达，既有悖于我们的常识，又不方便计算机的电路设计，于是我们的先人们开始了探索。</p>
-<h1 id="反码">反码</h1>
-<p>我们从上面的例子了解到，负数在表达的时候，不能这么图方便，不然可能会造成一些冲突和错误。先人们就开始折腾。结果弄出来反码这个东西。</p>
-<p>我们说了，只是负数的表达除了问题，所以<strong>正数无论是原码，反码还是后面我们讲的补码，都是不变的</strong>。要变的只有负数。</p>
-<p>负数原码转反码的方法很简单，符号位单独<strong>不变</strong>，只需要把其他的<strong>按位取反</strong>即可。什么叫按位取反呢，说成人话，就是0变1，1变0。还是拿刚刚的-5作为栗子。-5的原码为</p>
-<blockquote>
-<p>1000 0101</p>
-</blockquote>
-<p>那么转化为反码，符号位不变，其余按位取反：</p>
-<blockquote>
-<p>1111 1010</p>
-</blockquote>
-<p>懂了吧，那么这样5和-5相加会得到什么呢？</p>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0000</mn><mo separator="true">,</mo><mn>0101</mn><mo>+</mo><mn>1111</mn><mo separator="true">,</mo><mn>1010</mn><mo>=</mo><mn>1111</mn><mo separator="true">,</mo><mn>1111</mn></mrow><annotation encoding="application/x-tex">0000,0101 + 1111,1010 = 1111,1111
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8388800000000001em;vertical-align:-0.19444em;"></span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">0</span><span class="mord">1</span><span class="mord">0</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8388800000000001em;vertical-align:-0.19444em;"></span><span class="mord">1</span><span class="mord">1</span><span class="mord">1</span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">1</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8388800000000001em;vertical-align:-0.19444em;"></span><span class="mord">1</span><span class="mord">1</span><span class="mord">1</span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mord">1</span><span class="mord">1</span><span class="mord">1</span></span></span></span></span></p>
-<p>我们发现，得到了一个8bit能表示的最大的值。这个路子能否成功，就看临门一脚了。距离成功仅一步之遥。</p>
-<h1 id="补码">补码</h1>
-<p>这个“临门一脚”就交给补码啦。补码的出现，相反数相加不为0的情况才被彻底解决。那么补码又是个啥东东呢？</p>
-<p>正数的补码还是原码，这个刚刚说过了。而负数的补码，则是在反码的基础上加个1。可为啥是1呢？上面那个反码的例子，我相信大家是有些想法了，如果给<code>1111 1111</code>这个数加个1，那么等于多少呢？</p>
-<p>答案是<code>1 0000 0000</code>。</p>
-<p>又的小伙伴可能会抬杠了，那还是不等于0呀。我们注意观察，这个数已经达到9位了，最高位已经<strong>溢出</strong>一个Byte，那么对于一个Byte所表示的数字，计算机可以将最高位直接<strong>舍弃</strong>，bingo！不就变成<code>0000 0000</code>了吗？</p>
-<p>是不是很奇妙呢？不得不说，先人们着实厉害呀，在这里向他们致敬！</p>
-<p>另外，还要提醒一点，就是<strong>补码的补码就是原码</strong>，至于为什么大家可以回去自己试试，这里就不多赘述咯('')</p>
-<p>最后，在这篇文章结束前，我还想提醒一句：**正数是三码归一！！**别到时候别人给你一个正数叫你转换，你还按位取反啥啥啥的，那样就丢人啦！</p>
-<p>今天的博客就到此结束啦，如果你喜欢笔者的文章，记得点个赞哦(≧∇≦)ﾉ</p>
 ]]></content>
     </entry>
 </feed>

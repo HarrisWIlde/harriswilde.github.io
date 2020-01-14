@@ -3,7 +3,7 @@
   <head>
       <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>C语言之printf函数的用法 | TechZone</title>
+<title>初识Python，多多关照 | TechZone</title>
 <link rel="shortcut icon" href="https://harriswilde.github.io/favicon.ico?v=1578968864849">
 <link rel="stylesheet" href="https://harriswilde.github.io/styles/main.css">
 <meta name="description" content="HarrisWilde祝诸君元旦快乐🎉" />
@@ -180,12 +180,27 @@
             <div class="toc-box">
   <div class="toc-wrapper" id="toc_wrapper">
     <ul class="markdownIt-TOC">
-<li><a href="#%E5%88%9D%E7%AA%A5%E9%97%A8%E5%BE%84">初窥门径</a></li>
-<li><a href="#%E6%AD%A3%E5%BC%8F%E5%BC%80%E5%A7%8B">正式开始</a>
+<li><a href="#%E7%AE%97%E6%B3%95%E6%98%AF%E4%BB%80%E4%B9%88">算法是什么</a></li>
+<li><a href="#%E5%AF%B9%E8%B1%A1">对象</a>
 <ul>
-<li><a href="#%E5%8F%82%E6%95%B0%E8%A7%A3%E6%9E%90">参数解析</a></li>
+<li><a href="#%E6%9F%A5%E7%9C%8B%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%9C%B0%E5%9D%80">查看对象的地址</a></li>
+<li><a href="#%E6%9F%A5%E7%9C%8B%E5%AF%B9%E8%B1%A1%E7%B1%BB%E5%9E%8B">查看对象类型</a></li>
 </ul>
 </li>
+<li><a href="#%E6%95%B0%E4%B8%8E%E5%9B%9B%E5%88%99%E8%BF%90%E7%AE%97">数与四则运算</a></li>
+<li><a href="#%E8%AF%AD%E5%8F%A5%E5%92%8C%E8%AF%AD%E5%8F%A5%E5%9D%97">语句和语句块</a></li>
+<li><a href="#%E5%8F%98%E9%87%8F">变量</a>
+<ul>
+<li><a href="#%E5%A4%9A%E5%8F%98%E9%87%8F%E8%B5%8B%E5%80%BC">多变量赋值</a></li>
+</ul>
+</li>
+<li><a href="#%E6%B3%A8%E9%87%8A">注释</a>
+<ul>
+<li><a href="#%E5%8D%95%E8%A1%8C%E6%B3%A8%E9%87%8A">单行注释</a></li>
+<li><a href="#%E5%A4%9A%E8%A1%8C%E6%B3%A8%E9%87%8A">多行注释</a></li>
+</ul>
+</li>
+<li><a href="#python%E4%B8%AD%E7%9A%84%E4%BF%9D%E7%95%99%E5%AD%97">Python中的保留字</a></li>
 </ul>
 
   </div>
@@ -424,15 +439,15 @@ window.addEventListener('load', function() {
               <div class="article-box">
     <header class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://harriswilde.github.io/post/CPrintf">
-      C语言之printf函数的用法
+    <a class="post-title-link" href="https://harriswilde.github.io/post/PythonBasic">
+      初识Python，多多关照
     </a>
   </h1>
   <div class="post-meta">
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span>发布于</span>
-      <span>2019-10-13</span>
+      <span>2020-01-14</span>
     </span>
     
       <span class="meta-item">
@@ -441,8 +456,8 @@ window.addEventListener('load', function() {
         <span class="pc-show">分类于</span>
         
           
-            <a href="https://harriswilde.github.io/tag/qrA-i8flt">
-              <span>Clang</span>
+            <a href="https://harriswilde.github.io/tag/XDlggbnix">
+              <span>Python</span>
             </a>
           
         
@@ -456,235 +471,162 @@ window.addEventListener('load', function() {
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>1615<span class="pc-show">字数</span></span>
+      <span>1473<span class="pc-show">字数</span></span>
     </span>
   </div>
 </header>
 </div>
               <div class="post-body next-md-body" id="post_body">
-                <p>printf，即<strong>格式化输出</strong>，是C语言中常用的输出函数。本节内容咱们就来讲讲关于这个函数的一些用法。</p>
-<p>​		我们在《<a href="https://harriswilde.github.io/post/FirstCProgram">第一个C语言程序</a>》中有粗略地提到了printf函数，小伙伴们应该也对这个函数有了一个大致的了解，大概知道了是用来<strong>输出数据</strong>用的。但是，我们既然说它是个函数，那么就应该有挺多丰富的用法等着我们来发掘。那我们就一起来看看到底有哪些方法。</p>
-<h1 id="初窥门径">初窥门径</h1>
-<p>​		我们还是从那个最简单的C语言程序开始：</p>
-<pre><code class="language-c">#include &lt;stdio.h&gt;
-int main(void)
+                <p>在开始之前，我们先来认识认识Python的一些基本信息。</p>
+<p>在上一节里面，我们已经带大家安装好了Python的官方IDLE，并且教给大家了一个命令，那就是<code>print(&quot;新年快乐！&quot;)</code>，那么这节我们就来大致了解下Python以及利用Python进行的程序设计。</p>
+<hr>
+<h1 id="算法是什么">算法是什么</h1>
+<p>在开始编程之前，我们先来了解下什么是<strong>计算机程序设计</strong>。简单地说，计算机虽然能够做很多事情，而且速度很快，但是它好像浑身冒着一股不太聪明的亚子，不太擅长自己思考。只有我们告诉它要干什么，它才会去给我们效力。那么，这样的话，我们设计程序的时候，就需要告诉计算机每一步该怎么做，那么这些步骤按照顺序编排起来，就称之为<code>算法</code>。因此算法没啥大不了，不过就是做事情的步骤罢了。比如我要煎牛排，但是我不知道怎么做，那么我去请一位师傅，他就会这样告诉我：</p>
+<pre><code>准备好炊具，食材
+把锅烧热
+放入黄油
+将牛排放入其中
+将火候调整为适中
+每30秒翻一次面
+检查牛排表面，若颜色呈金黄有焦香，则盛出
+若没有，则重复翻面步骤
+</code></pre>
+<p>这就是做牛排的一种算法。计算机就是这样，每一步的任何细节你都要告诉它，否则它就无法判断，就会罢工。比如把<code>每30秒翻一次面</code>改为<code>每隔一会儿翻一次面</code>的话，计算机就不会了。</p>
+<h1 id="对象">对象</h1>
+<p>正所谓，万物皆对象。在Python里面，一个数，一个字符(串)等等都属于对象。</p>
+<h2 id="查看对象的地址">查看对象的地址</h2>
+<p>具体的每一个常量在Python中都是一个对象。每个对象，在内存中都有一个自己的地址，这就是它的<strong>身份</strong>。我们想要知道它的地址，只需要使用<code>id()</code>函数即可。</p>
+<pre><code class="language-python">&gt;&gt;&gt; id(4)
+140705889218928
+&gt;&gt;&gt; id(3.14)
+1923954506000
+&gt;&gt;&gt; id(&quot;a&quot;)
+1923945858224
+&gt;&gt;&gt; id(&quot;TechZone&quot;)
+1923955766256
+</code></pre>
+<h2 id="查看对象类型">查看对象类型</h2>
+<p>每一个对象也都有自己的<strong>类型</strong>，这是它们的种族。我们只需要使用函数<code>type()</code>就可以知道每一个对象的类型。</p>
+<pre><code class="language-python">&gt;&gt;&gt; type(4)
+&lt;class 'int'&gt;
+&gt;&gt;&gt; type(3.14)
+&lt;class 'float'&gt;
+&gt;&gt;&gt; type(&quot;a&quot;)
+&lt;class 'str'&gt;
+&gt;&gt;&gt; type(&quot;TechZone&quot;)
+&lt;class 'str'&gt;
+</code></pre>
+<h1 id="数与四则运算">数与四则运算</h1>
+<p>在Python里面，支持4中类型的数，分别是<code>int(有符号整型)</code> <code>long(长整型)</code> <code>float(浮点型)</code> <code>complex(复数)</code>。</p>
+<p>四则运算和我们平时使用的计算机差不多：<code>+加</code> <code>-减</code> <code>*乘</code> <code>/除</code>。</p>
+<p>不过，除法还有一种，就是<code>//整除</code>。也就是<strong>取整除法</strong>。</p>
+<pre><code class="language-python">&gt;&gt;&gt; 1+2
+3
+&gt;&gt;&gt; 33+54
+87
+&gt;&gt;&gt; 1-3
+-2
+&gt;&gt;&gt; 99*99
+9801
+&gt;&gt;&gt; 3/2
+1.5
+&gt;&gt;&gt; 3//2
+1
+</code></pre>
+<h1 id="语句和语句块">语句和语句块</h1>
+<p>Python和大部分的语言不同，就在于它的语句块是使用<strong>缩进</strong>来控制的，而<strong>不是</strong>使用大括号。并且语句的结束<strong>没有</strong>分号，不使用转行符<code>\</code>的情况下，回车就代表语句的结束。</p>
+<p>比如下面的一个程序，我分别使用C++和Python来写。</p>
+<p>C++：</p>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+using namespace std;
+ 
+int main (void)
 {
-    printf(&quot;Hello, world!\n&quot;);
-    return 0;
+   int a = 100;
+ 
+   if( a &lt; 20 )
+   {
+       cout &lt;&lt; &quot;a 小于 20&quot; &lt;&lt; endl;
+   }
+   else
+   {
+       cout &lt;&lt; &quot;a 大于 20&quot; &lt;&lt; endl;
+   }
+   cout &lt;&lt; &quot;a 的值是 &quot; &lt;&lt; a &lt;&lt; endl;
+ 
+   return 0;
 }
 </code></pre>
-<p>printf函数有个括号，那么这个函数的<strong>所有参数</strong>都是放在这个括号里面的。什么意思呢，printf这个函数就像是一个工具，这个工具有许许多多的功能。如何去设置这个工具，让它达到我们想要的效果，就只需要把我们的想法写在括号里就完事儿啦。</p>
-<p>​		但是呢，这个工具并没有搭载目前最新最火的人工智能，比如你这么写<br>
-<code>printf(让&quot;Hello, world!\n&quot;这个东西给劳资居中)</code>，这样肯定不行，因为printf看不懂呀。只有写出它看得懂的东西，它才会听话，乖乖给我们工作。你要是说些它听不懂的，那它就直接罢工不干啦，你就跟老板解释去吧！(printf：别说人话了，我听不懂)</p>
-<h1 id="正式开始">正式开始</h1>
-<p>​		既然想要函数听懂我们在说什么，就要遵循它的方式。那么我们先来了解下printf的通式：</p>
-<p><code>printf(输出框架*格式化设置,附加参数)</code></p>
-<h2 id="参数解析">参数解析</h2>
-<ul>
-<li>
-<p>输出框架</p>
-<p>​		我们上面那个<code>printf(&quot;Hello, world!\n&quot;)</code>中，就只用到了<strong>输出框架</strong>这一个参数。有的小伙伴可能会问了，我们看到的全部内容不就是引号里面的吗？咋叫框架呢？</p>
-<p>​		其实不然，我们还只用了一个参数，别急，后面大家就知道啦。</p>
-</li>
-<li>
-<p>格式化设置</p>
-<p>​		这个<strong>星号</strong>其实是没有的，这里只是告诉大家这两个参数之间是<strong>连接起来</strong>的，<strong>不</strong>需要空格。</p>
-<p>​		此处的语法通式为：<br>
-<code>%[标志] [宽度] [精度] [长度修饰符] 转换字符</code></p>
-<p>​		其中，带中括号的是<strong>可选参数</strong>，<strong>不</strong>带的是<strong>必选参数</strong>。</p>
-<ol>
-<li>
-<p>转换字符：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">字符</th>
-<th style="text-align:left">含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">c</td>
-<td style="text-align:left">char；字符</td>
-</tr>
-<tr>
-<td style="text-align:center">d</td>
-<td style="text-align:left">int；带符号的十进制整数</td>
-</tr>
-<tr>
-<td style="text-align:center">i</td>
-<td style="text-align:left">同上</td>
-</tr>
-<tr>
-<td style="text-align:center">e</td>
-<td style="text-align:left">double；以指数形式输出单、双精度浮点数</td>
-</tr>
-<tr>
-<td style="text-align:center">E</td>
-<td style="text-align:left">同上</td>
-</tr>
-<tr>
-<td style="text-align:center">f</td>
-<td style="text-align:left">double；以小数的形式输出单、双精度浮点数（指数显示小写e）</td>
-</tr>
-<tr>
-<td style="text-align:center">g</td>
-<td style="text-align:left">double；以%f或%e中较短的一种方式输出单、双精度浮点数（指数显示小写e）</td>
-</tr>
-<tr>
-<td style="text-align:center">G</td>
-<td style="text-align:left">同上，指数显示大写E</td>
-</tr>
-<tr>
-<td style="text-align:center">o</td>
-<td style="text-align:left">unsigned int；无符号八进制（无前导0）</td>
-</tr>
-<tr>
-<td style="text-align:center">s</td>
-<td style="text-align:left">char；字符串</td>
-</tr>
-<tr>
-<td style="text-align:center">u</td>
-<td style="text-align:left">int；无符号十进制</td>
-</tr>
-<tr>
-<td style="text-align:center">x</td>
-<td style="text-align:left">unsigned int；无符号十六进制（无前导0x）</td>
-</tr>
-<tr>
-<td style="text-align:center">X</td>
-<td style="text-align:left">同上（无前导0X）</td>
-</tr>
-<tr>
-<td style="text-align:center">p</td>
-<td style="text-align:left">void；指针值</td>
-</tr>
-<tr>
-<td style="text-align:center">n</td>
-<td style="text-align:left">int；用于存放已写字符的个数到变量，不用于输出</td>
-</tr>
-<tr>
-<td style="text-align:center">%</td>
-<td style="text-align:left">不进行参数转换；%本身</td>
-</tr>
-</tbody>
-</table>
-</li>
-<li>
-<p>标志：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">标志</th>
-<th style="text-align:left">含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">-</td>
-<td style="text-align:left">指定被转换的参数在其字段内左对齐（默认是右对齐）</td>
-</tr>
-<tr>
-<td style="text-align:center">+</td>
-<td style="text-align:left">给数加上正负号</td>
-</tr>
-<tr>
-<td style="text-align:center">[空格]</td>
-<td style="text-align:left">若非负数则加上空格</td>
-</tr>
-<tr>
-<td style="text-align:center">0</td>
-<td style="text-align:left">对于数值转换，当输出长度小于字段宽度时，添加前导0补充</td>
-</tr>
-<tr>
-<td style="text-align:center">#</td>
-<td style="text-align:left">指定另一种输出方式<br>1. 若转换字符为o，则第一个数为0<br>2. 若转换字符为x或X，则在输出的非零值前加0x或0X<br>3. 对于转换字符为e、E、f、g或G，则输出的数总包含一个小数点。<br>另外，对于转换字符g或G，还将尾部无意义的0保留</td>
-</tr>
-</tbody>
-</table>
-</li>
-<li>
-<p>宽度：</p>
-<p>转换后的参数输出宽度<strong>至少</strong>达到这个值，若不足则在<strong>左边或右边</strong>填补空格或者0。具体看标志的设置，<strong>若无，默认左边填充空格。</strong></p>
-</li>
-<li>
-<p>精度：</p>
-<p>这里要声明一下，只有这个参数前面是要加点号&quot;<strong>.</strong>&quot;来分隔的，</p>
-<p>对于<strong>字符串</strong>，它指定打印的字符的<strong>最大个数</strong>。</p>
-<p>对于<strong>整数</strong>，它指定打印字符的<strong>位数</strong>，必要时加0来填补。</p>
-<p>对于<strong>转换字符为e、E或f</strong>，它指定打印的<strong>小数点后</strong>的数字位数。</p>
-<p>对于<strong>转换字符为g或G</strong>，它指定打印的<strong>有效数字</strong>位数。</p>
-</li>
-<li>
-<p>长度修饰符：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">修饰符</th>
-<th style="text-align:left">含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">hh</td>
-<td style="text-align:left">按signed char或unsigned char类型输出</td>
-</tr>
-<tr>
-<td style="text-align:center">h</td>
-<td style="text-align:left">按short或unsignedshort输出</td>
-</tr>
-<tr>
-<td style="text-align:center">l</td>
-<td style="text-align:left">按long或unsigned long输出</td>
-</tr>
-<tr>
-<td style="text-align:center">ll</td>
-<td style="text-align:left">按long long或者unsigned long long输出</td>
-</tr>
-<tr>
-<td style="text-align:center">L</td>
-<td style="text-align:left">按long double类型输出</td>
-</tr>
-</tbody>
-</table>
-</li>
-</ol>
-</li>
-<li>
-<p>附加参数</p>
-<p>所谓附加参数，笔者也不做过多解释。假设我有一个变量c，在<code>int c=3</code>之后，我想要输出c的值，该怎么办呢？</p>
-<p>有的小伙伴很聪明，立马说，Harris！我知道，这样不就行了：</p>
-<pre><code class="language-c">#include &lt;stdio.h&gt;
-int main(void)
-{
-    int c=3;
-    printf(&quot;C=3\n&quot;);
-    return 0;
-}
+<p>Python：</p>
+<pre><code class="language-python">a = int(100)
+if a &lt; int(20):
+    print(&quot;a小于20&quot;)
+else:
+    print(&quot;a大于20&quot;)
+print(f&quot;a的值是{a}&quot;)
 </code></pre>
-<p>是的，这样做没错。我们的确正确输出了整型变量c的值。但是，我们写程序，很多时候时为了方便<strong>不懂程序的人</strong>来使用的。我们知道c的值，那是因为我们看得懂代码。</p>
-<p>如果我要你输出刚才用户输入的值，你怎么办呢？那么这个时候，<strong>附加参数</strong>就大显神威了。</p>
-<pre><code class="language-c">#include &lt;stdio.h&gt;
-int main(void)
-{
-    int c=3;//这里假定用户已经输入了值
-    printf(&quot;C的值为%d&quot;,c);
-    return 0;
-}
+<p>那么换行符<code>\</code>怎么用呢？看例子：</p>
+<p>这是一行写完的：</p>
+<pre><code class="language-python">...
+total = item1 + item2 + item3
+...
 </code></pre>
-<p>看到了吧。这里就把<strong>动态的变量c</strong>嵌入到语句里面输出了。</p>
-<p>看到这里我相信小伙伴们应该也明白了为啥我之前说引号里面的是<strong>框架</strong>了。这就是所谓的<strong>格式化输出</strong>，是不是有点只可意会不可言传的感觉呢？</p>
-<p>今天的内容基本就到这里结束啦。不过Harris在这里给大家留个悬念，大家可以自己回去自己的编译器上实验一下，看看能不能理解输出的结果？具体原理以后会讲，所以不理解没关系，学好上面的内容就很棒啦！</p>
-<pre><code class="language-c">#include &lt;stdio.h&gt;
-int main(void)
-{
-    char C = 'c';
-    printf(&quot;%c=%d&quot;,C,C);
-    return 0;
-}
+<p>这是换行：</p>
+<pre><code class="language-python">...
+total = iten1 + \
+iten2 + \
+item3
+...
 </code></pre>
-</li>
-</ul>
+<h1 id="变量">变量</h1>
+<p>如果你数学不好，也不用害怕。这里的变量，就是指的一个名字而已。比如：</p>
+<pre><code class="language-python">score = int(100)
+</code></pre>
+<p>这里，我就把整数100赋值给了变量<code>score</code>，如果以后有改动，<code>score</code>还可以重新赋值，因此称之为变量。</p>
+<p>变量的类型就是被赋值元素的类型，比如这里<code>score</code>的类型就是<code>int</code>。</p>
+<p>变量的名称可以包含<strong>数字、字母和下划线</strong>。但是数字<strong>不能</strong>够作为变量名的开头。</p>
+<h2 id="多变量赋值">多变量赋值</h2>
+<p>Python里面赋值还有一种方法，就是多变量赋值，比如：</p>
+<p>多个变量的值相同：</p>
+<pre><code class="language-python">a = b = c = 1
+</code></pre>
+<p>多个变量的值不同：</p>
+<pre><code class="language-python">a, b, c = 1, 2, &quot;TechZone&quot;
+</code></pre>
+<p>或者你还可以交换两个变量的值：</p>
+<pre><code class="language-python">a, b = b, a
+</code></pre>
+<p>还是很方便的，对吧？</p>
+<h1 id="注释">注释</h1>
+<p>注释，简单来说就是写一些方便人类对代码阅读的一些提示性语言，但是解释器在运行的时候是<strong>不会</strong>去理会这些东西的。</p>
+<h2 id="单行注释">单行注释</h2>
+<p>单行注释用<code>#</code>号，也就是说，<code>#</code>号后面的任何文字，解释器都不会去理会。</p>
+<pre><code class="language-python">...
+print(&quot;Hello, world!&quot;) #输出Hello,world!
+...
+</code></pre>
+<h2 id="多行注释">多行注释</h2>
+<p>多行注释使用三引号，具体使用三个单引号或者三个双引号都可以。</p>
+<pre><code class="language-python">'''
+这是一个多行注释，
+你可以在这里面长篇大论
+写篇小说也是没有问题
+'''
+</code></pre>
+<pre><code class="language-python">&quot;&quot;&quot;
+这也是多行注释，
+随便你用哪种，
+喜欢就好
+&quot;&quot;&quot;
+</code></pre>
+<p>当然，三引号的作用还有别的，我们以后再讲。</p>
+<h1 id="python中的保留字">Python中的保留字</h1>
+<p>这些保留字，不能够用于<strong>任何</strong>常量，变量和标识符名称。这些是Python自身语法要用的字，并且只包含<strong>小写</strong>。</p>
+<blockquote>
+<p>and, exec, not, assert, finally, or, break, for, pass, class, from, print, continue, global, raise, def, if, return, del, import, try, elif, in, while, else, is, with, except, lambda, yield.</p>
+</blockquote>
+<hr>
+<p>初识Python，希望它的简洁和优雅能够给你带来舒适和快乐！</p>
 
               </div>
               <div class="post-footer">
@@ -695,7 +637,7 @@ int main(void)
     </li>
     <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://harriswilde.github.io/post/CPrintf" title="C语言之printf函数的用法">C语言之printf函数的用法</a>
+      <a href="https://harriswilde.github.io/post/PythonBasic" title="初识Python，多多关照">初识Python，多多关照</a>
     </li>
     <li class="post-copyright-license">
       <strong>版权声明： </strong>
@@ -704,22 +646,18 @@ int main(void)
   </ul>
   <div class="tags">
     
-      <a href="https://harriswilde.github.io/tag/qrA-i8flt"># Clang</a>
+      <a href="https://harriswilde.github.io/tag/XDlggbnix"># Python</a>
     
   </div>
   <div class="nav">
     <div class="nav-prev">
       
         <i class="fa fa-angle-left"></i>
-        <a class="nav-pc-next" href="https://harriswilde.github.io/post/CPreStudy">C语言的一些基本知识</a>
-        <a class="nav-mobile-next" href="https://harriswilde.github.io/post/CPreStudy">上一篇</a>
+        <a class="nav-pc-next" href="https://harriswilde.github.io/post/CPointer">C语言之指针</a>
+        <a class="nav-mobile-next" href="https://harriswilde.github.io/post/CPointer">上一篇</a>
       
     </div>
     <div class="nav-next">
-      
-        <a class="nav-pc-next" href="https://harriswilde.github.io/post/CodeTrans">进制转换以及原、反、补码</a class="nav-pc-next">
-        <a class="nav-mobile-prev" href="https://harriswilde.github.io/post/CodeTrans">下一篇</a>
-        <i class="fa fa-angle-right"></i>
       
     </div>
   </div>
