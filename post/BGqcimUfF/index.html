@@ -1,0 +1,663 @@
+<html>
+<meta name="theme-color" content="#222222" />
+  <head>
+      <meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>浅谈拼手气红包的算法 | TechZone</title>
+<link rel="shortcut icon" href="https://harriswilde.github.io/favicon.ico?v=1580113445324">
+<link rel="stylesheet" href="https://harriswilde.github.io/styles/main.css">
+<meta name="description" content="HarrisWilde祝诸君元旦快乐🎉" />
+
+<link rel="stylesheet" href="/media/fonts/font-awesome.css">
+<link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Rosario:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.ui.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+  </head>
+  <body>
+    <div class="head-top-line"></div>
+    <div class="header-box">
+      
+<header class="header">
+  <div class="blog-header" id="header">
+    <div class="site-meta">
+      <div class="nav-toggle" id="nav_toggle">
+        <div class="toggle-box">
+          <div class="line line-top"></div>
+          <div class="line line-center"></div>
+          <div class="line line-bottom"></div>
+        </div>
+      </div>
+      <div class="site-title">
+        <a href="/" class="brand">
+          <span>TechZone</span>
+        </a>
+      </div>
+      <p class="subtitle">HarrisWilde的官方博客</p>
+    </div>
+    <nav class="site-nav" id="site_nav">
+      <ul id="nav_ul">
+        
+          <li class="nav-item ">
+            
+              <a href="/">
+                <i class="fa fa-home"></i> 首页
+              </a>
+            
+          </li>
+        
+          <li class="nav-item ">
+            
+              <a href="/archives">
+                <i class="fa fa-archive"></i> 归档
+              </a>
+            
+          </li>
+        
+          <li class="nav-item ">
+            
+              <a href="/tags">
+                <i class="fa fa-tags"></i> 分类
+              </a>
+            
+          </li>
+        
+          <li class="nav-item ">
+            
+              <a href="https://www.jianshu.com/u/766d2f134900" target="_blank">
+                <i class="fa fa-globe"></i> 简书
+              </a>
+            
+          </li>
+        
+        <li class="nav-item">
+          <a>
+            <i class="fa fa-search"></i> 搜索
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<script type="text/javascript"> 
+ 
+  let showNav = true;
+
+  let navToggle = document.querySelector('#nav_toggle'),
+  siteNav = document.querySelector('#site_nav');
+  
+  function navClick() {
+    let sideBar = document.querySelector('.sidebar');
+    let navUl = document.querySelector('#nav_ul');
+    navToggle.classList.toggle('nav-toggle-active');
+    siteNav.classList.toggle('nav-menu-active');
+    if (siteNav.classList.contains('nav-menu-active')) {
+      siteNav.style = "height: " + (navUl.children.length * 42) +"px !important";
+    } else {
+      siteNav.style = "";
+    }
+  }
+
+  navToggle.addEventListener('click',navClick);  
+</script>
+    </div>
+    <div class="main-continer">
+      <div class="section-layout">
+        <div class="section-layout-wrapper">
+          
+<div class="sidebar">
+    <div class="sidebar-wrapper" id="sidebar">
+      
+        <div class="post-list-sidebar">
+          <div class="sidebar-title">
+            <span id="tocSideBar" class="sidebar-title-item sidebar-title-active">文章目录</span>
+            <span id="metaSideBar" class="sidebar-title-item">站点概览</span>
+          </div>
+        </div>
+      
+      <div class="sidebar-body" id="sidebar_body">
+        
+          <div class="post-side-meta" id="post_side_meta">
+            <div class="sidebar-wrapper">
+  <div class="sidebar-item">
+    <img class="site-author-image" src="https://harriswilde.github.io/images/avatar.png"/>
+    <p class="site-author-name">TechZone</p>
+    <p class="site-description">HarrisWilde祝诸君元旦快乐🎉</p>
+  </div>
+  <div class="sidebar-item side-item-stat">
+    <div class="sidebar-item-box">
+      <a href="/archives/">
+        <span class="site-item-stat-count">17</span>
+        <span class="site-item-stat-name">日志</span>
+      </a>
+    </div>
+    <div class="sidebar-item-box">
+      <a href="">
+        <span class="site-item-stat-count">6</span>
+        <span class="site-item-stat-name">分类</span>
+      </a>
+    </div>
+    <div class="sidebar-item-box">
+      <a href="/tags/">
+        <span class="site-item-stat-count">6</span>
+        <span class="site-item-stat-name">标签</span>
+      </a>
+    </div>
+  </div>
+  <div class="sidebar-item">
+    <span class="site-item-rss">
+        <i class="fa fa-rss"></i>
+        <a href="https://harriswilde.github.io/atom.xml" target="_blank">RSS</a>
+    </span>
+  </div>
+  <div class="sidebar-item sidebar-item-social">
+    <div class="social-item">
+      <a href="https://www.github.com/hsxyhao">
+        <i class="fa fa-github"></i> GitHub
+      </a>
+      <a href="">
+        <i class="fa fa-twitter"></i> Twitter
+      </a>
+    </div>
+    <div class="social-item">
+      <a href="">
+        <i class="fa fa-globe"></i> 豆瓣
+      </a>
+      <a href="">
+        <i class="fa fa-globe"></i> 知乎
+      </a>
+    </div>
+  </div>
+</div>
+          </div>
+          <div class="post-toc sidebar-body-active" id="post_toc" style="opacity: 1;">
+            <div class="toc-box">
+  <div class="toc-wrapper" id="toc_wrapper">
+    <ul class="markdownIt-TOC">
+<li><a href="#1-%E9%9A%8F%E6%9C%BA%E5%88%86%E5%89%B2">1. 随机分割</a></li>
+<li><a href="#2-%E4%BA%8C%E5%80%8D%E5%9D%87%E5%80%BC%E6%B3%95">2. 二倍均值法</a></li>
+</ul>
+
+  </div>
+</div>
+
+<script>
+
+let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1; 
+let active = 'active-show', activeClass = 'active-current';
+let tocWrapper = document.querySelector('#toc_wrapper');
+let tocContent = tocWrapper.children[0];
+
+function addTocNumber(elem, deep) {
+  if (!elem) {
+    return;
+  }
+  let prop = elem.__proto__;
+
+  if (prop === HTMLUListElement.prototype) {
+    for (let i = 0; i < elem.children.length; i++) {
+      addTocNumber(elem.children[i], deep + (i + 1) + '.');
+    }
+  } else if (prop === HTMLLIElement.prototype) {
+    // 保存li元素
+    lList.push(elem);
+    for (let i = 0; i < elem.children.length; i++) {
+      let cur = elem.children[i];
+      if (cur.__proto__ === HTMLAnchorElement.prototype) {
+        cur.text =  deep + ' ' + cur.text;
+      } else if (cur.__proto__ === HTMLUListElement.prototype) {
+        addTocNumber(cur, deep);
+      }
+    }
+  }
+}
+
+
+document.addEventListener('scroll', function(e) {
+  if (lList.length <= 0) {
+    return;
+  }
+  let scrollTop = document.body.scrollTop;
+  let dir;
+
+  if (lastTop - scrollTop > 0) {
+    dir = 'up';
+  } else {
+    dir = 'down';
+  }
+
+  lastTop = scrollTop;
+  if (scrollTop <= 0) {
+    if (lastIndex >= 0 && lastIndex < hList.length) {
+      lList[lastIndex].classList.remove(activeClass);
+    }
+    return;
+  }
+
+  let current = 0, hasFind = false;
+  for (let i = 0; i < hList.length; i++) {
+    if (hList[i].offsetTop > scrollTop) {
+      current = i;
+      hasFind = true;
+      break;
+    }
+  }
+  if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
+    current = hList.length - 1;
+  } else {
+    current--;
+  }
+  if (dir === 'down') {
+    if (current > lastIndex) {
+      addActiveClass(current);
+      removeActiveClass(lastIndex) 
+      lastIndex = current;
+      removeParentActiveClass();
+      lList[current] && addActiveLiElemment(lList[current].parentElement,tocContent);
+    }
+  } else {
+    if (current < lastIndex) {
+      addActiveClass(current);
+      removeActiveClass(lastIndex);
+      lastIndex = current;
+      removeParentActiveClass();
+      lList[current] && addActiveLiElemment(lList[current].parentElement,tocContent);
+    }
+  }
+});
+
+function removeParentActiveClass() {
+  let parents = tocContent.querySelectorAll('.'+active)
+  parents.forEach(function(elem) {
+    elem.classList.remove(active);
+  });
+}
+
+function addActiveClass(index) {
+  if (index >= 0 && index < hList.length) {
+    lList[index].classList.add(activeClass);
+  }
+}
+
+function removeActiveClass(index) {
+  if (index >= 0 && index < hList.length) {
+    lList[index].classList.remove(activeClass);
+  }
+}
+
+function addActiveLiElemment(elem, parent) {
+  if (!elem || elem === parent) {
+    return;
+  } else {
+    if (elem.__proto__ === HTMLLIElement.prototype) {
+      elem.classList.add(active);
+    }
+    addActiveLiElemment(elem.parentElement, parent);
+  }
+}
+
+function showToc() {
+  if (tocWrapper) {
+    postBody = document.querySelector('#post_body');
+    for (let i = 0; i < postBody.children.length; i++) {
+      if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
+        hList.push(postBody.children[i]);
+      }
+    }
+
+    if (hList.length > 10) {
+      active = 'active-hidden'
+      tocContent.classList.add('closed');
+    } else {
+      tocContent.classList.add('expanded');
+    }
+  }
+}
+addTocNumber(tocContent, '');
+
+window.addEventListener('load', function() {
+  showToc();
+  document.querySelector('#sidebar').style='display: block;';
+  tocWrapper.classList.add('toc-active');
+  setTimeout(function() {
+    if ("createEvent" in document) {
+      let evt = document.createEvent("HTMLEvents");
+      evt.initEvent("scroll", false, true);
+      document.dispatchEvent(evt);
+    }
+    else {
+      document.fireEvent("scroll");
+    }
+  }, 500)
+})
+
+</script>
+          </div>
+        
+      </div>
+    </div>
+</div>
+<script>
+  const SIDEBAR_TITLE_ACTIVE = 'sidebar-title-active';
+  const SIDEBAR_BODY_ACTIVE = 'sidebar-body-active';
+  const SLIDE_UP_IN = 'slide-up-in';
+
+  let sidebar = document.querySelector('#sidebar'),
+  tocSideBar = document.querySelector('#tocSideBar'),
+  metaSideBar = document.querySelector('#metaSideBar'),
+  postToc = document.querySelector('#post_toc'),
+  postSiteMeta = document.querySelector('#post_side_meta'),
+  sidebarTitle = document.querySelector('.sidebar-title'),
+  sidebarBody = document.querySelector('#sidebar_body');
+
+  tocSideBar.addEventListener('click', (e) => {
+    toggleSidebar(e);
+  });
+
+  metaSideBar.addEventListener('click', (e) => {
+    toggleSidebar(e);
+  });
+
+  function toggleSidebar(e) {
+    let currentTitle = document.querySelector("."+SIDEBAR_TITLE_ACTIVE);
+    if (currentTitle == e.srcElement) {
+      return ;
+    }
+    let current, showElement, hideElement;
+    if (e.srcElement == metaSideBar) {
+      showElement = postSiteMeta;
+      hideElement = postToc;
+    } else if (e.srcElement == tocSideBar){
+      showElement = postToc;
+      hideElement = postSiteMeta;
+    }
+    currentTitle.classList.remove(SIDEBAR_TITLE_ACTIVE);
+    e.srcElement.classList.add(SIDEBAR_TITLE_ACTIVE);
+
+    window.Velocity(hideElement, 'stop');
+    window.Velocity(hideElement, 'transition.slideUpOut', {
+      display: 'none',
+      duration: 200,
+      complete: function () {
+        window.Velocity(showElement, 'transition.slideDownIn', {
+          duration: 200
+        });
+      }
+    })
+    hideElement.classList.remove(SIDEBAR_BODY_ACTIVE);
+    showElement.classList.add(SIDEBAR_BODY_ACTIVE);
+
+  }
+
+  postToc.addEventListener('transitionend', function() {
+    this.classList.remove(SLIDE_UP_IN);
+  });
+
+  let limitTop = document.querySelector('#nav_ul').children.length * 42 + 162;
+  let hasFix = false;
+  window.addEventListener('scroll', function(e) {
+    if (document.body.scrollTop >= limitTop) {
+      if (!hasFix) {
+        sidebar.classList.add('sidebar-fixed');
+        hasFix = true;
+      }
+    } else {
+      if (hasFix) {
+        sidebar.classList.remove('sidebar-fixed');
+        hasFix = false;
+      }
+    }
+  });
+</script>
+          <div class="section-box">
+            <div class="section post">
+              <div class="article-box">
+    <header class="post-header">
+  <h1 class="post-title">
+    <a class="post-title-link" href="https://harriswilde.github.io/post/BGqcimUfF">
+      浅谈拼手气红包的算法
+    </a>
+  </h1>
+  <div class="post-meta">
+    <span class="meta-item pc-show">
+      <i class="fa fa-calendar-o"></i>
+      <span>发布于</span>
+      <span>2020-01-27</span>
+    </span>
+    
+      <span class="meta-item">
+        <span class="post-meta-divider pc-show">|</span>
+        <i class="fa fa-folder-o"></i>
+        <span class="pc-show">分类于</span>
+        
+          
+            <a href="https://harriswilde.github.io/tag/-AyA1dZw-">
+              <span>算法</span>
+            </a>
+          
+        
+      </span>
+    
+    <span class="meta-item">
+      <span class="post-meta-divider">|</span>
+      <i class="fa fa-clock-o"></i>
+      <span>7分钟</span>
+    </span>
+    <span class="meta-item">
+      <span class="post-meta-divider">|</span>
+      <i class="fa fa-file-word-o"></i>
+      <span>1636<span class="pc-show">字数</span></span>
+    </span>
+  </div>
+</header>
+</div>
+              <div class="post-body next-md-body" id="post_body">
+                <p>首先，在这里祝各位小伙伴们鼠年大吉！！</p>
+<p>今天是大年初三，Harris在这里用一个简单的话题，开启鼠年的博客之旅。</p>
+<p>大家每逢佳节，最少不了的活动，就是“抢红包”。自打微信推出了电子红包之后，中国人的节日，又多了一种庆祝方式，那就是<strong>红包雨</strong>。这种将传统活动用科技的方式封装的做法，是Harris比较赞成的。把传统溶于新时代，为我们的传统春节带来了新鲜的空气。</p>
+<p>但是，我们在群里发红包的时候，可能有的小伙伴会纳闷儿，这个所谓的随即金额，到底是怎么算的呢？它到底是不是公平的呢？</p>
+<p>有的小伙伴和我说，这还不简单么，每一个人打开红包的时候，都按照当前剩余的余额为范围，随机生成一个数字就好了。</p>
+<p>但是呢，这样的话，随着红包被打开的越来越多，金额的总数也会越来越少。那么，可以抢到的红包也就越来越小，这虽然遵循我们常规所认为的“先来后到”，但是并不公平。</p>
+<p>那么要实现绝对的公平，该怎么办呢？</p>
+<h1 id="1-随机分割">1. 随机分割</h1>
+<p>其实，这种方法很直观就能想到。我们把一个红包想象成一个香肠，假设有<code>N</code>个人来分这个香肠，那么我们只要随机切<code>N-1</code>刀，把每一块分别分给每一个人即可。</p>
+<p>红包也是一样的道理，我们可以在红包发出去的同时，就随机分配好金额。等大家来分的时候，再依次分给每一个人就好了。</p>
+<p>这种算法思路并不难，而且也能够达到我们的目的，但是由于以下的两点，导致微信没有采用这种算法：</p>
+<ol>
+<li>算法复杂度高</li>
+<li>对服务器端的要求高</li>
+</ol>
+<p>首先第一点，这个算法的复杂度，肯定是要比现行的微信随机红包算法的复杂度高很多。另外，由于在红包发出去的瞬间，服务器上就需要存储关于这个红包的分配信息，在春节这种红包高峰期的时候，势必会给服务器带来巨大的压力。在分布式系统没有普及之前，第二点都将是一个难以解决的问题。</p>
+<p>因此，微信就退而求其次，采用第二种办法。</p>
+<h1 id="2-二倍均值法">2. 二倍均值法</h1>
+<p>实际上，我们每个人抢到的红包，都是在下面这个区间里面去随机一个数值：</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mrow><mo fence="true">(</mo><mn>0</mn><mo separator="true">,</mo><mn>2</mn><mover accent="true"><mi>M</mi><mo stretchy="true">‾</mo></mover><mo fence="true">]</mo></mrow><mspace width="1em"/><mo separator="true">;</mo><mover accent="true"><mi>M</mi><mo stretchy="true">‾</mo></mover><mo>=</mo><mfrac><mrow><mi mathvariant="normal">剩</mi><mi mathvariant="normal">余</mi><mi mathvariant="normal">金</mi><mi mathvariant="normal">额</mi></mrow><mrow><mi mathvariant="normal">剩</mi><mi mathvariant="normal">余</mi><mi mathvariant="normal">红</mi><mi mathvariant="normal">包</mi><mi mathvariant="normal">数</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\left(0,2\overline {M}\right]\quad;\overline M=\frac{剩余金额}{剩余红包数}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.23334em;vertical-align:-0.35001em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size1">(</span></span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">2</span><span class="mord overline"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8833300000000001em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10903em;">M</span></span></span><span style="top:-3.80333em;"><span class="pstrut" style="height:3em;"></span><span class="overline-line" style="border-bottom-width:0.04em;"></span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size1">]</span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace" style="margin-right:1em;"></span><span class="mpunct">;</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord overline"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8833300000000001em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span></span><span style="top:-3.80333em;"><span class="pstrut" style="height:3em;"></span><span class="overline-line" style="border-bottom-width:0.04em;"></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.363em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.677em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord cjk_fallback">剩</span><span class="mord cjk_fallback">余</span><span class="mord cjk_fallback">红</span><span class="mord cjk_fallback">包</span><span class="mord cjk_fallback">数</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord cjk_fallback">剩</span><span class="mord cjk_fallback">余</span><span class="mord cjk_fallback">金</span><span class="mord cjk_fallback">额</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<p>微信，正是采用的这种方法。</p>
+<p>那么，为什么这个是公平的呢？</p>
+<p>假设，发一个100元的红包，10份。那么第一个人的金额，就会在<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo fence="true">(</mo><mn>0</mn><mo separator="true">,</mo><mn>20</mn><mo fence="true">]</mo></mrow><annotation encoding="application/x-tex">\left(0,20\right]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">2</span><span class="mord">0</span><span class="mclose delimcenter" style="top:0em;">]</span></span></span></span></span>元里面随机。假设第一个人抢到了平均值10块钱，那么还剩90.</p>
+<p>第二个人的抢到的，应该是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mrow><mo fence="true">(</mo><mn>0</mn><mo separator="true">,</mo><mn>2</mn><mo>⋅</mo><mfrac><mn>90</mn><mn>9</mn></mfrac><mo fence="true">]</mo></mrow><mo>⇒</mo><mrow><mo fence="true">(</mo><mn>0</mn><mo separator="true">,</mo><mn>20</mn><mo fence="true">]</mo></mrow></mrow><annotation encoding="application/x-tex">\left(0,2\cdot \frac{90}{9}\right]\Rightarrow \left(0,20\right]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.20001em;vertical-align:-0.35001em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size1">(</span></span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">9</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">9</span><span class="mord mtight">0</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size1">]</span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">⇒</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">2</span><span class="mord">0</span><span class="mclose delimcenter" style="top:0em;">]</span></span></span></span></span>，和之前的一样，以此类推，这个算法是公平的。</p>
+<p>但是，并不是每一次都能够理想化地抢到平均值，毕竟我们是要在这个范围内取随机值。假设第一个人只抢到了1块钱，那么第二个人能够抢到的范围是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo fence="true">(</mo><mn>0</mn><mo separator="true">,</mo><mn>22</mn><mo fence="true">]</mo></mrow><annotation encoding="application/x-tex">\left(0,22\right]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">2</span><span class="mord">2</span><span class="mclose delimcenter" style="top:0em;">]</span></span></span></span></span>，范围就更大了点，假设第二个人也只抢到1块钱，那么第三个人的范围就是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo fence="true">(</mo><mn>0</mn><mo separator="true">,</mo><mn>24.5</mn><mo fence="true">]</mo></mrow><annotation encoding="application/x-tex">\left(0,24.5\right]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">2</span><span class="mord">4</span><span class="mord">.</span><span class="mord">5</span><span class="mclose delimcenter" style="top:0em;">]</span></span></span></span></span>，以此类推，假设前面的9个人都只抢到1块钱，那么最后一个人的范围，就是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo fence="true">(</mo><mn>0</mn><mo separator="true">,</mo><mn>91</mn><mo fence="true">]</mo></mrow><annotation encoding="application/x-tex">\left(0,91\right]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">9</span><span class="mord">1</span><span class="mclose delimcenter" style="top:0em;">]</span></span></span></span></span>，实际上就是91块。所以我们可以看到，如果每个人都抢到范围内平均值以下，那么后面的人的随机范围则会越来越大。</p>
+<p>那么，我们来看看另外一个极端，如果第一个人抢到20块钱，那么第二个人的范围就是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo fence="true">(</mo><mn>0</mn><mo separator="true">,</mo><mn>17.76</mn><mo fence="true">]</mo></mrow><annotation encoding="application/x-tex">\left(0,17.76\right]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mord">7</span><span class="mord">.</span><span class="mord">7</span><span class="mord">6</span><span class="mclose delimcenter" style="top:0em;">]</span></span></span></span></span>，假设第二个人抢到17元，第三个人的范围就是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo fence="true">(</mo><mn>0</mn><mo separator="true">,</mo><mn>15.75</mn><mo fence="true">]</mo></mrow><annotation encoding="application/x-tex">\left(0,15.75\right]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mord">5</span><span class="mord">.</span><span class="mord">7</span><span class="mord">5</span><span class="mclose delimcenter" style="top:0em;">]</span></span></span></span></span>……</p>
+<p>范围会越来越小，但是每个人的红包都不大，都没有超过第一个人，因此第一个人是本次的运气王。</p>
+<p>所以，其实这个算法这么看，貌似的确不那么公平，第一个人永远只能抢到二倍均值以下，也就是说，第一个人就是抢不到大红包，而越往后越<strong>有可能</strong>抢到大红包。</p>
+<p>当然，运气王是有可能出现在任意的位置，运气王的位置靠前，则整体不会有很大的红包，运气王靠后的话，后面就有可能出现比前面大很多的红包。</p>
+<p>那么这样的算法用代码如何实现呢？</p>
+<p>Harris都给大家列出来了，如果感兴趣可以研究研究：</p>
+<p>Java:</p>
+<pre><code class="language-java">//代码来源于网络
+//发红包算法，金额参数以分为单位
+public static List&lt;Integer&gt; divideRedPackage(Integer totalAmount, Integer totalPeopleNum){
+    List&lt;Integer&gt; amountList = new ArrayList&lt;Integer&gt;();
+    Integer restAmount = totalAmount;
+    Integer restPeopleNum = totalPeopleNum;
+    Random random = new Random();
+    for(int i=0; i&lt;totalPeopleNum-1; i++){
+        //随机范围：[1，剩余人均金额的两倍)，左闭右开
+        int amount = random.nextInt(restAmount / restPeopleNum * 2 - 1) + 1;
+        restAmount -= amount;
+        restPeopleNum --;
+        amountList.add(amount);
+    }
+    amountList.add(restAmount);
+    return amountList;
+}
+public static void main(String[] args){
+    List&lt;Integer&gt; amountList = divideRedPackage(5000, 30);
+    for(Integer amount : amountList){
+        System.out.println(&quot;抢到金额：&quot; + new BigDecimal(amount).divide(new BigDecimal(100)));
+    }
+}
+</code></pre>
+<p>C/C++：</p>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+void money();
+void money(double TotalAmount, int TotalPeople)
+{
+	double restAmount = TotalAmount;
+	int restPeople = TotalPeople;
+	for (int i = 0; i &lt; TotalPeople - 1; ++i)
+	{
+		int amount = rand() % ((int)((restAmount / restPeople) * 2) * 100);
+		restAmount -= amount / 100;
+		--restPeople;
+		printf(&quot;抢到金额：%.2f\n&quot;, (double)amount / 100);
+	}
+	printf(&quot;抢到金额：%.2f\n&quot;, (double)restAmount / 100);
+}
+
+int main(void)
+{
+	money(50, 30);
+	return 0;
+}
+</code></pre>
+<p>Python：</p>
+<pre><code class="language-python">import random
+def money(TotalMoney,TotalPeople):
+    restMoney = TotalMoney
+    restPeople = TotalPeople
+    for i in range(TotalPeople - 1):
+        mount = round(random.uniform(0.01,(restMoney / restPeople) * 2 - 0.01),2)
+        restMoney -= mount
+        restPeople -= 1
+        print(&quot;抢到金额：&quot;+str(mount))
+    print(&quot;抢到金额：&quot;+str(round(restMoney,2)))
+
+money(50,30)
+</code></pre>
+<p>本篇博客就到此结束了，其实生活中处处充满着知识，就看你有没有一颗爱钻研的心！</p>
+
+              </div>
+              <div class="post-footer">
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      TechZone
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://harriswilde.github.io/post/BGqcimUfF" title="浅谈拼手气红包的算法">浅谈拼手气红包的算法</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外,转载请注明出处！
+    </li>
+  </ul>
+  <div class="tags">
+    
+      <a href="https://harriswilde.github.io/tag/-AyA1dZw-"># 算法</a>
+    
+  </div>
+  <div class="nav">
+    <div class="nav-prev">
+      
+        <i class="fa fa-angle-left"></i>
+        <a class="nav-pc-next" href="https://harriswilde.github.io/post/PythonBasic">初识Python，多多关照</a>
+        <a class="nav-mobile-next" href="https://harriswilde.github.io/post/PythonBasic">上一篇</a>
+      
+    </div>
+    <div class="nav-next">
+      
+    </div>
+  </div>
+</div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-box">
+  <footer class="footer">
+    <div class="poweredby">
+      <div class="power-left">Power By HarrisWilde</a></div>
+      <div>Copy<a href="https://github.com/iissnan/hexo-theme-next"> Hexo Next Theme</a></div>
+    </div>
+  </footer>
+  <div class="back-to-top" id="back_to_top">
+    <i class="fa fa-arrow-up"></i>
+    <span class="scrollpercent">
+      <span id="back_to_top_text">100</span>%
+    </span>
+  </div>
+</div>
+
+<script>
+
+  let body = document.body;
+
+  let back2Top = document.querySelector('#back_to_top'),
+  back2TopText = document.querySelector('#back_to_top_text');
+
+  function scrollAnimation(currentY, targetY) {
+   
+    let needScrollTop = targetY - currentY
+    let _currentY = currentY
+    setTimeout(() => {
+      const dist = Math.ceil(needScrollTop / 10)
+      _currentY += dist
+      window.scrollTo(_currentY, currentY)
+      if (needScrollTop > 10 || needScrollTop < -10) {
+        scrollAnimation(_currentY, targetY)
+      } else {
+        window.scrollTo(_currentY, targetY)
+      }
+    }, 1)
+  }
+
+  back2Top.addEventListener("click", function(e) {
+    scrollAnimation(body.scrollTop, 0);
+    e.stopPropagation();
+    return false;
+  });
+  
+  window.addEventListener('scroll', function(e) {
+    let percent = body.scrollTop / (body.scrollHeight - body.clientHeight) * 100;
+    if (percent > 1 && !back2Top.classList.contains('back-top-active')) {
+      back2Top.classList.add('back-top-active');
+    }
+    if (percent == 0) {
+      back2Top.classList.remove('back-top-active');
+    }
+    back2TopText.textContent = Math.floor(percent);
+  });
+
+  // 动态调整站点概览高度
+  let sideBar = document.querySelector('.sidebar');
+  let navUl = document.querySelector('#nav_ul');
+  sideBar.style = 'margin-top:' + (navUl.children.length * 42 + 162) + 'px; opacity: 1;';
+  // 代码高亮
+  hljs.initHighlightingOnLoad();
+</script>
+    </div>
+  </body>
+  <script src="/media/js/motion.js"></script>
+</html>
