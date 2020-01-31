@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://harriswilde.github.io</id>
     <title>TechZone</title>
-    <updated>2020-01-27T08:25:25.222Z</updated>
+    <updated>2020-01-31T15:00:04.765Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://harriswilde.github.io"/>
     <link rel="self" href="https://harriswilde.github.io/atom.xml"/>
@@ -16,7 +16,8 @@
         <link href="https://harriswilde.github.io/post/BGqcimUfF">
         </link>
         <updated>2020-01-27T08:22:30.000Z</updated>
-        <content type="html"><![CDATA[<p>首先，在这里祝各位小伙伴们鼠年大吉！！</p>
+        <content type="html"><![CDATA[<hr>
+<p>首先，在这里祝各位小伙伴们鼠年大吉！！</p>
 <p>今天是大年初三，Harris在这里用一个简单的话题，开启鼠年的博客之旅。</p>
 <p>大家每逢佳节，最少不了的活动，就是“抢红包”。自打微信推出了电子红包之后，中国人的节日，又多了一种庆祝方式，那就是<strong>红包雨</strong>。这种将传统活动用科技的方式封装的做法，是Harris比较赞成的。把传统溶于新时代，为我们的传统春节带来了新鲜的空气。</p>
 <p>但是，我们在群里发红包的时候，可能有的小伙伴会纳闷儿，这个所谓的随机金额，到底是怎么算的呢？它到底是不是公平的呢？</p>
