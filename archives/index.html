@@ -1,17 +1,22 @@
+<!DOCTYPE html>
 <html>
-<meta name="theme-color" content="#222222" />
   <head>
       <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <title>TechZone</title>
-<link rel="shortcut icon" href="https://harriswilde.github.io/favicon.ico?v=1580482798206">
+<meta name="keywords" content="TechZone">
+<meta name="description" content="HarrisWilde祝诸君元旦快乐🎉">
+<link rel="shortcut icon" href="https://harriswilde.github.io/favicon.ico?v=1580530030364">
 <link rel="stylesheet" href="https://harriswilde.github.io/styles/main.css">
-<meta name="description" content="HarrisWilde祝诸君元旦快乐🎉" />
+
+<link rel="stylesheet" href="/media/css/gemini.css">
 
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Rosario:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
 
-<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<link href="/media/hljs/styles/github.css" rel="stylesheet">  
+<script src="/media/hljs/highlight.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.ui.min.js"></script>
 
@@ -19,14 +24,15 @@
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
     onload="renderMathInElement(document.body);"></script>
+      <meta name="description" content="HarrisWilde祝诸君元旦快乐🎉">
   </head>
   <body>
     <div class="head-top-line"></div>
     <div class="header-box">
       
-<header class="header">
-  <div class="blog-header" id="header">
-    <div class="site-meta">
+<div class=" gemini">
+  <header class="header bg-color ">
+    <div class="blog-header box-shadow-wrapper bg-color " id="header">
       <div class="nav-toggle" id="nav_toggle">
         <div class="toggle-box">
           <div class="line line-top"></div>
@@ -34,57 +40,64 @@
           <div class="line line-bottom"></div>
         </div>
       </div>
-      <div class="site-title">
-        <a href="/" class="brand">
-          <span>TechZone</span>
-        </a>
+      <div class="site-meta">       
+        <div class="site-title">
+          
+            <a href="/" class="brand">
+              <span>TechZone</span>
+            </a>  
+          
+        </div>
+        
+          <p class="subtitle">HarrisWilde的官方个人博客</p>
+        
       </div>
-      <p class="subtitle">HarrisWilde的官方博客</p>
+      <nav class="site-nav" id="site_nav">
+        <ul id="nav_ul">
+          
+            <li class="nav-item ">
+              
+                <a href="/">
+                  <i class="fa fa-home"></i> 首页
+                </a>
+              
+            </li>
+          
+            <li class="nav-item nav-item-active">
+              
+                <a href="/archives">
+                  <i class="fa fa-archive"></i> 归档
+                </a>
+              
+            </li>
+          
+            <li class="nav-item ">
+              
+                <a href="/tags">
+                  <i class="fa fa-tags"></i> 分类
+                </a>
+              
+            </li>
+          
+            <li class="nav-item ">
+              
+                <a href="https://www.jianshu.com/u/766d2f134900" target="_blank">
+                  <i class="fa fa-globe"></i> 简书
+                </a>
+              
+            </li>
+          
+          <li class="nav-item">
+            <a>
+              <i class="fa fa-search"></i> 搜索
+            </a>
+          </li>
+        </ul>
+      </nav>
     </div>
-    <nav class="site-nav" id="site_nav">
-      <ul id="nav_ul">
-        
-          <li class="nav-item ">
-            
-              <a href="/">
-                <i class="fa fa-home"></i> 首页
-              </a>
-            
-          </li>
-        
-          <li class="nav-item nav-item-active">
-            
-              <a href="/archives">
-                <i class="fa fa-archive"></i> 归档
-              </a>
-            
-          </li>
-        
-          <li class="nav-item ">
-            
-              <a href="/tags">
-                <i class="fa fa-tags"></i> 分类
-              </a>
-            
-          </li>
-        
-          <li class="nav-item ">
-            
-              <a href="https://www.jianshu.com/u/766d2f134900" target="_blank">
-                <i class="fa fa-globe"></i> 简书
-              </a>
-            
-          </li>
-        
-        <li class="nav-item">
-          <a>
-            <i class="fa fa-search"></i> 搜索
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </div>
-</header>
+  </header>
+</div>
+
 <script type="text/javascript"> 
  
   let showNav = true;
@@ -108,20 +121,23 @@
 </script>
     </div>
     <div class="main-continer">
-      <div class="section-layout">
+      
+      <div class="section-layout  gemini">
         <div class="section-layout-wrapper">
           <div class="sidebar">
-    <div class="sidebar-wrapper">
+    
+<div class="sidebar-wrapper box-shadow-wrapper bg-color">
   <div class="sidebar-item">
-    <img class="site-author-image" src="https://harriswilde.github.io/images/avatar.png"/>
+    <img class="site-author-image right-motion" src="https://harriswilde.github.io/images/avatar.png"/>
     <p class="site-author-name">TechZone</p>
-    <p class="site-description">HarrisWilde祝诸君元旦快乐🎉</p>
+    <p class="site-description right-motion">这个人很懒，什么都不想写...</p>
   </div>
-  <div class="sidebar-item side-item-stat">
+  <div class="sidebar-item side-item-stat right-motion">
     <div class="sidebar-item-box">
       <a href="/archives/">
-        <span class="site-item-stat-count">17</span>
-        <span class="site-item-stat-name">日志</span>
+        
+        <span class="site-item-stat-count">16</span>
+        <span class="site-item-stat-name">文章</span>
       </a>
     </div>
     <div class="sidebar-item-box">
@@ -137,264 +153,259 @@
       </a>
     </div>
   </div>
-  <div class="sidebar-item">
-    <span class="site-item-rss">
-        <i class="fa fa-rss"></i>
-        <a href="https://harriswilde.github.io/atom.xml" target="_blank">RSS</a>
-    </span>
-  </div>
+  
+    
+      <div class="sidebar-item" style="border-top: 1px dotted #ccc;">
+      </div>
+    
+  
   <div class="sidebar-item sidebar-item-social">
     <div class="social-item">
-      <a href="https://www.github.com/hsxyhao">
-        <i class="fa fa-github"></i> GitHub
-      </a>
-      <a href="">
-        <i class="fa fa-twitter"></i> Twitter
-      </a>
-    </div>
-    <div class="social-item">
-      <a href="">
-        <i class="fa fa-globe"></i> 豆瓣
-      </a>
-      <a href="">
-        <i class="fa fa-globe"></i> 知乎
-      </a>
+      
+        <a href="">
+          <i class="fa fa-qq"></i> QQ: 759035968
+        </a>
+      
+      
     </div>
   </div>
+
+
 </div>
 </div>
-          <div class="section-box">
-            <section class="section posts-expand">
+          <div class="section-box box-shadow-wrapper">
+            <section class="section archives-section bg-color posts-expand">
               
-<div class="archive-timeline-box">
-  <div class="archive-timeline-title">
+
+<div class="bg-color">
+  <div class="archive-timeline-box">
+    <div class="archive-timeline-title">
+      
+        <h2>非常好！目前共计16篇日志，继续努力！</h2>
+      
+    </div>
     
-      <h2>非常好！目前共计17篇日志，继续努力！</h2>
+      
+      
+        <div class="node-title">
+          <h2 class="tag-year">2020</h2>
+        </div>    
+        
+      
+      <a href="https://harriswilde.github.io/post/BGqcimUfF">
+        <div class="motion-warpper tag-archive-node">
+          <div class="tag-node">
+            <h1>
+              01-27
+              <small>浅谈拼手气红包的算法</small>
+            </h1>
+          </div>  
+      </div>
+      </a>
+    
+      
+      
+      <a href="https://harriswilde.github.io/post/PythonBasic">
+        <div class="motion-warpper tag-archive-node">
+          <div class="tag-node">
+            <h1>
+              01-14
+              <small>初识Python，多多关照</small>
+            </h1>
+          </div>  
+      </div>
+      </a>
+    
+      
+      
+      <a href="https://harriswilde.github.io/post/CPointer">
+        <div class="motion-warpper tag-archive-node">
+          <div class="tag-node">
+            <h1>
+              01-12
+              <small>C语言之指针</small>
+            </h1>
+          </div>  
+      </div>
+      </a>
+    
+      
+      
+      <a href="https://harriswilde.github.io/post/P-CkgTjqZ">
+        <div class="motion-warpper tag-archive-node">
+          <div class="tag-node">
+            <h1>
+              01-01
+              <small>积分变限函数的求导方法</small>
+            </h1>
+          </div>  
+      </div>
+      </a>
+    
+      
+      
+        <div class="node-title">
+          <h2 class="tag-year">2019</h2>
+        </div>    
+        
+      
+      <a href="https://harriswilde.github.io/post/PythonInstall">
+        <div class="motion-warpper tag-archive-node">
+          <div class="tag-node">
+            <h1>
+              12-31
+              <small>Python的安装以及环境配置</small>
+            </h1>
+          </div>  
+      </div>
+      </a>
+    
+      
+      
+      <a href="https://harriswilde.github.io/post/PythonBeginner">
+        <div class="motion-warpper tag-archive-node">
+          <div class="tag-node">
+            <h1>
+              12-31
+              <small>Python学习开场白</small>
+            </h1>
+          </div>  
+      </div>
+      </a>
+    
+      
+      
+      <a href="https://harriswilde.github.io/post/CArray">
+        <div class="motion-warpper tag-archive-node">
+          <div class="tag-node">
+            <h1>
+              12-07
+              <small>C语言之数组</small>
+            </h1>
+          </div>  
+      </div>
+      </a>
+    
+      
+      
+      <a href="https://harriswilde.github.io/post/GreatRandom">
+        <div class="motion-warpper tag-archive-node">
+          <div class="tag-node">
+            <h1>
+              11-15
+              <small>杂谈·一个神一般的随机算法</small>
+            </h1>
+          </div>  
+      </div>
+      </a>
+    
+      
+      
+      <a href="https://harriswilde.github.io/post/CBranchCycle">
+        <div class="motion-warpper tag-archive-node">
+          <div class="tag-node">
+            <h1>
+              11-07
+              <small>C语言的分支与循环</small>
+            </h1>
+          </div>  
+      </div>
+      </a>
+    
+      
+      
+      <a href="https://harriswilde.github.io/post/COperatorASCII">
+        <div class="motion-warpper tag-archive-node">
+          <div class="tag-node">
+            <h1>
+              11-04
+              <small>C语言运算符优先级及ASCII对照表</small>
+            </h1>
+          </div>  
+      </div>
+      </a>
+    
+      
+      
+      <a href="https://harriswilde.github.io/post/FixedFloatPoint">
+        <div class="motion-warpper tag-archive-node">
+          <div class="tag-node">
+            <h1>
+              10-22
+              <small>小数表示法(定点法、浮点法)</small>
+            </h1>
+          </div>  
+      </div>
+      </a>
+    
+      
+      
+      <a href="https://harriswilde.github.io/post/CodeTrans">
+        <div class="motion-warpper tag-archive-node">
+          <div class="tag-node">
+            <h1>
+              10-15
+              <small>进制转换以及原、反、补码</small>
+            </h1>
+          </div>  
+      </div>
+      </a>
+    
+      
+      
+      <a href="https://harriswilde.github.io/post/CPrintf">
+        <div class="motion-warpper tag-archive-node">
+          <div class="tag-node">
+            <h1>
+              10-13
+              <small>C语言之printf函数的用法</small>
+            </h1>
+          </div>  
+      </div>
+      </a>
+    
+      
+      
+      <a href="https://harriswilde.github.io/post/CPreStudy">
+        <div class="motion-warpper tag-archive-node">
+          <div class="tag-node">
+            <h1>
+              10-13
+              <small>C语言的一些基本知识</small>
+            </h1>
+          </div>  
+      </div>
+      </a>
+    
+      
+      
+      <a href="https://harriswilde.github.io/post/FirstCProgram">
+        <div class="motion-warpper tag-archive-node">
+          <div class="tag-node">
+            <h1>
+              10-11
+              <small>第一个C语言程序</small>
+            </h1>
+          </div>  
+      </div>
+      </a>
+    
+      
+      
+      <a href="https://harriswilde.github.io/post/CBeginner">
+        <div class="motion-warpper tag-archive-node">
+          <div class="tag-node">
+            <h1>
+              10-10
+              <small>C语言学习开场白</small>
+            </h1>
+          </div>  
+      </div>
+      </a>
     
   </div>
   
-    
-    
-      <div class="node-title">
-        <h2 class="tag-year">2020</h2>
-      </div>    
-      
-    
-    <a href="https://harriswilde.github.io/post/BGqcimUfF">
-      <div class="motion-warpper tag-archive-node">
-        <div class="tag-node">
-          <h1>
-            01-27
-            <small>浅谈拼手气红包的算法</small>
-          </h1>
-        </div>  
-    </div>
-    </a>
-  
-    
-    
-    <a href="https://harriswilde.github.io/post/PythonBasic">
-      <div class="motion-warpper tag-archive-node">
-        <div class="tag-node">
-          <h1>
-            01-14
-            <small>初识Python，多多关照</small>
-          </h1>
-        </div>  
-    </div>
-    </a>
-  
-    
-    
-    <a href="https://harriswilde.github.io/post/CPointer">
-      <div class="motion-warpper tag-archive-node">
-        <div class="tag-node">
-          <h1>
-            01-12
-            <small>C语言之指针</small>
-          </h1>
-        </div>  
-    </div>
-    </a>
-  
-    
-    
-    <a href="https://harriswilde.github.io/post/P-CkgTjqZ">
-      <div class="motion-warpper tag-archive-node">
-        <div class="tag-node">
-          <h1>
-            01-01
-            <small>积分变限函数的求导方法</small>
-          </h1>
-        </div>  
-    </div>
-    </a>
-  
-    
-    
-      <div class="node-title">
-        <h2 class="tag-year">2019</h2>
-      </div>    
-      
-    
-    <a href="https://harriswilde.github.io/post/PythonInstall">
-      <div class="motion-warpper tag-archive-node">
-        <div class="tag-node">
-          <h1>
-            12-31
-            <small>Python的安装以及环境配置</small>
-          </h1>
-        </div>  
-    </div>
-    </a>
-  
-    
-    
-    <a href="https://harriswilde.github.io/post/PythonBeginner">
-      <div class="motion-warpper tag-archive-node">
-        <div class="tag-node">
-          <h1>
-            12-31
-            <small>Python学习开场白</small>
-          </h1>
-        </div>  
-    </div>
-    </a>
-  
-    
-    
-    <a href="https://harriswilde.github.io/post/CArray">
-      <div class="motion-warpper tag-archive-node">
-        <div class="tag-node">
-          <h1>
-            12-07
-            <small>C语言之数组</small>
-          </h1>
-        </div>  
-    </div>
-    </a>
-  
-    
-    
-    <a href="https://harriswilde.github.io/post/GreatRandom">
-      <div class="motion-warpper tag-archive-node">
-        <div class="tag-node">
-          <h1>
-            11-15
-            <small>杂谈·一个神一般的随机算法</small>
-          </h1>
-        </div>  
-    </div>
-    </a>
-  
-    
-    
-    <a href="https://harriswilde.github.io/post/CBranchCycle">
-      <div class="motion-warpper tag-archive-node">
-        <div class="tag-node">
-          <h1>
-            11-07
-            <small>C语言的分支与循环</small>
-          </h1>
-        </div>  
-    </div>
-    </a>
-  
-    
-    
-    <a href="https://harriswilde.github.io/post/COperatorASCII">
-      <div class="motion-warpper tag-archive-node">
-        <div class="tag-node">
-          <h1>
-            11-04
-            <small>C语言运算符优先级及ASCII对照表</small>
-          </h1>
-        </div>  
-    </div>
-    </a>
-  
-    
-    
-    <a href="https://harriswilde.github.io/post/FixedFloatPoint">
-      <div class="motion-warpper tag-archive-node">
-        <div class="tag-node">
-          <h1>
-            10-22
-            <small>小数表示法(定点法、浮点法)</small>
-          </h1>
-        </div>  
-    </div>
-    </a>
-  
-    
-    
-    <a href="https://harriswilde.github.io/post/CodeTrans">
-      <div class="motion-warpper tag-archive-node">
-        <div class="tag-node">
-          <h1>
-            10-15
-            <small>进制转换以及原、反、补码</small>
-          </h1>
-        </div>  
-    </div>
-    </a>
-  
-    
-    
-    <a href="https://harriswilde.github.io/post/CPrintf">
-      <div class="motion-warpper tag-archive-node">
-        <div class="tag-node">
-          <h1>
-            10-13
-            <small>C语言之printf函数的用法</small>
-          </h1>
-        </div>  
-    </div>
-    </a>
-  
-    
-    
-    <a href="https://harriswilde.github.io/post/CPreStudy">
-      <div class="motion-warpper tag-archive-node">
-        <div class="tag-node">
-          <h1>
-            10-13
-            <small>C语言的一些基本知识</small>
-          </h1>
-        </div>  
-    </div>
-    </a>
-  
-    
-    
-    <a href="https://harriswilde.github.io/post/FirstCProgram">
-      <div class="motion-warpper tag-archive-node">
-        <div class="tag-node">
-          <h1>
-            10-11
-            <small>第一个C语言程序</small>
-          </h1>
-        </div>  
-    </div>
-    </a>
-  
-    
-    
-    <a href="https://harriswilde.github.io/post/CBeginner">
-      <div class="motion-warpper tag-archive-node">
-        <div class="tag-node">
-          <h1>
-            10-10
-            <small>C语言学习开场白</small>
-          </h1>
-        </div>  
-    </div>
-    </a>
-  
-</div>
-
-
-<div class="page">
+<div class="page bg-color">
   <ul class="pagination-ul">
     
     
@@ -409,6 +420,7 @@
     
   </ul>
 </div>
+</div>
 
             </section>
           </div>
@@ -416,25 +428,36 @@
       </div>
       <div class="footer-box">
   <footer class="footer">
+    <div class="copyright">
+      © 2019-2020 <i class="fa fa-heart"></i> HsxyHao
+    </div>
     <div class="poweredby">
-      <div class="power-left">Power By HarrisWilde</a></div>
-      <div>Copy<a href="https://github.com/iissnan/hexo-theme-next"> Hexo Next Theme</a></div>
+      Powered by HarrisWilde
     </div>
   </footer>
-  <div class="back-to-top" id="back_to_top">
+  
+  
+  <div class="gemini back-to-top" id="back_to_top">
     <i class="fa fa-arrow-up"></i>
+    
     <span class="scrollpercent">
-      <span id="back_to_top_text">100</span>%
+      <span id="back_to_top_text">0</span>%
     </span>
+    
   </div>
+  
+  
+  
 </div>
-
 <script>
 
+  let sideBarOpen = 'sidebar-open';
   let body = document.body;
-
   let back2Top = document.querySelector('#back_to_top'),
-  back2TopText = document.querySelector('#back_to_top_text');
+  back2TopText = document.querySelector('#back_to_top_text'),
+  drawerBox = document.querySelector('#drawer_box'),
+  rightSideBar = document.querySelector('.sidebar'),
+  viewport = document.querySelector('body');
 
   function scrollAnimation(currentY, targetY) {
    
@@ -453,26 +476,109 @@
   }
 
   back2Top.addEventListener("click", function(e) {
-    scrollAnimation(body.scrollTop, 0);
+    scrollAnimation(document.scrollingElement.scrollTop, 0);
     e.stopPropagation();
     return false;
   });
   
   window.addEventListener('scroll', function(e) {
-    let percent = body.scrollTop / (body.scrollHeight - body.clientHeight) * 100;
+    let percent = document.scrollingElement.scrollTop / (document.scrollingElement.scrollHeight - document.scrollingElement.clientHeight) * 100;
     if (percent > 1 && !back2Top.classList.contains('back-top-active')) {
       back2Top.classList.add('back-top-active');
     }
     if (percent == 0) {
       back2Top.classList.remove('back-top-active');
     }
-    back2TopText.textContent = Math.floor(percent);
+    if (back2TopText) {
+      back2TopText.textContent = Math.floor(percent);
+    }
   });
 
-  // 动态调整站点概览高度
-  let sideBar = document.querySelector('.sidebar');
-  let navUl = document.querySelector('#nav_ul');
-  sideBar.style = 'margin-top:' + (navUl.children.length * 42 + 162) + 'px; opacity: 1;';
+  
+  let hasCacu = false;
+  window.onresize = function() {
+    if (window.width > 991) {
+      calcuHeight();
+    } else {
+      hasCacu = false;
+    }
+  }
+
+  function calcuHeight() {
+    // 动态调整站点概览高度
+    if (!hasCacu && back2Top.classList.contains('pisces') || back2Top.classList.contains('gemini')) {
+      let sideBar = document.querySelector('.sidebar');
+      let navUl = document.querySelector('#site_nav');
+      sideBar.style = 'margin-top:' + (navUl.offsetHeight + navUl.offsetTop + 15) + 'px;';
+      hasCacu = true;
+    }
+  }
+  calcuHeight();
+  
+  let open = false, MOTION_TIME = 300, RIGHT_MOVE_DIS = '320px';
+
+  if (drawerBox) {
+    let rightMotions = document.querySelectorAll('.right-motion');
+    let right = drawerBox.classList.contains('right');
+
+    let transitionDir = right ? "transition.slideRightIn" : "transition.slideLeftIn";
+
+    let openProp, closeProp;
+    if (right) {
+      openProp = {
+        paddingRight: RIGHT_MOVE_DIS 
+      };
+      closeProp = {
+        paddingRight: '0px'
+      };
+    } else {
+      openProp = {
+        paddingLeft: RIGHT_MOVE_DIS 
+      };
+      closeProp = {
+        paddingLeft: '0px'
+      };
+    }
+
+    drawerBox.onclick = function() {
+      open = !open;
+      window.Velocity(rightSideBar, 'stop');
+      window.Velocity(viewport, 'stop');
+      window.Velocity(rightMotions, 'stop');
+      if (open) {
+        window.Velocity(rightSideBar, {
+          width: RIGHT_MOVE_DIS
+        }, {
+          duration: MOTION_TIME,
+          begin: function() {
+            window.Velocity(rightMotions, transitionDir,{ });
+          }
+        })
+        window.Velocity(viewport, openProp,{
+          duration: MOTION_TIME
+        });
+      } else {
+        window.Velocity(rightSideBar, {
+          width: '0px'
+        }, {
+          duration: MOTION_TIME,
+          begin: function() {
+            window.Velocity(rightMotions, {
+              opacity: 0
+            });
+          }
+        })
+        window.Velocity(viewport, closeProp ,{
+          duration: MOTION_TIME
+        });
+      }
+      for (let i = 0; i < drawerBox.children.length; i++) {
+        drawerBox.children[i].classList.toggle('muse-line');
+      }
+      drawerBox.classList.toggle(sideBarOpen);
+    }
+  }
+
   // 代码高亮
   hljs.initHighlightingOnLoad();
 </script>

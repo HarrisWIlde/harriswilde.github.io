@@ -1,17 +1,22 @@
+<!DOCTYPE html>
 <html>
-<meta name="theme-color" content="#222222" />
   <head>
-      <meta charset="UTF-8"/>
+    <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <title>C语言之指针 | TechZone</title>
-<link rel="shortcut icon" href="https://harriswilde.github.io/favicon.ico?v=1580482798206">
+<meta name="keywords" content="TechZone">
+<meta name="description" content="HarrisWilde祝诸君元旦快乐🎉">
+<link rel="shortcut icon" href="https://harriswilde.github.io/favicon.ico?v=1580530030364">
 <link rel="stylesheet" href="https://harriswilde.github.io/styles/main.css">
-<meta name="description" content="HarrisWilde祝诸君元旦快乐🎉" />
+
+<link rel="stylesheet" href="/media/css/gemini.css">
 
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Rosario:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
 
-<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<link href="/media/hljs/styles/github.css" rel="stylesheet">  
+<script src="/media/hljs/highlight.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.ui.min.js"></script>
 
@@ -19,14 +24,16 @@
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
     onload="renderMathInElement(document.body);"></script>
+    <meta name="description" content="C语言之指针" />
+    <meta name="keywords" content="Clang" />
   </head>
   <body>
     <div class="head-top-line"></div>
     <div class="header-box">
       
-<header class="header">
-  <div class="blog-header" id="header">
-    <div class="site-meta">
+<div class=" gemini">
+  <header class="header bg-color ">
+    <div class="blog-header box-shadow-wrapper bg-color " id="header">
       <div class="nav-toggle" id="nav_toggle">
         <div class="toggle-box">
           <div class="line line-top"></div>
@@ -34,57 +41,64 @@
           <div class="line line-bottom"></div>
         </div>
       </div>
-      <div class="site-title">
-        <a href="/" class="brand">
-          <span>TechZone</span>
-        </a>
+      <div class="site-meta">       
+        <div class="site-title">
+          
+            <a href="/" class="brand">
+              <span>TechZone</span>
+            </a>  
+          
+        </div>
+        
+          <p class="subtitle">HarrisWilde的官方个人博客</p>
+        
       </div>
-      <p class="subtitle">HarrisWilde的官方博客</p>
+      <nav class="site-nav" id="site_nav">
+        <ul id="nav_ul">
+          
+            <li class="nav-item ">
+              
+                <a href="/">
+                  <i class="fa fa-home"></i> 首页
+                </a>
+              
+            </li>
+          
+            <li class="nav-item ">
+              
+                <a href="/archives">
+                  <i class="fa fa-archive"></i> 归档
+                </a>
+              
+            </li>
+          
+            <li class="nav-item ">
+              
+                <a href="/tags">
+                  <i class="fa fa-tags"></i> 分类
+                </a>
+              
+            </li>
+          
+            <li class="nav-item ">
+              
+                <a href="https://www.jianshu.com/u/766d2f134900" target="_blank">
+                  <i class="fa fa-globe"></i> 简书
+                </a>
+              
+            </li>
+          
+          <li class="nav-item">
+            <a>
+              <i class="fa fa-search"></i> 搜索
+            </a>
+          </li>
+        </ul>
+      </nav>
     </div>
-    <nav class="site-nav" id="site_nav">
-      <ul id="nav_ul">
-        
-          <li class="nav-item ">
-            
-              <a href="/">
-                <i class="fa fa-home"></i> 首页
-              </a>
-            
-          </li>
-        
-          <li class="nav-item ">
-            
-              <a href="/archives">
-                <i class="fa fa-archive"></i> 归档
-              </a>
-            
-          </li>
-        
-          <li class="nav-item ">
-            
-              <a href="/tags">
-                <i class="fa fa-tags"></i> 分类
-              </a>
-            
-          </li>
-        
-          <li class="nav-item ">
-            
-              <a href="https://www.jianshu.com/u/766d2f134900" target="_blank">
-                <i class="fa fa-globe"></i> 简书
-              </a>
-            
-          </li>
-        
-        <li class="nav-item">
-          <a>
-            <i class="fa fa-search"></i> 搜索
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </div>
-</header>
+  </header>
+</div>
+
 <script type="text/javascript"> 
  
   let showNav = true;
@@ -108,11 +122,13 @@
 </script>
     </div>
     <div class="main-continer">
-      <div class="section-layout">
+      
+      <div class="section-layout gemini ">
         <div class="section-layout-wrapper">
           
+
 <div class="sidebar">
-    <div class="sidebar-wrapper" id="sidebar">
+    <div class="sidebar-box box-shadow-wrapper bg-color right-motion" id="sidebar">
       
         <div class="post-list-sidebar">
           <div class="sidebar-title">
@@ -121,20 +137,22 @@
           </div>
         </div>
       
-      <div class="sidebar-body" id="sidebar_body">
+      <div class="sidebar-body gemini" id="sidebar_body">
         
           <div class="post-side-meta" id="post_side_meta">
-            <div class="sidebar-wrapper">
+            
+<div class="sidebar-wrapper box-shadow-wrapper bg-color">
   <div class="sidebar-item">
-    <img class="site-author-image" src="https://harriswilde.github.io/images/avatar.png"/>
+    <img class="site-author-image right-motion" src="https://harriswilde.github.io/images/avatar.png"/>
     <p class="site-author-name">TechZone</p>
-    <p class="site-description">HarrisWilde祝诸君元旦快乐🎉</p>
+    <p class="site-description right-motion">这个人很懒，什么都不想写...</p>
   </div>
-  <div class="sidebar-item side-item-stat">
+  <div class="sidebar-item side-item-stat right-motion">
     <div class="sidebar-item-box">
       <a href="/archives/">
-        <span class="site-item-stat-count">17</span>
-        <span class="site-item-stat-name">日志</span>
+        
+        <span class="site-item-stat-count">16</span>
+        <span class="site-item-stat-name">文章</span>
       </a>
     </div>
     <div class="sidebar-item-box">
@@ -150,35 +168,29 @@
       </a>
     </div>
   </div>
-  <div class="sidebar-item">
-    <span class="site-item-rss">
-        <i class="fa fa-rss"></i>
-        <a href="https://harriswilde.github.io/atom.xml" target="_blank">RSS</a>
-    </span>
-  </div>
+  
+    
+      <div class="sidebar-item" style="border-top: 1px dotted #ccc;">
+      </div>
+    
+  
   <div class="sidebar-item sidebar-item-social">
     <div class="social-item">
-      <a href="https://www.github.com/hsxyhao">
-        <i class="fa fa-github"></i> GitHub
-      </a>
-      <a href="">
-        <i class="fa fa-twitter"></i> Twitter
-      </a>
-    </div>
-    <div class="social-item">
-      <a href="">
-        <i class="fa fa-globe"></i> 豆瓣
-      </a>
-      <a href="">
-        <i class="fa fa-globe"></i> 知乎
-      </a>
+      
+        <a href="">
+          <i class="fa fa-qq"></i> QQ: 759035968
+        </a>
+      
+      
     </div>
   </div>
+
+
 </div>
           </div>
           <div class="post-toc sidebar-body-active" id="post_toc" style="opacity: 1;">
-            <div class="toc-box">
-  <div class="toc-wrapper" id="toc_wrapper">
+            <div class="toc-box right-motion">
+  <div class="toc-wrapper auto-number manual" id="toc_wrapper">
     <ul class="markdownIt-TOC">
 <li><a href="#%E5%88%9D%E8%AF%86%E6%8C%87%E9%92%88%E5%92%8C%E6%8C%87%E9%92%88%E5%8F%98%E9%87%8F">初识指针和指针变量</a>
 <ul>
@@ -232,6 +244,7 @@ let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1;
 let active = 'active-show', activeClass = 'active-current';
 let tocWrapper = document.querySelector('#toc_wrapper');
 let tocContent = tocWrapper.children[0];
+let autoNumber = tocWrapper&&tocWrapper.classList.contains('auto-number');
 
 function addTocNumber(elem, deep) {
   if (!elem) {
@@ -249,7 +262,9 @@ function addTocNumber(elem, deep) {
     for (let i = 0; i < elem.children.length; i++) {
       let cur = elem.children[i];
       if (cur.__proto__ === HTMLAnchorElement.prototype) {
-        cur.text =  deep + ' ' + cur.text;
+        if (autoNumber) {
+          cur.text =  deep + ' ' + cur.text;
+        }
       } else if (cur.__proto__ === HTMLUListElement.prototype) {
         addTocNumber(cur, deep);
       }
@@ -262,7 +277,7 @@ document.addEventListener('scroll', function(e) {
   if (lList.length <= 0) {
     return;
   }
-  let scrollTop = document.body.scrollTop;
+  let scrollTop = document.scrollingElement.scrollTop;
   let dir;
 
   if (lastTop - scrollTop > 0) {
@@ -349,12 +364,17 @@ function showToc() {
         hList.push(postBody.children[i]);
       }
     }
-
-    if (hList.length > 10) {
-      active = 'active-hidden'
-      tocContent.classList.add('closed');
-    } else {
+    if (tocWrapper.classList.contains('compress')) {
+        tocContent.classList.add('closed');
+    } else if (tocWrapper.classList.contains('no_compress')){
       tocContent.classList.add('expanded');
+    } else {
+      if (hList.length > 10) {
+        active = 'active-hidden'
+        tocContent.classList.add('closed');
+      } else {
+        tocContent.classList.add('expanded');
+      }
     }
   }
 }
@@ -395,11 +415,11 @@ window.addEventListener('load', function() {
   sidebarTitle = document.querySelector('.sidebar-title'),
   sidebarBody = document.querySelector('#sidebar_body');
 
-  tocSideBar.addEventListener('click', (e) => {
+  tocSideBar && tocSideBar.addEventListener('click', (e) => {
     toggleSidebar(e);
   });
 
-  metaSideBar.addEventListener('click', (e) => {
+  metaSideBar && metaSideBar.addEventListener('click', (e) => {
     toggleSidebar(e);
   });
 
@@ -431,17 +451,19 @@ window.addEventListener('load', function() {
     })
     hideElement.classList.remove(SIDEBAR_BODY_ACTIVE);
     showElement.classList.add(SIDEBAR_BODY_ACTIVE);
-
   }
 
   postToc.addEventListener('transitionend', function() {
     this.classList.remove(SLIDE_UP_IN);
   });
 
-  let limitTop = document.querySelector('#nav_ul').children.length * 42 + 162;
-  let hasFix = false;
-  window.addEventListener('scroll', function(e) {
-    if (document.body.scrollTop >= limitTop) {
+
+  if (sidebarBody.classList.contains('pisces') || sidebarBody.classList.contains('gemini')) {
+    let hasFix = false;
+    let scrollEl = document.querySelector('.main-continer');
+    let limitTop = document.querySelector('#nav_ul').children.length * 42 + 162;
+    window.addEventListener('scroll', function(e) {
+    if (document.scrollingElement.scrollTop >= limitTop) {
       if (!hasFix) {
         sidebar.classList.add('sidebar-fixed');
         hasFix = true;
@@ -453,9 +475,11 @@ window.addEventListener('load', function() {
       }
     }
   });
+  }
+  
 </script>
-          <div class="section-box">
-            <div class="section post">
+          <div class="section-box box-shadow-wrapper">
+            <div class="section bg-color post post-page">
               <div class="article-box">
     <header class="post-header">
   <h1 class="post-title">
@@ -464,6 +488,7 @@ window.addEventListener('load', function() {
     </a>
   </h1>
   <div class="post-meta">
+    
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span>发布于</span>
@@ -482,9 +507,9 @@ window.addEventListener('load', function() {
           
         
       </span>
+      <span class="post-meta-divider">|</span>
     
     <span class="meta-item">
-      <span class="post-meta-divider">|</span>
       <i class="fa fa-clock-o"></i>
       <span>28分钟</span>
     </span>
@@ -1148,7 +1173,7 @@ const int* const p = &amp;cnum;
     </li>
     <li class="post-copyright-license">
       <strong>版权声明： </strong>
-      本博客所有文章除特别声明外,转载请注明出处！
+      本博客所有文章除特别声明外，转载请注明出处！
     </li>
   </ul>
   <div class="tags">
@@ -1159,16 +1184,16 @@ const int* const p = &amp;cnum;
   <div class="nav">
     <div class="nav-prev">
       
-        <i class="fa fa-angle-left"></i>
-        <a class="nav-pc-next" href="https://harriswilde.github.io/post/P-CkgTjqZ">积分变限函数的求导方法</a>
-        <a class="nav-mobile-next" href="https://harriswilde.github.io/post/P-CkgTjqZ">上一篇</a>
+        <i class="fa fa-chevron-left"></i>
+        <a class="nav-pc-next" title="初识Python，多多关照" href="https://harriswilde.github.io/post/PythonBasic">初识Python，多多关照</a class="nav-pc-next">
+        <a class="nav-mobile-prev" title="初识Python，多多关照" href="https://harriswilde.github.io/post/PythonBasic">上一篇</a>
       
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" href="https://harriswilde.github.io/post/PythonBasic">初识Python，多多关照</a class="nav-pc-next">
-        <a class="nav-mobile-prev" href="https://harriswilde.github.io/post/PythonBasic">下一篇</a>
-        <i class="fa fa-angle-right"></i>
+        <a class="nav-pc-next" title="积分变限函数的求导方法" href="https://harriswilde.github.io/post/P-CkgTjqZ">积分变限函数的求导方法</a>
+        <a class="nav-mobile-next" title="积分变限函数的求导方法" href="https://harriswilde.github.io/post/P-CkgTjqZ">下一篇</a>
+        <i class="fa fa-chevron-right"></i>
       
     </div>
   </div>
@@ -1180,25 +1205,36 @@ const int* const p = &amp;cnum;
       </div>
       <div class="footer-box">
   <footer class="footer">
+    <div class="copyright">
+      © 2019-2020 <i class="fa fa-heart"></i> HsxyHao
+    </div>
     <div class="poweredby">
-      <div class="power-left">Power By HarrisWilde</a></div>
-      <div>Copy<a href="https://github.com/iissnan/hexo-theme-next"> Hexo Next Theme</a></div>
+      Powered by HarrisWilde
     </div>
   </footer>
-  <div class="back-to-top" id="back_to_top">
+  
+  
+  <div class="gemini back-to-top" id="back_to_top">
     <i class="fa fa-arrow-up"></i>
+    
     <span class="scrollpercent">
-      <span id="back_to_top_text">100</span>%
+      <span id="back_to_top_text">0</span>%
     </span>
+    
   </div>
+  
+  
+  
 </div>
-
 <script>
 
+  let sideBarOpen = 'sidebar-open';
   let body = document.body;
-
   let back2Top = document.querySelector('#back_to_top'),
-  back2TopText = document.querySelector('#back_to_top_text');
+  back2TopText = document.querySelector('#back_to_top_text'),
+  drawerBox = document.querySelector('#drawer_box'),
+  rightSideBar = document.querySelector('.sidebar'),
+  viewport = document.querySelector('body');
 
   function scrollAnimation(currentY, targetY) {
    
@@ -1217,26 +1253,109 @@ const int* const p = &amp;cnum;
   }
 
   back2Top.addEventListener("click", function(e) {
-    scrollAnimation(body.scrollTop, 0);
+    scrollAnimation(document.scrollingElement.scrollTop, 0);
     e.stopPropagation();
     return false;
   });
   
   window.addEventListener('scroll', function(e) {
-    let percent = body.scrollTop / (body.scrollHeight - body.clientHeight) * 100;
+    let percent = document.scrollingElement.scrollTop / (document.scrollingElement.scrollHeight - document.scrollingElement.clientHeight) * 100;
     if (percent > 1 && !back2Top.classList.contains('back-top-active')) {
       back2Top.classList.add('back-top-active');
     }
     if (percent == 0) {
       back2Top.classList.remove('back-top-active');
     }
-    back2TopText.textContent = Math.floor(percent);
+    if (back2TopText) {
+      back2TopText.textContent = Math.floor(percent);
+    }
   });
 
-  // 动态调整站点概览高度
-  let sideBar = document.querySelector('.sidebar');
-  let navUl = document.querySelector('#nav_ul');
-  sideBar.style = 'margin-top:' + (navUl.children.length * 42 + 162) + 'px; opacity: 1;';
+  
+  let hasCacu = false;
+  window.onresize = function() {
+    if (window.width > 991) {
+      calcuHeight();
+    } else {
+      hasCacu = false;
+    }
+  }
+
+  function calcuHeight() {
+    // 动态调整站点概览高度
+    if (!hasCacu && back2Top.classList.contains('pisces') || back2Top.classList.contains('gemini')) {
+      let sideBar = document.querySelector('.sidebar');
+      let navUl = document.querySelector('#site_nav');
+      sideBar.style = 'margin-top:' + (navUl.offsetHeight + navUl.offsetTop + 15) + 'px;';
+      hasCacu = true;
+    }
+  }
+  calcuHeight();
+  
+  let open = false, MOTION_TIME = 300, RIGHT_MOVE_DIS = '320px';
+
+  if (drawerBox) {
+    let rightMotions = document.querySelectorAll('.right-motion');
+    let right = drawerBox.classList.contains('right');
+
+    let transitionDir = right ? "transition.slideRightIn" : "transition.slideLeftIn";
+
+    let openProp, closeProp;
+    if (right) {
+      openProp = {
+        paddingRight: RIGHT_MOVE_DIS 
+      };
+      closeProp = {
+        paddingRight: '0px'
+      };
+    } else {
+      openProp = {
+        paddingLeft: RIGHT_MOVE_DIS 
+      };
+      closeProp = {
+        paddingLeft: '0px'
+      };
+    }
+
+    drawerBox.onclick = function() {
+      open = !open;
+      window.Velocity(rightSideBar, 'stop');
+      window.Velocity(viewport, 'stop');
+      window.Velocity(rightMotions, 'stop');
+      if (open) {
+        window.Velocity(rightSideBar, {
+          width: RIGHT_MOVE_DIS
+        }, {
+          duration: MOTION_TIME,
+          begin: function() {
+            window.Velocity(rightMotions, transitionDir,{ });
+          }
+        })
+        window.Velocity(viewport, openProp,{
+          duration: MOTION_TIME
+        });
+      } else {
+        window.Velocity(rightSideBar, {
+          width: '0px'
+        }, {
+          duration: MOTION_TIME,
+          begin: function() {
+            window.Velocity(rightMotions, {
+              opacity: 0
+            });
+          }
+        })
+        window.Velocity(viewport, closeProp ,{
+          duration: MOTION_TIME
+        });
+      }
+      for (let i = 0; i < drawerBox.children.length; i++) {
+        drawerBox.children[i].classList.toggle('muse-line');
+      }
+      drawerBox.classList.toggle(sideBarOpen);
+    }
+  }
+
   // 代码高亮
   hljs.initHighlightingOnLoad();
 </script>
