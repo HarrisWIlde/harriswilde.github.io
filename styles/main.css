@@ -1894,13 +1894,7 @@ body {
         width: 960px;
         margin: 0 auto;
       }
-    @font-face {
-      font-family: 'Cascadia';
-      src: url('/media/fonts/Cascadia.ttf');
-    }
-    * {
-        font-family: 'Cascadia';
-    }body {
+    body {
       color: #555;
     }
     .next-md-body {
