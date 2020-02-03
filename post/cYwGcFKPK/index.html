@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>C语言之printf函数的用法 | TechZone</title>
+<title>C语言之函数（上） | TechZone</title>
 <meta name="keywords" content="TechZone">
 <meta name="description" content="HarrisWilde祝诸君元旦快乐🎉">
 <link rel="shortcut icon" href="https://harriswilde.github.io/favicon.ico?v=1580712908809">
@@ -25,7 +25,7 @@
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
     onload="renderMathInElement(document.body);"></script>
-    <meta name="description" content="C语言之printf函数的用法" />
+    <meta name="description" content="C语言之函数（上）" />
     <meta name="keywords" content="Clang" />
   </head>
   <body>
@@ -193,10 +193,27 @@
             <div class="toc-box right-motion">
   <div class="toc-wrapper auto-number auto" id="toc_wrapper">
     <ul class="markdownIt-TOC">
-<li><a href="#%E5%88%9D%E7%AA%A5%E9%97%A8%E5%BE%84">初窥门径</a></li>
-<li><a href="#%E6%AD%A3%E5%BC%8F%E5%BC%80%E5%A7%8B">正式开始</a>
+<li><a href="#%E5%87%BD%E6%95%B0%E7%9A%84%E5%AE%9A%E4%B9%89%E5%92%8C%E5%A3%B0%E6%98%8E">函数的定义和声明</a>
 <ul>
-<li><a href="#%E5%8F%82%E6%95%B0%E8%A7%A3%E6%9E%90">参数解析</a></li>
+<li><a href="#%E7%BB%AA%E8%AE%BA">绪论</a></li>
+<li><a href="#%E5%87%BD%E6%95%B0%E7%9A%84%E5%AE%9A%E4%B9%89">函数的定义</a></li>
+<li><a href="#%E5%87%BD%E6%95%B0%E7%9A%84%E5%A3%B0%E6%98%8E">函数的声明</a></li>
+</ul>
+</li>
+<li><a href="#%E5%87%BD%E6%95%B0%E7%9A%84%E5%8F%82%E6%95%B0%E5%92%8C%E8%BF%94%E5%9B%9E%E5%80%BC">函数的参数和返回值</a>
+<ul>
+<li><a href="#%E5%BD%A2%E5%8F%82%E5%92%8C%E5%AE%9E%E5%8F%82">形参和实参</a></li>
+<li><a href="#%E4%BC%A0%E5%80%BC%E5%92%8C%E4%BC%A0%E5%9D%80">传值和传址</a></li>
+<li><a href="#%E4%BC%A0%E6%95%B0%E7%BB%84">传数组</a></li>
+<li><a href="#%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0">可变参数</a></li>
+</ul>
+</li>
+<li><a href="#%E6%8C%87%E9%92%88%E5%87%BD%E6%95%B0%E5%92%8C%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88">指针函数和函数指针</a>
+<ul>
+<li><a href="#%E6%8C%87%E9%92%88%E5%87%BD%E6%95%B0">指针函数</a></li>
+<li><a href="#%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88">函数指针</a></li>
+<li><a href="#%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88%E4%BD%9C%E4%B8%BA%E5%8F%82%E6%95%B0">函数指针作为参数</a></li>
+<li><a href="#%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88%E4%BD%9C%E4%B8%BA%E8%BF%94%E5%9B%9E%E5%80%BC">函数指针作为返回值</a></li>
 </ul>
 </li>
 </ul>
@@ -449,8 +466,8 @@ window.addEventListener('load', function() {
               <div class="article-box">
     <header class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://harriswilde.github.io/post/CPrintf">
-      C语言之printf函数的用法
+    <a class="post-title-link" href="https://harriswilde.github.io/post/cYwGcFKPK">
+      C语言之函数（上）
     </a>
   </h1>
   <div class="post-meta">
@@ -458,7 +475,7 @@ window.addEventListener('load', function() {
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span>发布于</span>
-      <span>2019-10-13</span>
+      <span>2020-02-03</span>
     </span>
     
       <span class="meta-item">
@@ -477,240 +494,512 @@ window.addEventListener('load', function() {
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>6分钟</span>
+      <span>15分钟</span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>1615<span class="pc-show">字数</span></span>
+      <span>3436<span class="pc-show">字数</span></span>
     </span>
   </div>
 </header>
 </div>
               <div class="post-body next-md-body" id="post_body">
-                <p>printf，即<strong>格式化输出</strong>，是C语言中常用的输出函数。本节内容咱们就来讲讲关于这个函数的一些用法。</p>
-<p>​		我们在《<a href="https://harriswilde.github.io/post/FirstCProgram">第一个C语言程序</a>》中有粗略地提到了printf函数，小伙伴们应该也对这个函数有了一个大致的了解，大概知道了是用来<strong>输出数据</strong>用的。但是，我们既然说它是个函数，那么就应该有挺多丰富的用法等着我们来发掘。那我们就一起来看看到底有哪些方法。</p>
-<h1 id="初窥门径">初窥门径</h1>
-<p>​		我们还是从那个最简单的C语言程序开始：</p>
-<pre><code class="language-c">#include &lt;stdio.h&gt;
+                <p>在学习了指针以后，我们的C语言学习就算真正入门了。那么，随着我们自己编写的程序规模越来越大，我们写的代码也越来越繁杂，经常会碰到大脑不够用，或者名字不会起了这类看似很搞笑的问题。再者，就是往往要更改代码的时候牵一发而动全身，稍微出差错，就只能推倒重来。</p>
+<p>那么，在做开发，尤其是多人协作的大型开发的时候，程序模块化是十分重要的，你只需要预留一些供他人使用的必须的接口，然后把你定义的方法写个文档方便他人开发就行了。那么这种思维，就是<strong>结构化编程</strong>。</p>
+<p>比如，我们经常使用的<code>printf</code>函数，就是C语言开发者写好在<code>stdio.h</code>里面的。有了这个函数，我们就可以很简单地输出文本，而不需要去关注底层到底是如何实现的。你会发现，有函数，我们就可以把更多的注意力放在逻辑的实现上，而不需要去关注太多的细枝末节。</p>
+<h1 id="函数的定义和声明">函数的定义和声明</h1>
+<h2 id="绪论">绪论</h2>
+<p>虽然C语言的内置函数已经十分丰富，可以帮我们实现大部分的问题。什么字符串的处理啊，数学方面的计算啊，等等……但是，作为一门高级语言，C语言还可以让我们自己来定义函数，把我们的一些方法抽象封装出来，用于其他的对象上。</p>
+<p>我们举个简单的例子，封装一个输出字符图的函数：</p>
+<pre><code class="language-c">//Example 01
+#include &lt;stdio.h&gt;
+//------定义开始------//
+void print_house(void)
+{
+    printf(&quot;¤╭⌒╮ ╭⌒╮:∴★∵**☆．\n&quot;);
+    printf(&quot;╱◥██◣ :∴☆∵**★．\n&quot;);
+    printf(&quot;|田︱田田|:∴★∵**☆．\n&quot;);
+    printf(&quot;╬╬╬╬╬╬╬╬╬╬╬╬╬╬ \n&quot;);
+}
+//------定义结束------//
 int main(void)
 {
-    printf(&quot;Hello, world!\n&quot;);
+    print_house();//调用函数
     return 0;
 }
 </code></pre>
-<p>printf函数有个括号，那么这个函数的<strong>所有参数</strong>都是放在这个括号里面的。什么意思呢，printf这个函数就像是一个工具，这个工具有许许多多的功能。如何去设置这个工具，让它达到我们想要的效果，就只需要把我们的想法写在括号里就完事儿啦。</p>
-<p>​		但是呢，这个工具并没有搭载目前最新最火的人工智能，比如你这么写<br>
-<code>printf(让&quot;Hello, world!\n&quot;这个东西给劳资居中)</code>，这样肯定不行，因为printf看不懂呀。只有写出它看得懂的东西，它才会听话，乖乖给我们工作。你要是说些它听不懂的，那它就直接罢工不干啦，你就跟老板解释去吧！(printf：别说人话了，我听不懂)</p>
-<h1 id="正式开始">正式开始</h1>
-<p>​		既然想要函数听懂我们在说什么，就要遵循它的方式。那么我们先来了解下printf的通式：</p>
-<p><code>printf(输出框架*格式化设置,附加参数)</code></p>
-<h2 id="参数解析">参数解析</h2>
+<p>运行结果如下：</p>
+<pre><code>//Consequence 01
+¤╭⌒╮ ╭⌒╮:∴★∵**☆．
+╱◥██◣ :∴☆∵**★．
+|田︱田田|:∴★∵**☆．
+╬╬╬╬╬╬╬╬╬╬╬╬╬╬ 
+</code></pre>
+<h2 id="函数的定义">函数的定义</h2>
+<p>定义函数的方法，和我们使用<code>main</code>函数的方法差不多：</p>
+<pre><code class="language-c">类型名 函数名(参数列表)
+{
+    函数体
+}
+</code></pre>
 <ul>
-<li>
-<p>输出框架</p>
-<p>​		我们上面那个<code>printf(&quot;Hello, world!\n&quot;)</code>中，就只用到了<strong>输出框架</strong>这一个参数。有的小伙伴可能会问了，我们看到的全部内容不就是引号里面的吗？咋叫框架呢？</p>
-<p>​		其实不然，我们还只用了一个参数，别急，后面大家就知道啦。</p>
-</li>
-<li>
-<p>格式化设置</p>
-<p>​		这个<strong>星号</strong>其实是没有的，这里只是告诉大家这两个参数之间是<strong>连接起来</strong>的，<strong>不</strong>需要空格。</p>
-<p>​		此处的语法通式为：<br>
-<code>%[标志] [宽度] [精度] [长度修饰符] 转换字符</code></p>
-<p>​		其中，带中括号的是<strong>可选参数</strong>，<strong>不</strong>带的是<strong>必选参数</strong>。</p>
-<ol>
-<li>
-<p>转换字符：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">字符</th>
-<th style="text-align:left">含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">c</td>
-<td style="text-align:left">char；字符</td>
-</tr>
-<tr>
-<td style="text-align:center">d</td>
-<td style="text-align:left">int；带符号的十进制整数</td>
-</tr>
-<tr>
-<td style="text-align:center">i</td>
-<td style="text-align:left">同上</td>
-</tr>
-<tr>
-<td style="text-align:center">e</td>
-<td style="text-align:left">double；以指数形式输出单、双精度浮点数</td>
-</tr>
-<tr>
-<td style="text-align:center">E</td>
-<td style="text-align:left">同上</td>
-</tr>
-<tr>
-<td style="text-align:center">f</td>
-<td style="text-align:left">double；以小数的形式输出单、双精度浮点数（指数显示小写e）</td>
-</tr>
-<tr>
-<td style="text-align:center">g</td>
-<td style="text-align:left">double；以%f或%e中较短的一种方式输出单、双精度浮点数（指数显示小写e）</td>
-</tr>
-<tr>
-<td style="text-align:center">G</td>
-<td style="text-align:left">同上，指数显示大写E</td>
-</tr>
-<tr>
-<td style="text-align:center">o</td>
-<td style="text-align:left">unsigned int；无符号八进制（无前导0）</td>
-</tr>
-<tr>
-<td style="text-align:center">s</td>
-<td style="text-align:left">char；字符串</td>
-</tr>
-<tr>
-<td style="text-align:center">u</td>
-<td style="text-align:left">int；无符号十进制</td>
-</tr>
-<tr>
-<td style="text-align:center">x</td>
-<td style="text-align:left">unsigned int；无符号十六进制（无前导0x）</td>
-</tr>
-<tr>
-<td style="text-align:center">X</td>
-<td style="text-align:left">同上（无前导0X）</td>
-</tr>
-<tr>
-<td style="text-align:center">p</td>
-<td style="text-align:left">void；指针值</td>
-</tr>
-<tr>
-<td style="text-align:center">n</td>
-<td style="text-align:left">int；用于存放已写字符的个数到变量，不用于输出</td>
-</tr>
-<tr>
-<td style="text-align:center">%</td>
-<td style="text-align:left">不进行参数转换；%本身</td>
-</tr>
-</tbody>
-</table>
-</li>
-<li>
-<p>标志：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">标志</th>
-<th style="text-align:left">含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">-</td>
-<td style="text-align:left">指定被转换的参数在其字段内左对齐（默认是右对齐）</td>
-</tr>
-<tr>
-<td style="text-align:center">+</td>
-<td style="text-align:left">给数加上正负号</td>
-</tr>
-<tr>
-<td style="text-align:center">[空格]</td>
-<td style="text-align:left">若非负数则加上空格</td>
-</tr>
-<tr>
-<td style="text-align:center">0</td>
-<td style="text-align:left">对于数值转换，当输出长度小于字段宽度时，添加前导0补充</td>
-</tr>
-<tr>
-<td style="text-align:center">#</td>
-<td style="text-align:left">指定另一种输出方式<br>1. 若转换字符为o，则第一个数为0<br>2. 若转换字符为x或X，则在输出的非零值前加0x或0X<br>3. 对于转换字符为e、E、f、g或G，则输出的数总包含一个小数点。<br>另外，对于转换字符g或G，还将尾部无意义的0保留</td>
-</tr>
-</tbody>
-</table>
-</li>
-<li>
-<p>宽度：</p>
-<p>转换后的参数输出宽度<strong>至少</strong>达到这个值，若不足则在<strong>左边或右边</strong>填补空格或者0。具体看标志的设置，<strong>若无，默认左边填充空格。</strong></p>
-</li>
-<li>
-<p>精度：</p>
-<p>这里要声明一下，只有这个参数前面是要加点号&quot;<strong>.</strong>&quot;来分隔的，</p>
-<p>对于<strong>字符串</strong>，它指定打印的字符的<strong>最大个数</strong>。</p>
-<p>对于<strong>整数</strong>，它指定打印字符的<strong>位数</strong>，必要时加0来填补。</p>
-<p>对于<strong>转换字符为e、E或f</strong>，它指定打印的<strong>小数点后</strong>的数字位数。</p>
-<p>对于<strong>转换字符为g或G</strong>，它指定打印的<strong>有效数字</strong>位数。</p>
-</li>
-<li>
-<p>长度修饰符：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">修饰符</th>
-<th style="text-align:left">含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">hh</td>
-<td style="text-align:left">按signed char或unsigned char类型输出</td>
-</tr>
-<tr>
-<td style="text-align:center">h</td>
-<td style="text-align:left">按short或unsignedshort输出</td>
-</tr>
-<tr>
-<td style="text-align:center">l</td>
-<td style="text-align:left">按long或unsigned long输出</td>
-</tr>
-<tr>
-<td style="text-align:center">ll</td>
-<td style="text-align:left">按long long或者unsigned long long输出</td>
-</tr>
-<tr>
-<td style="text-align:center">L</td>
-<td style="text-align:left">按long double类型输出</td>
-</tr>
-</tbody>
-</table>
-</li>
-</ol>
-</li>
-<li>
-<p>附加参数</p>
-<p>所谓附加参数，笔者也不做过多解释。假设我有一个变量c，在<code>int c=3</code>之后，我想要输出c的值，该怎么办呢？</p>
-<p>有的小伙伴很聪明，立马说，Harris！我知道，这样不就行了：</p>
-<pre><code class="language-c">#include &lt;stdio.h&gt;
-int main(void)
-{
-    int c=3;
-    printf(&quot;C=3\n&quot;);
-    return 0;
-}
-</code></pre>
-<p>是的，这样做没错。我们的确正确输出了整型变量c的值。但是，我们写程序，很多时候时为了方便<strong>不懂程序的人</strong>来使用的。我们知道c的值，那是因为我们看得懂代码。</p>
-<p>如果我要你输出刚才用户输入的值，你怎么办呢？那么这个时候，<strong>附加参数</strong>就大显神威了。</p>
-<pre><code class="language-c">#include &lt;stdio.h&gt;
-int main(void)
-{
-    int c=3;//这里假定用户已经输入了值
-    printf(&quot;C的值为%d&quot;,c);
-    return 0;
-}
-</code></pre>
-<p>看到了吧。这里就把<strong>动态的变量c</strong>嵌入到语句里面输出了。</p>
-<p>看到这里我相信小伙伴们应该也明白了为啥我之前说引号里面的是<strong>框架</strong>了。这就是所谓的<strong>格式化输出</strong>，是不是有点只可意会不可言传的感觉呢？</p>
-<p>今天的内容基本就到这里结束啦。不过Harris在这里给大家留个悬念，大家可以自己回去自己的编译器上实验一下，看看能不能理解输出的结果？具体原理以后会讲，所以不理解没关系，学好上面的内容就很棒啦！</p>
-<pre><code class="language-c">#include &lt;stdio.h&gt;
-int main(void)
-{
-    char C = 'c';
-    printf(&quot;%c=%d&quot;,C,C);
-    return 0;
-}
-</code></pre>
-</li>
+<li>类型名就是函数返回值的类型，如果不希望函数返回任何类型，那么就应该使用<code>void</code>（无类型，表示没有返回值）。</li>
+<li><strong>函数名</strong>就是函数的名字，自己想怎么命名都可以，但是不要和保留字重复。</li>
+<li><strong>参数列表</strong>指定了参数的<strong>类型</strong>和<strong>名字</strong>，如果不需要传递参数，则写上<code>void</code>即可。</li>
+<li><strong>函数体</strong>是指函数的具体算法，是函数中关键部分</li>
 </ul>
+<h2 id="函数的声明">函数的声明</h2>
+<p>所谓的声明，就是将函数先告诉编译器，但是具体算法，则在<code>main</code>函数之后开发。</p>
+<p>如果不做声明，把上面的程序改成这样则会出错：</p>
+<pre><code class="language-c">//Example 01
+#include &lt;stdio.h&gt;
+int main(void)
+{
+    print_house();//调用函数
+    return 0;
+}
+//------定义开始------//
+void print_house(void)
+{
+    printf(&quot;¤╭⌒╮ ╭⌒╮:∴★∵**☆．\n&quot;);
+    printf(&quot;╱◥██◣ :∴☆∵**★．\n&quot;);
+    printf(&quot;|田︱田田|:∴★∵**☆．\n&quot;);
+    printf(&quot;╬╬╬╬╬╬╬╬╬╬╬╬╬╬ \n&quot;);
+}
+//------定义结束------//
+</code></pre>
+<p>因为道理上，程序是<strong>从上往下</strong>编译的，如果不提前告知，那么<code>main</code>函数里面的<code>print_house</code>，编译器便不知道这是个什么东西。</p>
+<p>如果你做了函数的声明，那么这个程序就可以正常执行：</p>
+<pre><code class="language-c">//Example 01
+#include &lt;stdio.h&gt;
+void print_house(void);//声明函数
+int main(void)
+{
+    print_house();//调用函数
+    return 0;
+}
+//------定义开始------//
+void print_house(void)
+{
+    printf(&quot;¤╭⌒╮ ╭⌒╮:∴★∵**☆．\n&quot;);
+    printf(&quot;╱◥██◣ :∴☆∵**★．\n&quot;);
+    printf(&quot;|田︱田田|:∴★∵**☆．\n&quot;);
+    printf(&quot;╬╬╬╬╬╬╬╬╬╬╬╬╬╬ \n&quot;);
+}
+//------定义结束------//
+</code></pre>
+<p>原则上来说，函数必须先定义，再使用。况且在以后的开发尤其是团队协作的情况下，先使用函数，后开发函数的情况比较多，因此养成<strong>先定义，后使用</strong>的良好习惯是最好的。</p>
+<h1 id="函数的参数和返回值">函数的参数和返回值</h1>
+<p>向函数传入参数，可以使函数的功能更加丰富。比如，我们刚刚定义了一个输出字符画的函数，但是这个函数无论在什么时候，它执行出来的结果都是一样的。无法实现更加个性化的功能。比如：</p>
+<pre><code class="language-c">//Example 02
+#include &lt;stdio.h&gt;
+void print(int);
+
+int main(void)
+{
+	int a;
+	scanf(&quot;%d&quot;, &amp;a);
+	print(a);
+	return 0;
+}
+
+void print(int a)
+{
+	for (int i = a; i &gt; 0; i--)
+	{
+		printf(&quot;-&quot;);
+	}
+}
+</code></pre>
+<p>运行结果如下：</p>
+<pre><code>//Consequence 02 - 01
+5
+-----
+</code></pre>
+<pre><code>//Consequence 02 - 02
+7
+-------
+</code></pre>
+<p>你看，输出的内容会随着用户输入的数字而改变，就像<strong>定制</strong>一样。</p>
+<p>那么函数的<strong>返回值</strong>又是什么呢？</p>
+<p>我们发现，我们刚刚写的函数，都没有返回值，因为在函数体的执行过程中，我们要得到的结果已经执行完毕了，并不需要返回什么东西。但是，有些函数就不一样了。</p>
+<p>比如，我们现在要创建一个函数，能够实现阶乘，这时候，就需要返回值了。</p>
+<pre><code class="language-c">//Example 03 - 迭代法
+#include &lt;stdio.h&gt;
+int factorial(int);
+
+int main(void)
+{
+    int a;
+    scanf(&quot;%d&quot;,&amp;a);
+    printf(&quot;%d&quot;, factorial(a));
+    return 0;
+}
+
+int factorial(int a)
+{
+    int sum = 1;
+    for (int i = a; i &gt; 0; i--)
+    {
+        sum *= i;
+    }
+    return sum;
+}
+</code></pre>
+<pre><code class="language-c">//Example 03 - 递归法
+#include &lt;stdio.h&gt;
+int factorial(int);
+
+int main(void)
+{
+    int a;
+    scanf(&quot;%d&quot;, &amp;a);
+    printf(&quot;%d&quot;, factorial(a));
+    return 0;
+}
+
+int factorial(int a)
+{
+    int sum;
+    if (a == 1)
+    {
+        return 1;
+    }
+    else
+    {
+        return a * factorial(a - 1);
+    }
+}
+</code></pre>
+<p>执行结果如下：</p>
+<pre><code>//Consequence 03
+5
+120
+</code></pre>
+<h2 id="形参和实参">形参和实参</h2>
+<p>所谓<strong>形参</strong>，就是形式参数，如：</p>
+<pre><code class="language-c">...
+int f(int a, int b);
+...
+</code></pre>
+<p>这其中的<code>a</code>和<code>b</code>就是形式参数，此时只是作占位符而已，而在函数真正使用的时候：</p>
+<pre><code class="language-c">...
+int main(void)
+{
+    f(x, y);
+    ...
+}
+...
+</code></pre>
+<p>此时的<code>x</code>和<code>y</code>就是<strong>实参</strong>。因为此时传递进去的值是真正程序里面拥有的值，是实实在在的。</p>
+<p>其实形参和实参的作用就是用来传递数据的，当我们自己定义的函数被调用的时候，实参会将值传递给形参（单向传递）。形参变量只有在函数被调用的时候才会分配内存，调用结束后，立即释放内存，因此形参变量只有在函数内部有效，<strong>对函数外的变量不影响</strong>。</p>
+<h2 id="传值和传址">传值和传址</h2>
+<pre><code class="language-c">//Example 04 - 01
+#include &lt;stdio.h&gt;
+void swap(int, int);
+void swap(int a, int b)
+{
+    int temp;
+    printf(&quot;swap中，交换前：a = %d, b = %d\n&quot;, a, b);
+    temp = a;
+    a = b;
+    b = temp;
+    printf(&quot;swap中，交换前：a = %d, b = %d\n&quot;, a, b);
+}
+
+int main(void)
+{
+    int a = 1, b = 2;
+    printf(&quot;main中，交换前：a = %d, b = %d\n&quot;, a, b);
+    swap(a, b);
+    printf(&quot;main中，交换前：a = %d, b = %d\n&quot;, a, b);
+    return 0;
+}
+</code></pre>
+<p>运行结果为：</p>
+<pre><code>//Consequence 04 - 01
+main中，交换前：a = 1, b = 2
+swap中，交换前：a = 1, b = 2
+swap中，交换前：a = 2, b = 1
+main中，交换前：a = 1, b = 2
+</code></pre>
+<p>可以看到，在<code>swap</code>函数内，传入的值被互换，但是在主函数内，值依旧没有被改变。因此可以得出结论：<strong>函数内部无法改变实参的值</strong></p>
+<p>但是，如果换成指针会怎样呢？</p>
+<pre><code class="language-c">//Example 04 - 02
+#include &lt;stdio.h&gt;
+void swap(int*, int*);
+void swap(int* a, int* b)
+{
+    int temp;
+    printf(&quot;swap中，交换前：a = %d, b = %d\n&quot;, *a, *b);
+    temp = *a;
+    *a = *b;
+    *b = temp;
+    printf(&quot;swap中，交换前：a = %d, b = %d\n&quot;, *a, *b);
+}
+
+int main(void)
+{
+    int a = 1, b = 2;
+    printf(&quot;main中，交换前：a = %d, b = %d\n&quot;, a, b);
+    swap(&amp;a, &amp;b);
+    printf(&quot;main中，交换前：a = %d, b = %d\n&quot;, a, b);
+    return 0;
+}
+</code></pre>
+<p>运行结果为：</p>
+<pre><code class="language-c">//Consequence 04 - 02
+main中，交换前：a = 1, b = 2
+swap中，交换前：a = 1, b = 2
+swap中，交换前：a = 2, b = 1
+main中，交换前：a = 2, b = 1
+</code></pre>
+<p>欸？怎么这会儿就能变了呢？有人可能会说，Harris你是不是刚刚骗我？</p>
+<p>其实并不是，我们看这句：<code>swap(&amp;a, &amp;b);</code>，我们其实传入的实参是两个变量的地址。</p>
+<p>打个比方，如果变量<code>a</code>的在内存里面住的是1号房间，变量<code>b</code>在内存中住的是2号房间。那么函数处理了之后，他俩住的地方并没有改变，也就是说，两个变量的内存地址并没有改变，只是函数把这个地址对应的值改变了而已。函数内对指针进行解引用，实际上就是间接地访问了变量的值。</p>
+<h2 id="传数组">传数组</h2>
+<p>既然是可以传递指针，那么数组按理来说，应该也是可以传的。</p>
+<pre><code class="language-c">//Example 05
+#include &lt;stdio.h&gt;
+void get_array(int);
+void get_array(int a[10])
+{
+	for (int i = 0; i &lt; 10; i++)
+	{
+		printf(&quot;a[%d] = %d\n&quot;, i, a[i]);
+	}
+}
+
+int main(void)
+{
+	int a[10] = { 1,2,3,4,5,6,7,8,9,10 };
+	get_array(a);
+	return 0;
+}
+</code></pre>
+<pre><code class="language-c">//Consequence 05
+a[0] = 1
+a[1] = 2
+a[2] = 3
+a[3] = 4
+a[4] = 5
+a[5] = 6
+a[6] = 7
+a[7] = 8
+a[8] = 9
+a[9] = 10
+</code></pre>
+<p>如果我们尝试着在函数内改变数组的值呢？</p>
+<pre><code class="language-c">//Example 06
+#include &lt;stdio.h&gt;
+void get_array(int);
+void get_array(int a[10])
+{
+	a[4] = 1;//更改一个值
+	for (int i = 0; i &lt; 10; i++)
+	{
+		printf(&quot;a[%d] = %d\n&quot;, i, a[i]);
+	}
+}
+
+int main(void)
+{
+	int a[10] = { 1,2,3,4,5,6,7,8,9,10 };
+	get_array(a);
+	return 0;
+}
+</code></pre>
+<pre><code>//Consequence 06
+a[0] = 1
+a[1] = 2
+a[2] = 3
+a[3] = 4
+a[4] = 1
+a[5] = 6
+a[6] = 7
+a[7] = 8
+a[8] = 9
+a[9] = 10
+</code></pre>
+<p>可以看到，在主函数里面输出数组，也是被改变了的。于是可以断定，其实传入的并不是一个数组，而是这个数组的<strong>首地址</strong>而已。</p>
+<h2 id="可变参数">可变参数</h2>
+<p>可能有的同学会纳闷，我们定义的函数，都是给参数预留了位置的，那如果像<code>printf()</code>这种函数，它的参数是取决于占位符的数量，这种函数是怎么定义的呢？</p>
+<p>这里，我们就要将一个以前没有用过的头文件<code>&lt;stdarg.h&gt;</code>。这个头文件中有一个类型和三个宏是需要用到的：</p>
+<p>一个类型是<code>va_list</code>，三个宏是<code>va_start</code> <code>va_arg</code> <code>va_end</code>，其中，<code>va</code>就是指<strong>variable-argument（可变参数）</strong>。</p>
+<pre><code class="language-c">//Example 07
+#include &lt;stdio.h&gt;
+#include &lt;stdarg.h&gt;
+int sum(int n, ...);
+int sum(int n, ...)//第一个参数n代表后面可变参数的数量，三个点代表不确定参数个数
+{
+	int sum = 0;
+	va_list arg;//定义参数列表
+	va_start(arg, n);//初始化参数列表，n为第一个参数的名称
+	for (int i = 0; i &lt; n; i++)
+	{
+		sum += va_arg(arg, int);//依次获取参数值
+	}
+	va_end(arg);//结束参数列表
+	return sum;
+}
+
+int main(void)
+{
+	int result;
+	result = sum(5, 1, 2, 3, 4, 5);
+	printf(&quot;result = %d\n&quot;, result);
+	return 0;
+}
+</code></pre>
+<p>结果如下：</p>
+<pre><code>//Consequence 07
+result = 15
+</code></pre>
+<h1 id="指针函数和函数指针">指针函数和函数指针</h1>
+<h2 id="指针函数">指针函数</h2>
+<p>函数的类型，实际上就是函数返回值的类型，那么顾名思义，指针函数就是返回指针的函数。</p>
+<pre><code class="language-c">//Example 08
+#include &lt;stdio.h&gt;
+char* getWord(char);
+char* getWord(char c)
+{
+    switch (c)
+    {
+    case 'A':return &quot;Apple&quot;;
+    case 'B':return &quot;Boy&quot;;
+    case 'C':return &quot;Cat&quot;;
+    case 'D':return &quot;Dog&quot;;
+    default:return &quot;None&quot;;
+    }
+}
+int main(void)
+{
+    char input;
+    scanf(&quot;%c&quot;, &amp;input);
+    printf(&quot;%s&quot;, getWord(input));
+    return 0;
+}
+</code></pre>
+<p>运行结果：</p>
+<pre><code>//Consequence 08
+A
+Apple
+</code></pre>
+<p>有的小伙伴可能会说，为啥这个<code>switch</code>语句中不用加<code>break</code>呢？</p>
+<p>因为<code>return</code>实际上就代表函数执行的结束，因此不会执行到下面的<code>case</code>。</p>
+<p>这个例子就是让函数返回字符串(指针)。</p>
+<p>另外，不要将函数中局部变量的值作为返回值，因为局部变量的值的作用域（有效范围）只有<strong>函数内部</strong>，因此返回局部变量是不合法的（详细将在下一节中讲到）。</p>
+<h2 id="函数指针">函数指针</h2>
+<pre><code class="language-c">指针函数 -&gt; int* f();
+函数指针 -&gt; int (*p)();
+</code></pre>
+<p>本质上，函数表示法就是指针表示法。因为函数的名字经过取值会变成函数的地址，所以在定义了函数指针以后，给它传递一个已经被定义的函数名，即可通过该指针进行调用。</p>
+<pre><code class="language-c">//Example 09
+#include &lt;stdio.h&gt;
+int square(int);
+int square(int a)
+{
+    return a * a;
+}
+int main(void)
+{
+    int num;
+    int (*fp)(int);
+    scanf(&quot;%d&quot;, &amp;num);
+    fp = square;
+    printf(&quot;%d * %d = %d\n&quot;, num, num, (*fp)(num));
+    return 0;
+}
+</code></pre>
+<p>结果如下：</p>
+<pre><code>//Consequence 10
+5
+5 * 5 = 25
+</code></pre>
+<p>这里<code>fp = square</code>可以写成<code>fp = &amp;square</code>，<code>(*fp)(num)</code>可以写成<code>fp(num)</code>，可能更加符合我们之前的习惯。</p>
+<h2 id="函数指针作为参数">函数指针作为参数</h2>
+<p>函数指针也可以作为参数传递，这样函数就可以实现更加丰富的功能。</p>
+<pre><code class="language-c">//Example 11
+#include &lt;stdio.h&gt;
+
+int add(int, int);
+int sub(int, int);
+int calc(int (*fp)(int, int), int, int);
+
+int add(int a, int b)
+{
+    return a + b;
+}
+int sub(int a, int b)
+{
+    return a - b;
+}
+int calc(int (*fp)(int, int), int a, int b)
+{
+    return (*fp)(a, b);
+}
+
+int main(void)
+{
+    printf(&quot;1 + 2 = %d\n&quot;, calc(add, 1, 2));
+    printf(&quot;1 - 2 = %d\n&quot;, calc(sub, 1, 2));
+    return 0;
+}
+</code></pre>
+<p>运行结果为：</p>
+<pre><code>//Consequence 11
+1 + 2 = 3
+1 - 2 = -1
+</code></pre>
+<h2 id="函数指针作为返回值">函数指针作为返回值</h2>
+<p>假设现在有个问题，让用户输入一个表达式，然后根据用户输入的运算符来确定应该调用哪一个函数进行运算。</p>
+<pre><code class="language-c">//Example 12
+#include &lt;stdio.h&gt;
+
+int add(int, int);
+int sub(int, int);
+int calc(int (*fp)(int, int), int, int);
+int (*select(char op))(int, int);
+
+int add(int a, int b)
+{
+    return a+b;
+}
+int sub(int a, int b)
+{
+    return a-b;
+}
+int calc(int (*fp)(int, int), int a, int b)
+{
+    return (*fp)(a, b);
+}
+int (*select(char op))(int, int)
+{
+    switch(op)
+    {
+        case '+':return add;
+        case '-':return sub;
+    }
+}
+int main(void)
+{
+    int a, b;
+    char op;
+    int (*fp)(int, int);
+    printf(&quot;请输入一个式子，如1+2：&quot;);
+    scanf(&quot;%d%c%d&quot;, &amp;a, &amp;op, &amp;b);
+    fp =  select(op);
+    printf(&quot;%d %c %d = %d\n&quot;, a, op, b, calc(fp, a, b));
+    return 0;
+}
+</code></pre>
+<p>运行结果如下：</p>
+<pre><code>//Consequence 12
+请输入一个式子，如1+2：3+4
+3 + 4 = 7
+</code></pre>
+<p>函数的知识太多太繁杂，所以Harris这次采用分节式来写博客。本期的就到这里啦！如果没有理解的，好好去消化下，理解了的就等我下一篇吧！</p>
 
               </div>
               <div class="post-footer">
@@ -721,7 +1010,7 @@ int main(void)
     </li>
     <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://harriswilde.github.io/post/CPrintf" title="C语言之printf函数的用法">C语言之printf函数的用法</a>
+      <a href="https://harriswilde.github.io/post/cYwGcFKPK" title="C语言之函数（上）">C语言之函数（上）</a>
     </li>
     <li class="post-copyright-license">
       <strong>版权声明： </strong>
@@ -736,15 +1025,11 @@ int main(void)
   <div class="nav">
     <div class="nav-prev">
       
-        <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="进制转换以及原、反、补码" href="https://harriswilde.github.io/post/CodeTrans">进制转换以及原、反、补码</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="进制转换以及原、反、补码" href="https://harriswilde.github.io/post/CodeTrans">上一篇</a>
-      
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="C语言的一些基本知识" href="https://harriswilde.github.io/post/CPreStudy">C语言的一些基本知识</a>
-        <a class="nav-mobile-next" title="C语言的一些基本知识" href="https://harriswilde.github.io/post/CPreStudy">下一篇</a>
+        <a class="nav-pc-next" title="浅谈拼手气红包的算法" href="https://harriswilde.github.io/post/BGqcimUfF">浅谈拼手气红包的算法</a>
+        <a class="nav-mobile-next" title="浅谈拼手气红包的算法" href="https://harriswilde.github.io/post/BGqcimUfF">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>
