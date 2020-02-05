@@ -236,7 +236,9 @@ blockquote:before {
   margin: 0 0 25px 0;
 }
 .sidebar-item-social {
-  margin-top: 20px;
+  margin-top: 5px;
+  padding-bottom: 5px;
+  border-bottom: 1px dotted #ccc;
 }
 .sidebar-item-social > .social-item {
   position: relative;
@@ -287,10 +289,9 @@ blockquote:before {
 }
 .friends-title {
   text-align: center;
-  margin-top: 20px;
+  margin-top: 10px;
   font-size: 14px;
   font-weight: 600;
-  border-top: 1px dotted #ccc;
 }
 .friends-box a {
   max-width: 280px;
@@ -1816,7 +1817,7 @@ blockquote:before {
 .hljs-comment,
 .hljs-quote {
   color: #998;
-  font-style: normal;
+  font-style: italic;
 }
 .hljs-keyword,
 .hljs-selector-tag,
@@ -1878,7 +1879,7 @@ blockquote:before {
   background: #dfd;
 }
 .hljs-emphasis {
-  font-style: normal;
+  font-style: italic;
 }
 .hljs-strong {
   font-weight: bold;
@@ -1963,23 +1964,23 @@ body {
       color: #495057;
       border-bottom-color: #495057;
     }.active-current > a {
-      color: #fc6423 !important;
-      border-bottom-color: #fc6423 !important;
+      color: #ff8787 !important;
+      border-bottom-color: #ff8787 !important;
     }
     .sidebar-title-active {
-      color: #fc6423 !important;
-      border-bottom-color: #fc6423 !important;
+      color: #ff8787;
+      border-bottom-color: #ff8787;
     }
     .sidebar-title-item:hover {
-      color: #fc6423 !important;
+      color: #ff8787 !important;
     }
     .active-show > a {
-      color: #fc6423;
-      border-bottom-color: #fc6423;
+      color: #ff8787;
+      border-bottom-color: #ff8787;
     }
     .active-hidden > a {
-      color: #fc6423;
-      border-bottom-color: #fc6423;
+      color: #ff8787;
+      border-bottom-color: #ff8787;
     }
       .site-meta {
         background: #222222 !important;
