@@ -1951,11 +1951,11 @@ body {
       }.nav-item a:hover {
         color: #222;
       }.nav-item-active {
-      background: #f9f9f9;
+      background: #3bc9db;
     }
 
     .nav-item:hover {
-      background: #f9f9f9;
+      background: #3bc9db;
       color: rgba(0, 0, 0, 0.98);
     }.markdownIt-TOC a {
       color: #868e96;
