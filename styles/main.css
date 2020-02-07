@@ -1888,16 +1888,24 @@ blockquote:before {
 }
 body {
       background-color: #eee;
+    }
+    .nav-toggle .line {
+      background-color: #eee !important;
     }.header {
         width: 960px;
         margin: 0 auto;
       }
-
       .main-continer {
         width: 960px;
         margin: 0 auto;
       }
-    body {
+    @font-face {
+      font-family: 'Cascadia';
+      src: url('/media/fonts/Cascadia.ttf');
+    }
+    * {
+        font-family: 'Cascadia';
+    }body {
       color: #555;
     }
     .next-md-body {
@@ -1943,7 +1951,6 @@ body {
       color: #006CFF;
       border-bottom-color: #006CFF;
     }
-
     .next-md-body a:hover, .friends-box a:hover {
       color: #006CFF;
       border-bottom-color: #006CFF;
@@ -1955,7 +1962,6 @@ body {
       }.nav-item-active {
       background: #f8f9fa;
     }
-
     .nav-item:hover {
       background: #f8f9fa;
       color: rgba(0, 0, 0, 0.98);
@@ -1987,8 +1993,11 @@ body {
       .site-meta {
         background: #222222 !important;
       }
+      .head-top-line {
+        background: #222222 !important;
+      }
     .brand {
-      background: #222222 !important;
+      background: #222222;
     }
     .main-title {
       color: #FFF;
