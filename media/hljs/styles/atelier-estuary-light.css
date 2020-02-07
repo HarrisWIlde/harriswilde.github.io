@@ -54,9 +54,9 @@
 
 .hljs-deletion,
 .hljs-addition {
-  color: #22221b;
-  display: inline-block;
-  width: 100%;
+ color: #a00000;
+ display: inline-block;
+ width: 100%;
 }
 
 .hljs-deletion {
@@ -80,5 +80,5 @@
 }
 
 .hljs-strong {
-  font-weight: bold;
+  font-weight: normal;
 }
