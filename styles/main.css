@@ -1825,7 +1825,7 @@ blockquote:before {
 .hljs-selector-tag,
 .hljs-subst {
   color: #333;
-  font-weight: bold;
+  font-weight: normal;
 }
 .hljs-number,
 .hljs-literal,
@@ -1842,7 +1842,7 @@ blockquote:before {
 .hljs-section,
 .hljs-selector-id {
   color: #900;
-  font-weight: bold;
+  font-weight: normal;
 }
 .hljs-subst {
   font-weight: normal;
@@ -1850,7 +1850,7 @@ blockquote:before {
 .hljs-type,
 .hljs-class .hljs-title {
   color: #458;
-  font-weight: bold;
+  font-weight: normal;
 }
 .hljs-tag,
 .hljs-name,
