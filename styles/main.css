@@ -1575,7 +1575,7 @@ blockquote:before {
 }
 .next-md-body .highlight pre,
 .next-md-body pre {
-  background-color: #373834;
+  background-color: #333333;
   border-radius: 10px;
   font-size: 85%;
   line-height: 1.45;
