@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://harriswilde.github.io</id>
     <title>TechZone</title>
-    <updated>2020-02-09T13:04:42.772Z</updated>
+    <updated>2020-02-09T13:14:42.955Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://harriswilde.github.io"/>
     <link rel="self" href="https://harriswilde.github.io/atom.xml"/>
@@ -323,7 +323,7 @@ int main(void)
 输入的整数分别是：5 23 4 51 22 31 1 9
 </code></pre>
 <h1 id="c语言的内存布局">C语言的内存布局</h1>
-<img src="https://s2.ax1x.com/2020/02/09/1hG8D1.png" alt="C语言的内存布局" style="zoom:67%;" />
+<img src="https://s2.ax1x.com/2020/02/09/1hG8D1.png" alt="C语言的内存布局" style="zoom:33%;" />
 <p>根据内存由低到高分别做如下划分：</p>
 <ul>
 <li>代码段(text segment)</li>
@@ -415,7 +415,7 @@ int main(void)
 <pre><code class="language-c">inline int square(int);
 </code></pre>
 <p>和普通的函数定义一样，只不过在前面加上<code>inline</code>即可。指定一个函数为内联函数，那么系统就会像处理宏定义那样，将整个函数直接在<code>main</code>函数中展开。</p>
-<p>不过，内敛函数也不是万能的。虽然节省了运行的时间，但是每个地方都要进行替换，实际上也增加了编译的时间。再者，其实现在的编译器也很聪明，对内联函数也有一套像寄存器变量那样的优化机制，并不是所有你声明的内联函数都能够成为内联函数，而有些普通函数也有可能会成为内联函数。</p>
+<p>不过，内联函数也不是万能的。虽然节省了运行的时间，但是每个地方都要进行替换，实际上也增加了编译的时间。再者，其实现在的编译器也很聪明，对内联函数也有一套像寄存器变量那样的优化机制，并不是所有你声明的内联函数都能够成为内联函数，而有些普通函数也有可能会成为内联函数。</p>
 <h1 id="一些小技巧">一些小技巧</h1>
 <h2 id="和">#和##</h2>
 <p>在含参宏定义中，#运算符后面应该跟一个参数，预处理器会把这个参数转换成一个字符串：</p>
