@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://harriswilde.github.io</id>
     <title>TechZone</title>
-    <updated>2020-02-07T15:11:51.366Z</updated>
+    <updated>2020-02-09T03:52:36.843Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://harriswilde.github.io"/>
     <link rel="self" href="https://harriswilde.github.io/atom.xml"/>
@@ -2157,6 +2157,10 @@ int main(void)
 </code></pre>
 </li>
 </ol>
+<p>其实，在C语言界，还有一个所谓“口耳相传”的书写习惯，就是：</p>
+<pre><code class="language-c">int a[] = {1, 2, 3, 4, 5,};
+</code></pre>
+<p>在最后一个元素后面加一个逗号。其实这对最终的编译没有任何影响，只不过一些老教材或者说计算机界的先辈们认为，这可以方便后人维护的时候添加元素。加不加逗号都无所谓，只不过习惯于加逗号的，都是在七八十年代就接触过C语言的人，某种意义上来说，这种习惯可以成为一个标签，拿出去 <s>装装逼</s> 也是可以的。</p>
 <p>那可能你会说了，”你刚刚提到的一个问题还没解决呢！要是班里的人数变了怎么办呢？“</p>
 <p>没错，我们现在就来解决下这个问题。</p>
 <h1 id="可变长数组">可变长数组</h1>
