@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>C语言之函数（下） | TechZone</title>
+<meta name="keywords" content="TechZone">
+<meta name="description" content="HarrisWilde祝诸君元旦快乐🎉">
+<link rel="shortcut icon" href="https://harriswilde.github.io/favicon.ico?v=1581252463243">
+<link rel="stylesheet" href="https://harriswilde.github.io/styles/main.css">
+
+<link rel="stylesheet" href="/media/css/pisces.css">
+
+<link rel="stylesheet" href="/media/fonts/font-awesome.css">
+<link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Rosario:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+<link href="/media/hljs/styles/monokai-sublime.css" rel="stylesheet">  
+<script src="/media/hljs/highlight.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.ui.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+    <meta name="description" content="C语言之函数（下）" />
+    <meta name="keywords" content="Clang" />
+    <meta name="theme-color" content="#222222"/>
+  </head>
+  <body>
+    <div class="head-top-line"></div>
+    <div class="header-box">
+      
+<div class=" pisces">
+  <header class="header bg-color ">
+    <div class="blog-header box-shadow-wrapper bg-color " id="header">
+      <div class="nav-toggle" id="nav_toggle">
+        <div class="toggle-box">
+          <div class="line line-top"></div>
+          <div class="line line-center"></div>
+          <div class="line line-bottom"></div>
+        </div>
+      </div>
+      <div class="site-meta">       
+        <div class="site-title">
+          
+            <a href="/" class="brand">
+              <span>TechZone</span>
+            </a>  
+          
+        </div>
+        
+          <p class="subtitle">HarrisWilde的官方个人博客</p>
+        
+      </div>
+      <nav class="site-nav" id="site_nav">
+        <ul id="nav_ul">
+          
+            <li class="nav-item ">
+              
+                <a href="/">
+                  <i class="fa fa-home"></i> 首页
+                </a>
+              
+            </li>
+          
+            <li class="nav-item ">
+              
+                <a href="/archives">
+                  <i class="fa fa-archive"></i> 归档
+                </a>
+              
+            </li>
+          
+            <li class="nav-item ">
+              
+                <a href="/tags">
+                  <i class="fa fa-tags"></i> 分类
+                </a>
+              
+            </li>
+          
+            <li class="nav-item ">
+              
+                <a href="https://www.jianshu.com/u/766d2f134900" target="_blank">
+                  <i class="fa fa-globe"></i> 简书
+                </a>
+              
+            </li>
+          
+          <li class="nav-item">
+            <a>
+              <i class="fa fa-search"></i> 搜索
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+</div>
+
+<script type="text/javascript"> 
+ 
+  let showNav = true;
+
+  let navToggle = document.querySelector('#nav_toggle'),
+  siteNav = document.querySelector('#site_nav');
+  
+  function navClick() {
+    let sideBar = document.querySelector('.sidebar');
+    let navUl = document.querySelector('#nav_ul');
+    navToggle.classList.toggle('nav-toggle-active');
+    siteNav.classList.toggle('nav-menu-active');
+    if (siteNav.classList.contains('nav-menu-active')) {
+      siteNav.style = "height: " + (navUl.children.length * 42) +"px !important";
+    } else {
+      siteNav.style = "";
+    }
+  }
+
+  navToggle.addEventListener('click',navClick);  
+</script>
+    </div>
+    <div class="main-continer">
+      
+      <div class="section-layout pisces ">
+        <div class="section-layout-wrapper">
+          
+
+<div class="sidebar">
+    <div class="sidebar-box box-shadow-wrapper bg-color right-motion" id="sidebar">
+      
+        <div class="post-list-sidebar">
+          <div class="sidebar-title">
+            <span id="tocSideBar" class="sidebar-title-item sidebar-title-active">文章目录</span>
+            <span id="metaSideBar" class="sidebar-title-item">站点概览</span>
+          </div>
+        </div>
+      
+      <div class="sidebar-body pisces" id="sidebar_body">
+        
+          <div class="post-side-meta" id="post_side_meta">
+            
+<div class="sidebar-wrapper box-shadow-wrapper bg-color">
+  <div class="sidebar-item">
+    <img class="site-author-image right-motion" src="https://harriswilde.github.io/images/avatar.png"/>
+    <p class="site-author-name">TechZone</p>
+    <p class="site-description right-motion">2020，共同进步！</p>
+  </div>
+  <div class="sidebar-item side-item-stat right-motion">
+    <div class="sidebar-item-box">
+      <a href="/archives/">
+        
+        <span class="site-item-stat-count">19</span>
+        <span class="site-item-stat-name">文章</span>
+      </a>
+    </div>
+    <div class="sidebar-item-box">
+      <a href="">
+        <span class="site-item-stat-count">6</span>
+        <span class="site-item-stat-name">分类</span>
+      </a>
+    </div>
+    <div class="sidebar-item-box">
+      <a href="/tags/">
+        <span class="site-item-stat-count">6</span>
+        <span class="site-item-stat-name">标签</span>
+      </a>
+    </div>
+  </div>
+  
+    
+      <div class="sidebar-item" style="border-top: 1px dotted #ccc; margin-top: 10px;">
+      </div>
+    
+  
+  
+
+
+</div>
+          </div>
+          <div class="post-toc sidebar-body-active" id="post_toc" style="opacity: 1;">
+            <div class="toc-box right-motion">
+  <div class="toc-wrapper auto-number auto" id="toc_wrapper">
+    <ul class="markdownIt-TOC">
+<li><a href="#%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86">动态内存管理</a>
+<ul>
+<li><a href="#malloc">malloc</a></li>
+<li><a href="#free">free</a></li>
+<li><a href="#%E7%94%B3%E8%AF%B7%E4%BB%BB%E6%84%8F%E5%B0%BA%E5%AF%B8%E7%9A%84%E5%86%85%E5%AD%98%E7%A9%BA%E9%97%B4">申请任意尺寸的内存空间</a></li>
+<li><a href="#calloc">calloc</a></li>
+<li><a href="#realloc">realloc</a></li>
+</ul>
+</li>
+<li><a href="#c%E8%AF%AD%E8%A8%80%E7%9A%84%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80">C语言的内存布局</a>
+<ul>
+<li><a href="#%E4%BB%A3%E7%A0%81%E6%AE%B5">代码段</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E6%AE%B5">数据段</a></li>
+<li><a href="#bss%E6%AE%B5">BSS段</a></li>
+<li><a href="#%E5%A0%86">堆</a></li>
+<li><a href="#%E6%A0%88">栈</a></li>
+</ul>
+</li>
+<li><a href="#%E9%AB%98%E7%BA%A7%E5%AE%8F%E5%AE%9A%E4%B9%89">高级宏定义</a>
+<ul>
+<li><a href="#%E4%B8%8D%E5%B8%A6%E5%8F%82%E6%95%B0%E7%9A%84%E5%AE%8F%E5%AE%9A%E4%B9%89">不带参数的宏定义</a></li>
+<li><a href="#%E5%B8%A6%E5%8F%82%E6%95%B0%E7%9A%84%E5%AE%8F%E5%AE%9A%E4%B9%89">带参数的宏定义</a></li>
+</ul>
+</li>
+<li><a href="#%E5%86%85%E8%81%94%E5%87%BD%E6%95%B0">内联函数</a></li>
+<li><a href="#%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8A%80%E5%B7%A7">一些小技巧</a>
+<ul>
+<li><a href="#%E5%92%8C">#和##</a></li>
+<li><a href="#%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0">可变参数</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</div>
+
+<script>
+
+let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1; 
+let active = 'active-show', activeClass = 'active-current';
+let tocWrapper = document.querySelector('#toc_wrapper');
+let tocContent = tocWrapper.children[0];
+let autoNumber = tocWrapper&&tocWrapper.classList.contains('auto-number');
+
+function addTocNumber(elem, deep) {
+  if (!elem) {
+    return;
+  }
+  let prop = elem.__proto__;
+
+  if (prop === HTMLUListElement.prototype) {
+    for (let i = 0; i < elem.children.length; i++) {
+      addTocNumber(elem.children[i], deep + (i + 1) + '.');
+    }
+  } else if (prop === HTMLLIElement.prototype) {
+    // 保存li元素
+    lList.push(elem);
+    for (let i = 0; i < elem.children.length; i++) {
+      let cur = elem.children[i];
+      if (cur.__proto__ === HTMLAnchorElement.prototype) {
+        if (autoNumber) {
+          cur.text =  deep + ' ' + cur.text;
+        }
+      } else if (cur.__proto__ === HTMLUListElement.prototype) {
+        addTocNumber(cur, deep);
+      }
+    }
+  }
+}
+
+
+document.addEventListener('scroll', function(e) {
+  if (lList.length <= 0) {
+    return;
+  }
+  let scrollTop = document.scrollingElement.scrollTop;
+  let dir;
+
+  if (lastTop - scrollTop > 0) {
+    dir = 'up';
+  } else {
+    dir = 'down';
+  }
+
+  lastTop = scrollTop;
+  if (scrollTop <= 0) {
+    if (lastIndex >= 0 && lastIndex < hList.length) {
+      lList[lastIndex].classList.remove(activeClass);
+    }
+    return;
+  }
+
+  let current = 0, hasFind = false;
+  for (let i = 0; i < hList.length; i++) {
+    if (hList[i].offsetTop > scrollTop) {
+      current = i;
+      hasFind = true;
+      break;
+    }
+  }
+  if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
+    current = hList.length - 1;
+  } else {
+    current--;
+  }
+  if (dir === 'down') {
+    if (current > lastIndex) {
+      addActiveClass(current);
+      removeActiveClass(lastIndex) 
+      lastIndex = current;
+      removeParentActiveClass();
+      lList[current] && addActiveLiElemment(lList[current].parentElement,tocContent);
+    }
+  } else {
+    if (current < lastIndex) {
+      addActiveClass(current);
+      removeActiveClass(lastIndex);
+      lastIndex = current;
+      removeParentActiveClass();
+      lList[current] && addActiveLiElemment(lList[current].parentElement,tocContent);
+    }
+  }
+});
+
+function removeParentActiveClass() {
+  let parents = tocContent.querySelectorAll('.'+active)
+  parents.forEach(function(elem) {
+    elem.classList.remove(active);
+  });
+}
+
+function addActiveClass(index) {
+  if (index >= 0 && index < hList.length) {
+    lList[index].classList.add(activeClass);
+  }
+}
+
+function removeActiveClass(index) {
+  if (index >= 0 && index < hList.length) {
+    lList[index].classList.remove(activeClass);
+  }
+}
+
+function addActiveLiElemment(elem, parent) {
+  if (!elem || elem === parent) {
+    return;
+  } else {
+    if (elem.__proto__ === HTMLLIElement.prototype) {
+      elem.classList.add(active);
+    }
+    addActiveLiElemment(elem.parentElement, parent);
+  }
+}
+
+function showToc() {
+  if (tocWrapper) {
+    postBody = document.querySelector('#post_body');
+    for (let i = 0; i < postBody.children.length; i++) {
+      if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
+        hList.push(postBody.children[i]);
+      }
+    }
+    if (tocWrapper.classList.contains('compress')) {
+        tocContent.classList.add('closed');
+    } else if (tocWrapper.classList.contains('no_compress')){
+      tocContent.classList.add('expanded');
+    } else {
+      if (hList.length > 10) {
+        active = 'active-hidden'
+        tocContent.classList.add('closed');
+      } else {
+        tocContent.classList.add('expanded');
+      }
+    }
+  }
+}
+addTocNumber(tocContent, '');
+
+window.addEventListener('load', function() {
+  showToc();
+  document.querySelector('#sidebar').style='display: block;';
+  tocWrapper.classList.add('toc-active');
+  setTimeout(function() {
+    if ("createEvent" in document) {
+      let evt = document.createEvent("HTMLEvents");
+      evt.initEvent("scroll", false, true);
+      document.dispatchEvent(evt);
+    }
+    else {
+      document.fireEvent("scroll");
+    }
+  }, 500)
+})
+
+</script>
+          </div>
+        
+      </div>
+    </div>
+</div>
+<script>
+  const SIDEBAR_TITLE_ACTIVE = 'sidebar-title-active';
+  const SIDEBAR_BODY_ACTIVE = 'sidebar-body-active';
+  const SLIDE_UP_IN = 'slide-up-in';
+
+  let sidebar = document.querySelector('#sidebar'),
+  tocSideBar = document.querySelector('#tocSideBar'),
+  metaSideBar = document.querySelector('#metaSideBar'),
+  postToc = document.querySelector('#post_toc'),
+  postSiteMeta = document.querySelector('#post_side_meta'),
+  sidebarTitle = document.querySelector('.sidebar-title'),
+  sidebarBody = document.querySelector('#sidebar_body');
+
+  tocSideBar && tocSideBar.addEventListener('click', (e) => {
+    toggleSidebar(e);
+  });
+
+  metaSideBar && metaSideBar.addEventListener('click', (e) => {
+    toggleSidebar(e);
+  });
+
+  function toggleSidebar(e) {
+    let currentTitle = document.querySelector("."+SIDEBAR_TITLE_ACTIVE);
+    if (currentTitle == e.srcElement) {
+      return ;
+    }
+    let current, showElement, hideElement;
+    if (e.srcElement == metaSideBar) {
+      showElement = postSiteMeta;
+      hideElement = postToc;
+    } else if (e.srcElement == tocSideBar){
+      showElement = postToc;
+      hideElement = postSiteMeta;
+    }
+    currentTitle.classList.remove(SIDEBAR_TITLE_ACTIVE);
+    e.srcElement.classList.add(SIDEBAR_TITLE_ACTIVE);
+
+    window.Velocity(hideElement, 'stop');
+    window.Velocity(hideElement, 'transition.slideUpOut', {
+      display: 'none',
+      duration: 200,
+      complete: function () {
+        window.Velocity(showElement, 'transition.slideDownIn', {
+          duration: 200
+        });
+      }
+    })
+    hideElement.classList.remove(SIDEBAR_BODY_ACTIVE);
+    showElement.classList.add(SIDEBAR_BODY_ACTIVE);
+  }
+
+  postToc.addEventListener('transitionend', function() {
+    this.classList.remove(SLIDE_UP_IN);
+  });
+
+
+  if (sidebarBody.classList.contains('pisces') || sidebarBody.classList.contains('gemini')) {
+    let hasFix = false;
+    let scrollEl = document.querySelector('.main-continer');
+    let limitTop = document.querySelector('#nav_ul').children.length * 42 + 162;
+    window.addEventListener('scroll', function(e) {
+    if (document.scrollingElement.scrollTop >= limitTop) {
+      if (!hasFix) {
+        sidebar.classList.add('sidebar-fixed');
+        hasFix = true;
+      }
+    } else {
+      if (hasFix) {
+        sidebar.classList.remove('sidebar-fixed');
+        hasFix = false;
+      }
+    }
+  });
+  }
+  
+</script>
+          <div class="section-box box-shadow-wrapper">
+            <div class="section bg-color post post-page">
+              <div class="article-box">
+    <header class="post-header">
+  <h1 class="post-title">
+    <a class="post-title-link" href="https://harriswilde.github.io/post/PS9G6tbW5">
+      C语言之函数（下）
+    </a>
+  </h1>
+  <div class="post-meta">
+    
+    <span class="meta-item pc-show">
+      <i class="fa fa-calendar-o"></i>
+      <span>发布于</span>
+      <span>2020-02-09</span>
+    </span>
+    
+      <span class="meta-item">
+        <span class="post-meta-divider pc-show">|</span>
+        <i class="fa fa-folder-o"></i>
+        <span class="pc-show">分类于</span>
+        
+          
+            <a href="https://harriswilde.github.io/tag/qrA-i8flt">
+              <span>Clang</span>
+            </a>
+          
+        
+      </span>
+      <span class="post-meta-divider">|</span>
+    
+    <span class="meta-item">
+      <i class="fa fa-clock-o"></i>
+      <span>17分钟</span>
+    </span>
+    <span class="meta-item">
+      <span class="post-meta-divider">|</span>
+      <i class="fa fa-file-word-o"></i>
+      <span>4240<span class="pc-show">字数</span></span>
+    </span>
+  </div>
+</header>
+</div>
+              <div class="post-body next-md-body" id="post_body">
+                <h1 id="动态内存管理">动态内存管理</h1>
+<p>我们知道，我们之前定义的变量、数组，都是我们事先定义好的，变量一旦被创建，就不能够再更改了。后来，C99标准又增加了变长数组，这一特性提高了我们程序对内存分配的灵活度，可是还是感觉不太灵活。那么有没有办法让它变得更灵活呢？</p>
+<p>当然有，而且只需要几个库的函数就能够搞定。而这些库全部都包含在<code>stdlib.h</code>这个头文件中：</p>
+<ul>
+<li>malloc ——申请动态内存空间</li>
+<li>free ——释放动态内存空间</li>
+<li>calloc ——申请并初始化一系列内存空间</li>
+<li>realloc ——重新分配内存空间</li>
+</ul>
+<h2 id="malloc">malloc</h2>
+<p><code>malloc</code>函数用于申请动态内存空间：</p>
+<pre><code class="language-c">#include &lt;stdlib.h&gt;
+void* malloc(size_t size);
+</code></pre>
+<p><code>malloc</code>函数向系统申请分配<code>size</code>个字节的内存空间，并返回一个指向这块空间的指针。不过，申请的这块空间并没有被初始化，因此上面的数据是随机的（和局部变量一样）。</p>
+<p>如果函数调用成功，那么会返回一个指向被申请的内存空间的指针，由于返回的是void类型的指针，所以它可以被转化成任何类型的数据。如果函数调用失败，返回值就是<code>NULL</code>。另外，如果<code>size</code>参数设置成0，那么返回值也有可能是0，但这种情况下并不一定代表调用失败。</p>
+<pre><code class="language-c">//Exmple 01
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main(void)
+{
+    int* ptr;
+    ptr = (int*)malloc(sizeof(int));
+    if (ptr == NULL)
+    {
+        printf(&quot;分配内存失败！\n&quot;);
+        exit(1);//程序异常退出
+    }
+    printf(&quot;请输入一个整数：&quot;);
+    scanf(&quot;%d&quot;, ptr);
+    printf(&quot;你输入的数据是：%d\n&quot;, *ptr);
+    return 0;
+}
+</code></pre>
+<p>运行结果为：</p>
+<pre><code>请输入一个整数：12
+你输入的数据是：12
+</code></pre>
+<p>这段代码的意思是，使用<code>malloc</code>函数申请一块int类型的空间，然后使用<code>ptr</code>指针来指向它，然后将用户输入的数据存储在这块空间里面。</p>
+<p>不过，<code>malloc</code>函数申请的空间是在堆上，那么这就意味这它不会自动释放，直到程序执行结束。所以在使用完变量之后务必释放内存，否则很有可能造成内存泄漏。</p>
+<h2 id="free">free</h2>
+<p>释放动态内存空间需要用<code>free</code>函数，函数原型：</p>
+<pre><code class="language-c">#include &lt;stdlib.h&gt;
+...
+void free(void* ptr);
+</code></pre>
+<p>释放的空间必须要是<code>malloc</code> <code>calloc</code> <code>realloc</code>函数申请的，否则将会导致未定义行为。如果<code>ptr</code>的参数是<code>NULL</code>，那么就不执行任何操作。</p>
+<p>这个函数实际上并不会修改<code>ptr</code>参数的值，所以调用后它仍然能够指向原来的地方，只不过变为非法空间罢了。</p>
+<p>有人会说了，现代计算机内存都不小，动辄16GB甚至更多，那么这个是否就用不上了呢？</p>
+<p>答案当然是否定的。不信你试试下面的这个程序：</p>
+<pre><code class="language-c">//Infinity malloc
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main(void)
+{
+    while (1)
+    {
+        malloc(1024);
+    }
+    return 0;
+}
+</code></pre>
+<p>你会发现内存占用会飙升。这种情况就叫做<strong>内存泄漏</strong>。我们申请的空间，在使用完后应该要立即释放，不然很有可能会造成不堪设想的后果。</p>
+<pre><code class="language-c">//Exmple 01 - Edited
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main(void)
+{
+    int* ptr;
+    ptr = (int*)malloc(sizeof(int));
+    if (ptr == NULL)
+    {
+        printf(&quot;分配内存失败！\n&quot;);
+        exit(1);//程序异常退出
+    }
+    printf(&quot;请输入一个整数：&quot;);
+    scanf(&quot;%d&quot;, ptr);
+    printf(&quot;你输入的数据是：%d\n&quot;, *ptr);
+    ////释放内存////
+    free(ptr);
+    return 0;
+}
+</code></pre>
+<p>因此，在使用完申请的内存之后应该要手动释放。</p>
+<p>我们再来看一个例子：</p>
+<pre><code class="language-c">//Example 02
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main(void)
+{
+    int* ptr;
+    int num = 123;
+    ptr = (int*)malloc(sizeof(int));
+    if (ptr == NULL)
+    {
+        printf(&quot;分配内存失败！\n&quot;);
+        exit(1);
+    }
+    printf(&quot;请输入一个整数：&quot;);
+    scanf(&quot;%d&quot;, ptr);
+    printf(&quot;你输入的整数是：%d\n&quot;, *ptr);
+    ptr = &amp;num;
+    printf(&quot;你输入的整数是：%d\n&quot;, *ptr);
+    free(ptr);
+    return 0;
+}
+</code></pre>
+<p>结果如下：</p>
+<pre><code>请输入一个整数：10
+你输入的整数是：10
+你输入的整数是：123
+HEAP[ConsoleApplication2.exe]: Invalid address specified to RtlValidateHeap( 00D20000, 0096F8E0 )
+ConsoleApplication2.exe 已触发了一个断点。
+</code></pre>
+<p>程序被中断了。</p>
+<p>刚开始，我们使用<code>malloc</code>函数申请了一段内存，并且只有<code>ptr</code>才知道这块内存的地址。所以后面我们更改了<code>ptr</code>后，这块内存就泄露了。后面我们尝试释放<code>ptr</code>，却发现，现在<code>ptr</code>所指向的变量是一个局部变量，不允许手动释放。这种情况的泄露一定要特别注意。</p>
+<h2 id="申请任意尺寸的内存空间">申请任意尺寸的内存空间</h2>
+<p><code>malloc</code>还可以用于申请一块任意尺寸的内存空间。对于后者，由于申请的空间是连续的，所以经常用数组的方式来进行索引。</p>
+<p>还记得在<a href="http://www.techzone.ltd/post/CArray/">《C语言之数组》</a>里我们讲过，Visual Studio和C99之前的编译器是不支持可变长数组的。如果恰好碰到这种环境，怎么办呢？刚好可以用这种方式来曲线救国：</p>
+<pre><code class="language-c">//Example 03
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+ int main(void)
+ {
+     int* array;
+     int n;
+     printf(&quot;请输入你要创建的数组元素个数：&quot;);
+     scanf(&quot;%d&quot;, &amp;n);
+     array = (int*)malloc(sizeof(int) * n);
+     for (int i = 0; i &lt; n; i++)
+     {
+         array[i] = i;
+         printf(&quot;%d\n&quot;, array[i]);
+     }
+     return 0;
+ }
+</code></pre>
+<p>运行结果如下：</p>
+<pre><code>//Consequence 03
+请输入你要创建的数组元素个数：10
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+</code></pre>
+<p>多维数组也一样可以（本质上也是线性存储）：</p>
+<pre><code class="language-c">//Example 04
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main(void)
+{
+    int** array;
+    int n, m;
+    scanf(&quot;%d %d&quot;, &amp;n, &amp;m);//n为几个大的数组，m是一个小数组中有几个元素
+    array = (int**)malloc(sizeof(int*) * n);//分配行数
+    for (int i = 0; i &lt; n; i++)
+    {
+        array[i] = (int*)malloc(sizeof(int) * m);//分配各个元素
+    }
+    for (int i = 0; i &lt; n; i++)
+    {
+        for (int j = 0; j &lt; m; j++)
+        {
+            array[i][j] = j;
+            printf(&quot;%d &quot;, array[i][j]);
+        }
+        printf(&quot;\n&quot;);
+    }
+    return 0;
+}
+</code></pre>
+<p>运行结果为：</p>
+<pre><code>//Consequence 04
+3 4
+0 1 2 3
+0 1 2 3
+0 1 2 3
+</code></pre>
+<p>由于<code>malloc</code>不会初始化申请的内存空间，所以需要字节进行初始化。当然可以写一个循环，像我们刚刚那样，不过还是略显繁琐。</p>
+<p>好在，标准库提供了更加高效的函数，包含在<code>string.h</code>头文件中：</p>
+<ul>
+<li>memset: 使用一个常量字节填充内存空间</li>
+<li>memcpy: 复制内存空间</li>
+<li>memmove: 移动内存空间</li>
+<li>memcmp: 比较内存空间</li>
+<li>memchr: 在内存空间中搜索一个字符</li>
+</ul>
+<p>函数原型如下：</p>
+<pre><code class="language-c">#include &lt;string.h&gt;
+void* memset(void* s, int c, size_t n);
+void* memcpy(void* dest, const void* src, size_t n);
+void* memmove(void* dest, const void* src, size_t n);
+int memcmp(const void* s1, const void* s2, size_t n);
+void* memchr(const void* s, int c, size_t n);
+</code></pre>
+<p>使用<code>memset</code>函数初始化空间：</p>
+<pre><code class="language-c">//Example 05
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+#define N 10
+
+int main(void)
+{
+    int* ptr = NULL;
+    ptr = (int*)malloc(N * sizeof(int));
+    if (ptr == NULL)
+    {
+        exit(1);
+    }
+    memset(ptr, 0, N * sizeof(int));
+    for (int i = 0; i &lt; N; i++)
+    {
+        printf(&quot;%d &quot;, ptr[i]);
+    }
+    putchar('\n');
+    free(ptr);
+    return 0;
+}
+</code></pre>
+<p>运行结果为：</p>
+<pre><code>//Consequence 05
+0 0 0 0 0 0 0 0 0 0
+</code></pre>
+<p>如果觉得这样太麻烦，那么我们就可以使用<code>calloc</code>来一步到位。</p>
+<h2 id="calloc">calloc</h2>
+<p><code>calloc</code>函数用于申请并初始化一系列内存空间：</p>
+<pre><code class="language-c">#include &lt;stdlib.h&gt;
+...
+void* calloc(size_t nmemb, size_t size);
+</code></pre>
+<p><code>calloc</code>函数在内存中动态地申请nmemb个长度为size的连续内存空间（即申请的总空间尺寸为<code>nmemb*size</code>），这些内存空间全部被初始化成0。</p>
+<p>如果函数调用成功，会返回一个指向申请的内存空间的指针，由于返回类型是void指针，因此可以被转换成任何类型的数据。如果函数调用失败，返回值是<code>NULL</code>。如果<code>nmemb</code>或<code>size</code>参数设置为0，返回值也可能是<code>NULL</code>，但这不一定意味着函数调用失败。</p>
+<h2 id="realloc">realloc</h2>
+<p>有时候可能需要对原来分配的空间进行拓展，但是没办法确保两次申请的空间是线性连续的。所以需要先申请一个足够大的空间，再把数据搬运过去。</p>
+<p>当然，这样确实可以，但是手动写代码的话感觉有些太繁琐了。使用<code>realloc</code>函数就可以帮我们完成这一系列的操作：</p>
+<pre><code class="language-c">#include &lt;stdlib.h&gt;
+...
+void* realloc(void* ptr, size_t size);
+</code></pre>
+<p>以下几点是需要注意的：</p>
+<ul>
+<li><code>realloc</code>函数将<code>ptr</code>指向的内存空间大小修改为<code>size</code>字节</li>
+<li>如果重新分配的内存比原来的大，则旧数据不会发生改变；若比原来小，数据有可能会丢失，慎用！</li>
+<li>该函数会移动内存空间并返回新的指针</li>
+<li>如果<code>ptr</code>的参数是<code>NULL</code>，那么调用该函数就相当于调用<code>malloc(size)</code></li>
+<li>如果<code>size</code>的参数为0，并且<code>ptr</code>的参数不为<code>NULL</code>，那么调用该函数就相当于调用<code>free(ptr)</code></li>
+<li>除非<code>ptr</code>的参数为<code>NULL</code>，否则<code>ptr</code>的值必须由先前调用的<code>malloc</code> <code>calloc</code> <code>realloc</code>函数返回</li>
+</ul>
+<p>下面这个程序，不断接受用户输入整数，直到用户输入-1结束，然后将所有的数据输出：</p>
+<pre><code class="language-c">//Example 06
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main(void)
+{
+    int num;
+    int count = 0;
+    int* ptr = NULL;//这里必须初始化为NULL
+    do
+    {
+        printf(&quot;请输入一个整数（输入-1表示结束：）&quot;);
+        scanf(&quot;%d&quot;, &amp;num);
+        count++;
+        ptr = (int*)realloc(ptr, count * sizeof(int));
+        if (ptr == NULL)
+        {
+            exit(1);
+        }
+        ptr[count - 1] = num;
+    } while (num != -1);
+    printf(&quot;输入的整数分别是：&quot;);
+    for (int i = 0; i &lt; count - 1; i++)
+    {
+        printf(&quot;%d &quot;, ptr[i]);
+    }
+    printf(&quot;\n&quot;);
+    free(ptr);
+    return 0;
+}
+</code></pre>
+<p>运行结果为：</p>
+<pre><code>//Consequence 06
+请输入一个整数（输入-1表示结束：）5
+请输入一个整数（输入-1表示结束：）23
+请输入一个整数（输入-1表示结束：）4
+请输入一个整数（输入-1表示结束：）51
+请输入一个整数（输入-1表示结束：）22
+请输入一个整数（输入-1表示结束：）31
+请输入一个整数（输入-1表示结束：）1
+请输入一个整数（输入-1表示结束：）9
+请输入一个整数（输入-1表示结束：）-1
+输入的整数分别是：5 23 4 51 22 31 1 9
+</code></pre>
+<h1 id="c语言的内存布局">C语言的内存布局</h1>
+<img src="https://s2.ax1x.com/2020/02/09/1hG8D1.png" alt="C语言的内存布局" style="zoom:67%;" />
+<p>根据内存由低到高分别做如下划分：</p>
+<ul>
+<li>代码段(text segment)</li>
+<li>数据段(initialized data segment)</li>
+<li>BSS段(BSS segment / Uninitialized data segment)</li>
+<li>栈(stack)</li>
+<li>堆(heap)</li>
+</ul>
+<h2 id="代码段">代码段</h2>
+<p>代码段通常用来存放程序执行代码的一块内存区域。这部分区域的大小再程序运行前就已经确定，并且内存区域通常值属于只读。在代码段中，也有可能包含一些只读的常数变量，如字符串常量等等。</p>
+<h2 id="数据段">数据段</h2>
+<p>数据段通常用来存放已经初始化的全局变量和局部静态变量。</p>
+<h2 id="bss段">BSS段</h2>
+<p>BSS段通常用来存放程序中为初始化的全局变量的一块内存区域。BSS是英文Black Started by Symbol的简称。这个区段中的数据在程序运行前将被自动初始化为0。</p>
+<h2 id="堆">堆</h2>
+<p>前面学习的动态内存管理，实际上就是在这里面进行的。堆里面主要放一些动态的内存段，能够扩展和缩小。</p>
+<h2 id="栈">栈</h2>
+<p>大家平时所听到的<strong>堆栈</strong>这个词，实际上就是指的栈。栈是函数执行的内存区域，通常和堆共享同一片区域。堆和栈是C语言运行时的重要元素之一。而它们之间也有很大的不同；<strong>堆</strong>由程序员手动申请，而<strong>栈</strong>由系统自动分配；<strong>堆</strong>由程序员手动释放，而<strong>栈</strong>由系统自动释放；<strong>堆</strong>的生存周期由程序员来决定，并且不同函数之间<strong>可以</strong>自由访问，而<strong>栈</strong>的生存周期由函数调用开始到函数返回时结束，函数之间的局部变量<strong>不可以</strong>互相访问。</p>
+<h1 id="高级宏定义">高级宏定义</h1>
+<p>作为C语言的三大预处理命令之一，宏定义的作用时替换。但是，宏定义就算再复杂，也只是替换不做任何的计算或者表达式求解。</p>
+<h2 id="不带参数的宏定义">不带参数的宏定义</h2>
+<p>这种就是我们常见的直接替换：</p>
+<pre><code class="language-c">#define PI 3.14
+</code></pre>
+<blockquote>
+<p>注意：</p>
+<ul>
+<li>为了和普通变量区分，宏的名字一般约定为全大写</li>
+<li>宏定义只是简单的替换，且是在编译前就处理好了，所以编译器不会对宏定义的语法进行检查</li>
+<li>宏定义的作用范围是从定义开始到程序的结束</li>
+<li>可以使用#undef命令中止宏定义的作用域</li>
+<li>宏定义允许嵌套(在宏定义中使用已定义的宏)</li>
+</ul>
+</blockquote>
+<h2 id="带参数的宏定义">带参数的宏定义</h2>
+<p>C语言的宏定义可以带参数。和函数类似，在宏定义里出现的叫做<strong>形参</strong>，而在调用的时候实际传递的叫做 <strong>实参</strong>。</p>
+<p>如：</p>
+<pre><code class="language-c">#define MAX(x, y) (((x) &gt; (y)) ? (x) : (y))
+</code></pre>
+<p>这个就是用来比较x和y哪个更大：</p>
+<pre><code class="language-c">//Example 07
+#include &lt;stdio.h&gt;
+#define MAX(x, y) (((x) &gt; (y)) ? (x) : (y))
+
+int main(void)
+{
+    int x, y;
+    printf(&quot;请输入两个整数：&quot;)；
+    scanf(&quot;%d %d&quot;, &amp;x, &amp;y);
+    printf(&quot;%d更大！&quot;, MAX(x, y));
+    return 0;
+}
+</code></pre>
+<p>运行结果如下：</p>
+<pre><code>//Consequence 08
+请输入两个整数：3 5
+5更大！
+</code></pre>
+<p>另外，参数的最外层建议加上一个小括号来确保优先级，不然很可能会出现隐式的bug。</p>
+<h1 id="内联函数">内联函数</h1>
+<p>由于预编译命令在编译之前就已经处理好了。而函数每次的调用却还要申请栈空间。的确，使用含参宏定义效率确实要更高。</p>
+<p>不过，有的时候却会出现一些bug，比如：</p>
+<pre><code class="language-c">//Example 09
+#define SQUARE(x) ((x) * (x))
+#include &lt;stdio.h&gt;
+
+int main(void)
+{
+    int i = 1;
+    while (i &lt;= 10)
+    {
+        printf(&quot;%d的平方根是%d\n&quot;, i-1, SQUARE(i++));
+    }
+    return 0;
+}
+</code></pre>
+<p>结果为：</p>
+<pre><code>//Consequence 09
+2的平方根是1
+4的平方根是9
+6的平方根是25
+8的平方根是49
+10的平方根是81
+</code></pre>
+<p>这是怎么回事呢？</p>
+<p>我们刚刚说过，宏定义只是简单的替换。那么<code>SQUARE(i++)</code>最终会被替换为<code>((i++) * (i++))</code>，那么没调用一次宏，就要自增两次。</p>
+<p>那么我又想用宏定义，却又向避开这个bug，怎么办呢？</p>
+<p>就是调用内联函数：</p>
+<pre><code class="language-c">inline int square(int);
+</code></pre>
+<p>和普通的函数定义一样，只不过在前面加上<code>inline</code>即可。指定一个函数为内联函数，那么系统就会像处理宏定义那样，将整个函数直接在<code>main</code>函数中展开。</p>
+<p>不过，内敛函数也不是万能的。虽然节省了运行的时间，但是每个地方都要进行替换，实际上也增加了编译的时间。再者，其实现在的编译器也很聪明，对内联函数也有一套像寄存器变量那样的优化机制，并不是所有你声明的内联函数都能够成为内联函数，而有些普通函数也有可能会成为内联函数。</p>
+<h1 id="一些小技巧">一些小技巧</h1>
+<h2 id="和">#和##</h2>
+<p>在含参宏定义中，#运算符后面应该跟一个参数，预处理器会把这个参数转换成一个字符串：</p>
+<pre><code class="language-c">//Example 10
+#define STR(s) # s
+#include &lt;stdio.h&gt;
+
+int main(void)
+{
+    printf(&quot;%s\n&quot;, STR(TechZone));
+    return 0;
+}
+</code></pre>
+<p>结果为：</p>
+<pre><code>//Consequence 10
+TechZone
+</code></pre>
+<p>虽然笔者传入的不是字符串形式，但是<code>#</code>将其变为了字符串，因此可以直接以<code>%s</code>的形式输出。</p>
+<p>并且传入字符中，所有的保留字符都会做转义处理，比如<code>\</code>会被替换为<code>\\</code>。存在多个空白字符的时候，会被替换为一个空格。</p>
+<p>而##运算符被成为连接运算符，如：</p>
+<pre><code class="language-c">//Example 11
+#define TOGETHER(x, y) x ## y
+#include &lt;stdio.h&gt;
+int main(void)
+{
+    printf(&quot;%d\n&quot;, TOGETHER(5, 20));
+    return 0;
+}
+</code></pre>
+<p>结果为：</p>
+<pre><code>//Consequence 11
+520
+</code></pre>
+<h2 id="可变参数">可变参数</h2>
+<p>之前学习了如何让函数支持可变参数，带参数的宏定义也支持使用可变参数：</p>
+<pre><code class="language-c">#define SHOWLIST(...) printf(#__VA_AGES__)
+</code></pre>
+<p>如：</p>
+<pre><code class="language-c">//Example 12
+#define SHOWLIST(...) printf(#__VA_AGES__)
+#include &lt;stdio.h&gt;
+
+int main(void)
+{
+    SHOWLIST(TechZone, HarrisWilde, C);
+    return 0;
+}
+</code></pre>
+<p>由于在VS2019下无法支持编译，这次的结果使用Linux下的GCC来执行：</p>
+<pre><code>//Consequence 12 in GCC
+TechZone, HarrisWilde, C
+</code></pre>
+<p>可变参数是允许存在空参数的，如果是空参数，则##前面的逗号也会一起被去掉，避免导致参数数量不一致：</p>
+<pre><code class="language-c">//Example 13
+#define PRINT(format, ...) printf(#format, ##__VA_AGES__)
+
+int main(void)
+{
+    PRINT(num = %d\n, 10);
+    PRINT(Hello, world!\n);
+    return 0;
+}
+</code></pre>
+<p>结果为：</p>
+<pre><code>//Consequence 13 in GCC
+num = 10
+Hello, world!
+</code></pre>
+<p>函数的基础知识到这里就结束了，希望对大家有所帮助！</p>
+
+              </div>
+              <div class="post-footer">
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      TechZone
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://harriswilde.github.io/post/PS9G6tbW5" title="C语言之函数（下）">C语言之函数（下）</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，转载请注明出处！
+    </li>
+  </ul>
+  <div class="tags">
+    
+      <a href="https://harriswilde.github.io/tag/qrA-i8flt"># Clang</a>
+    
+  </div>
+  <div class="nav">
+    <div class="nav-prev">
+      
+    </div>
+    <div class="nav-next">
+      
+        <a class="nav-pc-next" title="C语言之函数（中）" href="https://harriswilde.github.io/post/IKKYqSXMf">C语言之函数（中）</a>
+        <a class="nav-mobile-next" title="C语言之函数（中）" href="https://harriswilde.github.io/post/IKKYqSXMf">下一篇</a>
+        <i class="fa fa-chevron-right"></i>
+      
+    </div>
+  </div>
+</div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-box">
+  <footer class="footer">
+    <div class="copyright">
+      © 2019-2020 | TechZone
+    </div>
+    <div class="poweredby">
+      Powered by HarrisWilde
+    </div>
+  </footer>
+  
+  
+  <div class="pisces back-to-top" id="back_to_top">
+    <i class="fa fa-arrow-up"></i>
+    
+    <span class="scrollpercent">
+      <span id="back_to_top_text">0</span>%
+    </span>
+    
+  </div>
+  
+  
+  
+</div>
+<script>
+
+  let sideBarOpen = 'sidebar-open';
+  let body = document.body;
+  let back2Top = document.querySelector('#back_to_top'),
+  back2TopText = document.querySelector('#back_to_top_text'),
+  drawerBox = document.querySelector('#drawer_box'),
+  rightSideBar = document.querySelector('.sidebar'),
+  viewport = document.querySelector('body');
+
+  function scrollAnimation(currentY, targetY) {
+   
+    let needScrollTop = targetY - currentY
+    let _currentY = currentY
+    setTimeout(() => {
+      const dist = Math.ceil(needScrollTop / 10)
+      _currentY += dist
+      window.scrollTo(_currentY, currentY)
+      if (needScrollTop > 10 || needScrollTop < -10) {
+        scrollAnimation(_currentY, targetY)
+      } else {
+        window.scrollTo(_currentY, targetY)
+      }
+    }, 1)
+  }
+
+  back2Top.addEventListener("click", function(e) {
+    scrollAnimation(document.scrollingElement.scrollTop, 0);
+    e.stopPropagation();
+    return false;
+  });
+  
+  window.addEventListener('scroll', function(e) {
+    let percent = document.scrollingElement.scrollTop / (document.scrollingElement.scrollHeight - document.scrollingElement.clientHeight) * 100;
+    if (percent > 1 && !back2Top.classList.contains('back-top-active')) {
+      back2Top.classList.add('back-top-active');
+    }
+    if (percent == 0) {
+      back2Top.classList.remove('back-top-active');
+    }
+    if (back2TopText) {
+      back2TopText.textContent = Math.floor(percent);
+    }
+  });
+
+  
+  let hasCacu = false;
+  window.onresize = function() {
+    if (window.width > 991) {
+      calcuHeight();
+    } else {
+      hasCacu = false;
+    }
+  }
+
+  function calcuHeight() {
+    // 动态调整站点概览高度
+    if (!hasCacu && back2Top.classList.contains('pisces') || back2Top.classList.contains('gemini')) {
+      let sideBar = document.querySelector('.sidebar');
+      let navUl = document.querySelector('#site_nav');
+      sideBar.style = 'margin-top:' + (navUl.offsetHeight + navUl.offsetTop + 15) + 'px;';
+      hasCacu = true;
+    }
+  }
+  calcuHeight();
+  
+  let open = false, MOTION_TIME = 300, RIGHT_MOVE_DIS = '320px';
+
+  if (drawerBox) {
+    let rightMotions = document.querySelectorAll('.right-motion');
+    let right = drawerBox.classList.contains('right');
+
+    let transitionDir = right ? "transition.slideRightIn" : "transition.slideLeftIn";
+
+    let openProp, closeProp;
+    if (right) {
+      openProp = {
+        paddingRight: RIGHT_MOVE_DIS 
+      };
+      closeProp = {
+        paddingRight: '0px'
+      };
+    } else {
+      openProp = {
+        paddingLeft: RIGHT_MOVE_DIS 
+      };
+      closeProp = {
+        paddingLeft: '0px'
+      };
+    }
+
+    drawerBox.onclick = function() {
+      open = !open;
+      window.Velocity(rightSideBar, 'stop');
+      window.Velocity(viewport, 'stop');
+      window.Velocity(rightMotions, 'stop');
+      if (open) {
+        window.Velocity(rightSideBar, {
+          width: RIGHT_MOVE_DIS
+        }, {
+          duration: MOTION_TIME,
+          begin: function() {
+            window.Velocity(rightMotions, transitionDir,{ });
+          }
+        })
+        window.Velocity(viewport, openProp,{
+          duration: MOTION_TIME
+        });
+      } else {
+        window.Velocity(rightSideBar, {
+          width: '0px'
+        }, {
+          duration: MOTION_TIME,
+          begin: function() {
+            window.Velocity(rightMotions, {
+              opacity: 0
+            });
+          }
+        })
+        window.Velocity(viewport, closeProp ,{
+          duration: MOTION_TIME
+        });
+      }
+      for (let i = 0; i < drawerBox.children.length; i++) {
+        drawerBox.children[i].classList.toggle('muse-line');
+      }
+      drawerBox.classList.toggle(sideBarOpen);
+    }
+  }
+
+  // 代码高亮
+  hljs.initHighlightingOnLoad();
+</script>
+    </div>
+  </body>
+  <script src="/media/js/motion.js"></script>
+</html>
