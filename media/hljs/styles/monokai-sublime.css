@@ -43,7 +43,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 }
 
 .hljs-emphasis {
-  font-style: italic;
+  font-style: normal;
 }
 
 .hljs-keyword,
