@@ -1900,7 +1900,13 @@ body {
         width: 960px;
         margin: 0 auto;
       }
-    body {
+    @font-face {
+      font-family: 'Cascadia';
+      src: url('/media/fonts/Cascadia.ttf');
+    }
+    * {
+        font-family: 'Cascadia';
+    }body {
       color: #555;
     }
     .next-md-body {
