@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://harriswilde.github.io</id>
     <title>TechZone</title>
-    <updated>2020-02-11T03:45:08.013Z</updated>
+    <updated>2020-02-11T03:51:27.602Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://harriswilde.github.io"/>
     <link rel="self" href="https://harriswilde.github.io/atom.xml"/>
@@ -1591,7 +1591,7 @@ money(50,30)
 <p>Python和大部分的语言不同，就在于它的语句块是使用<strong>缩进</strong>来控制的，而<strong>不是</strong>使用大括号。并且语句的结束<strong>没有</strong>分号，不使用转行符<code>\</code>的情况下，回车就代表语句的结束。</p>
 <p>比如下面的一个程序，我分别使用C++和Python来写。</p>
 <p>C++：</p>
-<pre><code class="language-c++">#include &lt;iostream&gt;
+<pre><code class="language-cpp">#include &lt;iostream&gt;
 using namespace std;
  
 int main (void)
