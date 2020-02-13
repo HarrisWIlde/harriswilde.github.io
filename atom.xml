@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://harriswilde.github.io</id>
     <title>TechZone</title>
-    <updated>2020-02-11T15:28:53.193Z</updated>
+    <updated>2020-02-13T04:22:44.665Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://harriswilde.github.io"/>
     <link rel="self" href="https://harriswilde.github.io/atom.xml"/>
@@ -10,6 +10,123 @@
     <logo>https://harriswilde.github.io/images/avatar.png</logo>
     <icon>https://harriswilde.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, TechZone</rights>
+    <entry>
+        <title type="html"><![CDATA[排序算法：冒泡排序及其优化]]></title>
+        <id>https://harriswilde.github.io/post/wi0begzME</id>
+        <link href="https://harriswilde.github.io/post/wi0begzME">
+        </link>
+        <updated>2020-02-13T04:21:33.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="冒泡排序">冒泡排序</h1>
+<p>冒泡排序属于几种排序算法里面的最简单的一种，不需要什么高深的思维，就可以很快理解。</p>
+<p>冒泡排序实际上就是把相邻的数相互比较，把大的放右边（或者左边，这取决于你想顺序排还是倒序排）。如果把大的放右边，那么第一轮遍历之后，就会把这组数据中最大的放到最后边。</p>
+<p>此时，最后一个已经是固定的了，依次把前面的按照这样的套路排序下去就行了。</p>
+<p>下面这个动画可能会更直观地帮助你理解：</p>
+<img src="https://s2.ax1x.com/2020/02/13/1qJg2R.gif" alt="冒泡排序" style="zoom:67%;" />
+<p>代码实现如下：</p>
+<p>C:</p>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+void sort(int arr[])
+{
+    for (int i = 0; i &lt; sizeof(arr)/sizeof(arr[0]) - 1; i++)
+    {
+        for(int j = 0; j &lt; sizeof(arr)/sizeof(arr[0]) - 1 - i; j++)
+        {
+            int temp = 0;
+            if (arr[j] &gt; arr[j + 1])
+            {
+                temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+</code></pre>
+<p>Java:</p>
+<pre><code class="language-java">public static void sort(int arr[]){
+    for( int i = 0 ; i &lt; arr.length - 1 ; i++ ){
+        for(int j = 0;j &lt; arr.length - 1 - i ; j++){
+            int temp = 0;
+            if(arr[j] &gt; arr[j + 1]){
+                temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+</code></pre>
+<p>Python:</p>
+<pre><code class="language-python">def sort(arr):
+    for i in range(len(arr)):
+        for j in range(len(arr) - i):
+            if arr[j] &gt; arr[j + 1]:
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+</code></pre>
+<p>其实通过我们上面的动图发现，当排到第4轮的时候，实际上整个列表就已经是有序的了，那么接下来的几轮，就是在浪费时间和资源。那么既然如此，有没有优化的方案呢？</p>
+<p>当然是有的。</p>
+<h1 id="冒泡排序优化版鸡尾酒排序">冒泡排序优化版：鸡尾酒排序</h1>
+<p>我们所设想的，应该是这样：</p>
+<img src="https://s2.ax1x.com/2020/02/13/1qGs1I.gif" alt="冒泡优化" style="zoom:67%;" />
+<p>这个思路也很好实现。只需要设一个变量用来做标记，当某一次遍历的时候，一个元素都没有替换，那么就可以视为已经有序，后面的遍历就全省了。</p>
+<p>代码实现如下：</p>
+<p>C:</p>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+void sort(int arr[])
+{
+    for (int i = 0; i &lt; sizeof(arr)/sizeof(arr[0]) - 1; i++)
+    {
+        int flag = 1;//设置标记，每轮循环都初始化为1
+        for(int j = 0; j &lt; sizeof(arr)/sizeof(arr[0]) - 1 - i; j++)
+        {
+            int temp = 0;
+            if (arr[j] &gt; arr[j + 1])
+            {
+                temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+                flag = 0;//当发生元素交换的时候，将其改变为0
+            }
+        }
+        if (flag)//当标记为真。即为1的时候，跳出循环
+        {
+            break;
+        }
+    }
+}
+</code></pre>
+<p>Java:</p>
+<pre><code class="language-java">public static void sort(int arr[]){
+    for( int i = 0;i &lt; arr.length - 1 ; i++ ){
+        boolean flag = true;//设置布尔变量，每轮循环初始化为真
+        for( int j = 0;j &lt; arr.length - 1 - i ; j++ ){
+            int temp = 0;
+            if(arr[j] &lt; arr[j + 1]){
+                temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+                flag = false;//有变量交换，就更改为假
+            }
+        }
+        if(flag){//若一轮循环中没有改变变量，则跳出循环
+            break;
+        }
+    }
+}
+</code></pre>
+<p>Python:</p>
+<pre><code class="language-python">def sort(arr):
+    for i in range(len(arr)):
+        flag = True
+        for j in range(len(arr) - i):
+            if arr[j] &gt; arr[j + 1]:
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+                flag = False
+        if flag:
+            break
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Python序列、列表及其方法]]></title>
         <id>https://harriswilde.github.io/post/NEar5wUsO</id>
@@ -2882,22 +2999,6 @@ SyntaxError: invalid character in identifier
 <p>这是因为你还不会和解释器进行交流，自然它就听不懂你在说什么了。</p>
 <p>不过要是不会交流，还是挺没意思的吧？</p>
 <p>如果你已经看到了这里，那么今天的基础工作应该做的差不多了，那咱们就开始吧。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Python学习开场白]]></title>
-        <id>https://harriswilde.github.io/post/PythonBeginner</id>
-        <link href="https://harriswilde.github.io/post/PythonBeginner">
-        </link>
-        <updated>2019-12-31T15:02:06.000Z</updated>
-        <content type="html"><![CDATA[<p>在2019年的最后一天，写一篇小短文来正式开启我的Python学习的版面。</p>
-<p>Python语言，用我的话来说，就是通识语言。基本上只要你会一点点英语，那么这门语言对于你来说，就毫无难度。语法几乎就是英语，你甚至不需要知道那些艰深晦涩的原理，就可以快速地达到你想达到的目的。无论你是文科还是理科，无论你是否有计算机基础，你都可以学习这门语言。我甚至有一种预感，这门语言未来将不再是程序员们的专属，可能会成为一门普适性的语言，现在已经有这种趋势了。</p>
-<p>当然，Python也有许多令人诟病的地方，比如版本更新兼容性差，性能低，函数语法太过冗杂等等。咱们就来避重就轻，感受一下这门语言的魅力。</p>
-<p>Python和大数据、人工智能、机器学习等名词连起来出现已经见怪不怪了，还是那句话，你不需要很专业，也不需要很痛苦，静下心来学习，你会发现，编程已经成为了一种享受，就像和计算机对话一样。</p>
-<p>但是，如果你是计算机类专业的学生，或者打算从事这方面的工作，就千万别局限于Python，也别听那些什么机构吹的东西，Python虽然简单，但是用Python来解决的问题往往不简单，过硬的实力是必不可少的。</p>
-<p>最后，祝诸君鼠年大吉，学业有成、事业攀升！</p>
-<pre><code class="language-python">print(&quot;新年快乐！&quot;)
-</code></pre>
 ]]></content>
     </entry>
 </feed>

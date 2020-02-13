@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>C语言之printf函数的用法 | TechZone</title>
+<title>排序算法：冒泡排序及其优化 | TechZone</title>
 <meta name="keywords" content="TechZone">
 <meta name="description" content="HarrisWilde祝诸君元旦快乐🎉">
 <link rel="shortcut icon" href="https://harriswilde.github.io/favicon.ico?v=1581567755355">
@@ -24,8 +24,8 @@
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
     onload="renderMathInElement(document.body);"></script>
-    <meta name="description" content="C语言之printf函数的用法" />
-    <meta name="keywords" content="Clang" />
+    <meta name="description" content="排序算法：冒泡排序及其优化" />
+    <meta name="keywords" content="算法" />
     <meta name="theme-color" content="#222222"/>
   </head>
   <body>
@@ -184,12 +184,8 @@
             <div class="toc-box right-motion">
   <div class="toc-wrapper auto-number auto" id="toc_wrapper">
     <ul class="markdownIt-TOC">
-<li><a href="#%E5%88%9D%E7%AA%A5%E9%97%A8%E5%BE%84">初窥门径</a></li>
-<li><a href="#%E6%AD%A3%E5%BC%8F%E5%BC%80%E5%A7%8B">正式开始</a>
-<ul>
-<li><a href="#%E5%8F%82%E6%95%B0%E8%A7%A3%E6%9E%90">参数解析</a></li>
-</ul>
-</li>
+<li><a href="#%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F">冒泡排序</a></li>
+<li><a href="#%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%E4%BC%98%E5%8C%96%E7%89%88%E9%B8%A1%E5%B0%BE%E9%85%92%E6%8E%92%E5%BA%8F">冒泡排序优化版：鸡尾酒排序</a></li>
 </ul>
 
   </div>
@@ -440,8 +436,8 @@ window.addEventListener('load', function() {
               <div class="article-box">
     <header class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://harriswilde.github.io/post/CPrintf">
-      C语言之printf函数的用法
+    <a class="post-title-link" href="https://harriswilde.github.io/post/wi0begzME">
+      排序算法：冒泡排序及其优化
     </a>
   </h1>
   <div class="post-meta">
@@ -449,7 +445,7 @@ window.addEventListener('load', function() {
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span>发布于</span>
-      <span>2019-10-13</span>
+      <span>2020-02-13</span>
     </span>
     
       <span class="meta-item">
@@ -458,8 +454,8 @@ window.addEventListener('load', function() {
         <span class="pc-show">分类于</span>
         
           
-            <a href="https://harriswilde.github.io/tag/qrA-i8flt">
-              <span>Clang</span>
+            <a href="https://harriswilde.github.io/tag/-AyA1dZw-">
+              <span>算法</span>
             </a>
           
         
@@ -468,240 +464,126 @@ window.addEventListener('load', function() {
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>6分钟</span>
+      <span>4分钟</span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>1615<span class="pc-show">字数</span></span>
+      <span>734<span class="pc-show">字数</span></span>
     </span>
   </div>
 </header>
 </div>
               <div class="post-body next-md-body" id="post_body">
-                <p>printf，即<strong>格式化输出</strong>，是C语言中常用的输出函数。本节内容咱们就来讲讲关于这个函数的一些用法。</p>
-<p>​		我们在《<a href="https://harriswilde.github.io/post/FirstCProgram">第一个C语言程序</a>》中有粗略地提到了printf函数，小伙伴们应该也对这个函数有了一个大致的了解，大概知道了是用来<strong>输出数据</strong>用的。但是，我们既然说它是个函数，那么就应该有挺多丰富的用法等着我们来发掘。那我们就一起来看看到底有哪些方法。</p>
-<h1 id="初窥门径">初窥门径</h1>
-<p>​		我们还是从那个最简单的C语言程序开始：</p>
+                <h1 id="冒泡排序">冒泡排序</h1>
+<p>冒泡排序属于几种排序算法里面的最简单的一种，不需要什么高深的思维，就可以很快理解。</p>
+<p>冒泡排序实际上就是把相邻的数相互比较，把大的放右边（或者左边，这取决于你想顺序排还是倒序排）。如果把大的放右边，那么第一轮遍历之后，就会把这组数据中最大的放到最后边。</p>
+<p>此时，最后一个已经是固定的了，依次把前面的按照这样的套路排序下去就行了。</p>
+<p>下面这个动画可能会更直观地帮助你理解：</p>
+<img src="https://s2.ax1x.com/2020/02/13/1qJg2R.gif" alt="冒泡排序" style="zoom:67%;" />
+<p>代码实现如下：</p>
+<p>C:</p>
 <pre><code class="language-c">#include &lt;stdio.h&gt;
-int main(void)
+void sort(int arr[])
 {
-    printf(&quot;Hello, world!\n&quot;);
-    return 0;
+    for (int i = 0; i &lt; sizeof(arr)/sizeof(arr[0]) - 1; i++)
+    {
+        for(int j = 0; j &lt; sizeof(arr)/sizeof(arr[0]) - 1 - i; j++)
+        {
+            int temp = 0;
+            if (arr[j] &gt; arr[j + 1])
+            {
+                temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
 }
 </code></pre>
-<p>printf函数有个括号，那么这个函数的<strong>所有参数</strong>都是放在这个括号里面的。什么意思呢，printf这个函数就像是一个工具，这个工具有许许多多的功能。如何去设置这个工具，让它达到我们想要的效果，就只需要把我们的想法写在括号里就完事儿啦。</p>
-<p>​		但是呢，这个工具并没有搭载目前最新最火的人工智能，比如你这么写<br>
-<code>printf(让&quot;Hello, world!\n&quot;这个东西给劳资居中)</code>，这样肯定不行，因为printf看不懂呀。只有写出它看得懂的东西，它才会听话，乖乖给我们工作。你要是说些它听不懂的，那它就直接罢工不干啦，你就跟老板解释去吧！(printf：别说人话了，我听不懂)</p>
-<h1 id="正式开始">正式开始</h1>
-<p>​		既然想要函数听懂我们在说什么，就要遵循它的方式。那么我们先来了解下printf的通式：</p>
-<p><code>printf(输出框架*格式化设置,附加参数)</code></p>
-<h2 id="参数解析">参数解析</h2>
-<ul>
-<li>
-<p>输出框架</p>
-<p>​		我们上面那个<code>printf(&quot;Hello, world!\n&quot;)</code>中，就只用到了<strong>输出框架</strong>这一个参数。有的小伙伴可能会问了，我们看到的全部内容不就是引号里面的吗？咋叫框架呢？</p>
-<p>​		其实不然，我们还只用了一个参数，别急，后面大家就知道啦。</p>
-</li>
-<li>
-<p>格式化设置</p>
-<p>​		这个<strong>星号</strong>其实是没有的，这里只是告诉大家这两个参数之间是<strong>连接起来</strong>的，<strong>不</strong>需要空格。</p>
-<p>​		此处的语法通式为：<br>
-<code>%[标志] [宽度] [精度] [长度修饰符] 转换字符</code></p>
-<p>​		其中，带中括号的是<strong>可选参数</strong>，<strong>不</strong>带的是<strong>必选参数</strong>。</p>
-<ol>
-<li>
-<p>转换字符：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">字符</th>
-<th style="text-align:left">含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">c</td>
-<td style="text-align:left">char；字符</td>
-</tr>
-<tr>
-<td style="text-align:center">d</td>
-<td style="text-align:left">int；带符号的十进制整数</td>
-</tr>
-<tr>
-<td style="text-align:center">i</td>
-<td style="text-align:left">同上</td>
-</tr>
-<tr>
-<td style="text-align:center">e</td>
-<td style="text-align:left">double；以指数形式输出单、双精度浮点数</td>
-</tr>
-<tr>
-<td style="text-align:center">E</td>
-<td style="text-align:left">同上</td>
-</tr>
-<tr>
-<td style="text-align:center">f</td>
-<td style="text-align:left">double；以小数的形式输出单、双精度浮点数（指数显示小写e）</td>
-</tr>
-<tr>
-<td style="text-align:center">g</td>
-<td style="text-align:left">double；以%f或%e中较短的一种方式输出单、双精度浮点数（指数显示小写e）</td>
-</tr>
-<tr>
-<td style="text-align:center">G</td>
-<td style="text-align:left">同上，指数显示大写E</td>
-</tr>
-<tr>
-<td style="text-align:center">o</td>
-<td style="text-align:left">unsigned int；无符号八进制（无前导0）</td>
-</tr>
-<tr>
-<td style="text-align:center">s</td>
-<td style="text-align:left">char；字符串</td>
-</tr>
-<tr>
-<td style="text-align:center">u</td>
-<td style="text-align:left">int；无符号十进制</td>
-</tr>
-<tr>
-<td style="text-align:center">x</td>
-<td style="text-align:left">unsigned int；无符号十六进制（无前导0x）</td>
-</tr>
-<tr>
-<td style="text-align:center">X</td>
-<td style="text-align:left">同上（无前导0X）</td>
-</tr>
-<tr>
-<td style="text-align:center">p</td>
-<td style="text-align:left">void；指针值</td>
-</tr>
-<tr>
-<td style="text-align:center">n</td>
-<td style="text-align:left">int；用于存放已写字符的个数到变量，不用于输出</td>
-</tr>
-<tr>
-<td style="text-align:center">%</td>
-<td style="text-align:left">不进行参数转换；%本身</td>
-</tr>
-</tbody>
-</table>
-</li>
-<li>
-<p>标志：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">标志</th>
-<th style="text-align:left">含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">-</td>
-<td style="text-align:left">指定被转换的参数在其字段内左对齐（默认是右对齐）</td>
-</tr>
-<tr>
-<td style="text-align:center">+</td>
-<td style="text-align:left">给数加上正负号</td>
-</tr>
-<tr>
-<td style="text-align:center">[空格]</td>
-<td style="text-align:left">若非负数则加上空格</td>
-</tr>
-<tr>
-<td style="text-align:center">0</td>
-<td style="text-align:left">对于数值转换，当输出长度小于字段宽度时，添加前导0补充</td>
-</tr>
-<tr>
-<td style="text-align:center">#</td>
-<td style="text-align:left">指定另一种输出方式<br>1. 若转换字符为o，则第一个数为0<br>2. 若转换字符为x或X，则在输出的非零值前加0x或0X<br>3. 对于转换字符为e、E、f、g或G，则输出的数总包含一个小数点。<br>另外，对于转换字符g或G，还将尾部无意义的0保留</td>
-</tr>
-</tbody>
-</table>
-</li>
-<li>
-<p>宽度：</p>
-<p>转换后的参数输出宽度<strong>至少</strong>达到这个值，若不足则在<strong>左边或右边</strong>填补空格或者0。具体看标志的设置，<strong>若无，默认左边填充空格。</strong></p>
-</li>
-<li>
-<p>精度：</p>
-<p>这里要声明一下，只有这个参数前面是要加点号&quot;<strong>.</strong>&quot;来分隔的，</p>
-<p>对于<strong>字符串</strong>，它指定打印的字符的<strong>最大个数</strong>。</p>
-<p>对于<strong>整数</strong>，它指定打印字符的<strong>位数</strong>，必要时加0来填补。</p>
-<p>对于<strong>转换字符为e、E或f</strong>，它指定打印的<strong>小数点后</strong>的数字位数。</p>
-<p>对于<strong>转换字符为g或G</strong>，它指定打印的<strong>有效数字</strong>位数。</p>
-</li>
-<li>
-<p>长度修饰符：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">修饰符</th>
-<th style="text-align:left">含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">hh</td>
-<td style="text-align:left">按signed char或unsigned char类型输出</td>
-</tr>
-<tr>
-<td style="text-align:center">h</td>
-<td style="text-align:left">按short或unsignedshort输出</td>
-</tr>
-<tr>
-<td style="text-align:center">l</td>
-<td style="text-align:left">按long或unsigned long输出</td>
-</tr>
-<tr>
-<td style="text-align:center">ll</td>
-<td style="text-align:left">按long long或者unsigned long long输出</td>
-</tr>
-<tr>
-<td style="text-align:center">L</td>
-<td style="text-align:left">按long double类型输出</td>
-</tr>
-</tbody>
-</table>
-</li>
-</ol>
-</li>
-<li>
-<p>附加参数</p>
-<p>所谓附加参数，笔者也不做过多解释。假设我有一个变量c，在<code>int c=3</code>之后，我想要输出c的值，该怎么办呢？</p>
-<p>有的小伙伴很聪明，立马说，Harris！我知道，这样不就行了：</p>
-<pre><code class="language-c">#include &lt;stdio.h&gt;
-int main(void)
-{
-    int c=3;
-    printf(&quot;C=3\n&quot;);
-    return 0;
+<p>Java:</p>
+<pre><code class="language-java">public static void sort(int arr[]){
+    for( int i = 0 ; i &lt; arr.length - 1 ; i++ ){
+        for(int j = 0;j &lt; arr.length - 1 - i ; j++){
+            int temp = 0;
+            if(arr[j] &gt; arr[j + 1]){
+                temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
 }
 </code></pre>
-<p>是的，这样做没错。我们的确正确输出了整型变量c的值。但是，我们写程序，很多时候时为了方便<strong>不懂程序的人</strong>来使用的。我们知道c的值，那是因为我们看得懂代码。</p>
-<p>如果我要你输出刚才用户输入的值，你怎么办呢？那么这个时候，<strong>附加参数</strong>就大显神威了。</p>
+<p>Python:</p>
+<pre><code class="language-python">def sort(arr):
+    for i in range(len(arr)):
+        for j in range(len(arr) - i):
+            if arr[j] &gt; arr[j + 1]:
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+</code></pre>
+<p>其实通过我们上面的动图发现，当排到第4轮的时候，实际上整个列表就已经是有序的了，那么接下来的几轮，就是在浪费时间和资源。那么既然如此，有没有优化的方案呢？</p>
+<p>当然是有的。</p>
+<h1 id="冒泡排序优化版鸡尾酒排序">冒泡排序优化版：鸡尾酒排序</h1>
+<p>我们所设想的，应该是这样：</p>
+<img src="https://s2.ax1x.com/2020/02/13/1qGs1I.gif" alt="冒泡优化" style="zoom:67%;" />
+<p>这个思路也很好实现。只需要设一个变量用来做标记，当某一次遍历的时候，一个元素都没有替换，那么就可以视为已经有序，后面的遍历就全省了。</p>
+<p>代码实现如下：</p>
+<p>C:</p>
 <pre><code class="language-c">#include &lt;stdio.h&gt;
-int main(void)
+void sort(int arr[])
 {
-    int c=3;//这里假定用户已经输入了值
-    printf(&quot;C的值为%d&quot;,c);
-    return 0;
+    for (int i = 0; i &lt; sizeof(arr)/sizeof(arr[0]) - 1; i++)
+    {
+        int flag = 1;//设置标记，每轮循环都初始化为1
+        for(int j = 0; j &lt; sizeof(arr)/sizeof(arr[0]) - 1 - i; j++)
+        {
+            int temp = 0;
+            if (arr[j] &gt; arr[j + 1])
+            {
+                temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+                flag = 0;//当发生元素交换的时候，将其改变为0
+            }
+        }
+        if (flag)//当标记为真。即为1的时候，跳出循环
+        {
+            break;
+        }
+    }
 }
 </code></pre>
-<p>看到了吧。这里就把<strong>动态的变量c</strong>嵌入到语句里面输出了。</p>
-<p>看到这里我相信小伙伴们应该也明白了为啥我之前说引号里面的是<strong>框架</strong>了。这就是所谓的<strong>格式化输出</strong>，是不是有点只可意会不可言传的感觉呢？</p>
-<p>今天的内容基本就到这里结束啦。不过Harris在这里给大家留个悬念，大家可以自己回去自己的编译器上实验一下，看看能不能理解输出的结果？具体原理以后会讲，所以不理解没关系，学好上面的内容就很棒啦！</p>
-<pre><code class="language-c">#include &lt;stdio.h&gt;
-int main(void)
-{
-    char C = 'c';
-    printf(&quot;%c=%d&quot;,C,C);
-    return 0;
+<p>Java:</p>
+<pre><code class="language-java">public static void sort(int arr[]){
+    for( int i = 0;i &lt; arr.length - 1 ; i++ ){
+        boolean flag = true;//设置布尔变量，每轮循环初始化为真
+        for( int j = 0;j &lt; arr.length - 1 - i ; j++ ){
+            int temp = 0;
+            if(arr[j] &lt; arr[j + 1]){
+                temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+                flag = false;//有变量交换，就更改为假
+            }
+        }
+        if(flag){//若一轮循环中没有改变变量，则跳出循环
+            break;
+        }
+    }
 }
 </code></pre>
-</li>
-</ul>
+<p>Python:</p>
+<pre><code class="language-python">def sort(arr):
+    for i in range(len(arr)):
+        flag = True
+        for j in range(len(arr) - i):
+            if arr[j] &gt; arr[j + 1]:
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+                flag = False
+        if flag:
+            break
+</code></pre>
 
               </div>
               <div class="post-footer">
@@ -712,7 +594,7 @@ int main(void)
     </li>
     <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://harriswilde.github.io/post/CPrintf" title="C语言之printf函数的用法">C语言之printf函数的用法</a>
+      <a href="https://harriswilde.github.io/post/wi0begzME" title="排序算法：冒泡排序及其优化">排序算法：冒泡排序及其优化</a>
     </li>
     <li class="post-copyright-license">
       <strong>版权声明： </strong>
@@ -721,21 +603,17 @@ int main(void)
   </ul>
   <div class="tags">
     
-      <a href="https://harriswilde.github.io/tag/qrA-i8flt"># Clang</a>
+      <a href="https://harriswilde.github.io/tag/-AyA1dZw-"># 算法</a>
     
   </div>
   <div class="nav">
     <div class="nav-prev">
       
-        <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="进制转换以及原、反、补码" href="https://harriswilde.github.io/post/CodeTrans">进制转换以及原、反、补码</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="进制转换以及原、反、补码" href="https://harriswilde.github.io/post/CodeTrans">上一篇</a>
-      
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="C语言的一些基本知识" href="https://harriswilde.github.io/post/CPreStudy">C语言的一些基本知识</a>
-        <a class="nav-mobile-next" title="C语言的一些基本知识" href="https://harriswilde.github.io/post/CPreStudy">下一篇</a>
+        <a class="nav-pc-next" title="Python序列、列表及其方法" href="https://harriswilde.github.io/post/NEar5wUsO">Python序列、列表及其方法</a>
+        <a class="nav-mobile-next" title="Python序列、列表及其方法" href="https://harriswilde.github.io/post/NEar5wUsO">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>
