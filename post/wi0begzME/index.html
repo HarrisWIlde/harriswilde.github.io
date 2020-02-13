@@ -6,7 +6,7 @@
 <title>排序算法：冒泡排序及其优化 | TechZone</title>
 <meta name="keywords" content="TechZone">
 <meta name="description" content="HarrisWilde祝诸君元旦快乐🎉">
-<link rel="shortcut icon" href="https://harriswilde.github.io/favicon.ico?v=1581577711439">
+<link rel="shortcut icon" href="https://harriswilde.github.io/favicon.ico?v=1581578392964">
 <link rel="stylesheet" href="https://harriswilde.github.io/styles/main.css">
 
 <link rel="stylesheet" href="/media/css/pisces.css">
@@ -469,7 +469,7 @@ window.addEventListener('load', function() {
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>801<span class="pc-show">字数</span></span>
+      <span>807<span class="pc-show">字数</span></span>
     </span>
   </div>
 </header>
@@ -522,7 +522,7 @@ void sort(int arr[])
             if arr[j] &gt; arr[j + 1]:
                 arr[j], arr[j + 1] = arr[j + 1], arr[j]
 </code></pre>
-<p>我们看到双层循环，就不难推出这个算法的时间复杂度为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>O</mi><mrow><mo>(</mo><msup><mi>n</mi><mn>2</mn></msup><mo>)</mo></mrow></msub></mrow><annotation encoding="application/x-tex">O_{(n^2)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.03853em;vertical-align:-0.3551999999999999em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.34480000000000005em;"><span style="top:-2.5198em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7463142857142857em;"><span style="top:-2.786em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3551999999999999em;"><span></span></span></span></span></span></span></span></span></span>。</p>
+<p>我们看到双层循环，就不难推出这个算法的时间复杂度为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>O</mi><mrow><mo>(</mo><msup><mi>n</mi><mn>2</mn></msup><mo>)</mo></mrow></msub></mrow><annotation encoding="application/x-tex">O_{(n^2)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.03853em;vertical-align:-0.3551999999999999em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.34480000000000005em;"><span style="top:-2.5198em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7463142857142857em;"><span style="top:-2.786em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3551999999999999em;"><span></span></span></span></span></span></span></span></span></span>，且为稳定排序。</p>
 <p>其实通过我们上面的动图发现，当排到第4轮的时候，实际上整个列表就已经是有序的了，那么接下来的几轮，就是在浪费时间和资源。那么既然如此，有没有优化的方案呢？</p>
 <p>当然是有的。</p>
 <h1 id="冒泡排序优化版鸡尾酒排序">冒泡排序优化版：鸡尾酒排序</h1>
