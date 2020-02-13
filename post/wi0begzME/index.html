@@ -6,7 +6,7 @@
 <title>排序算法：冒泡排序及其优化 | TechZone</title>
 <meta name="keywords" content="TechZone">
 <meta name="description" content="HarrisWilde祝诸君元旦快乐🎉">
-<link rel="shortcut icon" href="https://harriswilde.github.io/favicon.ico?v=1581567755355">
+<link rel="shortcut icon" href="https://harriswilde.github.io/favicon.ico?v=1581567975346">
 <link rel="stylesheet" href="https://harriswilde.github.io/styles/main.css">
 
 <link rel="stylesheet" href="/media/css/pisces.css">
@@ -469,7 +469,7 @@ window.addEventListener('load', function() {
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>734<span class="pc-show">字数</span></span>
+      <span>770<span class="pc-show">字数</span></span>
     </span>
   </div>
 </header>
@@ -576,12 +576,12 @@ void sort(int arr[])
 <p>Python:</p>
 <pre><code class="language-python">def sort(arr):
     for i in range(len(arr)):
-        flag = True
+        flag = True #此处设置标记
         for j in range(len(arr) - i):
             if arr[j] &gt; arr[j + 1]:
                 arr[j], arr[j + 1] = arr[j + 1], arr[j]
-                flag = False
-        if flag:
+                flag = False #若有元素被交换，则更改标记
+        if flag: #若一轮中没有任何变量被交换，则跳出循环
             break
 </code></pre>
 
