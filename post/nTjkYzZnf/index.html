@@ -6,7 +6,7 @@
 <title>排序算法：插入排序和希尔排序 | TechZone</title>
 <meta name="keywords" content="TechZone">
 <meta name="description" content="HarrisWilde祝诸君元旦快乐🎉">
-<link rel="shortcut icon" href="https://harriswilde.github.io/favicon.ico?v=1581670748000">
+<link rel="shortcut icon" href="https://harriswilde.github.io/favicon.ico?v=1581678216565">
 <link rel="stylesheet" href="https://harriswilde.github.io/styles/main.css">
 
 <link rel="stylesheet" href="/media/css/pisces.css">
@@ -537,7 +537,7 @@ def sort(arr):
 <p>但是在数据分布比较散的情况下，有时候还是需要移动很多位。那么这种情况下，人们就开始着手改进插入排序，其中希尔改进的插入排序最为出名，也就是<strong>希尔排序</strong>。</p>
 <h1 id="希尔排序">希尔排序</h1>
 <p>希尔排序改进了插入排序的缺点，可以实现元素的跳跃移动。</p>
-<figure data-type="image" tabindex="2"><img src="https://s2.ax1x.com/2020/02/14/1Xt1zQ.gif" alt="希尔排序" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://s2.ax1x.com/2020/02/14/1jcQdU.gif" alt="希尔排序" loading="lazy"></figure>
 <p>希尔排序又叫做<strong>缩小增量排序</strong>，图中的<strong>Gap</strong>就是增量的意思。所谓增量，可以理解为一个跨度。插入排序中广为诟病的依次移动，当加上了跨度之后就可以实现跳跃移动。而每一轮排完之后跨度都会减小，直到跨度为1，就完成了排序。实际上，跨度为1的时候就是普通的插入排序。只不过经过了前面的洗礼之后，数据已经基本变得有序了，最后一轮的插入只是很简单地完善一下而已。</p>
 <p>代码实现如下：</p>
 <pre><code class="language-c">void shellSort( long int array[], int length)
