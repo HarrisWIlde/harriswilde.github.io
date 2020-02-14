@@ -308,7 +308,7 @@ function newFunction() {
                         i.pop()();
                 }, o.src = "https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js", e.appendChild(o);
             }
-            Prism.plugins.toolbar.registerButton("copy-to-clipboard", function(e) { var t = document.createElement("button"); return t.textContent = "复制代码", r ? o() : i.push(o), t; function o() { var o = new r(t, { text: function() { return e.code; } }); o.on("success", function() { t.textContent = "已复制", n(); }), o.on("error", function() { t.textContent = "Press Ctrl+C to copy", n(); }); } function n() { setTimeout(function() { t.textContent = "Copy"; }, 5e3); } });
+            Prism.plugins.toolbar.registerButton("copy-to-clipboard", function(e) { var t = document.createElement("button"); return t.textContent = "复制代码", r ? o() : i.push(o), t; function o() { var o = new r(t, { text: function() { return e.code; } }); o.on("success", function() { t.textContent = "已复制", n(); }), o.on("error", function() { t.textContent = "按下组合键Ctrl+C来复制", n(); }); } function n() { setTimeout(function() { t.textContent = "复制"; }, 5e3); } });
         }
         else
             console.warn("Copy to Clipboard plugin loaded before Toolbar plugin.");
