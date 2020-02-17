@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8"/>
+      <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>Python学习开场白 | TechZone</title>
+<title>TechZone</title>
 <meta name="keywords" content="TechZone">
 <meta name="description" content="HarrisWilde祝诸君元旦快乐🎉">
 <link rel="shortcut icon" href="https://harriswilde.github.io/favicon.ico?v=1581940560817">
@@ -24,9 +24,7 @@
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
     onload="renderMathInElement(document.body);"></script>
-    <meta name="description" content="Python学习开场白" />
-    <meta name="keywords" content="Python" />
-    <meta name="theme-color" content="#222222"/>
+      <meta name="theme-color" content="#222222"/>
   </head>
   <body>
     <div class="head-top-line"></div>
@@ -124,16 +122,10 @@
     </div>
     <div class="main-continer">
       
-      <div class="section-layout pisces ">
+      <div class="section-layout  pisces">
         <div class="section-layout-wrapper">
-          
-
-<div class="sidebar">
-    <div class="sidebar-box box-shadow-wrapper bg-color right-motion" id="sidebar">
-      
-      <div class="sidebar-body pisces" id="sidebar_body">
-        
-          
+          <div class="sidebar">
+    
 <div class="sidebar-wrapper box-shadow-wrapper bg-color">
   <div class="sidebar-item">
     <img class="site-author-image right-motion" src="https://harriswilde.github.io/images/avatar.png"/>
@@ -175,179 +167,286 @@
 
 
 </div>
-        
-      </div>
-    </div>
 </div>
-<script>
-  const SIDEBAR_TITLE_ACTIVE = 'sidebar-title-active';
-  const SIDEBAR_BODY_ACTIVE = 'sidebar-body-active';
-  const SLIDE_UP_IN = 'slide-up-in';
-
-  let sidebar = document.querySelector('#sidebar'),
-  tocSideBar = document.querySelector('#tocSideBar'),
-  metaSideBar = document.querySelector('#metaSideBar'),
-  postToc = document.querySelector('#post_toc'),
-  postSiteMeta = document.querySelector('#post_side_meta'),
-  sidebarTitle = document.querySelector('.sidebar-title'),
-  sidebarBody = document.querySelector('#sidebar_body');
-
-  tocSideBar && tocSideBar.addEventListener('click', (e) => {
-    toggleSidebar(e);
-  });
-
-  metaSideBar && metaSideBar.addEventListener('click', (e) => {
-    toggleSidebar(e);
-  });
-
-  function toggleSidebar(e) {
-    let currentTitle = document.querySelector("."+SIDEBAR_TITLE_ACTIVE);
-    if (currentTitle == e.srcElement) {
-      return ;
-    }
-    let current, showElement, hideElement;
-    if (e.srcElement == metaSideBar) {
-      showElement = postSiteMeta;
-      hideElement = postToc;
-    } else if (e.srcElement == tocSideBar){
-      showElement = postToc;
-      hideElement = postSiteMeta;
-    }
-    currentTitle.classList.remove(SIDEBAR_TITLE_ACTIVE);
-    e.srcElement.classList.add(SIDEBAR_TITLE_ACTIVE);
-
-    window.Velocity(hideElement, 'stop');
-    window.Velocity(hideElement, 'transition.slideUpOut', {
-      display: 'none',
-      duration: 200,
-      complete: function () {
-        window.Velocity(showElement, 'transition.slideDownIn', {
-          duration: 200
-        });
-      }
-    })
-    hideElement.classList.remove(SIDEBAR_BODY_ACTIVE);
-    showElement.classList.add(SIDEBAR_BODY_ACTIVE);
-  }
-
-  postToc.addEventListener('transitionend', function() {
-    this.classList.remove(SLIDE_UP_IN);
-  });
-
-
-  if (sidebarBody.classList.contains('pisces') || sidebarBody.classList.contains('gemini')) {
-    let hasFix = false;
-    let scrollEl = document.querySelector('.main-continer');
-    let limitTop = document.querySelector('#nav_ul').children.length * 42 + 162;
-    window.addEventListener('scroll', function(e) {
-    if (document.scrollingElement.scrollTop >= limitTop) {
-      if (!hasFix) {
-        sidebar.classList.add('sidebar-fixed');
-        hasFix = true;
-      }
-    } else {
-      if (hasFix) {
-        sidebar.classList.remove('sidebar-fixed');
-        hasFix = false;
-      }
-    }
-  });
-  }
-  
-</script>
-          <div class="section-box box-shadow-wrapper">
-            <div class="section bg-color post post-page">
-              <div class="article-box">
-    <header class="post-header">
-  <h1 class="post-title">
-    <a class="post-title-link" href="https://harriswilde.github.io/post/PythonBeginner/">
-      Python学习开场白
-    </a>
-  </h1>
-  <div class="post-meta">
-    
-    <span class="meta-item pc-show">
-      <i class="fa fa-calendar-o"></i>
-      <span>发布于</span>
-      <span>2019-12-31</span>
-    </span>
-    
-      <span class="meta-item">
-        <span class="post-meta-divider pc-show">|</span>
-        <i class="fa fa-folder-o"></i>
-        <span class="pc-show">分类于</span>
+            <div class="section-box tag-line">
+              <div class="box-shadow-wrapper">
+                <div class="bg-color">
+                  <section class="section posts-expand">
+                    <div class="padding-wrapper">
+  <div class="tag-timeline-box">
+    <div class="tag-timeline-wrapper">
+      <div class="tag-timeline-title">
+        <h2>
+          C
+          <small>标签</small>
+        </h2>
+      </div>
+      
         
           
-            <a href="https://harriswilde.github.io/tag/XDlggbnix/">
-              <span>Python</span>
+            <a href="https://harriswilde.github.io/post/qb0i5L7tn/">
+              <div class="motion-warpper">
+                <div class="tag-post-node">
+                  <h1>
+                    02-17
+                    <small>失传的结构体打包艺术</small>
+                  </h1>
+                </div>  
+              </div>
             </a>
           
         
-      </span>
-      <span class="post-meta-divider">|</span>
-    
-    <span class="meta-item">
-      <i class="fa fa-clock-o"></i>
-      <span>2分钟</span>
-    </span>
-    <span class="meta-item">
-      <span class="post-meta-divider">|</span>
-      <i class="fa fa-file-word-o"></i>
-      <span>426<span class="pc-show">字数</span></span>
-    </span>
-  </div>
-</header>
-</div>
-              <div class="post-body next-md-body" id="post_body">
-                <p>在2019年的最后一天，写一篇小短文来正式开启我的Python学习的版面。</p>
-<p>Python语言，用我的话来说，就是通识语言。基本上只要你会一点点英语，那么这门语言对于你来说，就毫无难度。语法几乎就是英语，你甚至不需要知道那些艰深晦涩的原理，就可以快速地达到你想达到的目的。无论你是文科还是理科，无论你是否有计算机基础，你都可以学习这门语言。我甚至有一种预感，这门语言未来将不再是程序员们的专属，可能会成为一门普适性的语言，现在已经有这种趋势了。</p>
-<p>当然，Python也有许多令人诟病的地方，比如版本更新兼容性差，性能低，函数语法太过冗杂等等。咱们就来避重就轻，感受一下这门语言的魅力。</p>
-<p>Python和大数据、人工智能、机器学习等名词连起来出现已经见怪不怪了，还是那句话，你不需要很专业，也不需要很痛苦，静下心来学习，你会发现，编程已经成为了一种享受，就像和计算机对话一样。</p>
-<p>但是，如果你是计算机类专业的学生，或者打算从事这方面的工作，就千万别局限于Python，也别听那些什么机构吹的东西，Python虽然简单，但是用Python来解决的问题往往不简单，过硬的实力是必不可少的。</p>
-<p>最后，祝诸君鼠年大吉，学业有成、事业攀升！</p>
-<pre><code class="language-python">print(&quot;新年快乐！&quot;)
-</code></pre>
-
+          
+        
+          
+        
+      
+        
+          
+            <a href="https://harriswilde.github.io/post/LUjp1bkYi/">
+              <div class="motion-warpper">
+                <div class="tag-post-node">
+                  <h1>
+                    02-17
+                    <small>The Lost Art of Structure Packing</small>
+                  </h1>
+                </div>  
               </div>
-              <div class="post-footer">
-  <ul class="post-copyright">
-    <li class="post-copyright-author">
-      <strong>本文作者：</strong>
-      TechZone
-    </li>
-    <li class="post-copyright-link">
-      <strong>本文链接：</strong>
-      <a href="https://harriswilde.github.io/post/PythonBeginner/" title="Python学习开场白">Python学习开场白</a>
-    </li>
-    <li class="post-copyright-license">
-      <strong>版权声明： </strong>
-      本博客所有文章除特别声明外，转载请注明出处！
-    </li>
-  </ul>
-  <div class="tags">
-    
-      <a href="https://harriswilde.github.io/tag/XDlggbnix/"># Python</a>
-    
-  </div>
-  <div class="nav">
-    <div class="nav-prev">
+            </a>
+          
+        
+          
+        
+          
+        
       
-        <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="Python的安装以及环境配置" href="https://harriswilde.github.io/post/PythonInstall/">Python的安装以及环境配置</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="Python的安装以及环境配置" href="https://harriswilde.github.io/post/PythonInstall/">上一篇</a>
+        
+          
+        
       
-    </div>
-    <div class="nav-next">
+        
+          
+        
       
-        <a class="nav-pc-next" title="C语言之数组" href="https://harriswilde.github.io/post/CArray/">C语言之数组</a>
-        <a class="nav-mobile-next" title="C语言之数组" href="https://harriswilde.github.io/post/CArray/">下一篇</a>
-        <i class="fa fa-chevron-right"></i>
+        
+          
+        
+      
+        
+          
+        
+          
+        
+      
+        
+          
+            <a href="https://harriswilde.github.io/post/PS9G6tbW5/">
+              <div class="motion-warpper">
+                <div class="tag-post-node">
+                  <h1>
+                    02-09
+                    <small>C语言之函数（下）</small>
+                  </h1>
+                </div>  
+              </div>
+            </a>
+          
+        
+      
+        
+          
+            <a href="https://harriswilde.github.io/post/IKKYqSXMf/">
+              <div class="motion-warpper">
+                <div class="tag-post-node">
+                  <h1>
+                    02-06
+                    <small>C语言之函数（中）</small>
+                  </h1>
+                </div>  
+              </div>
+            </a>
+          
+        
+      
+        
+          
+            <a href="https://harriswilde.github.io/post/cYwGcFKPK/">
+              <div class="motion-warpper">
+                <div class="tag-post-node">
+                  <h1>
+                    02-03
+                    <small>C语言之函数（上）</small>
+                  </h1>
+                </div>  
+              </div>
+            </a>
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <a href="https://harriswilde.github.io/post/CPointer/">
+              <div class="motion-warpper">
+                <div class="tag-post-node">
+                  <h1>
+                    01-12
+                    <small>C语言之指针</small>
+                  </h1>
+                </div>  
+              </div>
+            </a>
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <a href="https://harriswilde.github.io/post/CArray/">
+              <div class="motion-warpper">
+                <div class="tag-post-node">
+                  <h1>
+                    12-07
+                    <small>C语言之数组</small>
+                  </h1>
+                </div>  
+              </div>
+            </a>
+          
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <a href="https://harriswilde.github.io/post/CBranchCycle/">
+              <div class="motion-warpper">
+                <div class="tag-post-node">
+                  <h1>
+                    11-07
+                    <small>C语言的分支与循环</small>
+                  </h1>
+                </div>  
+              </div>
+            </a>
+          
+        
+      
+        
+          
+            <a href="https://harriswilde.github.io/post/COperatorASCII/">
+              <div class="motion-warpper">
+                <div class="tag-post-node">
+                  <h1>
+                    11-04
+                    <small>C语言运算符优先级及ASCII对照表</small>
+                  </h1>
+                </div>  
+              </div>
+            </a>
+          
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <a href="https://harriswilde.github.io/post/CPrintf/">
+              <div class="motion-warpper">
+                <div class="tag-post-node">
+                  <h1>
+                    10-13
+                    <small>C语言之printf函数的用法</small>
+                  </h1>
+                </div>  
+              </div>
+            </a>
+          
+        
+      
+        
+          
+            <a href="https://harriswilde.github.io/post/CPreStudy/">
+              <div class="motion-warpper">
+                <div class="tag-post-node">
+                  <h1>
+                    10-13
+                    <small>C语言的一些基本知识</small>
+                  </h1>
+                </div>  
+              </div>
+            </a>
+          
+        
+      
+        
+          
+            <a href="https://harriswilde.github.io/post/FirstCProgram/">
+              <div class="motion-warpper">
+                <div class="tag-post-node">
+                  <h1>
+                    10-11
+                    <small>第一个C语言程序</small>
+                  </h1>
+                </div>  
+              </div>
+            </a>
+          
+        
+      
+        
+          
+            <a href="https://harriswilde.github.io/post/CBeginner/">
+              <div class="motion-warpper">
+                <div class="tag-post-node">
+                  <h1>
+                    10-10
+                    <small>C语言学习开场白</small>
+                  </h1>
+                </div>  
+              </div>
+            </a>
+          
+        
+      
+        
       
     </div>
   </div>
 </div>
-              
-            </div>
+                  </section>
+                </div>
+              </div>
           </div>
         </div>
       </div>
