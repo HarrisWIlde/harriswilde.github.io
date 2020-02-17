@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://harriswilde.github.io</id>
     <title>TechZone</title>
-    <updated>2020-02-17T11:56:05.519Z</updated>
+    <updated>2020-02-17T13:30:08.178Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://harriswilde.github.io"/>
     <link rel="self" href="https://harriswilde.github.io/atom.xml"/>
@@ -10,6 +10,539 @@
     <logo>https://harriswilde.github.io/images/avatar.png</logo>
     <icon>https://harriswilde.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, TechZone</rights>
+    <entry>
+        <title type="html"><![CDATA[C语言之结构体（上）]]></title>
+        <id>https://harriswilde.github.io/post/M4QwK7i-6/</id>
+        <link href="https://harriswilde.github.io/post/M4QwK7i-6/">
+        </link>
+        <updated>2020-02-17T13:29:26.000Z</updated>
+        <content type="html"><![CDATA[<p>有的时候，我们所遇到的数据结构，不仅仅是一群数字或者是字符串那么简单。比如我们每一个人的学籍信息，学号是一个长整数，名字却是字符；甚至有更复杂的情况，这种问题在现实生活中并不少见。我们之前学过一种叫数组的数据结构，它可以允许我们把很多同类型的数据集中在一起处理。相对于之前，这已经是一次极大的进步。但是，新的问题，往往又会出现，这个时候，我们就得上更高端的装备——结构体。</p>
+<p>相比于数组，结构体有以下的更强大的优势（加粗的是结构体特有的）：</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-7929422"><label class="task-list-item-label" for="task-item-7929422"> 批量存储数据</label></li>
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-1002432"> <strong>存储不同类型的数据</strong><label class="task-list-item-label" for="task-item-1002432"> **存储不同类型的数据**</label></li>
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-2091014"> <strong>支持嵌套</strong><label class="task-list-item-label" for="task-item-2091014"> **支持嵌套**</label></li>
+</ul>
+<h1 id="结构体的声明与定义">结构体的声明与定义</h1>
+<h2 id="声明">声明</h2>
+<p>结构体的声明使用<code>struct</code>关键字，如果我们想要把我们的学籍信息组织以下的话，可以这样表示：</p>
+<pre><code class="language-c">struct Info
+{
+    unsigned long identifier;//学号，用无符号长整数表示
+    char name[20];//名字，用字符数组表示
+    unsigned int year;//入学年份，用无符号整数表示
+    unsigned int years;//学制，用无符号整数表示
+}
+</code></pre>
+<p>这样，我们就相当于描绘好了一个框架，以后要用的话直接定义一个这种类型的变量就好了。</p>
+<h2 id="定义">定义</h2>
+<p>我们刚刚申请了一个名叫<code>Info</code>的结构体类型，那么理论上我们可以像声明其他变量的操作一样，去声明我们的结构体操作，但是C语言中规定，声明结构体变量的时候，<code>struct</code>关键字是不可少的。</p>
+<p><code>struct 结构体类型名 结构体变量名</code></p>
+<p>不过，你可以在某个函数里面定义：</p>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+
+struct Info
+{
+    unsigned long identifier;//学号，用无符号长整数表示
+    char name[20];//名字，用字符数组表示
+    unsigned int year;//入学年份，用无符号整数表示
+    unsigned int years;//学制，用无符号整数表示
+};
+
+int main(void)
+{
+    /**
+     *在main函数中声明结构体变量
+     *结构体变量名叫info
+     *struct关键字不能丢
+     */
+    struct Info info;
+    ...
+}
+</code></pre>
+<p>也可以在声明的时候就把变量名定义下来（此时这个变量是全局变量）：</p>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+
+struct Info
+{
+    unsigned long identifier;//学号，用无符号长整数表示
+    char name[20];//名字，用字符数组表示
+    unsigned int year;//入学年份，用无符号整数表示
+    unsigned int years;//学制，用无符号整数表示
+} info;
+/**
+ *此时直接定义了变量
+ *该变量是全局变量
+ *变量名叫info
+ */
+
+int main(void)
+{
+    ...
+}
+</code></pre>
+<h2 id="访问结构体成员">访问结构体成员</h2>
+<p>结构体成员的访问有点不同于以往的任何变量，它是采用点号运算符<code>.</code>来访问成员的。比如，<code>info.name</code>就是引用<code>info</code>结构体的<code>name</code>成员，是一个字符数组，而<code>info.year</code>则可以查到入学年份，是个无符号整型。</p>
+<p>比如，下面开始录入学生的信息：</p>
+<pre><code class="language-c">//Example 01
+#include &lt;stdio.h&gt;
+
+struct Info
+{
+    unsigned long identifier;//学号，用无符号长整数表示
+    char name[20];//名字，用字符数组表示
+    unsigned int year;//入学年份，用无符号整数表示
+    unsigned int years;//学制，用无符号整数表示
+};
+
+int main(void)
+{
+    struct Info info;
+
+    printf(&quot;请输入学生的学号：&quot;);
+    scanf(&quot;%d&quot;, &amp;info.identifier);
+    printf(&quot;请输入学生的姓名：&quot;);
+    scanf(&quot;%s&quot;, info.name);
+    printf(&quot;请输入学生的入学年份：&quot;);
+    scanf(&quot;%d&quot;, &amp;info.year);
+    printf(&quot;请输入学生的学制：&quot;);
+    scanf(&quot;%d&quot;, &amp;info.years);
+
+    printf(&quot;\n数据录入完毕\n\n&quot;);
+
+    printf(&quot;学号：%d\n姓名：%s\n入学年份：%d\n学制：%d\n毕业时间：%d\n&quot;, \
+        info.identifier, info.name, info.year, info.years, info.year + info.years);
+    return 0;
+}
+</code></pre>
+<p>运行结果如下：</p>
+<pre><code>//Consequence 01
+请输入学生的学号：20191101
+请输入学生的姓名：Harris
+请输入学生的入学年份：2019
+请输入学生的学制：4
+
+数据录入完毕
+
+学号：20191101
+姓名：Harris
+入学年份：2019
+学制：4
+毕业时间：2023
+</code></pre>
+<h2 id="初始化结构体">初始化结构体</h2>
+<p>像数组一样，结构体也可以在定义的时候初始化，方法也几乎一样：</p>
+<pre><code class="language-c">struct Info info = {
+    20191101,
+    &quot;Harris&quot;,
+    2019,
+    4
+};
+</code></pre>
+<p>在C99标准中，还支持给指定元素赋值（就像数组一样）：</p>
+<pre><code class="language-c">struct Info info = {
+    .name = &quot;Harris&quot;,
+    .year = 2019
+};
+</code></pre>
+<p>对于没有被初始化的成员，则<strong>数值型</strong>成员初始化为0，<strong>字符型</strong>成员初始化为‘\0’。</p>
+<h2 id="对齐">对齐</h2>
+<p>下面这个代码，大家来看看会发生什么：</p>
+<pre><code class="language-c">//EXample 02 V1
+#include &lt;stdio.h&gt;
+
+int main(void)
+{
+    struct A
+    {
+        char a;
+        int b;
+        char c;
+    } a = {'a', 10, 'o'};
+    
+    printf(&quot;size of a = %d\n&quot;, sizeof(a));
+    
+    return 0;
+}
+</code></pre>
+<p>我们之前学过，<code>char</code>类型的变量占1字节，<code>int</code>类型的变量占4字节，那么这么一算，一个结构体A型的变量应该就是6字节了。别急，我们看运行结果：</p>
+<pre><code>//COnsequence 02 V1
+size of a = 12
+</code></pre>
+<p>怎么变成12了呢？标准更新了？老师教错了？都不是。我们把代码改一下：</p>
+<pre><code class="language-c">//EXample 02 V2
+#include &lt;stdio.h&gt;
+
+int main(void)
+{
+    struct A
+    {
+        char a;
+        char c;
+        int b;
+    } a = {'a', 'o', 10};
+    
+    printf(&quot;size of a = %d\n&quot;, sizeof(a));
+    
+    return 0;
+}
+</code></pre>
+<p>结果：</p>
+<pre><code>//Consequence 02 V2
+size of a = 8
+</code></pre>
+<p>实际上，这是编译器对我们程序的一种优化——内存对齐。在第一个例子中，第一个和第三个成员是<code>char</code>类型是1个字节，而中间的<code>int</code>却有4个字节，为了对齐，两个<code>char</code>也占用了4个字节，于是就是12个字节。</p>
+<p>而在第二个例子里面，前两个都是<code>char</code>，最后一个是<code>int</code>，那么前两个可以一起占用4个字节（实际只用2个，第一个例子也同理，只是为了访问速度更快，而不是为了扩展），最后的<code>int</code>占用4字节，合起来就是8个字节。</p>
+<p>关于如何声明结构体来节省内存容量，可以阅读下面的这篇文章，作者是艾瑞克·雷蒙，时尚最具争议性的黑客之一，被公认为开源运动的主要领导者之一：</p>
+<p><a href="https://harriswilde.github.io/post/LUjp1bkYi/">英文原版</a>，<a href="https://harriswilde.github.io/post/LUjp1bkYi/">中文版</a></p>
+<h1 id="结构体嵌套">结构体嵌套</h1>
+<p>在学籍里面，如果我们的日期想要更加详细一些，精确到day，这时候就可以使用结构体嵌套来完成：</p>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+
+struct Date
+{
+    unsigned int year;
+    unsigned int month;
+    unsigned int day;
+};
+
+struct Info
+{
+    unsigned long identifier;//学号，用无符号长整数表示
+    char name[20];//名字，用字符数组表示
+    struct Date date;/*---入学日期，用结构体Date表示---*/
+    unsigned int years;//学制，用无符号整数表示
+};
+
+int main(void)
+{
+    ...
+}
+</code></pre>
+<p>如此一来，比我们单独声明普通变量快多了。</p>
+<p>不过，这样访问变量，就必须用点号一层层往下访问。比如要访问<code>day</code>这个成员，那就只能<code>info.date.day</code>而不能直接<code>info.date</code>或者<code>info,day</code>。</p>
+<pre><code class="language-c">//Example 03
+#include &lt;stdio.h&gt;
+
+struct Date
+{
+    unsigned int year;
+    unsigned int month;
+    unsigned int day;
+};
+
+struct Info
+{
+    unsigned long identifier;//学号，用无符号长整数表示
+    char name[20];//名字，用字符数组表示
+    struct Date date;/*---入学日期，用结构体Date表示---*/
+    unsigned int years;//学制，用无符号整数表示
+};
+
+int main(void)
+{
+    struct Info info;
+    printf(&quot;请输入学生的学号：&quot;);
+    scanf(&quot;%d&quot;, &amp;info.identifier);
+    printf(&quot;请输入学生的姓名：&quot;);
+    scanf(&quot;%s&quot;, info.name);
+    printf(&quot;请输入学生的入学年份：&quot;);
+    scanf(&quot;%d&quot;, &amp;info.date.year);
+    printf(&quot;请输入学生的入学月份：&quot;);
+    scanf(&quot;%d&quot;, &amp;info.date.month);
+    printf(&quot;请输入学生的入学日期：&quot;);
+    scanf(&quot;%d&quot;, &amp;info.date.day);
+    printf(&quot;请输入学生的学制：&quot;);
+    scanf(&quot;%d&quot;, &amp;info.years);
+
+    printf(&quot;\n数据录入完毕\n\n&quot;);
+
+    printf(&quot;学号：%d\n姓名：%s\n入学时间：%d/%d/%d\n学制：%d\n毕业时间：%d\n&quot;,\
+           info.identifier, info.name,\
+           info.date.year, info.date.month, info.date.day,\
+           info.years, info.date.year + info.years);
+    return 0;
+}
+</code></pre>
+<p>运行结果如下：</p>
+<pre><code>//Consequence 03
+请输入学生的学号：20191101
+请输入学生的姓名：Harris
+请输入学生的入学年份：2019
+请输入学生的入学月份：9
+请输入学生的入学日期：7
+请输入学生的学制：4
+
+数据录入完毕
+
+学号：20191101
+姓名：Harris
+入学时间：2019/9/7
+学制：4
+毕业时间：2023
+</code></pre>
+<h1 id="结构体数组">结构体数组</h1>
+<p>刚刚我们演示了存储一个学生的学籍信息的时候，使用结构体的例子。那么，如果要录入一批学生，这时候我们就可以沿用之前的思路，使用结构体数组。</p>
+<p>我们知道，数组的定义，就是存放一堆相同类型的数据的容器。而结构体一旦被我们声明，那么你就可以把它看作一个类型，只不过是你自己定义的罢了。</p>
+<p>定义结构体数组也很简单：</p>
+<pre><code class="language-c">struct 结构体类型
+{
+    成员;
+} 数组名[长度];
+
+/****或者这样****/
+
+struct 结构体类型
+{
+    成员;
+};
+struct 结构体类型 数组名[长度];
+</code></pre>
+<h1 id="结构体指针">结构体指针</h1>
+<p>既然我们可以把结构体看作一个类型，那么也就必然有对应的指针变量。</p>
+<pre><code class="language-c">struct Info* pinfo;
+</code></pre>
+<p>但是在指针这里，结构体和数组就不一样了。我们知道，数组名实际上就是指向这个数组第一个元素的地址，所以可以将数组名直接赋值给指针。而结构体的变量名并不是指向该结构体的地址，所以要使用取地址运算符<code>&amp;</code>才能获取地址：</p>
+<pre><code class="language-c">pinfo = &amp;info;
+</code></pre>
+<p>通过结构体指针来访问结构体有以下两种方法：</p>
+<ol>
+<li><code>(*结构体指针).成员名</code></li>
+<li><code>结构体指针-&gt;成员名</code></li>
+</ol>
+<p>第一个方法由于点号运算符比指针的取值运算符优先级更高，因此需要加一个小括号来确定优先级，让指针先解引用变成结构体变量，在使用点号的方法去访问。</p>
+<p>相比之下，第二种方法就直观许多。</p>
+<p>这两种方法在实现上是完全等价的，但是点号只能用于结构体变量，而箭头只能够用于指针。</p>
+<p>第一种方法：</p>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+...
+int main(void)
+{
+    struct Info *p;
+    p = &amp;info;
+    
+    printf(&quot;学号：\n&quot;, (*p).identifier);
+    printf(&quot;姓名：\n&quot;, (*p).name);
+    printf(&quot;入学时间：%d/%d/%d\n&quot;, (*p).date.year, (*p).date.month, (*p).date.day);
+    printf(&quot;学制：\n&quot;, (*p).years);
+    return 0;
+}
+</code></pre>
+<p>第二种方法：</p>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+...
+int main(void)
+{
+    struct Info *p;
+    p = &amp;info;
+    
+    printf(&quot;学号：\n&quot;, p -&gt; identifier);
+    printf(&quot;姓名：\n&quot;, p -&gt; name);
+    printf(&quot;入学时间：%d/%d/%d\n&quot;, p -&gt; date.year, p -&gt; date.month, p -&gt; date.day);
+    printf(&quot;学制：\n&quot;, p -&gt; years);
+    return 0;
+}
+</code></pre>
+<h1 id="传递结构体信息">传递结构体信息</h1>
+<h2 id="传递结构体变量">传递结构体变量</h2>
+<p>我们先来看看下面的代码：</p>
+<pre><code class="language-c">//Example 04
+#include &lt;stdio.h&gt;
+
+int main(void)
+{
+    struct Test
+    {
+        int x;
+        int y;
+    }t1, t2;
+
+    t1.x = 3;
+    t1.y = 4;
+    t2 = t1;
+
+    printf(&quot;t2.x = %d, t2.y = %d\n&quot;, t2.x, t2.y);
+    return 0;
+}
+</code></pre>
+<p>运行结果如下：</p>
+<pre><code>//Consequence 04
+t2.x = 3, t2.y = 4
+</code></pre>
+<p>这么看来，结构体是可以直接赋值的。那么既然这样，作为函数的参数和返回值也自然是没问题的了。</p>
+<p>先来试试作为参数:</p>
+<pre><code class="language-c">//Example 05
+#include &lt;stdio.h&gt;
+struct Date
+{
+    unsigned int year;
+    unsigned int month;
+    unsigned int day;
+};
+
+struct Info
+{
+    unsigned long identifier;
+    char name[20];
+    struct Date date;
+    unsigned int years;
+};
+
+struct Info getInput(struct Info info);
+void printInfo(struct Info info);
+
+struct Info getInput(struct Info info)
+{
+    printf(&quot;请输入学号：&quot;);
+    scanf(&quot;%d&quot;, &amp;info.identifier);
+    printf(&quot;请输入姓名：&quot;);
+    scanf(&quot;%s&quot;, info.name);
+    printf(&quot;请输入入学年份：&quot;);
+    scanf(&quot;%d&quot;, &amp;info.date.year);
+    printf(&quot;请输入月份：&quot;);
+    scanf(&quot;%d&quot;, &amp;info.date.month);
+    printf(&quot;请输入日期：&quot;);
+    scanf(&quot;%d&quot;, &amp;info.date.day);
+    printf(&quot;请输入学制：&quot;);
+    scanf(&quot;%d&quot;, &amp;info.years);
+
+    return info;
+}
+
+void printInfo(struct Info info)
+{
+    printf(&quot;学号：%d\n姓名：%s\n入学时间：%d/%d/%d\n学制：%d\n毕业时间：%d\n&quot;, \
+        info.identifier, info.name, \
+        info.date.year, info.date.month, info.date.day, \
+        info.years, info.date.year + info.years);
+}
+
+int main(void)
+{
+    struct Info i1 = {};
+    struct Info i2 = {};
+    printf(&quot;请录入第一个同学的信息...\n&quot;);
+    i1 = getInput(i1);
+    putchar('\n');
+    printf(&quot;请录入第二个学生的信息...\n&quot;);
+    i2 = getInput(i2);
+
+    printf(&quot;\n录入完毕，现在开始打印...\n\n&quot;);
+    printf(&quot;打印第一个学生的信息...\n&quot;);
+    printInfo(i1);
+    putchar('\n');
+    printf(&quot;打印第二个学生的信息...\n&quot;);
+    printInfo(i2);
+
+    return 0;
+}
+</code></pre>
+<p>运行结果如下：</p>
+<pre><code>//Consequence 05
+请录入第一个同学的信息...
+请输入学号：20191101
+请输入姓名：Harris
+请输入入学年份：2019
+请输入月份：9
+请输入日期：7
+请输入学制：4
+
+请录入第二个学生的信息...
+请输入学号：20191102
+请输入姓名：Joy
+请输入入学年份：2019
+请输入月份：9
+请输入日期：8
+请输入学制：5
+
+录入完毕，现在开始打印...
+
+打印第一个学生的信息...
+学号：20191101
+姓名：Harris
+入学时间：2019/9/7
+学制：4
+毕业时间：2023
+
+打印第二个学生的信息...
+学号：20191102
+姓名：Joy
+入学时间：2019/9/8
+学制：5
+毕业时间：2024
+</code></pre>
+<h2 id="传递指向结构体变量的指针">传递指向结构体变量的指针</h2>
+<p>早期的C语言是不允许直接将结构体作为参数直接传递进去的。主要是考虑到如果结构体的内存占用太大，那么整个程序的内存开销就会爆炸。不过现在的C语言已经放开了这方面的限制。</p>
+<p>不过，作为一名合格的开发者，我们应该要去珍惜硬件资源。那么，传递指针就是一个很好的办法。</p>
+<p>将刚才的代码修改一下：</p>
+<pre><code class="language-c">//Example 06
+//Example 05
+#include &lt;stdio.h&gt;
+struct Date
+{
+    unsigned int year;
+    unsigned int month;
+    unsigned int day;
+};
+
+struct Info
+{
+    unsigned long identifier;
+    char name[20];
+    struct Date date;
+    unsigned int years;
+};
+
+void getInput(struct Info *info);
+void printInfo(struct Info *info);
+
+void getInput(struct Info *info)
+{
+    printf(&quot;请输入学号：&quot;);
+    scanf(&quot;%d&quot;, &amp;info-&gt;identifier);
+    printf(&quot;请输入姓名：&quot;);
+    scanf(&quot;%s&quot;, info-&gt;name);
+    printf(&quot;请输入入学年份：&quot;);
+    scanf(&quot;%d&quot;, &amp;info-&gt;date.year);
+    printf(&quot;请输入月份：&quot;);
+    scanf(&quot;%d&quot;, &amp;info-&gt;date.month);
+    printf(&quot;请输入日期：&quot;);
+    scanf(&quot;%d&quot;, &amp;info-&gt;date.day);
+    printf(&quot;请输入学制：&quot;);
+    scanf(&quot;%d&quot;, &amp;info-&gt;years);
+}
+
+void printInfo(struct Info *info)
+{
+    printf(&quot;学号：%d\n姓名：%s\n入学时间：%d/%d/%d\n学制：%d\n毕业时间：%d\n&quot;, \
+        info-&gt;identifier, info-&gt;name, \
+        info-&gt;date.year, info-&gt;date.month, info-&gt;date.day, \
+        info-&gt;years, info-&gt;date.year + info-&gt;years);
+}
+
+int main(void)
+{
+    struct Info i1 = {};
+    struct Info i2 = {};
+    printf(&quot;请录入第一个同学的信息...\n&quot;);
+    getInput(&amp;i1);
+    putchar('\n');
+    printf(&quot;请录入第二个学生的信息...\n&quot;);
+    getInput(&amp;i2);
+
+    printf(&quot;\n录入完毕，现在开始打印...\n\n&quot;);
+    printf(&quot;打印第一个学生的信息...\n&quot;);
+    printInfo(&amp;i1);
+    putchar('\n');
+    printf(&quot;打印第二个学生的信息...\n&quot;);
+    printInfo(&amp;i2);
+
+    return 0;
+}
+</code></pre>
+<p>此时传递的就是一个指针，而不是一个庞大的结构体。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[失传的结构体打包艺术]]></title>
         <id>https://harriswilde.github.io/post/qb0i5L7tn/</id>
@@ -2808,112 +3341,6 @@ int main(void)
 3 + 4 = 7
 </code></pre>
 <p>函数的知识太多太繁杂，所以Harris这次采用分节式来写博客。本期的就到这里啦！如果没有理解的，好好去消化下，理解了的就等我下一篇吧！</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[浅谈拼手气红包的算法]]></title>
-        <id>https://harriswilde.github.io/post/BGqcimUfF/</id>
-        <link href="https://harriswilde.github.io/post/BGqcimUfF/">
-        </link>
-        <updated>2020-01-27T08:22:30.000Z</updated>
-        <content type="html"><![CDATA[<hr>
-<p>首先，在这里祝各位小伙伴们鼠年大吉！！</p>
-<p>今天是大年初三，Harris在这里用一个简单的话题，开启鼠年的博客之旅。</p>
-<p>大家每逢佳节，最少不了的活动，就是“抢红包”。自打微信推出了电子红包之后，中国人的节日，又多了一种庆祝方式，那就是<strong>红包雨</strong>。这种将传统活动用科技的方式封装的做法，是Harris比较赞成的。把传统溶于新时代，为我们的传统春节带来了新鲜的空气。</p>
-<p>但是，我们在群里发红包的时候，可能有的小伙伴会纳闷儿，这个所谓的随机金额，到底是怎么算的呢？它到底是不是公平的呢？</p>
-<p>有的小伙伴和我说，这还不简单么，每一个人打开红包的时候，都按照当前剩余的余额为范围，随机生成一个数字就好了。</p>
-<p>但是呢，这样的话，随着红包被打开的越来越多，金额的总数也会越来越少。那么，可以抢到的红包也就越来越小，这虽然遵循我们常规所认为的“先来后到”，但是并不公平。</p>
-<p>那么要实现绝对的公平，该怎么办呢？</p>
-<h1 id="1-随机分割">1. 随机分割</h1>
-<p>其实，这种方法很直观就能想到。我们把一个红包想象成一个香肠，假设有<code>N</code>个人来分这个香肠，那么我们只要随机切<code>N-1</code>刀，把每一块分别分给每一个人即可。</p>
-<p>红包也是一样的道理，我们可以在红包发出去的同时，就随机分配好金额。等大家来分的时候，再依次分给每一个人就好了。</p>
-<p>这种算法思路并不难，而且也能够达到我们的目的，但是由于以下的两点，导致微信没有采用这种算法：</p>
-<ol>
-<li>算法复杂度高</li>
-<li>对服务器端的要求高</li>
-</ol>
-<p>首先第一点，这个算法的复杂度，肯定是要比现行的微信随机红包算法的复杂度高很多。另外，由于在红包发出去的瞬间，服务器上就需要存储关于这个红包的分配信息，在春节这种红包高峰期的时候，势必会给服务器带来巨大的压力。在分布式系统没有普及之前，第二点都将是一个难以解决的问题。</p>
-<p>因此，微信就退而求其次，采用第二种办法。</p>
-<h1 id="2-二倍均值法">2. 二倍均值法</h1>
-<p>实际上，我们每个人抢到的红包，都是在下面这个区间里面去随机一个数值：</p>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mrow><mo fence="true">(</mo><mn>0</mn><mo separator="true">,</mo><mn>2</mn><mover accent="true"><mi>M</mi><mo stretchy="true">‾</mo></mover><mo fence="true">]</mo></mrow><mspace width="1em"/><mo separator="true">;</mo><mover accent="true"><mi>M</mi><mo stretchy="true">‾</mo></mover><mo>=</mo><mfrac><mrow><mi mathvariant="normal">剩</mi><mi mathvariant="normal">余</mi><mi mathvariant="normal">金</mi><mi mathvariant="normal">额</mi></mrow><mrow><mi mathvariant="normal">剩</mi><mi mathvariant="normal">余</mi><mi mathvariant="normal">红</mi><mi mathvariant="normal">包</mi><mi mathvariant="normal">数</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\left(0,2\overline {M}\right]\quad;\overline M=\frac{剩余金额}{剩余红包数}
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.23334em;vertical-align:-0.35001em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size1">(</span></span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">2</span><span class="mord overline"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8833300000000001em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10903em;">M</span></span></span><span style="top:-3.80333em;"><span class="pstrut" style="height:3em;"></span><span class="overline-line" style="border-bottom-width:0.04em;"></span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size1">]</span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace" style="margin-right:1em;"></span><span class="mpunct">;</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord overline"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8833300000000001em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span></span><span style="top:-3.80333em;"><span class="pstrut" style="height:3em;"></span><span class="overline-line" style="border-bottom-width:0.04em;"></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.363em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.677em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord cjk_fallback">剩</span><span class="mord cjk_fallback">余</span><span class="mord cjk_fallback">红</span><span class="mord cjk_fallback">包</span><span class="mord cjk_fallback">数</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord cjk_fallback">剩</span><span class="mord cjk_fallback">余</span><span class="mord cjk_fallback">金</span><span class="mord cjk_fallback">额</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
-<p>微信，正是采用的这种方法。</p>
-<p>那么，为什么这个是公平的呢？</p>
-<p>假设，发一个100元的红包，10份。那么第一个人的金额，就会在<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo fence="true">(</mo><mn>0</mn><mo separator="true">,</mo><mn>20</mn><mo fence="true">]</mo></mrow><annotation encoding="application/x-tex">\left(0,20\right]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">2</span><span class="mord">0</span><span class="mclose delimcenter" style="top:0em;">]</span></span></span></span></span>元里面随机。假设第一个人抢到了平均值10块钱，那么还剩90.</p>
-<p>第二个人的抢到的，应该是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mrow><mo fence="true">(</mo><mn>0</mn><mo separator="true">,</mo><mn>2</mn><mo>⋅</mo><mfrac><mn>90</mn><mn>9</mn></mfrac><mo fence="true">]</mo></mrow><mo>⇒</mo><mrow><mo fence="true">(</mo><mn>0</mn><mo separator="true">,</mo><mn>20</mn><mo fence="true">]</mo></mrow></mrow><annotation encoding="application/x-tex">\left(0,2\cdot \frac{90}{9}\right]\Rightarrow \left(0,20\right]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.20001em;vertical-align:-0.35001em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size1">(</span></span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">9</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">9</span><span class="mord mtight">0</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size1">]</span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">⇒</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">2</span><span class="mord">0</span><span class="mclose delimcenter" style="top:0em;">]</span></span></span></span></span>，和之前的一样，以此类推，这个算法是公平的。</p>
-<p>但是，并不是每一次都能够理想化地抢到平均值，毕竟我们是要在这个范围内取随机值。假设第一个人只抢到了1块钱，那么第二个人能够抢到的范围是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo fence="true">(</mo><mn>0</mn><mo separator="true">,</mo><mn>22</mn><mo fence="true">]</mo></mrow><annotation encoding="application/x-tex">\left(0,22\right]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">2</span><span class="mord">2</span><span class="mclose delimcenter" style="top:0em;">]</span></span></span></span></span>，范围就更大了点，假设第二个人也只抢到1块钱，那么第三个人的范围就是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo fence="true">(</mo><mn>0</mn><mo separator="true">,</mo><mn>24.5</mn><mo fence="true">]</mo></mrow><annotation encoding="application/x-tex">\left(0,24.5\right]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">2</span><span class="mord">4</span><span class="mord">.</span><span class="mord">5</span><span class="mclose delimcenter" style="top:0em;">]</span></span></span></span></span>，以此类推，假设前面的9个人都只抢到1块钱，那么最后一个人的范围，就是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo fence="true">(</mo><mn>0</mn><mo separator="true">,</mo><mn>91</mn><mo fence="true">]</mo></mrow><annotation encoding="application/x-tex">\left(0,91\right]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">9</span><span class="mord">1</span><span class="mclose delimcenter" style="top:0em;">]</span></span></span></span></span>，实际上就是91块。所以我们可以看到，如果每个人都抢到范围内平均值以下，那么后面的人的随机范围则会越来越大。</p>
-<p>那么，我们来看看另外一个极端，如果第一个人抢到20块钱，那么第二个人的范围就是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo fence="true">(</mo><mn>0</mn><mo separator="true">,</mo><mn>17.76</mn><mo fence="true">]</mo></mrow><annotation encoding="application/x-tex">\left(0,17.76\right]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mord">7</span><span class="mord">.</span><span class="mord">7</span><span class="mord">6</span><span class="mclose delimcenter" style="top:0em;">]</span></span></span></span></span>，假设第二个人抢到17元，第三个人的范围就是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo fence="true">(</mo><mn>0</mn><mo separator="true">,</mo><mn>15.75</mn><mo fence="true">]</mo></mrow><annotation encoding="application/x-tex">\left(0,15.75\right]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mord">5</span><span class="mord">.</span><span class="mord">7</span><span class="mord">5</span><span class="mclose delimcenter" style="top:0em;">]</span></span></span></span></span>……</p>
-<p>范围会越来越小，但是每个人的红包都不大，都没有超过第一个人，因此第一个人是本次的运气王。</p>
-<p>所以，其实这个算法这么看，貌似的确不那么公平，第一个人永远只能抢到二倍均值以下，也就是说，第一个人就是抢不到大红包，而越往后越<strong>有可能</strong>抢到大红包。</p>
-<p>当然，运气王是有可能出现在任意的位置，运气王的位置靠前，则整体不会有很大的红包，运气王靠后的话，后面就有可能出现比前面大很多的红包。</p>
-<p>那么这样的算法用代码如何实现呢？</p>
-<p>Harris都给大家列出来了，如果感兴趣可以研究研究：</p>
-<p>Java:</p>
-<pre><code class="language-java">//代码来源于网络
-//发红包算法，金额参数以分为单位
-public static List&lt;Integer&gt; divideRedPackage(Integer totalAmount, Integer totalPeopleNum){
-    List&lt;Integer&gt; amountList = new ArrayList&lt;Integer&gt;();
-    Integer restAmount = totalAmount;
-    Integer restPeopleNum = totalPeopleNum;
-    Random random = new Random();
-    for(int i=0; i&lt;totalPeopleNum-1; i++){
-        //随机范围：[1，剩余人均金额的两倍)，左闭右开
-        int amount = random.nextInt(restAmount / restPeopleNum * 2 - 1) + 1;
-        restAmount -= amount;
-        restPeopleNum --;
-        amountList.add(amount);
-    }
-    amountList.add(restAmount);
-    return amountList;
-}
-public static void main(String[] args){
-    List&lt;Integer&gt; amountList = divideRedPackage(5000, 30);
-    for(Integer amount : amountList){
-        System.out.println(&quot;抢到金额：&quot; + new BigDecimal(amount).divide(new BigDecimal(100)));
-    }
-}
-</code></pre>
-<p>C/C++：</p>
-<pre><code class="language-c">#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-
-void money();
-void money(double TotalAmount, int TotalPeople)
-{
-	double restAmount = TotalAmount;
-	int restPeople = TotalPeople;
-	for (int i = 0; i &lt; TotalPeople - 1; ++i)
-	{
-		int amount = rand() % ((int)((restAmount / restPeople) * 2) * 100);
-		restAmount -= amount / 100;
-		--restPeople;
-		printf(&quot;抢到金额：%.2f\n&quot;, (double)amount / 100);
-	}
-	printf(&quot;抢到金额：%.2f\n&quot;, (double)restAmount / 100);
-}
-
-int main(void)
-{
-	money(50, 30);
-	return 0;
-}
-</code></pre>
-<p>Python：</p>
-<pre><code class="language-python">import random
-def money(TotalMoney,TotalPeople):
-    restMoney = TotalMoney
-    restPeople = TotalPeople
-    for i in range(TotalPeople - 1):
-        mount = round(random.uniform(0.01,(restMoney / restPeople) * 2 - 0.01),2)
-        restMoney -= mount
-        restPeople -= 1
-        print(&quot;抢到金额：&quot;+str(mount))
-    print(&quot;抢到金额：&quot;+str(round(restMoney,2)))
-
-money(50,30)
-</code></pre>
-<p>本篇博客就到此结束了，其实生活中处处充满着知识，就看你有没有一颗爱钻研的心！</p>
 ]]></content>
     </entry>
 </feed>
