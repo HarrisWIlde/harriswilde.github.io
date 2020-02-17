@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://harriswilde.github.io</id>
     <title>TechZone</title>
-    <updated>2020-02-17T09:00:52.300Z</updated>
+    <updated>2020-02-17T11:50:37.943Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://harriswilde.github.io"/>
     <link rel="self" href="https://harriswilde.github.io/atom.xml"/>
@@ -16,15 +16,19 @@
         <link href="https://harriswilde.github.io/post/qb0i5L7tn/">
         </link>
         <updated>2020-02-17T08:38:35.000Z</updated>
-        <summary type="html"><![CDATA[<p>《失传的结构体打包艺术》(中文版)<br>
+        <summary type="html"><![CDATA[<blockquote>
+<p>《失传的结构体打包艺术》(中文版)<br>
 转载自：<a href="https://github.com/ludx/The-Lost-Art-of-C-Structure-Packing">https://github.com/ludx/The-Lost-Art-of-C-Structure-Packing</a><br>
 作者：Eric S. Raymond<br>
 原文链接：<a href="http://www.catb.org/esr/structure-packing/">http://www.catb.org/esr/structure-packing/</a></p>
+</blockquote>
 ]]></summary>
-        <content type="html"><![CDATA[<p>《失传的结构体打包艺术》(中文版)<br>
+        <content type="html"><![CDATA[<blockquote>
+<p>《失传的结构体打包艺术》(中文版)<br>
 转载自：<a href="https://github.com/ludx/The-Lost-Art-of-C-Structure-Packing">https://github.com/ludx/The-Lost-Art-of-C-Structure-Packing</a><br>
 作者：Eric S. Raymond<br>
 原文链接：<a href="http://www.catb.org/esr/structure-packing/">http://www.catb.org/esr/structure-packing/</a></p>
+</blockquote>
 <!-- more -->
 <h1 id="谁应阅读本文">谁应阅读本文</h1>
 <p>本文探讨如何通过手工重新打包C结构体声明，来减小内存空间占用。你需要掌握基本的C语言知识，以理解本文所讲述的内容。</p>
@@ -301,13 +305,17 @@ struct foo3 quad[4];
         <link href="https://harriswilde.github.io/post/LUjp1bkYi/">
         </link>
         <updated>2020-02-17T08:02:49.000Z</updated>
-        <summary type="html"><![CDATA[<p>《失传的结构体打包艺术》(英文原版)<br>
+        <summary type="html"><![CDATA[<blockquote>
+<p>《失传的结构体打包艺术》(英文原版)<br>
 作者：Eric S. Raymond<br>
 原文链接：<a href="http://www.catb.org/esr/structure-packing/">http://www.catb.org/esr/structure-packing/</a></p>
+</blockquote>
 ]]></summary>
-        <content type="html"><![CDATA[<p>《失传的结构体打包艺术》(英文原版)<br>
+        <content type="html"><![CDATA[<blockquote>
+<p>《失传的结构体打包艺术》(英文原版)<br>
 作者：Eric S. Raymond<br>
 原文链接：<a href="http://www.catb.org/esr/structure-packing/">http://www.catb.org/esr/structure-packing/</a></p>
+</blockquote>
 <!-- more -->
 <h1 id="who-should-read-this">Who should read this</h1>
 <p>This page is about a technique for reducing the memory footprint of programs in compiled languages with C-like structures - manually repacking these declarations for reduced size. To read it, you will require basic knowledge of the C programming language.</p>

@@ -408,6 +408,7 @@ blockquote:before {
   padding: 1px 0;
   display: inline-block;
   border-top: 1px solid transparent;
+  transition: ease-in-out 0.7s;
 }
 .pagination-active a {
   color: #fff;
@@ -538,6 +539,7 @@ blockquote:before {
   border-bottom: none;
   line-height: 1.2;
   vertical-align: top;
+  transition: ease-in-out;
 }
 .post-title-link:hover {
   color: inherit;
