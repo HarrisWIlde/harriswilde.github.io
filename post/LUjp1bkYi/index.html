@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>The Lost Art of Structure Packing | TechZone</title>
+<meta name="keywords" content="TechZone">
+<meta name="description" content="HarrisWilde祝诸君元旦快乐🎉">
+<link rel="shortcut icon" href="https://harriswilde.github.io/favicon.ico?v=1581929038131">
+<link rel="stylesheet" href="https://harriswilde.github.io/styles/main.css">
+
+<link rel="stylesheet" href="/media/css/pisces.css">
+
+<link rel="stylesheet" href="/media/fonts/font-awesome.css">
+<link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Rosario:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+<link href="/media/hljs/styles/prism.css" rel="stylesheet">  
+<script src="/media/hljs/highlight.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.ui.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+    <meta name="description" content="The Lost Art of Structure Packing" />
+    <meta name="keywords" content="C++,数据结构,Clang" />
+    <meta name="theme-color" content="#222222"/>
+  </head>
+  <body>
+    <div class="head-top-line"></div>
+    <div class="header-box">
+      
+<div class=" pisces">
+  <header class="header bg-color ">
+    <div class="blog-header box-shadow-wrapper bg-color " id="header">
+      <div class="nav-toggle" id="nav_toggle">
+        <div class="toggle-box">
+          <div class="line line-top"></div>
+          <div class="line line-center"></div>
+          <div class="line line-bottom"></div>
+        </div>
+      </div>
+      <div class="site-meta">       
+        <div class="site-title">
+          
+            <a href="/" class="brand">
+              <span>TechZone</span>
+            </a>  
+          
+        </div>
+        
+          <p class="subtitle">HarrisWilde的官方个人博客</p>
+        
+      </div>
+      <nav class="site-nav" id="site_nav">
+        <ul id="nav_ul">
+          
+            <li class="nav-item ">
+              
+                <a href="/">
+                  <i class="fa fa-home"></i> 首页
+                </a>
+              
+            </li>
+          
+            <li class="nav-item ">
+              
+                <a href="/archives">
+                  <i class="fa fa-archive"></i> 归档
+                </a>
+              
+            </li>
+          
+            <li class="nav-item ">
+              
+                <a href="/tags">
+                  <i class="fa fa-tags"></i> 分类
+                </a>
+              
+            </li>
+          
+            <li class="nav-item ">
+              
+                <a href="https://www.jianshu.com/u/766d2f134900" target="_blank">
+                  <i class="fa fa-globe"></i> 简书
+                </a>
+              
+            </li>
+          
+          <li class="nav-item">
+            <a>
+              <i class="fa fa-search"></i> 搜索
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+</div>
+
+<script type="text/javascript"> 
+ 
+  let showNav = true;
+
+  let navToggle = document.querySelector('#nav_toggle'),
+  siteNav = document.querySelector('#site_nav');
+  
+  function navClick() {
+    let sideBar = document.querySelector('.sidebar');
+    let navUl = document.querySelector('#nav_ul');
+    navToggle.classList.toggle('nav-toggle-active');
+    siteNav.classList.toggle('nav-menu-active');
+    if (siteNav.classList.contains('nav-menu-active')) {
+      siteNav.style = "height: " + (navUl.children.length * 42) +"px !important";
+    } else {
+      siteNav.style = "";
+    }
+  }
+
+  navToggle.addEventListener('click',navClick);  
+</script>
+    </div>
+    <div class="main-continer">
+      
+      <div class="section-layout pisces ">
+        <div class="section-layout-wrapper">
+          
+
+<div class="sidebar">
+    <div class="sidebar-box box-shadow-wrapper bg-color right-motion" id="sidebar">
+      
+        <div class="post-list-sidebar">
+          <div class="sidebar-title">
+            <span id="tocSideBar" class="sidebar-title-item sidebar-title-active">文章目录</span>
+            <span id="metaSideBar" class="sidebar-title-item">站点概览</span>
+          </div>
+        </div>
+      
+      <div class="sidebar-body pisces" id="sidebar_body">
+        
+          <div class="post-side-meta" id="post_side_meta">
+            
+<div class="sidebar-wrapper box-shadow-wrapper bg-color">
+  <div class="sidebar-item">
+    <img class="site-author-image right-motion" src="https://harriswilde.github.io/images/avatar.png"/>
+    <p class="site-author-name">TechZone</p>
+    <p class="site-description right-motion">2020，共同进步！</p>
+  </div>
+  <div class="sidebar-item side-item-stat right-motion">
+    <div class="sidebar-item-box">
+      <a href="/archives/">
+        
+        <span class="site-item-stat-count">25</span>
+        <span class="site-item-stat-name">文章</span>
+      </a>
+    </div>
+    <div class="sidebar-item-box">
+      <a href="">
+        <span class="site-item-stat-count">7</span>
+        <span class="site-item-stat-name">分类</span>
+      </a>
+    </div>
+    <div class="sidebar-item-box">
+      <a href="/tags/">
+        <span class="site-item-stat-count">7</span>
+        <span class="site-item-stat-name">标签</span>
+      </a>
+    </div>
+  </div>
+  
+    
+      <div class="sidebar-item" style="border-top: 1px dotted #ccc; margin-top: 10px;">
+      </div>
+    
+  
+  
+
+
+</div>
+          </div>
+          <div class="post-toc sidebar-body-active" id="post_toc" style="opacity: 1;">
+            <div class="toc-box right-motion">
+  <div class="toc-wrapper auto-number auto" id="toc_wrapper">
+    <ul class="markdownIt-TOC">
+<li><a href="#who-should-read-this">Who should read this</a></li>
+<li><a href="#why-i-wrote-it">Why I wrote it</a></li>
+<li><a href="#alignment-requirements">Alignment requirements</a></li>
+<li><a href="#padding">Padding</a></li>
+<li><a href="#structure-alignment-and-padding">Structure alignment and padding</a></li>
+<li><a href="#bitfields">Bitfields</a></li>
+<li><a href="#structure-reordering">Structure reordering</a></li>
+<li><a href="#awkward-scalar-cases">Awkward scalar cases</a></li>
+<li><a href="#readability-and-cache-locality">Readability and cache locality</a></li>
+<li><a href="#other-packing-techniques">Other packing techniques</a></li>
+<li><a href="#overriding-alignment-rules">Overriding alignment rules</a></li>
+<li><a href="#tools">Tools</a></li>
+<li><a href="#proof-and-exceptional-cases">Proof and exceptional cases</a></li>
+<li><a href="#go-and-rust">Go and Rust</a></li>
+<li><a href="#supporting-this-work">Supporting this work</a></li>
+<li><a href="#related-reading">Related Reading</a></li>
+<li><a href="#version-history">Version history</a></li>
+</ul>
+
+  </div>
+</div>
+
+<script>
+
+let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1; 
+let active = 'active-show', activeClass = 'active-current';
+let tocWrapper = document.querySelector('#toc_wrapper');
+let tocContent = tocWrapper.children[0];
+let autoNumber = tocWrapper&&tocWrapper.classList.contains('auto-number');
+
+function addTocNumber(elem, deep) {
+  if (!elem) {
+    return;
+  }
+  let prop = elem.__proto__;
+
+  if (prop === HTMLUListElement.prototype) {
+    for (let i = 0; i < elem.children.length; i++) {
+      addTocNumber(elem.children[i], deep + (i + 1) + '.');
+    }
+  } else if (prop === HTMLLIElement.prototype) {
+    // 保存li元素
+    lList.push(elem);
+    for (let i = 0; i < elem.children.length; i++) {
+      let cur = elem.children[i];
+      if (cur.__proto__ === HTMLAnchorElement.prototype) {
+        if (autoNumber) {
+          cur.text =  deep + ' ' + cur.text;
+        }
+      } else if (cur.__proto__ === HTMLUListElement.prototype) {
+        addTocNumber(cur, deep);
+      }
+    }
+  }
+}
+
+
+document.addEventListener('scroll', function(e) {
+  if (lList.length <= 0) {
+    return;
+  }
+  let scrollTop = document.scrollingElement.scrollTop;
+  let dir;
+
+  if (lastTop - scrollTop > 0) {
+    dir = 'up';
+  } else {
+    dir = 'down';
+  }
+
+  lastTop = scrollTop;
+  if (scrollTop <= 0) {
+    if (lastIndex >= 0 && lastIndex < hList.length) {
+      lList[lastIndex].classList.remove(activeClass);
+    }
+    return;
+  }
+
+  let current = 0, hasFind = false;
+  for (let i = 0; i < hList.length; i++) {
+    if (hList[i].offsetTop > scrollTop) {
+      current = i;
+      hasFind = true;
+      break;
+    }
+  }
+  if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
+    current = hList.length - 1;
+  } else {
+    current--;
+  }
+  if (dir === 'down') {
+    if (current > lastIndex) {
+      addActiveClass(current);
+      removeActiveClass(lastIndex) 
+      lastIndex = current;
+      removeParentActiveClass();
+      lList[current] && addActiveLiElemment(lList[current].parentElement,tocContent);
+    }
+  } else {
+    if (current < lastIndex) {
+      addActiveClass(current);
+      removeActiveClass(lastIndex);
+      lastIndex = current;
+      removeParentActiveClass();
+      lList[current] && addActiveLiElemment(lList[current].parentElement,tocContent);
+    }
+  }
+});
+
+function removeParentActiveClass() {
+  let parents = tocContent.querySelectorAll('.'+active)
+  parents.forEach(function(elem) {
+    elem.classList.remove(active);
+  });
+}
+
+function addActiveClass(index) {
+  if (index >= 0 && index < hList.length) {
+    lList[index].classList.add(activeClass);
+  }
+}
+
+function removeActiveClass(index) {
+  if (index >= 0 && index < hList.length) {
+    lList[index].classList.remove(activeClass);
+  }
+}
+
+function addActiveLiElemment(elem, parent) {
+  if (!elem || elem === parent) {
+    return;
+  } else {
+    if (elem.__proto__ === HTMLLIElement.prototype) {
+      elem.classList.add(active);
+    }
+    addActiveLiElemment(elem.parentElement, parent);
+  }
+}
+
+function showToc() {
+  if (tocWrapper) {
+    postBody = document.querySelector('#post_body');
+    for (let i = 0; i < postBody.children.length; i++) {
+      if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
+        hList.push(postBody.children[i]);
+      }
+    }
+    if (tocWrapper.classList.contains('compress')) {
+        tocContent.classList.add('closed');
+    } else if (tocWrapper.classList.contains('no_compress')){
+      tocContent.classList.add('expanded');
+    } else {
+      if (hList.length > 10) {
+        active = 'active-hidden'
+        tocContent.classList.add('closed');
+      } else {
+        tocContent.classList.add('expanded');
+      }
+    }
+  }
+}
+addTocNumber(tocContent, '');
+
+window.addEventListener('load', function() {
+  showToc();
+  document.querySelector('#sidebar').style='display: block;';
+  tocWrapper.classList.add('toc-active');
+  setTimeout(function() {
+    if ("createEvent" in document) {
+      let evt = document.createEvent("HTMLEvents");
+      evt.initEvent("scroll", false, true);
+      document.dispatchEvent(evt);
+    }
+    else {
+      document.fireEvent("scroll");
+    }
+  }, 500)
+})
+
+</script>
+          </div>
+        
+      </div>
+    </div>
+</div>
+<script>
+  const SIDEBAR_TITLE_ACTIVE = 'sidebar-title-active';
+  const SIDEBAR_BODY_ACTIVE = 'sidebar-body-active';
+  const SLIDE_UP_IN = 'slide-up-in';
+
+  let sidebar = document.querySelector('#sidebar'),
+  tocSideBar = document.querySelector('#tocSideBar'),
+  metaSideBar = document.querySelector('#metaSideBar'),
+  postToc = document.querySelector('#post_toc'),
+  postSiteMeta = document.querySelector('#post_side_meta'),
+  sidebarTitle = document.querySelector('.sidebar-title'),
+  sidebarBody = document.querySelector('#sidebar_body');
+
+  tocSideBar && tocSideBar.addEventListener('click', (e) => {
+    toggleSidebar(e);
+  });
+
+  metaSideBar && metaSideBar.addEventListener('click', (e) => {
+    toggleSidebar(e);
+  });
+
+  function toggleSidebar(e) {
+    let currentTitle = document.querySelector("."+SIDEBAR_TITLE_ACTIVE);
+    if (currentTitle == e.srcElement) {
+      return ;
+    }
+    let current, showElement, hideElement;
+    if (e.srcElement == metaSideBar) {
+      showElement = postSiteMeta;
+      hideElement = postToc;
+    } else if (e.srcElement == tocSideBar){
+      showElement = postToc;
+      hideElement = postSiteMeta;
+    }
+    currentTitle.classList.remove(SIDEBAR_TITLE_ACTIVE);
+    e.srcElement.classList.add(SIDEBAR_TITLE_ACTIVE);
+
+    window.Velocity(hideElement, 'stop');
+    window.Velocity(hideElement, 'transition.slideUpOut', {
+      display: 'none',
+      duration: 200,
+      complete: function () {
+        window.Velocity(showElement, 'transition.slideDownIn', {
+          duration: 200
+        });
+      }
+    })
+    hideElement.classList.remove(SIDEBAR_BODY_ACTIVE);
+    showElement.classList.add(SIDEBAR_BODY_ACTIVE);
+  }
+
+  postToc.addEventListener('transitionend', function() {
+    this.classList.remove(SLIDE_UP_IN);
+  });
+
+
+  if (sidebarBody.classList.contains('pisces') || sidebarBody.classList.contains('gemini')) {
+    let hasFix = false;
+    let scrollEl = document.querySelector('.main-continer');
+    let limitTop = document.querySelector('#nav_ul').children.length * 42 + 162;
+    window.addEventListener('scroll', function(e) {
+    if (document.scrollingElement.scrollTop >= limitTop) {
+      if (!hasFix) {
+        sidebar.classList.add('sidebar-fixed');
+        hasFix = true;
+      }
+    } else {
+      if (hasFix) {
+        sidebar.classList.remove('sidebar-fixed');
+        hasFix = false;
+      }
+    }
+  });
+  }
+  
+</script>
+          <div class="section-box box-shadow-wrapper">
+            <div class="section bg-color post post-page">
+              <div class="article-box">
+    <header class="post-header">
+  <h1 class="post-title">
+    <a class="post-title-link" href="https://harriswilde.github.io/post/LUjp1bkYi">
+      The Lost Art of Structure Packing
+    </a>
+  </h1>
+  <div class="post-meta">
+    
+    <span class="meta-item pc-show">
+      <i class="fa fa-calendar-o"></i>
+      <span>发布于</span>
+      <span>2020-02-17</span>
+    </span>
+    
+      <span class="meta-item">
+        <span class="post-meta-divider pc-show">|</span>
+        <i class="fa fa-folder-o"></i>
+        <span class="pc-show">分类于</span>
+        
+          
+            <a href="https://harriswilde.github.io/tag/wPpzBFBxL">
+              <span>C++</span>
+            </a>、
+          
+        
+          
+            <a href="https://harriswilde.github.io/tag/DFrZZfISm">
+              <span>数据结构</span>
+            </a>、
+          
+        
+          
+            <a href="https://harriswilde.github.io/tag/qrA-i8flt">
+              <span>Clang</span>
+            </a>
+          
+        
+      </span>
+      <span class="post-meta-divider">|</span>
+    
+    <span class="meta-item">
+      <i class="fa fa-clock-o"></i>
+      <span>35分钟</span>
+    </span>
+    <span class="meta-item">
+      <span class="post-meta-divider">|</span>
+      <i class="fa fa-file-word-o"></i>
+      <span>5597<span class="pc-show">字数</span></span>
+    </span>
+  </div>
+</header>
+</div>
+              <div class="post-body next-md-body" id="post_body">
+                <p>《失传的结构体打包艺术》(英文原版)<br>
+作者：Eric S. Raymond<br>
+原文链接：<a href="http://www.catb.org/esr/structure-packing/">http://www.catb.org/esr/structure-packing/</a></p>
+<!-- more -->
+<h1 id="who-should-read-this">Who should read this</h1>
+<p>This page is about a technique for reducing the memory footprint of programs in compiled languages with C-like structures - manually repacking these declarations for reduced size. To read it, you will require basic knowledge of the C programming language.</p>
+<p>You need to know this technique if you intend to write code for memory-constrained embedded systems, or operating-system kernels. It is useful if you are working with application data sets so large that your programs routinely hit memory limits. It is good to know in any application where you really, really care about optimizing your use of memory bandwidth and minimizing cache-line misses.</p>
+<p>Finally, knowing this technique is a gateway to other esoteric C topics. You are not an advanced C programmer until you have grasped these rules. You are not a master of C until you could have written this document yourself and can criticize it intelligently.</p>
+<p>This document originated with &quot;C&quot; in the title, but many of the techniques discussed here also apply to the Go language - and should generalize to any compiled language with C-like structures. There is a note discussing Go and Rust towards the end.</p>
+<h1 id="why-i-wrote-it">Why I wrote it</h1>
+<p>This webpage exists because in late 2013 I found myself heavily applying an optimization technique that I had learned more than two decades previously and not used much since.</p>
+<p>I needed to reduce the memory footprint of a program that used thousands - sometimes hundreds of thousands - of C struct instances. The program was cvs-fast-export and the problem was that it was dying with out-of-memory errors on large repositories.</p>
+<p>There are ways to reduce memory usage significantly in situations like this, by rearranging the order of structure members in careful ways. This can lead to dramatic gains - in my case I was able to cut the working-set size by around 40%, enabling the program to handle much larger repositories without dying.</p>
+<p>But as I worked, and thought about what I was doing, it began to dawn on me that the technique I was using has been more than half forgotten in these latter days. A little web research confirmed that programmers don’t seem to talk about it much any more, at least not where a search engine can see them. A couple of Wikipedia entries touch the topic, but I found nobody who covered it comprehensively.</p>
+<p>There are actually reasons for this that aren’t stupid. CS courses (rightly) steer people away from micro-optimization towards finding better algorithms. The plunging price of machine resources has made squeezing memory usage less necessary. And the way hackers used to learn how to do it back in the day was by bumping their noses on strange hardware architectures - a less common experience now.</p>
+<p>But the technique still has value in important situations, and will as long as memory is finite. This document is intended to save programmers from having to rediscover the technique, so they can concentrate effort on more important things.</p>
+<h1 id="alignment-requirements">Alignment requirements</h1>
+<p>The first thing to understand is that, on modern processors, the way your compiler lays out basic datatypes in memory is constrained in order to make memory accesses faster. Our examples are in C, but any compiled language generates code under the same constraints.</p>
+<p>Storage for the basic C datatypes on an x86 or ARM processor doesn’t normally start at arbitrary byte addresses in memory. Rather, each type except char has an alignment requirement; chars can start on any byte address, but 2-byte shorts must start on an even address, 4-byte ints or floats must start on an address divisible by 4, and 8-byte longs or doubles must start on an address divisible by 8. Signed or unsigned makes no difference.</p>
+<p>The jargon for this is that basic C types on x86 and ARM are self-aligned. Pointers, whether 32-bit (4-byte) or 64-bit (8-byte) are self-aligned too.</p>
+<p>Self-alignment makes access faster because it facilitates generating single-instruction fetches and puts of the typed data. Without alignment constraints, on the other hand, the code might end up having to do two or more accesses spanning machine-word boundaries. Characters are a special case; they’re equally expensive from anywhere they live inside a single machine word. That’s why they don’t have a preferred alignment.</p>
+<p>I said &quot;on modern processors&quot; because on some older ones forcing your C program to violate alignment rules (say, by casting an odd address into an int pointer and trying to use it) didn’t just slow your code down, it caused an illegal instruction fault. This was the behavior, for example, on Sun SPARC chips. In fact, with sufficient determination and the right (e18) hardware flag set on the processor, you can still trigger this on x86.</p>
+<p>Also, self-alignment is not the only possible rule. Historically, some processors (especially those lacking <a href="https://en.wikipedia.org/wiki/Barrel_shifter">barrel shifters</a>) have had more restrictive ones. If you do embedded systems, you might trip over one of these lurking in the underbrush. Be aware this is possible.</p>
+<p>From when it was first written at the beginning of 2014 until late 2016, this section ended with the last paragraph. During that period I’ve learned something rather reassuring from working with the source code for the reference implementation of NTP. It does packet analysis by reading packets off the wire directly into memory that the rest of the code sees as a struct, relying on the assumption of minimal self-aligned padding.</p>
+<p>The interesting news is that NTP has apparently being getting away with this for decades across a very wide span of hardware, operating systems, and compilers, including not just Unixes but under Windows variants as well. This suggests that platforms with padding rules other than self-alignment are either nonexistent or confined to such specialized niches that they’re never either NTP servers or clients.</p>
+<h1 id="padding">Padding</h1>
+<p>Now we’ll look at a simple example of variable layout in memory. Consider the following series of variable declarations in the top level of a C module:</p>
+<pre><code class="language-c">char *p;
+char c;
+int x;
+</code></pre>
+<p>If you didn’t know anything about data alignment, you might assume that these three variables would occupy a continuous span of bytes in memory. That is, on a 32-bit machine 4 bytes of pointer would be immediately followed by 1 byte of char and that immediately followed by 4 bytes of int. And a 64-bit machine would be different only in that the pointer would be 8 bytes.</p>
+<p>In fact, the hidden assumption that the allocated order of static variables is their source order is not necessarily valid; the C standards don’t mandate it. I’m going to ignore this detail because (a) that hidden assumption is usually correct anyway, and (b) the actual purpose of talking about padding and packing outside structures is to prepare you for what happens inside them.</p>
+<p>Here’s what actually happens (on an x86 or ARM or anything else with self-aligned types). The storage for p starts on a self-aligned 4- or 8-byte boundary depending on the machine word size. This is pointer alignment - the strictest possible.</p>
+<p>The storage for c follows immediately. But the 4-byte alignment requirement of x forces a gap in the layout; it comes out as though there were a fourth intervening variable, like this:</p>
+<pre><code class="language-c">char *p;      /* 4 or 8 bytes */
+char c;       /* 1 byte */
+char pad[3];  /* 3 bytes */
+int x;        /* 4 bytes */
+</code></pre>
+<p>The <code>pad[3]</code> character array represents the fact that there are three bytes of waste space in the structure. The old-school term for this was &quot;slop&quot;. The value of the padding bits is undefined; in particular it is not guaranteed that they will be zeroed.</p>
+<p>Compare what happens if <code>x</code> is a 2-byte short:</p>
+<pre><code class="language-c">char *p;
+char c;
+short x;
+</code></pre>
+<p>In that case, the actual layout will be this:</p>
+<pre><code class="language-c">char *p;      /* 4 or 8 bytes */
+char c;       /* 1 byte */
+char pad[1];  /* 1 byte */
+short x;      /* 2 bytes */
+</code></pre>
+<p>On the other hand, if x is a long on a 64-bit machine</p>
+<pre><code class="language-c">char *p;
+char c;
+long x;
+</code></pre>
+<p>we end up with this:</p>
+<pre><code class="language-c">char *p;     /* 8 bytes */
+char c;      /* 1 byte */
+char pad[7]; /* 7 bytes */
+long x;      /* 8 bytes */
+</code></pre>
+<p>If you have been following carefully, you are probably now wondering about the case where the shorter variable declaration comes first:</p>
+<pre><code class="language-c">char c;
+char *p;
+int x;
+</code></pre>
+<p>If the actual memory layout were written like this</p>
+<pre><code class="language-c">char c;
+char pad1[M];
+char *p;
+char pad2[N];
+int x;
+</code></pre>
+<p>what can we say about <code>M</code> and <code>N</code>?</p>
+<p>First, in this case <code>N</code> will be zero. The address of <code>x</code>, coming right after <code>p</code>, is guaranteed to be pointer-aligned, which is never less strict than int-aligned.</p>
+<p>The value of <code>M</code> is less predictable. If the compiler happened to map <code>c</code> to the last byte of a machine word, the next byte (the first of <code>p</code>) would be the first byte of the next one and properly pointer-aligned. M would be zero.</p>
+<p>It is more likely that <code>c</code> will be mapped to the <em>first</em> byte of a machine word. In that case M will be whatever padding is needed to ensure that <code>p</code> has pointer alignment - 3 on a 32-bit machine, 7 on a 64-bit machine.</p>
+<p>Intermediate cases are possible. M can be anything from 0 to 7 (0 to 3 on 32-bit) because a char can start on any byte boundary in a machine word.</p>
+<p>If you wanted to make those variables take up less space, you could get that effect by swapping <code>x</code> with <code>c</code> in the original sequence.</p>
+<pre><code class="language-c">char *p;     /* 8 bytes */
+long x;      /* 8 bytes */
+char c;      /* 1 byte
+</code></pre>
+<p>Usually, for the small number of scalar variables in your C programs, bumming out the few bytes you can get by changing the order of declaration won’t save you enough to be significant. The technique becomes more interesting when applied to nonscalar variables - especially structs.</p>
+<p>Before we get to those, let’s dispose of arrays of scalars. On a platform with self-aligned types, arrays of char/short/int/long/pointer have no internal padding; each member is automatically self-aligned at the end of the next one.</p>
+<p>All these rules and examples map over to Go with only syntactic changes.</p>
+<p>In the next section we will see that the same is <strong>not</strong> necessarily true of structure arrays.</p>
+<h1 id="structure-alignment-and-padding">Structure alignment and padding</h1>
+<p>In general, a struct instance will have the alignment of its widest scalar member. Compilers do this as the easiest way to ensure that all the members are self-aligned for fast access.</p>
+<p>Also, in C (and Go, and Rust) the address of a struct is the same as the address of its first member - there is no leading padding. Beware: in C++, classes that look like structs may break this rule! (Whether they do or not depends on how base classes and virtual member functions are implemented, and varies by compiler.)</p>
+<p>(When you’re in doubt about this sort of thing, ANSI C provides an offsetof() macro which can be used to read out structure member offsets.)</p>
+<p>Consider this struct:</p>
+<pre><code class="language-c">struct foo1 {
+    char *p;
+    char c;
+    long x;
+};
+</code></pre>
+<p>Assuming a 64-bit machine, any instance of <code>struct foo1</code> will have 8-byte alignment. The memory layout of one of these looks unsurprising, like this:</p>
+<pre><code class="language-c">struct foo1 {
+    char *p;     /* 8 bytes */
+    char c;      /* 1 byte
+    char pad[7]; /* 7 bytes */
+    long x;      /* 8 bytes */
+};
+</code></pre>
+<p>It's laid out exactly as though variables of these types has been separately declared. But if we put <code>c</code> first, that's no longer true.</p>
+<pre><code class="language-c">struct foo2 {
+    char c;      /* 1 byte */
+    char pad[7]; /* 7 bytes */
+    char *p;     /* 8 bytes */
+    long x;      /* 8 bytes */
+};
+</code></pre>
+<p>If the members were separate variables, <code>c</code> could start at any byte boundary and the size of <code>pad</code> might vary. Because <code>struct foo2</code> has the pointer alignment of its widest member, that’s no longer possible. Now <code>c</code> has to be pointer-aligned, and following padding of 7 bytes is locked in.</p>
+<p>Now let’s talk about trailing padding on structures. To explain this, I need to introduce a basic concept which I’ll call the <em>stride address</em> of a structure. It is the first address following the structure data that has the <strong>same alignment as the structure.</strong></p>
+<p>The general rule of trailing structure padding is this: the compiler will behave as though the structure has trailing padding out to its stride address. This rule controls what <code>sizeof()</code> will return.</p>
+<p>Consider this example on a 64-bit x86 or ARM machine:</p>
+<pre><code class="language-c">struct foo3 {
+    char *p;     /* 8 bytes */
+    char c;      /* 1 byte */
+};
+
+struct foo3 singleton;
+struct foo3 quad[4];
+</code></pre>
+<p>You might think that <code>sizeof(struct foo3)</code> should be 9, but it’s actually 16. The stride address is that of <code>(&amp;p)[2]</code>. Thus, in the <code>quad</code> array, each member has 7 bytes of trailing padding, because the first member of each following struct wants to be self-aligned on an 8-byte boundary. The memory layout is as though the structure had been declared like this:</p>
+<pre><code class="language-c">struct foo3 {
+    char *p;     /* 8 bytes */
+    char c;      /* 1 byte */
+    char pad[7];
+};
+</code></pre>
+<p>For contrast, consider the following example:</p>
+<pre><code class="language-c">struct foo4 {
+    short s;     /* 2 bytes */
+    char c;      /* 1 byte */
+};
+</code></pre>
+<p>Because <code>s</code> only needs to be 2-byte aligned, the stride address is just one byte after <code>c</code>, and <code>struct foo4</code> as a whole only needs one byte of trailing padding. It will be laid out like this:</p>
+<pre><code class="language-c">struct foo4 {
+    short s;     /* 2 bytes */
+    char c;      /* 1 byte */
+    char pad[1];
+};
+</code></pre>
+<p>and <code>sizeof(struct foo4)</code> will return 4.</p>
+<p>Here's a last important detail: If your structure has structure members, the inner structs want to have the alignment of longest scalar too. Suppose you write this:</p>
+<pre><code class="language-c">struct foo5 {
+    char c;
+    struct foo5_inner {
+        char *p;
+        short x;
+    } inner;
+};
+</code></pre>
+<p>The <code>char *p</code> member in the inner struct forces the outer struct to be pointer-aligned as well as the inner. Actual layout will be like this on a 64-bit machine:</p>
+<pre><code class="language-c">struct foo5 {
+    char c;           /* 1 byte*/
+    char pad1[7];     /* 7 bytes */
+    struct foo5_inner {
+        char *p;      /* 8 bytes */
+        short x;      /* 2 bytes */
+        char pad2[6]; /* 6 bytes */
+    } inner;
+};
+</code></pre>
+<p>This structure gives us a hint of the savings that might be possible from repacking structures. Of 24 bytes, 13 of them are padding. That’s more than 50% waste space!</p>
+<h1 id="bitfields">Bitfields</h1>
+<p>Now let’s consider C bitfields. What they give you the ability to do is declare structure fields of smaller than character width, down to 1 bit, like this:</p>
+<pre><code class="language-c">struct foo6 {
+    short s;
+    char c;
+    int flip:1;
+    int nybble:4;
+    int septet:7;
+};
+</code></pre>
+<p>The thing to know about bitfields is that they are implemented with word- and byte-level mask and rotate instructions operating on machine words, and cannot cross word boundaries. C99 guarentees that bit-fields will be packed as tightly as possible, provided they don’t cross storage unit boundaries (6.7.2.1 #10).</p>
+<p>This restriction is relaxed in C11 (6.7.2.1p11) and C++14 ([class.bit]p1); these revisions do not actually require <code>struct foo9</code> to be 64 bits instead of 32; a bit-field can span multiple allocation units instead of starting a new one. It’s up to the implementation to decide; GCC leaves it up to the ABI, which for x64 does prevent them from sharing an allocation unit.</p>
+<p>Assuming we’re on a 32-bit machine, the C99 rules imply that the layout may look like this:</p>
+<pre><code class="language-c">struct foo6 {
+    short s;       /* 2 bytes */
+    char c;        /* 1 byte */
+    int flip:1;    /* total 1 bit */
+    int nybble:4;  /* total 5 bits */
+    int pad1:3;    /* pad to an 8-bit boundary */
+    int septet:7;  /* 7 bits */
+    int pad2:25;   /* pad to 32 bits */
+};
+</code></pre>
+<p>But this isn’t the only possibility, because the C standard does not specify that bits are allocated low-to-high. So the layout could look like this:</p>
+<pre><code class="language-c">struct foo6 {
+    short s;       /* 2 bytes */
+    char c;        /* 1 byte */
+    int pad1:3;    /* pad to an 8-bit boundary */
+    int flip:1;    /* total 1 bit */
+    int nybble:4;  /* total 5 bits */
+    int pad2:25;   /* pad to 32 bits */
+    int septet:7;  /* 7 bits */
+};
+</code></pre>
+<p>That is, the padding could precede rather than following the payload bits.</p>
+<p>Note also that, as with normal structure padding, the padding bits are not guaranteed to be zero; C99 mentions this.</p>
+<p>Note that the base type of a bit field is interpreted for signedness but not necessarily for size. It is up to implementors whether &quot;short flip:1&quot; or &quot;long flip:1&quot; are supported, and whether those base types change the size of the storage unit the field is packed into.</p>
+<p>Proceed with caution and check with -Wpadded if you have it available (e.g. under clang). Compilers on exotic hardware might interpret the C99 rules in surprising ways; older compilers might not quite follow them.</p>
+<p>The restriction that bitfields cannot cross machine word boundaries means that, while the first two of the following structures pack into one and two 32-bit words as you’d expect, the third (<code>struct foo9</code>) takes up three 32-bit words in C99, in the last of which only one bit is used.</p>
+<pre><code class="language-c">struct foo7 {
+    int bigfield:31;      /* 32-bit word 1 begins */
+    int littlefield:1;
+};
+
+struct foo8 {
+    int bigfield1:31;     /* 32-bit word 1 begins /*
+    int littlefield1:1;
+    int bigfield2:31;     /* 32-bit word 2 begins */
+    int littlefield2:1;
+};
+
+struct foo9 {
+    int bigfield1:31;     /* 32-bit word 1 begins */
+    int bigfield2:31;     /* 32-bit word 2 begins */
+    int littlefield1:1;
+    int littlefield2:1;   /* 32-bit word 3 begins */
+};
+</code></pre>
+<p>Again, C11 and C++14 may pack foo9 tighter, but it would perhaps be unwise to count on this.</p>
+<p>On the other hand, <code>struct foo8</code> would fit into a single 64-bit word if the machine has those.</p>
+<h1 id="structure-reordering">Structure reordering</h1>
+<p>Now that you know how and why compilers insert padding in and after your structures we’ll examine what you can do to squeeze out the slop. This is the art of structure packing.</p>
+<p>The first thing to notice is that slop only happens in two places. One is where storage bound to a larger data type (with stricter alignment requirements) follows storage bound to a smaller one. The other is where a struct naturally ends before its stride address, requiring padding so the next one will be properly aligned.</p>
+<p>The simplest way to eliminate slop is to reorder the structure members by decreasing alignment. That is: make all the pointer-aligned subfields come first, because on a 64-bit machine they will be 8 bytes. Then the 4-byte ints; then the 2-byte shorts; then the character fields.</p>
+<p>So, for example, consider this simple linked-list structure:</p>
+<pre><code class="language-c">struct foo10 {
+    char c;
+    struct foo10 *p;
+    short x;
+};
+</code></pre>
+<p>With the implied slop made explicit, here it is:</p>
+<pre><code class="language-c">struct foo10 {
+    char c;          /* 1 byte */
+    char pad1[7];    /* 7 bytes */
+    struct foo10 *p; /* 8 bytes */
+    short x;         /* 2 bytes */
+    char pad2[6];    /* 6 bytes */
+};
+</code></pre>
+<p>That’s 24 bytes. If we reorder by size, we get this:</p>
+<pre><code class="language-c">struct foo11 {
+    struct foo11 *p;
+    short x;
+    char c;
+};
+</code></pre>
+<p>Considering self-alignment, we see that none of the data fields need padding. This is because the stride address for a (longer) field with stricter alignment is always a validly-aligned start address for a (shorter) field with less strict requirements. All the repacked struct actually requires is trailing padding:</p>
+<pre><code class="language-c">struct foo11 {
+    struct foo11 *p; /* 8 bytes */
+    short x;         /* 2 bytes */
+    char c;          /* 1 byte */
+    char pad[5];     /* 5 bytes */
+};
+</code></pre>
+<p>Our repack transformation drops the size from 24 to 16 bytes. This might not seem like a lot, but suppose you have a linked list of 200K of these? The savings add up fast - especially on memory-constrained embedded systems or in the core part of an OS kernel that has to stay resident.</p>
+<p>Note that reordering is not guaranteed to produce savings. Applying this technique to an earlier example, <code>struct foo5</code>, we get this:</p>
+<pre><code class="language-c">struct foo12 {
+    struct foo5 {
+        char *p;      /* 8 bytes */
+        short x;      /* 2 bytes */
+    } inner;
+    char c;           /* 1 byte*/
+};
+</code></pre>
+<p>With padding written out, this is</p>
+<pre><code class="language-c">struct foo12 {
+    struct foo5 {
+        char *p;      /* 8 bytes */
+        short x;      /* 2 bytes */
+        char pad[6];  /* 6 bytes */
+    } inner;
+    char c;           /* 1 byte*/
+    char pad[7];      /* 7 bytes */
+};
+</code></pre>
+<p>It’s still 24 bytes because <code>c</code> cannot back into the inner struct’s trailing padding. To collect that gain you would need to redesign your data structures.</p>
+<p>Curiously, strictly ordering your structure fields by <em>increasing</em> size also works to mimimize padding. You can minimize padding with any order in which (a) all fields of any one size are in a continuous span (completely eliminating padding between them), and (b) the gaps between those spans are such that the sizes on either side have as few doubling steps of difference from each other as possible. Usually this means no padding at all on one side.</p>
+<p>Even more general minimal-padding orders are possible. Example:</p>
+<pre><code class="language-c">struct foo13 {
+    int32_t i;
+    int32_t i2;
+    char octet[8];
+    int32_t i3;
+    int32_t i4;
+    int64_t l;
+    int32_t i5;
+    int32_t i6;
+};
+</code></pre>
+<p>This struct has zero padding under self-alignment rules. Working out why is a useful exercise to develop your understanding.</p>
+<p>Since shipping the first version of this guide I have been asked why, if reordering for minimal slop is so simple, C compilers don’t do it automatically. The answer: C is a language originally designed for writing operating systems and other code close to the hardware. Automatic reordering would interfere with a systems programmer’s ability to lay out structures that exactly match the byte and bit-level layout of memory-mapped device control blocks.</p>
+<p>Go hews to the C philosophy and does not reorder fields. Rust makes the opposite choice; by default, its compiler may reorder structure fields.</p>
+<h1 id="awkward-scalar-cases">Awkward scalar cases</h1>
+<p>Using enumerated types instead of #defines is a good idea, if only because symbolic debuggers have those symbols available and can show them rather than raw integers. But, while enums are guaranteed to be compatible with an integral type, the C standard does not specify which underlying integral type is to be used for them.</p>
+<p>Be aware when repacking your structs that while enumerated-type variables are usually ints, this is compiler-dependent; they could be shorts, longs, or even chars by default. Your compiler may have a pragma or command-line option to force the size.</p>
+<p>The <code>long double</code> type is a similar trouble spot. Some C platforms implement this in 80 bits, some in 128, and some of the 80-bit platforms pad it to 96 or 128 bits.</p>
+<p>In both cases it's best to use <code>sizeof()</code> to check the storage size.</p>
+<p>Finally, under x86 Linux doubles are sometimes an exception to the self-alignment rule; an 8-byte double may require only 4-byte alignment within a struct even though standalone doubles variables have 8-byte self-alignment. This depends on compiler and options.</p>
+<h1 id="readability-and-cache-locality">Readability and cache locality</h1>
+<p>While reordering by size is the simplest way to eliminate slop, it’s not necessarily the right thing. There are two more issues: readability and cache locality.</p>
+<p>Programs are not just communications to a computer, they are communications to other human beings. Code readability is important even (or especially!) when the audience of the communication is only your future self.</p>
+<p>A clumsy, mechanical reordering of your structure can harm readability. When possible, it is better to reorder fields so they remain in coherent groups with semantically related pieces of data kept close together. Ideally, the design of your structure should communicate the design of your program.</p>
+<p>When your program frequently accesses a structure, or parts of a structure, it is helpful for performance if the accesses tend to fit within a cache line - the memory block fetched by your processor when it is told to get any single address within the block. On 64-bit x86 a cache line is 64 bytes beginning on a self-aligned address; on other platforms it is often 32 bytes.</p>
+<p>The things you should do to preserve readability - grouping related and co-accessed data in adjacent fields - also improve cache-line locality. These are both reasons to reorder intelligently, with awareness of your code’s data-access patterns.</p>
+<p>If your code does concurrent access to a structure from multiple threads, there’s a third issue: cache line bouncing. To minimize expensive bus traffic, you should arrange your data so that reads come from one cache line and writes go to another in your tighter loops.</p>
+<p>And yes, this sometimes contradicts the previous guidance about grouping related data in the same cache-line-sized block. Multithreading is hard. Cache-line bouncing and other multithread optimization issues are very advanced topics which deserve an entire tutorial of their own. The best I can do here is make you aware that these issues exist.</p>
+<h1 id="other-packing-techniques">Other packing techniques</h1>
+<p>Reordering works best when combined with other techniques for slimming your structures. If you have several boolean flags in a struct, for example, consider reducing them to 1-bit bitfields and packing them into a place in the structure that would otherwise be slop.</p>
+<p>You’ll take a small access-time penalty for this - but if it squeezes the working set enough smaller, that penalty will be swamped by your gains from avoided cache misses.</p>
+<p>More generally, look for ways to shorten data field sizes. In cvs-fast-export, for example, one squeeze I applied was to use the knowledge that RCS and CVS repositories didn't exist before 1982. I dropped a 64-bit Unix <code>time_t</code> (zero date at the beginning of 1970) for a 32-bit time offset from 1982-01-01T00:00:00; this will cover dates to 2118. (Note: if you pull a trick like this, do a bounds check whenever you set the field to prevent nasty bugs!)</p>
+<p>Each such field shortening not only decreases the explicit size of your structure, it may remove slop and/or create additional opportunities for gains from field reordering. Virtuous cascades of such effects are not very hard to trigger.</p>
+<p>The riskiest form of packing is to use unions. If you know that certain fields in your structure are never used in combination with certain other fields, consider using a union to make them share storage. But be extra careful and verify your work with regression testing, because if your lifetime analysis is even slightly wrong you will get bugs ranging from crashes to (much worse) subtle data corruption.</p>
+<h1 id="overriding-alignment-rules">Overriding alignment rules</h1>
+<p>Sometimes you can coerce your compiler into not using the processor’s normal alignment rules by using a pragma, usually <code>#pragma pack</code>. GCC and clang have a &quot;packed&quot; attribute you can attach to individual structure declarations; GCC has an -fpack-struct option for entire compilations.</p>
+<p>Do not do this casually, as it forces the generation of more expensive and slower code. Usually you can save as much memory, or almost as much, with the techniques I describe here.</p>
+<p>The only good reason for <code>#pragma pack</code> is if you have to exactly match your C data layout to some kind of bit-level hardware or protocol requirement, like a memory-mapped hardware port, and violating normal alignment is required for that to work. If you’re in that situation, and you don’t already know everything else I’m writing about here, you’re in deep trouble and I wish you luck.</p>
+<h1 id="tools">Tools</h1>
+<p>The clang compiler has a -Wpadded option that causes it to generate messages about alignment holes and padding. Some versions also have an undocumented -fdump-record-layouts option that yields <a href="http://lists.cs.uiuc.edu/pipermail/cfe-dev/2014-July/037778.html">more information</a>.</p>
+<p>If you're using C11, you can deploy static_assert to check your assumptions about type and structure sizes. Example:</p>
+<pre><code class="language-c">#include &lt;assert.h&gt;
+struct foo4 {
+    short s;     /* 2 bytes */
+    char c;      /* 1 byte */
+};
+static_assert(sizeof(struct foo4) == 4, &quot;Check your assumptions&quot;);
+</code></pre>
+<p>I have not used it myself, but several respondents speak well of a program called pahole. This tool cooperates with a compiler to produce reports on your structures that describe padding, alignment, and cache line boundaries. This was at one time a standalone C program, but that is now unmaintained; s script with the name pahole now ships with gdb and that is what you should use.</p>
+<p>I’ve received a report that a proprietary code auditing tool called &quot;PVS Studio&quot; can detect structure-packing opportunities.</p>
+<h1 id="proof-and-exceptional-cases">Proof and exceptional cases</h1>
+<p>You can download sourcecode for a little program that demonstrates the assertions about scalar and structure sizes made above. It is <a href="http://www.catb.org/esr/structure-packing/packtest.c">packtest.c</a>.</p>
+<p>If you look through enough strange combinations of compilers, options, and unusual hardware, you will find exceptions to some of the rules I have described. They get more common as you go back in time to older processor designs.</p>
+<p>The next level beyond knowing these rules is knowing how and when to expect that they will be broken. In the years when I learned them (the early 1980s) we spoke of people who didn’t get this as victims of &quot;all-the-world’s-a-VAX syndrome&quot;. Remember that not all the world is a PC.</p>
+<h1 id="go-and-rust">Go and Rust</h1>
+<p>The Go language is in many respects similar to C. It has structures and arrays, though not bitfields or unions. Go compilers have the same optimization and alignment issues as C compilers. One important difference is that the Go specification <strong>requires</strong> structure fields to be self-aligned. As in C, array elements are padded up to the following stride address.</p>
+<p>Therefore, if you know the implications of self-aligment in C, you can apply them directly to calculating sizes and offsets in Go and to space-optimizing Go structures. The obvious correspondence mostly works.</p>
+<p>I say &quot;mostly&quot; because Go has one odd quirk. Since Go 1.5, a zero-length field at the end of a struct (that is, a zero-length array or empty struct) is sized and aligned as though it is one byte. The reasons for this are discussed in an essay <a href="https://dave.cheney.net/2015/10/09/padding-is-hard">Padding is Hard</a> by one of the Go developers.</p>
+<p>Rust follows C-like field alignment rules if a structure is annotated with &quot;repr(C)&quot;. Otherwise (by default) all bets are off: padding rules are (deliberately) unspecified and the compiler may even reorder structure members. It is probably best to let the Rust compiler do space optimization rather than forcing it.</p>
+<h1 id="supporting-this-work">Supporting this work</h1>
+<p>If you were educated or entertained by this document, please sign up for my <a href="https://www.patreon.com/esr">Patreon feed</a>. The time needed to write and maintain documents like this one is not free, and while I enjoying giving them to the world my bills won’t pay themselves. Even a few dollars a month - from enough of you - helps a lot.</p>
+<h1 id="related-reading">Related Reading</h1>
+<p>This section exists to collect pointers to essays which I judge to be good companions to this one.</p>
+<p><a href="http://blog.regehr.org/archives/213">A Guide to Undefined Behavior in C and C++</a></p>
+<p><a href="http://www.catb.org/esr/time-programming/">Time, Clock, and Calendar Programming In C</a></p>
+<p><a href="http://www.catb.org/esr/faqs/things-every-hacker-once-knew/">Things Every Hacker Once Knew</a></p>
+<h1 id="version-history">Version history</h1>
+<p>2.2 @ 2019-12-19 Minor markup fix.</p>
+<p>2.1 @ 2019-02-14 Correct a minor error in one of the examples pointed out by Luis Emilio Moreno Durán.</p>
+<p>2.0 @ 2018-08-06 Drop &quot;C&quot; out of the title as these techniques are applicable to Go and Rust as well. More coverage of Go and Rust. The pahole tool has been replaced by a script in the gdb distribution.</p>
+<p>1.19 @ 2018-02-12 Describe usefulness of static_assert() in C11. Added Go and Rust coverage.</p>
+<p>1.18 @ 2017-06-01 More general zero-padding orders. C11 and C14 relax a constraint on bitfield packing.</p>
+<p>1.17 @ 2016-11-14 Typo fixes.</p>
+<p>1.16 @ 2016-10-21 Answer an objection about allocation order being unrelated to source order.</p>
+<p>1.15 @ 2016-10-20 Note the field evidence from NTP.</p>
+<p>1.14 @ 2015-12-19 Typo correction: -Wpadding → -Wpadded.</p>
+<p>1.13 @ 2015-11-23 Be explicit about padding bits being undefined. More about bitfields.</p>
+<p>1.12 @ 2015-11-11 Major revision of section on bitfields reflecting C99 rules.</p>
+<p>1.11 @ 2015-07-23 Mention the clang -fdump-record-layouts option.</p>
+<p>1.10 @ 2015-02-20 Mention attributepacked, -fpack-struct, and PVS Studio.</p>
+<p>1.9 @ 2014-10-01 Added link to &quot;Time, Clock, and Calendar Programming In C&quot;.</p>
+<p>1.8 @ 2014-05-20 Improved explanation for the bitfield examples,</p>
+<p>1.7 @ 2014-05-17 Correct a minor error in the description of the layout of struct foo8.</p>
+<p>1.6 @ 2014-05-14 Emphasize that bitfields cannot cross word boundaries. Idea from Dale Gulledge.</p>
+<p>1.5 @ 2014-01-13 Explain why structure member reordering is not done automatically.</p>
+<p>1.4 @ 2014-01-04 A note about double under x86 Linux.</p>
+<p>1.3 @ 2014-01-03 New sections on awkward scalar cases, readability and cache locality, and tools.</p>
+<p>1.2 @ 2014-01-02 Correct an erroneous address calculation.</p>
+<p>1.1 @ 2014-01-01Explain why aligned accesses are faster. Mention offsetof. Various minor fixes, including the packtest.c download link.</p>
+<p>1.0 @ 2014-01-01 Initial release.</p>
+
+              </div>
+              <div class="post-footer">
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      TechZone
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://harriswilde.github.io/post/LUjp1bkYi" title="The Lost Art of Structure Packing">The Lost Art of Structure Packing</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，转载请注明出处！
+    </li>
+  </ul>
+  <div class="tags">
+    
+      <a href="https://harriswilde.github.io/tag/wPpzBFBxL"># C++</a>
+    
+      <a href="https://harriswilde.github.io/tag/DFrZZfISm"># 数据结构</a>
+    
+      <a href="https://harriswilde.github.io/tag/qrA-i8flt"># Clang</a>
+    
+  </div>
+  <div class="nav">
+    <div class="nav-prev">
+      
+        <i class="fa fa-chevron-left"></i>
+        <a class="nav-pc-next" title="失传的结构体打包艺术" href="https://harriswilde.github.io/post/qb0i5L7tn">失传的结构体打包艺术</a class="nav-pc-next">
+        <a class="nav-mobile-prev" title="失传的结构体打包艺术" href="https://harriswilde.github.io/post/qb0i5L7tn">上一篇</a>
+      
+    </div>
+    <div class="nav-next">
+      
+        <a class="nav-pc-next" title="排序算法：插入排序和希尔排序" href="https://harriswilde.github.io/post/nTjkYzZnf">排序算法：插入排序和希尔排序</a>
+        <a class="nav-mobile-next" title="排序算法：插入排序和希尔排序" href="https://harriswilde.github.io/post/nTjkYzZnf">下一篇</a>
+        <i class="fa fa-chevron-right"></i>
+      
+    </div>
+  </div>
+</div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-box">
+  <footer class="footer">
+    <div class="copyright">
+      © 2019-2020 | TechZone
+    </div>
+    <div class="poweredby">
+      Powered by HarrisWilde
+    </div>
+  </footer>
+  
+  
+  <div class="pisces back-to-top" id="back_to_top">
+    <i class="fa fa-arrow-up"></i>
+    
+    <span class="scrollpercent">
+      <span id="back_to_top_text">0</span>%
+    </span>
+    
+  </div>
+  
+  
+  
+</div>
+<script>
+
+  let sideBarOpen = 'sidebar-open';
+  let body = document.body;
+  let back2Top = document.querySelector('#back_to_top'),
+  back2TopText = document.querySelector('#back_to_top_text'),
+  drawerBox = document.querySelector('#drawer_box'),
+  rightSideBar = document.querySelector('.sidebar'),
+  viewport = document.querySelector('body');
+
+  function scrollAnimation(currentY, targetY) {
+   
+    let needScrollTop = targetY - currentY
+    let _currentY = currentY
+    setTimeout(() => {
+      const dist = Math.ceil(needScrollTop / 10)
+      _currentY += dist
+      window.scrollTo(_currentY, currentY)
+      if (needScrollTop > 10 || needScrollTop < -10) {
+        scrollAnimation(_currentY, targetY)
+      } else {
+        window.scrollTo(_currentY, targetY)
+      }
+    }, 1)
+  }
+
+  back2Top.addEventListener("click", function(e) {
+    scrollAnimation(document.scrollingElement.scrollTop, 0);
+    e.stopPropagation();
+    return false;
+  });
+  
+  window.addEventListener('scroll', function(e) {
+    let percent = document.scrollingElement.scrollTop / (document.scrollingElement.scrollHeight - document.scrollingElement.clientHeight) * 100;
+    if (percent > 1 && !back2Top.classList.contains('back-top-active')) {
+      back2Top.classList.add('back-top-active');
+    }
+    if (percent == 0) {
+      back2Top.classList.remove('back-top-active');
+    }
+    if (back2TopText) {
+      back2TopText.textContent = Math.floor(percent);
+    }
+  });
+
+  
+  let hasCacu = false;
+  window.onresize = function() {
+    if (window.width > 991) {
+      calcuHeight();
+    } else {
+      hasCacu = false;
+    }
+  }
+
+  function calcuHeight() {
+    // 动态调整站点概览高度
+    if (!hasCacu && back2Top.classList.contains('pisces') || back2Top.classList.contains('gemini')) {
+      let sideBar = document.querySelector('.sidebar');
+      let navUl = document.querySelector('#site_nav');
+      sideBar.style = 'margin-top:' + (navUl.offsetHeight + navUl.offsetTop + 15) + 'px;';
+      hasCacu = true;
+    }
+  }
+  calcuHeight();
+  
+  let open = false, MOTION_TIME = 300, RIGHT_MOVE_DIS = '320px';
+
+  if (drawerBox) {
+    let rightMotions = document.querySelectorAll('.right-motion');
+    let right = drawerBox.classList.contains('right');
+
+    let transitionDir = right ? "transition.slideRightIn" : "transition.slideLeftIn";
+
+    let openProp, closeProp;
+    if (right) {
+      openProp = {
+        paddingRight: RIGHT_MOVE_DIS 
+      };
+      closeProp = {
+        paddingRight: '0px'
+      };
+    } else {
+      openProp = {
+        paddingLeft: RIGHT_MOVE_DIS 
+      };
+      closeProp = {
+        paddingLeft: '0px'
+      };
+    }
+
+    drawerBox.onclick = function() {
+      open = !open;
+      window.Velocity(rightSideBar, 'stop');
+      window.Velocity(viewport, 'stop');
+      window.Velocity(rightMotions, 'stop');
+      if (open) {
+        window.Velocity(rightSideBar, {
+          width: RIGHT_MOVE_DIS
+        }, {
+          duration: MOTION_TIME,
+          begin: function() {
+            window.Velocity(rightMotions, transitionDir,{ });
+          }
+        })
+        window.Velocity(viewport, openProp,{
+          duration: MOTION_TIME
+        });
+      } else {
+        window.Velocity(rightSideBar, {
+          width: '0px'
+        }, {
+          duration: MOTION_TIME,
+          begin: function() {
+            window.Velocity(rightMotions, {
+              opacity: 0
+            });
+          }
+        })
+        window.Velocity(viewport, closeProp ,{
+          duration: MOTION_TIME
+        });
+      }
+      for (let i = 0; i < drawerBox.children.length; i++) {
+        drawerBox.children[i].classList.toggle('muse-line');
+      }
+      drawerBox.classList.toggle(sideBarOpen);
+    }
+  }
+
+  // 代码高亮
+  hljs.initHighlightingOnLoad();
+</script>
+    </div>
+  </body>
+  <script src="/media/js/motion.js"></script>
+</html>
