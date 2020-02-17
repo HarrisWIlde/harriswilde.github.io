@@ -6,7 +6,7 @@
 <title>排序算法：冒泡排序及其优化 | TechZone</title>
 <meta name="keywords" content="TechZone">
 <meta name="description" content="HarrisWilde祝诸君元旦快乐🎉">
-<link rel="shortcut icon" href="https://harriswilde.github.io/favicon.ico?v=1581949743403">
+<link rel="shortcut icon" href="https://harriswilde.github.io/favicon.ico?v=1581952551471">
 <link rel="stylesheet" href="https://harriswilde.github.io/styles/main.css">
 
 <link rel="stylesheet" href="/media/css/pisces.css">
@@ -468,12 +468,12 @@ window.addEventListener('load', function() {
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>4分钟</span>
+      <span>5分钟</span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>807<span class="pc-show">字数</span></span>
+      <span>927<span class="pc-show">字数</span></span>
     </span>
   </div>
 </header>
@@ -531,62 +531,105 @@ void sort(int arr[])
 <p>当然是有的。</p>
 <h1 id="冒泡排序优化版鸡尾酒排序">冒泡排序优化版：鸡尾酒排序</h1>
 <p>我们所设想的，应该是这样：</p>
-<img src="https://s2.ax1x.com/2020/02/13/1qGs1I.gif" alt="冒泡优化" style="zoom:67%;" />
+<img src="https://s2.ax1x.com/2020/02/17/3iGzhd.gif" alt="鸡尾酒排序" style="zoom:67%;" />
 <p>这个思路也很好实现。只需要设一个变量用来做标记，当某一次遍历的时候，一个元素都没有替换，那么就可以视为已经有序，后面的遍历就全省了。</p>
 <p>代码实现如下：</p>
 <p>C:</p>
 <pre><code class="language-c">#include &lt;stdio.h&gt;
-void sort(int arr[])
+void swap(int a[], b, c)//设置交换数据的函数
 {
-    for (int i = 0; i &lt; sizeof(arr)/sizeof(arr[0]) - 1; i++)
+    int temp = 0;
+    if (b &lt; c)
     {
-        int flag = 1;//设置标记，每轮循环都初始化为1
-        for(int j = 0; j &lt; sizeof(arr)/sizeof(arr[0]) - 1 - i; j++)
+        if (a[b] &gt; a[c])
         {
-            int temp = 0;
-            if (arr[j] &gt; arr[j + 1])
-            {
-                temp = arr[j];
-                arr[j] = arr[j + 1];
-                arr[j + 1] = temp;
-                flag = 0;//当发生元素交换的时候，将其改变为0
-            }
-        }
-        if (flag)//当标记为真。即为1的时候，跳出循环
-        {
-            break;
+            temp = a[b];
+            a[b] = a[c];
+            a[c] = temp;
         }
     }
+}
+
+void cocatailSort(int a[])
+{
+    int length = sizeof(a)/sizeof(a[0]);
+    int flag1 = 1, flag2 = 1;
+    for (int i = 0, i &lt; length / 2, i++)
+    {
+        flag1 = 1;
+        flag2 = 1;
+        for(int j=i;j&lt;length-i-1;j++)
+        {
+            if(array[j] &gt; array[j+1]) { 
+            swap(array, j, j+1) ; 
+            flag1 = false ; //若已交换则更改变量
+        }
+        for(int j=length-i-1;j&gt;i;j--)
+        { 
+            if(array[j] &lt; array[j-1])
+            { 
+                 swap(array, j-1, j) ; 
+                 flag2 = false ; //若已交换则更改变量
+            } 
+        } 
+        if(flag1 &amp;&amp; flag2)
+        { //来回一趟都没有交换则跳出
+            break ; 
+        }
 }
 </code></pre>
 <p>Java:</p>
-<pre><code class="language-java">public static void sort(int arr[]){
-    for( int i = 0;i &lt; arr.length - 1 ; i++ ){
-        boolean flag = true;//设置布尔变量，每轮循环初始化为真
-        for( int j = 0;j &lt; arr.length - 1 - i ; j++ ){
-            int temp = 0;
-            if(arr[j] &lt; arr[j + 1]){
-                temp = arr[j];
-                arr[j] = arr[j + 1];
-                arr[j + 1] = temp;
-                flag = false;//有变量交换，就更改为假
-            }
-        }
-        if(flag){//若一轮循环中没有改变变量，则跳出循环
-            break;
-        }
-    }
-}
+<pre><code class="language-java">public static void swap(int[] a, int b, int c) { //交换数据的函数
+    int temp = 0 ; 
+    if(b &lt; c) { 
+      if(a[b] &gt; a[c]) { 
+        temp = a[b] ; 
+        a[b] = a[c] ; 
+        a[c] = temp ;  
+      } 
+    } 
+  } 
+
+public static void cocatailSortFlag(int[] array) { 
+    int length = array.length ; 
+    boolean flag1,flag2 = true ; 
+    //来回循环length/2次 
+    for(int i=0;i&lt;length/2;i++) { 
+      flag1 = true ; //初始化标记变量
+      flag2 = true ; 
+      for(int j=i;j&lt;length-i-1;j++) { 
+        if(array[j] &gt; array[j+1]) { 
+          swap(array, j, j+1) ; 
+          flag1 = false ; //若已交换则更改变量
+        } 
+      } 
+      for(int j=length-i-1;j&gt;i;j--) { 
+        if(array[j] &lt; array[j-1]) { 
+          swap(array, j-1, j) ; 
+          flag2 = false ; //若已交换则更改变量
+        } 
+      } 
+      if(flag1 &amp;&amp; flag2) { //来回一趟都没有交换则跳出
+        break ; 
+      } 
+    } 
+  } 
 </code></pre>
 <p>Python:</p>
 <pre><code class="language-python">def sort(arr):
-    for i in range(len(arr)):
-        flag = True #此处设置标记
-        for j in range(len(arr) - i):
-            if arr[j] &gt; arr[j + 1]:
-                arr[j], arr[j + 1] = arr[j + 1], arr[j]
-                flag = False #若有元素被交换，则更改标记
-        if flag: #若一轮中没有任何变量被交换，则跳出循环
+    flag1, flag2 = True
+    #来回循环len/2次
+    for i in range(len(arr) - 2):
+        flag1, flag2 = True
+        for j in range(i, len(arr) - i - 1):
+            if arr[j] &gt; arr[j+1]:
+                arr[j], arr[j+1] = arr[j+1], arr[j]
+                flag1 = False
+        for j in range(len(arr) - i - 1, i, -1):
+            if arr[j] &lt; arr[j+1]:
+                arr[j], arr[j+1] = arr[j+1], arr[j]
+                flag2 = False
+        if flag1 and flag2:
             break
 </code></pre>
 
