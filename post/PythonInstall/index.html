@@ -6,7 +6,7 @@
 <title>Python的安装以及环境配置 | TechZone</title>
 <meta name="keywords" content="TechZone">
 <meta name="description" content="HarrisWilde祝诸君元旦快乐🎉">
-<link rel="shortcut icon" href="https://harriswilde.github.io/favicon.ico?v=1582594721305">
+<link rel="shortcut icon" href="https://harriswilde.github.io/favicon.ico?v=1582886178550">
 <link rel="stylesheet" href="https://harriswilde.github.io/styles/main.css">
 
 <link rel="stylesheet" href="/media/css/pisces.css">
@@ -541,7 +541,7 @@ operable program or batch file.
 <hr>
 <h1 id="linux和unix">Linux和Unix</h1>
 <p>绝大部分的Linux和Unix系统（包括MacOS）都是内置Python解释器的，你只需要打开终端提示符，输入以下命令：</p>
-<pre><code>$ python
+<pre><code class="language-shell">$ python
 </code></pre>
 <p>这会启动Python交互解释器，同时也应该有下面这样的输出：</p>
 <pre><code>Python 2.5.1 (r251:54869, Apr 18 2007, 22:08:04)
@@ -550,7 +550,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 &gt;&gt;&gt;▮
 </code></pre>
 <p>如果没有安装的话，可能会得到下面的错误：</p>
-<pre><code>bash: python: command not found
+<pre><code class="language-shell">bash: python: command not found
 </code></pre>
 <p>那么，你就要自己安装了。</p>
 <h2 id="使用包管理器">使用包管理器</h2>
@@ -559,10 +559,10 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <p>注意，在Linux中使用包管理安装器安装Python的时候可能需要具备系统管理员（root账户）权限。</p>
 </blockquote>
 <p>例如，如果使用的操作系统位Debian Linux，那么可以使用下面的命令来安装Python：</p>
-<pre><code>$ apt-get install python
+<pre><code class="language-shell">$ apt-get install python
 </code></pre>
 <p>如果是Gentoo Linux，则可以使用：</p>
-<pre><code>$ emerge python
+<pre><code class="language-shell">$ emerge python
 </code></pre>
 <blockquote>
 <p>许多包管理器都有自动下载的功能，包括Yum、Synaptic（Unbuntu Linux专有的包管理器）以及其他Debian样式的管理器。你能够通过这些管理器获得Python的最新版本。</p>
@@ -574,14 +574,14 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <li>按照说明下载源代码</li>
 <li>下载拓展名为<code>.tgz</code>的文件，将其保存在临时的位置。假设你想将Python安装在自己的主目录，那么可以将它放置在类似于<code>~/python</code>的目录中。进入这个目录（比如使用<code>cd ~/python</code>命令）。</li>
 <li>使用<code>tar -xzvf Python-3.7.tgz</code>(3.7是版本号)解压缩文件。如果使用的tar版本不支持<code>z</code>选项，那么可以先使用gunzip进行解压，然后再使用<code>tar -xvf</code>命令。如果解压缩的过程中出错，那你就试试重新下载，因为下载的时候也有可能会出错。</li>
-<li>进入解压好的文件夹：<pre><code>$ cd Python-3.7
+<li>进入解压好的文件夹：<pre><code class="language-shell">$ cd Python-3.7
 </code></pre>
-执行下面的命令：<pre><code>./configue --perfix=$(pwd)
+执行下面的命令：<pre><code class="language-shell">./configue --perfix=$(pwd)
 make
 make install
 </code></pre>
 最后应该可以再当前文件夹内找到一个名为python的可执行文件（如果上面的步骤无效的话，那就看看包含在发布版中的README文件）。将当前文件夹的路径包含在环境变量PATH中，这样安装就大功告成了！<br>
-如果要看看其他的配置命令，那么就使用以下的命令：<pre><code>./configue --help
+如果要看看其他的配置命令，那么就使用以下的命令：<pre><code class="language-shell">./configue --help
 </code></pre>
 </li>
 </ol>
