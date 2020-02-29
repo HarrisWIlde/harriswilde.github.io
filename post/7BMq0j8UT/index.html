@@ -1,0 +1,2026 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>C语言之结构体（下） | TechZone</title>
+<meta name="keywords" content="TechZone">
+<meta name="description" content="HarrisWilde祝诸君元旦快乐🎉">
+<link rel="shortcut icon" href="https://harriswilde.github.io/favicon.ico?v=1582950458146">
+<link rel="stylesheet" href="https://harriswilde.github.io/styles/main.css">
+
+<link rel="stylesheet" href="/media/css/pisces.css">
+
+<link rel="stylesheet" href="/media/fonts/font-awesome.css">
+<link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Rosario:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+<link href="/media/hljs/styles/prism.css" rel="stylesheet">  
+<script src="/media/hljs/highlight.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.ui.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+    <meta name="description" content="C语言之结构体（下）" />
+    <meta name="keywords" content="C,数据结构" />
+    <meta name="theme-color" content="#222222"/>
+  </head>
+  <body>
+    <div class="head-top-line"></div>
+    <div class="header-box">
+      
+<div class=" pisces">
+  <header class="header bg-color ">
+    <div class="blog-header box-shadow-wrapper bg-color " id="header">
+      <div class="nav-toggle" id="nav_toggle">
+        <div class="toggle-box">
+          <div class="line line-top"></div>
+          <div class="line line-center"></div>
+          <div class="line line-bottom"></div>
+        </div>
+      </div>
+      <div class="site-meta">       
+        <div class="site-title">
+          
+            <a href="/" class="brand">
+              <span>TechZone</span>
+            </a>  
+          
+        </div>
+        
+          <p class="subtitle">HarrisWilde的官方个人博客</p>
+        
+      </div>
+      <nav class="site-nav" id="site_nav">
+        <ul id="nav_ul">
+          
+            <li class="nav-item ">
+              
+                <a href="/">
+                  <i class="fa fa-home"></i> 首页
+                </a>
+              
+            </li>
+          
+            <li class="nav-item ">
+              
+                <a href="/archives">
+                  <i class="fa fa-archive"></i> 归档
+                </a>
+              
+            </li>
+          
+            <li class="nav-item ">
+              
+                <a href="/tags">
+                  <i class="fa fa-tags"></i> 分类
+                </a>
+              
+            </li>
+          
+            <li class="nav-item ">
+              
+                <a href="https://www.jianshu.com/u/766d2f134900" target="_blank">
+                  <i class="fa fa-globe"></i> 简书
+                </a>
+              
+            </li>
+          
+          <li class="nav-item">
+            <a>
+              <i class="fa fa-search"></i> 搜索
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+</div>
+
+<script type="text/javascript"> 
+ 
+  let showNav = true;
+
+  let navToggle = document.querySelector('#nav_toggle'),
+  siteNav = document.querySelector('#site_nav');
+  
+  function navClick() {
+    let sideBar = document.querySelector('.sidebar');
+    let navUl = document.querySelector('#nav_ul');
+    navToggle.classList.toggle('nav-toggle-active');
+    siteNav.classList.toggle('nav-menu-active');
+    if (siteNav.classList.contains('nav-menu-active')) {
+      siteNav.style = "height: " + (navUl.children.length * 42) +"px !important";
+    } else {
+      siteNav.style = "";
+    }
+  }
+
+  navToggle.addEventListener('click',navClick);  
+</script>
+    </div>
+    <div class="main-continer">
+      
+      <div class="section-layout pisces ">
+        <div class="section-layout-wrapper">
+          
+
+<div class="sidebar">
+    <div class="sidebar-box box-shadow-wrapper bg-color right-motion" id="sidebar">
+      
+        <div class="post-list-sidebar">
+          <div class="sidebar-title">
+            <span id="tocSideBar" class="sidebar-title-item sidebar-title-active">文章目录</span>
+            <span id="metaSideBar" class="sidebar-title-item">站点概览</span>
+          </div>
+        </div>
+      
+      <div class="sidebar-body pisces" id="sidebar_body">
+        
+          <div class="post-side-meta" id="post_side_meta">
+            
+<div class="sidebar-wrapper box-shadow-wrapper bg-color">
+  <div class="sidebar-item">
+    <img class="site-author-image right-motion" src="https://harriswilde.github.io/images/avatar.png"/>
+    <p class="site-author-name">TechZone</p>
+    <p class="site-description right-motion">2020，共同进步！</p>
+  </div>
+  <div class="sidebar-item side-item-stat right-motion">
+    <div class="sidebar-item-box">
+      <a href="/archives/">
+        
+        <span class="site-item-stat-count">27</span>
+        <span class="site-item-stat-name">文章</span>
+      </a>
+    </div>
+    <div class="sidebar-item-box">
+      <a href="">
+        <span class="site-item-stat-count">7</span>
+        <span class="site-item-stat-name">分类</span>
+      </a>
+    </div>
+    <div class="sidebar-item-box">
+      <a href="/tags/">
+        <span class="site-item-stat-count">7</span>
+        <span class="site-item-stat-name">标签</span>
+      </a>
+    </div>
+  </div>
+  
+    
+      <div class="sidebar-item">
+        <span class="site-item-rss">
+            <i class="fa fa-rss"></i>
+            <a href="https://harriswilde.github.io/atom.xml" target="_blank">RSS</a>
+        </span>
+      </div>
+    
+  
+  
+
+
+</div>
+          </div>
+          <div class="post-toc sidebar-body-active" id="post_toc" style="opacity: 1;">
+            <div class="toc-box right-motion">
+  <div class="toc-wrapper auto-number auto" id="toc_wrapper">
+    <ul class="markdownIt-TOC">
+<li><a href="#%E5%8A%A8%E6%80%81%E7%94%B3%E8%AF%B7%E7%BB%93%E6%9E%84%E4%BD%93">动态申请结构体</a></li>
+<li><a href="#%E5%AE%9E%E6%88%98%E5%BB%BA%E7%AB%8B%E4%B8%80%E4%B8%AA%E5%9B%BE%E4%B9%A6%E9%A6%86%E6%95%B0%E6%8D%AE%E5%BA%93">实战：建立一个图书馆数据库</a></li>
+<li><a href="#%E5%8D%95%E9%93%BE%E8%A1%A8">单链表</a>
+<ul>
+<li><a href="#%E5%9C%A8%E5%8D%95%E9%93%BE%E8%A1%A8%E4%B8%AD%E6%8F%92%E5%85%A5%E5%85%83%E7%B4%A0">在单链表中插入元素</a>
+<ul>
+<li><a href="#%E5%A4%B4%E6%8F%92%E6%B3%95">头插法</a></li>
+<li><a href="#%E5%B0%BE%E6%8F%92%E6%B3%95">尾插法</a></li>
+</ul>
+</li>
+<li><a href="#%E6%90%9C%E7%B4%A2%E5%8D%95%E9%93%BE%E8%A1%A8">搜索单链表</a></li>
+<li><a href="#%E6%8F%92%E5%85%A5%E7%BB%93%E7%82%B9%E5%88%B0%E6%8C%87%E5%AE%9A%E4%BD%8D%E7%BD%AE">插入结点到指定位置</a></li>
+<li><a href="#%E5%88%A0%E9%99%A4%E7%BB%93%E7%82%B9">删除结点</a></li>
+</ul>
+</li>
+<li><a href="#%E5%86%85%E5%AD%98%E6%B1%A0">内存池</a></li>
+<li><a href="#typedef">typedef</a>
+<ul>
+<li><a href="#%E7%BB%99%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%B5%B7%E5%88%AB%E5%90%8D">给数据类型起别名</a></li>
+<li><a href="#%E7%BB%93%E6%9E%84%E4%BD%93%E7%9A%84%E6%90%AD%E6%A1%A3">结构体的搭档</a></li>
+<li><a href="#%E8%BF%9B%E9%98%B6">进阶</a></li>
+</ul>
+</li>
+<li><a href="#%E5%85%B1%E7%94%A8%E4%BD%93">共用体</a>
+<ul>
+<li><a href="#%E5%A3%B0%E6%98%8E">声明</a></li>
+<li><a href="#%E5%88%9D%E5%A7%8B%E5%8C%96">初始化</a></li>
+</ul>
+</li>
+<li><a href="#%E6%9E%9A%E4%B8%BE">枚举</a></li>
+<li><a href="#%E4%BD%8D%E5%9F%9F">位域</a></li>
+</ul>
+
+  </div>
+</div>
+
+<script>
+
+let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1; 
+let active = 'active-show', activeClass = 'active-current';
+let tocWrapper = document.querySelector('#toc_wrapper');
+let tocContent = tocWrapper.children[0];
+let autoNumber = tocWrapper&&tocWrapper.classList.contains('auto-number');
+
+function addTocNumber(elem, deep) {
+  if (!elem) {
+    return;
+  }
+  let prop = elem.__proto__;
+
+  if (prop === HTMLUListElement.prototype) {
+    for (let i = 0; i < elem.children.length; i++) {
+      addTocNumber(elem.children[i], deep + (i + 1) + '.');
+    }
+  } else if (prop === HTMLLIElement.prototype) {
+    // 保存li元素
+    lList.push(elem);
+    for (let i = 0; i < elem.children.length; i++) {
+      let cur = elem.children[i];
+      if (cur.__proto__ === HTMLAnchorElement.prototype) {
+        if (autoNumber) {
+          cur.text =  deep + ' ' + cur.text;
+        }
+      } else if (cur.__proto__ === HTMLUListElement.prototype) {
+        addTocNumber(cur, deep);
+      }
+    }
+  }
+}
+
+
+document.addEventListener('scroll', function(e) {
+  if (lList.length <= 0) {
+    return;
+  }
+  let scrollTop = document.scrollingElement.scrollTop;
+  let dir;
+
+  if (lastTop - scrollTop > 0) {
+    dir = 'up';
+  } else {
+    dir = 'down';
+  }
+
+  lastTop = scrollTop;
+  if (scrollTop <= 0) {
+    if (lastIndex >= 0 && lastIndex < hList.length) {
+      lList[lastIndex].classList.remove(activeClass);
+    }
+    return;
+  }
+
+  let current = 0, hasFind = false;
+  for (let i = 0; i < hList.length; i++) {
+    if (hList[i].offsetTop > scrollTop) {
+      current = i;
+      hasFind = true;
+      break;
+    }
+  }
+  if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
+    current = hList.length - 1;
+  } else {
+    current--;
+  }
+  if (dir === 'down') {
+    if (current > lastIndex) {
+      addActiveClass(current);
+      removeActiveClass(lastIndex) 
+      lastIndex = current;
+      removeParentActiveClass();
+      lList[current] && addActiveLiElemment(lList[current].parentElement,tocContent);
+    }
+  } else {
+    if (current < lastIndex) {
+      addActiveClass(current);
+      removeActiveClass(lastIndex);
+      lastIndex = current;
+      removeParentActiveClass();
+      lList[current] && addActiveLiElemment(lList[current].parentElement,tocContent);
+    }
+  }
+});
+
+function removeParentActiveClass() {
+  let parents = tocContent.querySelectorAll('.'+active)
+  parents.forEach(function(elem) {
+    elem.classList.remove(active);
+  });
+}
+
+function addActiveClass(index) {
+  if (index >= 0 && index < hList.length) {
+    lList[index].classList.add(activeClass);
+  }
+}
+
+function removeActiveClass(index) {
+  if (index >= 0 && index < hList.length) {
+    lList[index].classList.remove(activeClass);
+  }
+}
+
+function addActiveLiElemment(elem, parent) {
+  if (!elem || elem === parent) {
+    return;
+  } else {
+    if (elem.__proto__ === HTMLLIElement.prototype) {
+      elem.classList.add(active);
+    }
+    addActiveLiElemment(elem.parentElement, parent);
+  }
+}
+
+function showToc() {
+  if (tocWrapper) {
+    postBody = document.querySelector('#post_body');
+    for (let i = 0; i < postBody.children.length; i++) {
+      if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
+        hList.push(postBody.children[i]);
+      }
+    }
+    if (tocWrapper.classList.contains('compress')) {
+        tocContent.classList.add('closed');
+    } else if (tocWrapper.classList.contains('no_compress')){
+      tocContent.classList.add('expanded');
+    } else {
+      if (hList.length > 10) {
+        active = 'active-hidden'
+        tocContent.classList.add('closed');
+      } else {
+        tocContent.classList.add('expanded');
+      }
+    }
+  }
+}
+addTocNumber(tocContent, '');
+
+window.addEventListener('load', function() {
+  showToc();
+  document.querySelector('#sidebar').style='display: block;';
+  tocWrapper.classList.add('toc-active');
+  setTimeout(function() {
+    if ("createEvent" in document) {
+      let evt = document.createEvent("HTMLEvents");
+      evt.initEvent("scroll", false, true);
+      document.dispatchEvent(evt);
+    }
+    else {
+      document.fireEvent("scroll");
+    }
+  }, 500)
+})
+
+</script>
+          </div>
+        
+      </div>
+    </div>
+</div>
+<script>
+  const SIDEBAR_TITLE_ACTIVE = 'sidebar-title-active';
+  const SIDEBAR_BODY_ACTIVE = 'sidebar-body-active';
+  const SLIDE_UP_IN = 'slide-up-in';
+
+  let sidebar = document.querySelector('#sidebar'),
+  tocSideBar = document.querySelector('#tocSideBar'),
+  metaSideBar = document.querySelector('#metaSideBar'),
+  postToc = document.querySelector('#post_toc'),
+  postSiteMeta = document.querySelector('#post_side_meta'),
+  sidebarTitle = document.querySelector('.sidebar-title'),
+  sidebarBody = document.querySelector('#sidebar_body');
+
+  tocSideBar && tocSideBar.addEventListener('click', (e) => {
+    toggleSidebar(e);
+  });
+
+  metaSideBar && metaSideBar.addEventListener('click', (e) => {
+    toggleSidebar(e);
+  });
+
+  function toggleSidebar(e) {
+    let currentTitle = document.querySelector("."+SIDEBAR_TITLE_ACTIVE);
+    if (currentTitle == e.srcElement) {
+      return ;
+    }
+    let current, showElement, hideElement;
+    if (e.srcElement == metaSideBar) {
+      showElement = postSiteMeta;
+      hideElement = postToc;
+    } else if (e.srcElement == tocSideBar){
+      showElement = postToc;
+      hideElement = postSiteMeta;
+    }
+    currentTitle.classList.remove(SIDEBAR_TITLE_ACTIVE);
+    e.srcElement.classList.add(SIDEBAR_TITLE_ACTIVE);
+
+    window.Velocity(hideElement, 'stop');
+    window.Velocity(hideElement, 'transition.slideUpOut', {
+      display: 'none',
+      duration: 200,
+      complete: function () {
+        window.Velocity(showElement, 'transition.slideDownIn', {
+          duration: 200
+        });
+      }
+    })
+    hideElement.classList.remove(SIDEBAR_BODY_ACTIVE);
+    showElement.classList.add(SIDEBAR_BODY_ACTIVE);
+  }
+
+  postToc.addEventListener('transitionend', function() {
+    this.classList.remove(SLIDE_UP_IN);
+  });
+
+
+  if (sidebarBody.classList.contains('pisces') || sidebarBody.classList.contains('gemini')) {
+    let hasFix = false;
+    let scrollEl = document.querySelector('.main-continer');
+    let limitTop = document.querySelector('#nav_ul').children.length * 42 + 162;
+    window.addEventListener('scroll', function(e) {
+    if (document.scrollingElement.scrollTop >= limitTop) {
+      if (!hasFix) {
+        sidebar.classList.add('sidebar-fixed');
+        hasFix = true;
+      }
+    } else {
+      if (hasFix) {
+        sidebar.classList.remove('sidebar-fixed');
+        hasFix = false;
+      }
+    }
+  });
+  }
+  
+</script>
+          <div class="section-box box-shadow-wrapper">
+            <div class="section bg-color post post-page">
+              <div class="article-box">
+    <header class="post-header">
+  <h1 class="post-title">
+    <a class="post-title-link" href="https://harriswilde.github.io/post/7BMq0j8UT/">
+      C语言之结构体（下）
+    </a>
+  </h1>
+  <div class="post-meta">
+    
+    <span class="meta-item pc-show">
+      <i class="fa fa-calendar-o"></i>
+      <span>发布于</span>
+      <span>2020-02-29</span>
+    </span>
+    
+      <span class="meta-item">
+        <span class="post-meta-divider pc-show">|</span>
+        <i class="fa fa-folder-o"></i>
+        <span class="pc-show">分类于</span>
+        
+          
+            <a href="https://harriswilde.github.io/tag/VC6KZQgdc/">
+              <span>C</span>
+            </a>、
+          
+        
+          
+            <a href="https://harriswilde.github.io/tag/DFrZZfISm/">
+              <span>数据结构</span>
+            </a>
+          
+        
+      </span>
+      <span class="post-meta-divider">|</span>
+    
+    <span class="meta-item">
+      <i class="fa fa-clock-o"></i>
+      <span>32分钟</span>
+    </span>
+    <span class="meta-item">
+      <span class="post-meta-divider">|</span>
+      <i class="fa fa-file-word-o"></i>
+      <span>7152<span class="pc-show">字数</span></span>
+    </span>
+  </div>
+</header>
+</div>
+              <div class="post-body next-md-body" id="post_body">
+                <h1 id="动态申请结构体">动态申请结构体</h1>
+<p>结构体也可以在堆里面动态申请：</p>
+<pre><code class="language-c">//Example 01
+#include &lt;stdio.h&gt;
+...
+int main(void)
+{
+    struct Info *i1;
+    struct Info *i2;
+    
+    i1 = (struct Info *)malloc(sizeof(struct Info));
+    i2 = (struct Info *)malloc(sizeof(struct Info));
+    if (i1 == NULL || i2 == NULL)
+    {
+        printf(&quot;内存分配失败！\n&quot;);
+        exit(1);
+    }
+    
+    printf(&quot;请录入第一个同学的信息...\n&quot;);
+    getInput(i1);
+    putchar('\n');
+    printf(&quot;请录入第二个学生的信息...\n&quot;);
+    getInput(i2);
+
+    printf(&quot;\n录入完毕，现在开始打印...\n\n&quot;);
+    printf(&quot;打印第一个学生的信息...\n&quot;);
+    printInfo(i1);
+    putchar('\n');
+    printf(&quot;打印第二个学生的信息...\n&quot;);
+    printInfo(i2);
+    
+    free(i1);
+    free(i2);
+    
+    return 0;
+}
+</code></pre>
+<h1 id="实战建立一个图书馆数据库">实战：建立一个图书馆数据库</h1>
+<p>实际上，我们建立的数组可以是指向结构体指针的数组。</p>
+<p>代码实现如下：</p>
+<pre><code class="language-c">//Example 02
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+#define MAX_SIZE 100
+
+struct Date
+{
+    int year;
+    int month;
+    int day;
+};
+
+struct Book
+{
+    char title[128];
+    char author[48];
+    float price;
+    struct Date date;
+    char publisher[48];
+};
+
+void getInput(struct Book* book);//录入数据
+void printBook(struct Book* book);//打印数据
+void initLibrary(struct Book* lib[]);//初始化结构体
+void printLibrary(struct Book* lib[]);//打印单本书数据
+void releaseLibrary(struct Book* lib[]);//释放内存
+
+void getInput(struct Book* book)
+{
+    printf(&quot;请输入书名：&quot;);
+    scanf(&quot;%s&quot;, book-&gt;title);
+    printf(&quot;请输入作者：&quot;);
+    scanf(&quot;%s&quot;, book-&gt;author);
+    printf(&quot;请输入售价：&quot;);
+    scanf(&quot;%f&quot;, &amp;book-&gt;price);
+    printf(&quot;请输入出版日期：&quot;);
+    scanf(&quot;%d-%d-%d&quot;, &amp;book-&gt;date.year, &amp;book-&gt;date.month, &amp;book-&gt;date.day);
+    printf(&quot;请输入出版社：&quot;);
+    scanf(&quot;%s&quot;, book-&gt;publisher);
+}
+
+void printBook(struct Book* book)
+{
+    printf(&quot;书名：%s\n&quot;, book-&gt;title);
+    printf(&quot;作者：%s\n&quot;, book-&gt;author);
+    printf(&quot;售价：%.2f\n&quot;, book-&gt;price);
+    printf(&quot;出版日期：%d-%d-%d\n&quot;, book-&gt;date.year, book-&gt;date.month, book-&gt;date.day);
+    printf(&quot;出版社：%s\n&quot;, book-&gt;publisher);
+}
+
+void initLibrary(struct Book* lib[])
+{
+    for (int i = 0; i &lt; MAX_SIZE; i++)
+    {
+        lib[i] = NULL;
+    }
+}
+
+void printLibrary(struct Book* lib[])
+{
+    for (int i = 0; i &lt; MAX_SIZE; i++)
+    {
+        if (lib[i] != NULL)
+        {
+            printBook(lib[i]);
+            putchar('\n');
+        }
+    }
+}
+
+void releaseLibrary(struct Book* lib[])
+{
+    for (int i = 0; i &lt; MAX_SIZE; i++)
+    {
+        if (lib[i] != NULL)
+        {
+            free(lib[i]);
+        }
+    }
+}
+
+int main(void)
+{
+    struct Book* lib[MAX_SIZE];
+    struct Book* p = NULL;
+    int ch, index = 0;
+
+    initLibrary(lib);
+
+    while (1)
+    {
+        printf(&quot;请问是否要录入图书信息(Y/N):&quot;);
+        do
+        {
+            ch = getchar();
+        } while (ch != 'Y' &amp;&amp; ch != 'N');
+
+        if (ch == 'Y')
+        {
+            if (index &lt; MAX_SIZE)
+            {
+                p = (struct Book*)malloc(sizeof(struct Book));
+                getInput(p);
+                lib[index] = p;
+                index++;
+                putchar('\n');
+            }
+            else
+            {
+                printf(&quot;数据库已满！\n&quot;);
+                break;
+            }
+        }
+        else
+        {
+            break;
+        }
+    }
+
+    printf(&quot;\n数据录入完毕，开始打印验证...\n\n&quot;);
+    printLibrary(lib);
+    releaseLibrary(lib);
+
+    return 0;
+}
+</code></pre>
+<p>运行结果如下：</p>
+<pre><code>//Consequence 02
+请问是否要录入图书信息(Y/N):Y
+请输入书名：人类简史
+请输入作者：尤瓦尔·赫拉利
+请输入售价：32.25
+请输入出版日期：2016-3-4
+请输入出版社：中信出版集团
+
+请问是否要录入图书信息(Y/N):N
+
+数据录入完毕，开始打印验证...
+
+书名：人类简史
+作者：尤瓦尔·赫拉利
+售价：32.25
+出版日期：2016-3-4
+出版社：中信出版集团
+</code></pre>
+<h1 id="单链表">单链表</h1>
+<p>我们知道，数组变量在内存中，是连续的，而且不可拓展。显然在一些情况下，这种数据结构拥有很大的局限性。比如移动数据的时候，会牵一发而动全身，尤其是反转这种操作更加令人窒息。那么，需要需要一种数据结构来弄出一种更加灵活的“数组”，那么这，就是<strong>链表</strong>。</p>
+<p>本节我们只讲讲单链表。</p>
+<p>所谓链表，就是由一个个<strong>结点</strong>组成的一个数据结构。每个结点都有<strong>数据域</strong>和<strong>指针域</strong>组成。其中数据域用来存储你想要存储的信息，而指针域用来存储下一个结点的地址。如图：</p>
+<figure data-type="image" tabindex="1"><img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1582172126913&amp;di=6235443bc28e35d4d02c9032141a9a3a&amp;imgtype=jpg&amp;src=http%3A%2F%2Fimg1.imgtn.bdimg.com%2Fit%2Fu%3D3182779591%2C3019656518%26fm%3D214%26gp%3D0.jpg" alt="单链表" loading="lazy"></figure>
+<p>当然，链表最前面还有一个头指针，用来存储头结点的地址。</p>
+<p>这样一来，链表中的每一个结点都可以不用挨个存放，因为有了指针把他们串起来。因此结点放在哪都无所谓，反正指针总是能够指向下一个元素。我们只需要知道头指针，就能够顺藤摸瓜地找到整个链表。</p>
+<p>因此对于学籍数据库来说，我们只需要在Info结构体中加上一个指向自身类型的成员即可：</p>
+<pre><code class="language-c">struct Info
+{
+    unsigned long identifier;
+    char name[20];
+    struct Date date;
+    unsigned int years;
+    struct Info* next;
+};
+</code></pre>
+<h2 id="在单链表中插入元素">在单链表中插入元素</h2>
+<h3 id="头插法">头插法</h3>
+<figure data-type="image" tabindex="2"><img src="https://upload-images.jianshu.io/upload_images/10074272-da68e6d07f274ea0.jpg" alt="头插法" loading="lazy"></figure>
+<p>这种每次都将数据插入单链表的头部（头指针后面）的插入法就叫头插法。</p>
+<p>如果要把学生信息加入到单链表，可以这么写：</p>
+<pre><code class="language-c">void addInfo(struct Info** students)//students是头指针
+{
+    struct Info* info, *temp;
+    info = (struct Info*)malloc(sizeof(struct Info));
+    if (info == NULL)
+    {
+        printf(&quot;内存分配失败！\n&quot;);
+        exit(1);
+    }
+    
+    getInput(info);
+    
+    if (*students != NULL)
+    {
+        temp = *students;
+        *students = info;
+        info-&gt;next = temp;
+    }
+    else
+    {
+        *students = info;
+        info-&gt;next = NULL;
+    }
+}
+</code></pre>
+<blockquote>
+<p>由于students存放的是头指针，因此我们需要传入它的地址传递给函数，才能够改变它本身的值。而students本身又是一个指向Info结构体的指针，所以参数的类型应该就是<code>struct Info**</code>。</p>
+</blockquote>
+<p>往单链表里面添加一个结点，也就是先申请一个结点，然后判断链表是否为空。如果为空，那么直接将头指针指向它，然后<code>next</code>成员指向<code>NULL</code>。若不为空，那么先将<code>next</code>指向头指针原本指向的结点，然后将头指针指向新结点即可。</p>
+<p>那么，打印链表也变得很简单：</p>
+<pre><code class="language-c">void printStu(struct Info* students)
+{
+    struct Info* info;
+    int count = 1;
+    
+    info = students;
+    while (book != NULL)
+    {
+        printf(&quot;Student%d:\n&quot;, count);
+        printf(&quot;姓名：%s\n&quot;, info-&gt;name);
+        printf(&quot;学号：%d\n&quot;, info-&gt;identifier);
+        info = info-&gt;next;
+        count++;
+    }
+}
+</code></pre>
+<p>想要读取单链表里面的数据，只需要迭代单链表中的每一个结点，直到<code>next</code>成员为<code>NULL</code>，即表示单链表的结束。</p>
+<p>最后，当然还是别忘了释放空间：</p>
+<pre><code class="language-c">void releaseStu(struct Info** students)
+{
+    struct Info* temp;
+    
+    while (*students != NULL)
+    {
+        temp = *students;
+        *students = (*students)-&gt;next;
+        free(temp);
+    }
+}
+</code></pre>
+<h3 id="尾插法">尾插法</h3>
+<p>与头插法类似，尾插法就是把每一个数据都插入到链表的末尾。</p>
+<pre><code class="language-c">void addInfo(struct Info** students)
+{
+    struct Info* info, *temp;
+    info = (struct Info*)malloc(sizeof(struct Info));
+    if (info == NULL)
+    {
+        printf(&quot;内存分配失败！\n&quot;);
+        exit(1);
+    }
+    
+    getInput(info);
+    
+    if (*students != NULL)
+    {
+        temp = *students;
+        *students = info;
+        //定位到链表的末尾的位置
+        while (temp-&gt;next != NULL)
+        {
+            temp = temp-&gt;next;
+        }
+        //插入数据
+        temp-&gt;next = info;
+        info-&gt;next = temp;
+    }
+    else
+    {
+        *students = info;
+        info-&gt;next = NULL;
+    }
+}
+</code></pre>
+<p>这么一来，程序执行的效率难免要降低很多，因为每次插入数据，都要先遍历一次链表。如果链表很长，那么对于插入数据来说就是一次灾难。不过，我们可以给程序添加一个指针，让它永远都指向链表的尾部，这样一来，就可以用很少的空间换取很高的程序执行效率。</p>
+<p>代码更改如下：</p>
+<pre><code class="language-c">void addInfo(struct Info** students)
+{
+    struct Info* info, *temp;
+    static struct Info* tail;//设置静态指针
+    info = (struct Info*)malloc(sizeof(struct Info));
+    if (info == NULL)
+    {
+        printf(&quot;内存分配失败！\n&quot;);
+        exit(1);
+    }
+    
+    getInput(info);
+    
+    if (*students != NULL)
+    {
+        tail-&gt;next = info;
+        info-&gt;next = NULL;
+    }
+    else
+    {
+        *students = info;
+        info-&gt;next = NULL;
+    }
+}
+</code></pre>
+<h2 id="搜索单链表">搜索单链表</h2>
+<p>单链表是我们用来存储数据的一个容器，那么有时候需要快速查找信息就需要开发相关搜索的功能。比如说输入学号，查找同学的所有信息。</p>
+<pre><code class="language-c">struct Info *searchInfo(struct Info* students, long* target)
+{
+    struct Info* info;
+    info = students;
+    while (info != NULL)
+    {
+        if (info-&gt;identifier == target)
+        {
+            break;
+        }
+        info = info-&gt;next;
+    }
+    
+    return book;
+};
+
+void printInfo(struct Info* info)
+{
+    ...
+}
+...
+
+int main(void)
+{
+    ...
+    printf(&quot;\n请输入学生学号：&quot;);
+    scanf(&quot;%d&quot;, input);
+    info = searchInfo(students, input);
+    if (info == NULL)
+    {
+        printf(&quot;抱歉，未找到相关结果！\n&quot;);
+    }
+    else
+    {
+        do
+        {
+            printf(&quot;相关结果如下：\n&quot;);
+            printInfo(book);
+        } while ((info = searchInfo(info-&gt;next, input)) != NULL);
+    }
+    
+    releaseInfo(...);
+    return 0;
+}
+</code></pre>
+<h2 id="插入结点到指定位置">插入结点到指定位置</h2>
+<p>到了这里，才体现出链表真正的优势。</p>
+<p>设想一下，如果有一个有序数组，现在要求你去插入一个数字，插入完成之后，数组依然保持有序。你会怎么做？</p>
+<p>没错，你应该会挨个去比较，然后找到合适的位置（当然这里也可以使用二分法，比较节省算力），把这个位置后面的所有数都往后移动一个位置，然后将我们要插入的数字放入刚刚我们腾出来的空间里面。</p>
+<p>你会发现，这样的处理方法，经常需要移动大量的数据，对于程序的执行效率来说，是一个不利因素。那么链表，就无所谓。反正在内存中，链表的存储毫无逻辑，我们只需要改变指针的值就可以实现链表的中间插入。</p>
+<pre><code class="language-c">//Example 03
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+struct Node
+{
+    int value;
+    struct Node* next;
+};
+
+void insNode(struct Node** head, int value)
+{
+    struct Node* pre;
+    struct Node* cur;
+    struct Node* New;
+
+    cur = *head;
+    pre = NULL;
+
+    while (cur != NULL &amp;&amp; cur-&gt;value &lt; value)
+    {
+        pre = cur;
+        cur = cur-&gt;next;
+    }
+
+    New = (struct Node*)malloc(sizeof(struct Node));
+    if (New == NULL)
+    {
+        printf(&quot;内存分配失败！\n&quot;);
+        exit(1);
+    }
+    New-&gt;value = value;
+    New-&gt;next = cur;
+
+    if (pre == NULL)
+    {
+        *head = New;
+    }
+    else
+    {
+        pre-&gt;next = New;
+    }
+}
+
+void printNode(struct Node* head)
+{
+    struct Node* cur;
+
+    cur = head;
+    while (cur != NULL)
+    {
+        printf(&quot;%d &quot;, cur-&gt;value);
+        cur = cur-&gt;next;
+    }
+    putchar('\n');
+}
+
+int main(void)
+{
+    struct Node* head = NULL;
+    int input;
+
+    printf(&quot;开始插入整数...\n&quot;);
+    while (1)
+    {
+        printf(&quot;请输入一个整数，输入-1表示结束：&quot;);
+        scanf(&quot;%d&quot;, &amp;input);
+        if (input == -1)
+        {
+            break;
+        }
+        insNode(&amp;head, input);
+        printNode(head);
+    }
+
+    return 0;
+}
+</code></pre>
+<p>运行结果如下：</p>
+<pre><code>//Consequence 03
+开始插入整数...
+请输入一个整数，输入-1表示结束：4
+4
+请输入一个整数，输入-1表示结束：5
+4 5
+请输入一个整数，输入-1表示结束：3
+3 4 5
+请输入一个整数，输入-1表示结束：6
+3 4 5 6
+请输入一个整数，输入-1表示结束：2
+2 3 4 5 6
+请输入一个整数，输入-1表示结束：5
+2 3 4 5 5 6
+请输入一个整数，输入-1表示结束：1
+1 2 3 4 5 5 6
+请输入一个整数，输入-1表示结束：7
+1 2 3 4 5 5 6 7
+请输入一个整数，输入-1表示结束：-1
+</code></pre>
+<h2 id="删除结点">删除结点</h2>
+<p>删除结点的思路也差不多，首先修改待删除的结点的上一个结点的指针，将其指向待删除结点的下一个结点。然后释放待删除结点的空间。</p>
+<pre><code class="language-c">...
+void delNode(struct Node** head, int value)
+{
+    struct Node* pre;
+    struct NOde* cur;
+    
+    cur = *head;
+    pre = NULL;
+    while (cur != NULL &amp;&amp; cur-&gt;value != value)
+    {
+        pre = cur;
+        cur = cur-&gt;next;
+    }
+    if (cur == NULL)
+    {
+        printf(&quot;未找到匹配项!\n&quot;);
+        return ;
+    }
+    else
+    {
+        if (pre == NULL)
+        {
+            *head = cur-&gt;next;
+        }
+        else
+        {
+            pre-&gt;next = cur-&gt;next;
+        }
+        free(cur);
+    }
+}
+</code></pre>
+<h1 id="内存池">内存池</h1>
+<p>C语言的内存管理，从来都是一个让人头秃的问题。要想更自由地管理内存，就必须去堆中申请，然后还需要考虑何时释放，万一释放不当，或者没有及时释放，造成的后果都是难以估量的。</p>
+<p>当然如果就这些，那倒也还不算什么。问题就在于，如果大量地使用<code>malloc</code>和<code>free</code>函数来申请内存，首先使要经历一个从应用层切入系统内核层，调用完成之后，再返回应用层的一系列步骤，实际上使非常浪费时间的。更重要的是，还会产生大量的内存碎片。比如，先申请了一个1KB的空间，紧接着又申请了一个8KB的空间。而后，这个1KB使用完了，被释放，但是这个空间却只有等到下一次有刚好1KB的空间申请，才能够被重新调用。这么一来，极限情况下，整个堆有可能被弄得支离破碎，最终导致大量内存浪费。</p>
+<p>那么这种情况下，我们解决这类问题的思路，就是创建一个内存池。</p>
+<p>内存池，实际上就是我们让程序创建出来的一块额外的缓存区域，如果有需要释放内存，先不必使用<code>free</code>函数，如果内存池有空，那么直接放入内存池。同样的道理，下一次程序申请空间的时候，先检查下内存池里面有没有合适的内存，如果有，则直接拿出来调用，如果没有，那么再使用<code>malloc</code>。</p>
+<p>其实内存池我们就可以使用单链表来进行维护，下面通过一个通讯录的程序来说明内存池的运用。</p>
+<p>普通的版本：</p>
+<pre><code class="language-c">//Example 04 V1
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+struct Person
+{
+	char name[40];
+	char phone[20];
+	struct Person* next;
+};
+
+void getInput(struct Person* person);
+void printPerson(struct Person* person);
+void addPerson(struct Person** contects);
+void changePerson(struct Person* contacts);
+void delPerson(struct Person** contacts);
+struct Person* findPerson(struct Person* contacts);
+void displayContacts(struct Person* contacts);
+void releaseContacts(struct Person** contacts);
+
+void getInput(struct Person* person)
+{
+	printf(&quot;请输入姓名：&quot;);
+	scanf(&quot;%s&quot;, person-&gt;name);
+	printf(&quot;请输入电话：&quot;);
+	scanf(&quot;%s&quot;, person-&gt;phone);
+}
+
+void addPerson(struct Person** contacts)
+{
+	struct Person* person;
+	struct Person* temp;
+
+	person = (struct Person*)malloc(sizeof(struct Person));
+	if (person == NULL)
+	{
+		printf(&quot;内存分配失败！\n&quot;);
+		exit(1);
+	}
+
+	getInput(person);
+
+	//将person添加到通讯录中
+	if (*contacts != NULL)
+	{
+		temp = *contacts;
+		*contacts = person;
+		person-&gt;next = temp;
+	}
+	else
+	{
+		*contacts = person;
+		person-&gt;next = NULL;
+	}
+}
+
+void printPerson(struct Person* person)
+{
+	printf(&quot;联系人：%s\n&quot;, person-&gt;name);
+	printf(&quot;电话：%s\n&quot;, person-&gt;phone);
+}
+
+struct Person* findPerson(struct Person* contacts)
+{
+	struct Person* current;
+	char input[40];
+
+	printf(&quot;请输入联系人：&quot;);
+	scanf(&quot;%s&quot;, input);
+
+	current = contacts;
+	while (current != NULL &amp;&amp; strcmp(current-&gt;name, input))
+	{
+		current = current-&gt;next;
+	}
+
+	return current;
+}
+
+void changePerson(struct Person* contacts)
+{
+	struct Person* person;
+
+	person = findPerson(contacts);
+	if (person == NULL)
+	{
+		printf(&quot;找不到联系人！\n&quot;);
+	}
+	else
+	{
+		printf(&quot;请输入联系电话：&quot;);
+		scanf(&quot;%s&quot;, person-&gt;phone);
+	}
+}
+
+void delPerson(struct Person** contacts)
+{
+	struct Person* person;
+	struct Person* current;
+	struct Person* previous;
+
+	//先找到待删除的节点的指针
+	person = findPerson(*contacts);
+	if (person == NULL)
+	{
+		printf(&quot;找不到该联系人！\n&quot;);
+	}
+	else
+	{
+		current = *contacts;
+		previous = NULL;
+
+		//将current定位到待删除的节点
+		while (current != NULL &amp;&amp; current != person)
+		{
+			previous = current;
+			current = current-&gt;next;
+		}
+
+		if (previous == NULL)
+		{
+			//若待删除的是第一个节点
+			*contacts = current-&gt;next;
+		}
+		else
+		{
+			//若待删除的不是第一个节点
+			previous-&gt;next = current-&gt;next;
+		}
+
+		free(person);//将内存空间释放
+	}
+}
+
+void displayContacts(struct Person* contacts)
+{
+	struct Person* current;
+
+	current = contacts;
+	while (current != NULL)
+	{
+		printPerson(current);
+		current = current-&gt;next;
+	}
+}
+
+void releaseContacts(struct Person** contacts)
+{
+	struct Person* temp;
+
+	while (*contacts != NULL)
+	{
+		temp = *contacts;
+		*contacts = (*contacts)-&gt;next;
+		free(temp);
+	}
+}
+
+int main(void)
+{
+	int code;
+	struct Person* contacts = NULL;
+	struct Person* person;
+
+	printf(&quot;| 欢迎使用通讯录管理程序 |\n&quot;);
+	printf(&quot;|--- 1:插入新的联系人 ---|\n&quot;);
+	printf(&quot;|--- 2:查找现有联系人 ---|\n&quot;);
+	printf(&quot;|--- 3:更改现有联系人 ---|\n&quot;);
+	printf(&quot;|--- 4:删除现有联系人 ---|\n&quot;);
+	printf(&quot;|--- 5:显示当前通讯录 ---|\n&quot;);
+	printf(&quot;|--- 6:退出通讯录程序 ---|\n&quot;);
+
+	while (1)
+	{
+		printf(&quot;\n请输入指令代码：&quot;);
+		scanf(&quot;%d&quot;, &amp;code);
+		switch (code)
+		{
+		case 1:addPerson(&amp;contacts); break;
+		case 2:person = findPerson(contacts);
+			if (person == NULL)
+			{
+				printf(&quot;找不到该联系人！\n&quot;);
+			}
+			else
+			{
+				printPerson(person);
+			}
+			break;
+		case 3:changePerson(contacts); break;
+		case 4:delPerson(&amp;contacts); break;
+		case 5:displayContacts(contacts); break;
+		case 6:goto END;
+		}
+	}
+
+END://此处直接跳出恒循环
+	releaseContacts(&amp;contacts);
+
+	return 0;
+
+}
+</code></pre>
+<p>运行结果如下：</p>
+<pre><code>//Consequence 04 V1
+| 欢迎使用通讯录管理程序 |
+|--- 1:插入新的联系人 ---|
+|--- 2:查找现有联系人 ---|
+|--- 3:更改现有联系人 ---|
+|--- 4:删除现有联系人 ---|
+|--- 5:显示当前通讯录 ---|
+|--- 6:退出通讯录程序 ---|
+
+请输入指令代码：1
+请输入姓名：HarrisWilde
+请输入电话：0101111
+
+请输入指令代码：1
+请输入姓名：Jack
+请输入电话：0101112
+
+请输入指令代码：1
+请输入姓名：Rose
+请输入电话：0101113
+
+请输入指令代码：2
+请输入联系人：HarrisWilde
+联系人：HarrisWilde
+电话：0101111
+
+请输入指令代码：2
+请输入联系人：Mike
+找不到该联系人！
+
+请输入指令代码：5
+联系人：Rose
+电话：0101113
+联系人：Jack
+电话：0101112
+联系人：HarrisWilde
+电话：0101111
+
+请输入指令代码：3
+请输入联系人：HarrisWilde
+请输入联系电话：0101234
+
+请输入指令代码：5
+联系人：Rose
+电话：0101113
+联系人：Jack
+电话：0101112
+联系人：HarrisWilde
+电话：0101234
+
+请输入指令代码：6
+</code></pre>
+<p>下面加入内存池：</p>
+<pre><code class="language-c">//Example 04 V2
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+#define MAX 1024
+
+struct Person
+{
+	char name[40];
+	char phone[20];
+	struct Person* next;
+};
+
+struct Person* pool = NULL;
+int count;
+
+void getInput(struct Person* person);
+void printPerson(struct Person* person);
+void addPerson(struct Person** contects);
+void changePerson(struct Person* contacts);
+void delPerson(struct Person** contacts);
+struct Person* findPerson(struct Person* contacts);
+void displayContacts(struct Person* contacts);
+void releaseContacts(struct Person** contacts);
+void releasePool(void);
+
+void getInput(struct Person* person)
+{
+	printf(&quot;请输入姓名：&quot;);
+	scanf(&quot;%s&quot;, person-&gt;name);
+	printf(&quot;请输入电话：&quot;);
+	scanf(&quot;%s&quot;, person-&gt;phone);
+}
+
+void addPerson(struct Person** contacts)
+{
+	struct Person* person;
+	struct Person* temp;
+
+	//如果内存池不是空的，那么首先从里面获取空间
+	if (pool != NULL)
+	{
+		person = pool;
+		pool = pool-&gt;next;
+		count--;
+	}
+	//内存池为空，则直接申请
+	else
+	{
+		person = (struct Person*)malloc(sizeof(struct Person));
+		if (person == NULL)
+		{
+			printf(&quot;内存分配失败！\n&quot;);
+			exit(1);
+		}
+	}
+
+
+	getInput(person);
+
+	//将person添加到通讯录中
+	if (*contacts != NULL)
+	{
+		temp = *contacts;
+		*contacts = person;
+		person-&gt;next = temp;
+	}
+	else
+	{
+		*contacts = person;
+		person-&gt;next = NULL;
+	}
+}
+
+void printPerson(struct Person* person)
+{
+	printf(&quot;联系人：%s\n&quot;, person-&gt;name);
+	printf(&quot;电话：%s\n&quot;, person-&gt;phone);
+}
+
+struct Person* findPerson(struct Person* contacts)
+{
+	struct Person* current;
+	char input[40];
+
+	printf(&quot;请输入联系人：&quot;);
+	scanf(&quot;%s&quot;, input);
+
+	current = contacts;
+	while (current != NULL &amp;&amp; strcmp(current-&gt;name, input))
+	{
+		current = current-&gt;next;
+	}
+
+	return current;
+}
+
+void changePerson(struct Person* contacts)
+{
+	struct Person* person;
+
+	person = findPerson(contacts);
+	if (person == NULL)
+	{
+		printf(&quot;找不到联系人！\n&quot;);
+	}
+	else
+	{
+		printf(&quot;请输入联系电话：&quot;);
+		scanf(&quot;%s&quot;, person-&gt;phone);
+	}
+}
+
+void delPerson(struct Person** contacts)
+{
+	struct Person* person;
+	struct Person* current;
+	struct Person* previous;
+	struct Person* temp;
+	{
+
+	};
+
+	//先找到待删除的节点的指针
+	person = findPerson(*contacts);
+	if (person == NULL)
+	{
+		printf(&quot;找不到该联系人！\n&quot;);
+	}
+	else
+	{
+		current = *contacts;
+		previous = NULL;
+
+		//将current定位到待删除的节点
+		while (current != NULL &amp;&amp; current != person)
+		{
+			previous = current;
+			current = current-&gt;next;
+		}
+
+		if (previous == NULL)
+		{
+			//若待删除的是第一个节点
+			*contacts = current-&gt;next;
+		}
+		else
+		{
+			//若待删除的不是第一个节点
+			previous-&gt;next = current-&gt;next;
+		}
+
+		//判断内存池中有没有空位
+		if (count &lt; MAX)
+		{
+			//使用头插法将person指向的空间插入内存池中
+			if (pool != NULL)
+			{
+				temp = pool;
+				pool = person;
+				person-&gt;next = temp;
+			}
+			else
+			{
+				pool = person;
+				person-&gt;next = NULL;
+			}
+			count++;
+		}
+		//没有空位，直接释放
+		else
+		{
+			free(person);//将内存空间释放
+		}
+	}
+}
+
+void displayContacts(struct Person* contacts)
+{
+	struct Person* current;
+
+	current = contacts;
+	while (current != NULL)
+	{
+		printPerson(current);
+		current = current-&gt;next;
+	}
+}
+
+void releaseContacts(struct Person** contacts)
+{
+	struct Person* temp;
+
+	while (*contacts != NULL)
+	{
+		temp = *contacts;
+		*contacts = (*contacts)-&gt;next;
+		free(temp);
+	}
+}
+
+void releasePool(void)
+{
+	struct Person* temp;
+	while (pool != NULL)
+	{
+		temp = pool;
+		pool = pool-&gt;next;
+		free(temp);
+	}
+}
+
+int main(void)
+{
+	int code;
+	struct Person* contacts = NULL;
+	struct Person* person;
+
+	printf(&quot;| 欢迎使用通讯录管理程序 |\n&quot;);
+	printf(&quot;|--- 1:插入新的联系人 ---|\n&quot;);
+	printf(&quot;|--- 2:查找现有联系人 ---|\n&quot;);
+	printf(&quot;|--- 3:更改现有联系人 ---|\n&quot;);
+	printf(&quot;|--- 4:删除现有联系人 ---|\n&quot;);
+	printf(&quot;|--- 5:显示当前通讯录 ---|\n&quot;);
+	printf(&quot;|--- 6:退出通讯录程序 ---|\n&quot;);
+
+	while (1)
+	{
+		printf(&quot;\n请输入指令代码：&quot;);
+		scanf(&quot;%d&quot;, &amp;code);
+		switch (code)
+		{
+		case 1:addPerson(&amp;contacts); break;
+		case 2:person = findPerson(contacts);
+			if (person == NULL)
+			{
+				printf(&quot;找不到该联系人！\n&quot;);
+			}
+			else
+			{
+				printPerson(person);
+			}
+			break;
+		case 3:changePerson(contacts); break;
+		case 4:delPerson(&amp;contacts); break;
+		case 5:displayContacts(contacts); break;
+		case 6:goto END;
+		}
+	}
+
+END://此处直接跳出恒循环
+	releaseContacts(&amp;contacts);
+	releasePool();
+
+	return 0;
+
+}
+</code></pre>
+<h1 id="typedef">typedef</h1>
+<h2 id="给数据类型起别名">给数据类型起别名</h2>
+<p>C语言是一门古老的语言，它是在1969至1973年间，由两位天才丹尼斯·里奇和肯·汤普逊在贝尔实验室以B语言为基础开发出来的，用于他们的重写UNIX计划（这也为后来UNIX系统的可移植性打下了基础，之前的UNIX是使用汇编语言编写的，当然也是这两位为了玩一个自己设计的游戏而编写的）。天才就是和咱常人不一样，不过他俩的故事，在这篇里面不多啰嗦，我们回到话题。</p>
+<p>虽然C语言诞生的很早，但是却依旧不是最早的高级编程语言。目前公认的最早的高级编程语言，是IBM公司于1957年开发的FORTRAN语言。C语言诞生之时，FORTRAN已经统领行业数十年之久。因此，C语言要想快速吸纳FORTRAN中的潜在用户，就必须做出一些妥协。</p>
+<p>我们知道，不同的语言的语法，一般来说是不同的，甚至还有较大的差距。比如：</p>
+<p>C:</p>
+<pre><code class="language-c">int a, b, c;
+float i, j, k;
+</code></pre>
+<p>而FORTRAN语言是这样的：</p>
+<pre><code class="language-fortran">integer :: a, b, c;
+real :: i, j, k;
+</code></pre>
+<p>如果让FORTRAN用户使用原来的变量名称进行使用，那么就能够快速迁移到C语言上面来，这就是<code>typedef</code>的用处之一。</p>
+<p>我们使用FORTRAN语言的类型名，那就这么办：</p>
+<pre><code class="language-c">typedef int integer;
+typedef float real;
+
+integer a, b, c;
+real i, j, k;
+</code></pre>
+<h2 id="结构体的搭档">结构体的搭档</h2>
+<p>虽然结构体的出现能够让我们有一个更科学的数据结构来管理数据，但是每次使用结构体都需要<code>struct...</code>，未免显得有些冗长和麻烦。有了<code>typedef</code>的助攻，我们就可以很轻松地给结构体类型起一个容易理解的名字：</p>
+<pre><code class="language-c">typedef struct date
+{
+    int year;
+    int month;
+    int day;
+} DATE;//为了区分，一般用全大写
+
+int main(void)
+{
+    DATE* date;
+    ...
+}
+</code></pre>
+<p>甚至还可以顺便给它的指针也定义一个别名：</p>
+<pre><code class="language-c">typedef struct date
+{
+    int year;
+    int month;
+    int day;
+} DATE, *PDATE;
+</code></pre>
+<h2 id="进阶">进阶</h2>
+<p>我们还可以利用<code>typedef</code>来简化一些比较复杂的命令。</p>
+<p>比如：</p>
+<pre><code class="language-c">int (*ptr) [5];
+</code></pre>
+<p>我们知道这是一个数组指针，指向一个5元素的数组。那么我们可以改写成这样：</p>
+<pre><code class="language-c">typedef int(*PTR_TO_ARRAY)[3];
+</code></pre>
+<p>这样就可以把很复杂的声明变得很简单：</p>
+<pre><code class="language-c">PTR_TO_ARRAY a = &amp;array;
+</code></pre>
+<p>取名的时候要尽量使用容易理解的名字，这样才能达到使用<code>typedef</code>的最终目的。</p>
+<h1 id="共用体">共用体</h1>
+<p>共用体也称联合体。</p>
+<h2 id="声明">声明</h2>
+<p>和结构体还是有点像：</p>
+<pre><code class="language-c">union 共用体名称
+{
+    成员1;
+    成员2;
+    成员3;
+};
+</code></pre>
+<p>但是两者有本质的不同。共用体的每一个成员共用一段内存，那么这也就意味着它们不可能同时被正确地访问。如：</p>
+<pre><code class="language-c">//Example 05
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+union Test
+{
+	int i;
+	double pi;
+	char str[9];
+};
+
+int main(void)
+{
+	union Test test;
+
+	test.i = 10;
+	test.pi = 3.14;
+	strcpy(test.str, &quot;TechZone&quot;);
+
+	printf(&quot;test.i: %d\n&quot;, test.i);
+	printf(&quot;test.pi: %.2f\n&quot;, test.pi);
+	printf(&quot;test.str: %s\n&quot;, test.str);
+
+	return 0;
+}
+</code></pre>
+<p>执行结果如下：</p>
+<pre><code>//Consequence 05
+test.i: 1751344468
+test.pi: 3946574856045802736197446431383475413237648487838717723111623714247921409395495328582015991082102150186282825269379326297769425957893182570875995348588904500564659454087397032067072.00
+test.str: TechZone
+</code></pre>
+<p>可以看到，共用体只能正确地展示出最后一次被赋值的成员。共用体的内存应该要能够满足最大的成员能够正常存储。但是并不一定等于最大的成员的尺寸，因为还要考虑内存对齐的问题。</p>
+<p>共用体可以类似结构体一样来定义和声明，但是共用体还可以允许不带名字：</p>
+<pre><code class="language-c">union
+{
+	int i;
+	char ch;
+	float f;
+} a, b;
+</code></pre>
+<h2 id="初始化">初始化</h2>
+<p>共用体不能在同一时间存放多个成员，所以不能批量初始化</p>
+<pre><code class="language-c">union data
+{
+    int i;
+    char ch;
+    float f;
+};
+
+union data a = {520};        //初始化第一个成员
+union data b = a;            //直接使用一个共用体初始化另一个共用体
+union data c = {.ch = 'C'};  //C99的特性，指定初始化成员
+</code></pre>
+<h1 id="枚举">枚举</h1>
+<p>枚举是一个基本的数据类型，它可以让数据更简洁。</p>
+<p>如果写一个判断星期的文章，我们当然可以使用宏定义来使代码更加易懂，不过：</p>
+<pre><code class="language-c">#define MON 1
+#define TUE 2
+#define WED 3
+#define THU 4
+#define FRI 5
+#define SAT 6
+#define SUN 7
+</code></pre>
+<p>这样的写法有点费键盘。那么枚举就简单多了：</p>
+<pre><code class="language-c">enum DAY
+{
+      MON=1, TUE, WED, THU, FRI, SAT, SUN
+};
+</code></pre>
+<blockquote>
+<p>**注意：**第一个枚举成员的默认值为整型的 0，后续枚举成员的值在前一个成员上加 1。我们在这个实例中把第一个枚举成员的值定义为 1，第二个就为 2，以此类推。</p>
+</blockquote>
+<p>枚举变量的定义和声明方法和共用体一样，也可以省略枚举名，直接声明变量名。</p>
+<pre><code class="language-c">//Example 06
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main()
+{
+
+    enum color { red = 1, green, blue };
+
+    enum  color favorite_color;
+
+    printf(&quot;请输入你喜欢的颜色: (1. red, 2. green, 3. blue): &quot;);
+    scanf(&quot;%d&quot;, &amp;favorite_color);
+
+    //输出结果
+    switch (favorite_color)
+    {
+    case red:
+        printf(&quot;你喜欢的颜色是红色&quot;);
+        break;
+    case green:
+        printf(&quot;你喜欢的颜色是绿色&quot;);
+        break;
+    case blue:
+        printf(&quot;你喜欢的颜色是蓝色&quot;);
+        break;
+    default:
+        printf(&quot;你没有选择你喜欢的颜色&quot;);
+    }
+
+    return 0;
+}
+</code></pre>
+<p>执行结果如下：</p>
+<pre><code>//Consequence 06
+请输入你喜欢的颜色: (1. red, 2. green, 3. blue): 3
+你喜欢的颜色是蓝色
+</code></pre>
+<p>也可以把整数转换为枚举类型：</p>
+<pre><code class="language-c">//Example 07
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main()
+{
+    enum day
+    {
+        saturday,
+        sunday,
+        monday,
+        tuesday,
+        wednesday,
+        thursday,
+        friday
+    } workday;
+
+    int a = 1;
+    enum day weekend;
+    weekend = (enum day) a;  //使用强制类型转换
+    //weekend = a; //错误
+    printf(&quot;weekend:%d&quot;, weekend);
+    return 0;
+}
+</code></pre>
+<p>运行结果如下：</p>
+<pre><code>//Consequence 07
+weekend:1
+</code></pre>
+<h1 id="位域">位域</h1>
+<p>C语言除了开发桌面应用等，还有一个很重要的领域，那就是<strong>单片机</strong>开发。单片机上的硬件资源十分有限，容不得我们去肆意挥洒。单片机使一种集成电路芯片，使采用超大规模集成电路技术把具有数据处理能力的CPU、RAM、ROM、I/O、中断系统、定时器/计数器等功能（有的还包括显示驱动电路、脉宽调制电路、模拟多路转换器、A/D转换器等电路）集成到一块硅片上构成的一个小而完善的微型计算机系统，在工控领域使用广泛。</p>
+<p>对于这样的设备，通常内存只有256B，那么能够给我们利用的资源就十分珍贵了。在这种情况下，如果我们只需要定义一个变量来存放布尔值，一般就申请一个整型变量，通过1和0来间接存储。但是，显然1和0只用1个bit就能够放完，而一个整型却是4个字节，也就是32bit。这就造成了内存的浪费。</p>
+<p>好在，C语言为我们提供了一种数据结构，称为<strong>位域</strong>（也叫位端、位字段）。也就是把一个字节中的二进制位划分，并且你能够指定每个区域的位数。每个域有一个域名，并允许程序中按域名进行单独操作。</p>
+<p>使用位域的做法是在结构体定义的时候，在结构体成员后面使用冒号（:）和数字来表示该成员所占的位数。</p>
+<pre><code class="language-c">//Example 08
+#include &lt;stdio.h&gt;
+
+int main(void)
+{
+	struct Test
+	{
+		unsigned int a : 1;
+		unsigned int b : 1;
+		unsigned int c : 2;
+	} test;
+	
+	test.a = 0;
+	test.b = 1;
+	test.c = 2;
+
+	printf(&quot;a = %d, b = %d, c = %d\n&quot;, test.a, test.b, test.c);
+	printf(&quot;size of test = %d\n&quot;, sizeof(test));
+
+	return 0;
+}
+</code></pre>
+<p>运行结果如下：</p>
+<pre><code>//Consequence 08
+a = 0, b = 1, c = 2
+size of test = 4
+</code></pre>
+<p>如此一来，结构体<code>test</code>只用了4bit，却存放下了0、1、2三个整数。但是由于2在二进制中是10，因此占了2个bit。如果把<code>test.b</code>赋值为2，那么：</p>
+<pre><code>//Consequence 08 V2
+a = 0, b = 0, c = 2
+size of test = 4
+</code></pre>
+<p>可以看到，b中的10溢出了，只剩下0。</p>
+<p>当然，位域的宽度不能够超过本身类型的长度，比如：</p>
+<pre><code class="language-c">unsigned int a : 100;
+</code></pre>
+<p>那么就会报错：</p>
+<pre><code>错误	C2034	“main::test::a”: 位域类型对位数太小
+</code></pre>
+<p>位域成员也可以没有名称，只要给出类型和宽度即可：</p>
+<pre><code class="language-c">struct Test
+{
+    unsigned int x : 1;
+    unsigned int y : 2;
+    unsigned int z : 3;
+    unsigned int : 26;
+};
+</code></pre>
+<p>无名位域一般用来作为填充或者调整成员的位置，因为没有名称，所以无名位域并不能够拿来使用。</p>
+<blockquote>
+<p>C语言的标准只说明unsigned int和signed int支持位域，然后C99增加了_Bool类型也支持位域，其他数据类型理论上是不支持的。不过大多数编译器在具体实现时都进行了扩展，额外支持了signed char、unsigned char以及枚举类型，所以如果对char类型的结构体成员使用位域，基本上也没什么问题。但如果考虑到程序的可移植性，就需要谨慎对待了。另外，由于内存的基本单位是字节，而位域只是字节的一部分，所以并不能对位域进行取地址运算。</p>
+</blockquote>
+<p>虽然科技发展日新月异，但是秉承着节约成本这个放之四海而皆准的原则，还是要注意使用！毕竟5毛钱可能是小钱，但是乘以5000万呢？</p>
+
+              </div>
+              <div class="post-footer">
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      TechZone
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://harriswilde.github.io/post/7BMq0j8UT/" title="C语言之结构体（下）">C语言之结构体（下）</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，转载请注明出处！
+    </li>
+  </ul>
+  <div class="tags">
+    
+      <a href="https://harriswilde.github.io/tag/VC6KZQgdc/"># C</a>
+    
+      <a href="https://harriswilde.github.io/tag/DFrZZfISm/"># 数据结构</a>
+    
+  </div>
+  <div class="nav">
+    <div class="nav-prev">
+      
+    </div>
+    <div class="nav-next">
+      
+        <a class="nav-pc-next" title="C语言之结构体（上）" href="https://harriswilde.github.io/post/M4QwK7i-6/">C语言之结构体（上）</a>
+        <a class="nav-mobile-next" title="C语言之结构体（上）" href="https://harriswilde.github.io/post/M4QwK7i-6/">下一篇</a>
+        <i class="fa fa-chevron-right"></i>
+      
+    </div>
+  </div>
+</div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-box">
+  <footer class="footer">
+    <div class="copyright">
+      © 2019-2020 | TechZone
+    </div>
+    <div class="poweredby">
+      Powered by HarrisWilde
+    </div>
+  </footer>
+  
+  
+  <div class="pisces back-to-top" id="back_to_top">
+    <i class="fa fa-arrow-up"></i>
+    
+    <span class="scrollpercent">
+      <span id="back_to_top_text">0</span>%
+    </span>
+    
+  </div>
+  
+  
+  
+</div>
+<script>
+
+  let sideBarOpen = 'sidebar-open';
+  let body = document.body;
+  let back2Top = document.querySelector('#back_to_top'),
+  back2TopText = document.querySelector('#back_to_top_text'),
+  drawerBox = document.querySelector('#drawer_box'),
+  rightSideBar = document.querySelector('.sidebar'),
+  viewport = document.querySelector('body');
+
+  function scrollAnimation(currentY, targetY) {
+   
+    let needScrollTop = targetY - currentY
+    let _currentY = currentY
+    setTimeout(() => {
+      const dist = Math.ceil(needScrollTop / 10)
+      _currentY += dist
+      window.scrollTo(_currentY, currentY)
+      if (needScrollTop > 10 || needScrollTop < -10) {
+        scrollAnimation(_currentY, targetY)
+      } else {
+        window.scrollTo(_currentY, targetY)
+      }
+    }, 1)
+  }
+
+  back2Top.addEventListener("click", function(e) {
+    scrollAnimation(document.scrollingElement.scrollTop, 0);
+    e.stopPropagation();
+    return false;
+  });
+  
+  window.addEventListener('scroll', function(e) {
+    let percent = document.scrollingElement.scrollTop / (document.scrollingElement.scrollHeight - document.scrollingElement.clientHeight) * 100;
+    if (percent > 1 && !back2Top.classList.contains('back-top-active')) {
+      back2Top.classList.add('back-top-active');
+    }
+    if (percent == 0) {
+      back2Top.classList.remove('back-top-active');
+    }
+    if (back2TopText) {
+      back2TopText.textContent = Math.floor(percent);
+    }
+  });
+
+  
+  let hasCacu = false;
+  window.onresize = function() {
+    if (window.width > 991) {
+      calcuHeight();
+    } else {
+      hasCacu = false;
+    }
+  }
+
+  function calcuHeight() {
+    // 动态调整站点概览高度
+    if (!hasCacu && back2Top.classList.contains('pisces') || back2Top.classList.contains('gemini')) {
+      let sideBar = document.querySelector('.sidebar');
+      let navUl = document.querySelector('#site_nav');
+      sideBar.style = 'margin-top:' + (navUl.offsetHeight + navUl.offsetTop + 15) + 'px;';
+      hasCacu = true;
+    }
+  }
+  calcuHeight();
+  
+  let open = false, MOTION_TIME = 300, RIGHT_MOVE_DIS = '320px';
+
+  if (drawerBox) {
+    let rightMotions = document.querySelectorAll('.right-motion');
+    let right = drawerBox.classList.contains('right');
+
+    let transitionDir = right ? "transition.slideRightIn" : "transition.slideLeftIn";
+
+    let openProp, closeProp;
+    if (right) {
+      openProp = {
+        paddingRight: RIGHT_MOVE_DIS 
+      };
+      closeProp = {
+        paddingRight: '0px'
+      };
+    } else {
+      openProp = {
+        paddingLeft: RIGHT_MOVE_DIS 
+      };
+      closeProp = {
+        paddingLeft: '0px'
+      };
+    }
+
+    drawerBox.onclick = function() {
+      open = !open;
+      window.Velocity(rightSideBar, 'stop');
+      window.Velocity(viewport, 'stop');
+      window.Velocity(rightMotions, 'stop');
+      if (open) {
+        window.Velocity(rightSideBar, {
+          width: RIGHT_MOVE_DIS
+        }, {
+          duration: MOTION_TIME,
+          begin: function() {
+            window.Velocity(rightMotions, transitionDir,{ });
+          }
+        })
+        window.Velocity(viewport, openProp,{
+          duration: MOTION_TIME
+        });
+      } else {
+        window.Velocity(rightSideBar, {
+          width: '0px'
+        }, {
+          duration: MOTION_TIME,
+          begin: function() {
+            window.Velocity(rightMotions, {
+              opacity: 0
+            });
+          }
+        })
+        window.Velocity(viewport, closeProp ,{
+          duration: MOTION_TIME
+        });
+      }
+      for (let i = 0; i < drawerBox.children.length; i++) {
+        drawerBox.children[i].classList.toggle('muse-line');
+      }
+      drawerBox.classList.toggle(sideBarOpen);
+    }
+  }
+
+  // 代码高亮
+  hljs.initHighlightingOnLoad();
+</script>
+    </div>
+  </body>
+  <script src="/media/js/motion.js"></script>
+</html>
