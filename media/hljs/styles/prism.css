@@ -248,5 +248,5 @@ div.code-toolbar > .toolbar span:hover,
 div.code-toolbar > .toolbar span:focus {
 	color: whitesmoke;
 	text-decoration: none;
-	cursor: pointer;
+	cursor: default;
 }
