@@ -318,6 +318,11 @@ blockquote:before {
 .bg-img img {
   width: 100%;
   height: 100%;
+  object-fit: cover;
+}
+.home-sidebar-fixed {
+  position: fixed !important;
+  top: 0px;
 }
 .footer-box {
   position: relative;
@@ -408,7 +413,6 @@ blockquote:before {
   padding: 1px 0;
   display: inline-block;
   border-top: 1px solid transparent;
-  transition: ease-in-out 0.7s;
 }
 .pagination-active a {
   color: #fff;
@@ -424,8 +428,8 @@ blockquote:before {
   border-top: 1px solid transparent;
 }
 .post-body img {
+  max-width: 100%;
   display: block;
-  width: 100%;
   overflow: hidden;
   background-size: cover;
   background-position: center;
@@ -470,7 +474,7 @@ blockquote:before {
   text-decoration: none;
   border-radius: 0;
   transition-property: background-color;
-  transition-duration: 0.3s;
+  transition-duration: 0.2s;
   transition-timing-function: ease-in-out;
   transition-delay: 0s;
 }
@@ -539,7 +543,6 @@ blockquote:before {
   border-bottom: none;
   line-height: 1.2;
   vertical-align: top;
-  transition: ease-in-out;
 }
 .post-title-link:hover {
   color: inherit;
@@ -609,7 +612,6 @@ blockquote:before {
   text-decoration: none;
   border-bottom: 1px solid #999;
   word-wrap: break-word;
-  transition: 0.5s ease-in-out;
 }
 .post-footer .tags a:hover {
   color: #222;
@@ -693,7 +695,6 @@ blockquote:before {
   color: #555;
   padding: 0 5px;
   margin-right: 10px;
-  transition: 0.3s ease-in-out;
 }
 .sidebar-title-item:hover {
   color: #fc6423;
@@ -1551,18 +1552,19 @@ blockquote:before {
   padding-right: 20px;
 }
 .next-md-body code {
-  background-color: rgba(27, 31, 35, 0.05);
-  border-radius: 3px;
+  background-color: #d8ecf0;
+  color: #d73a49;
+  border-radius: 4px;
   font-size: 85%;
   margin: 0;
   padding: 0.2em 0.4em;
-  color: crimson;
 }
 .next-md-body pre {
   word-wrap: normal;
 }
 .next-md-body pre > code {
   background: transparent;
+  color: silver;
   border: 0;
   font-size: 100%;
   margin: 0;
@@ -1579,8 +1581,8 @@ blockquote:before {
 }
 .next-md-body .highlight pre,
 .next-md-body pre {
-  background-color: #333333;
-  border-radius: 10px;
+  background-color: #2e2e2e;
+  border-radius: 9px;
   font-size: 85%;
   line-height: 1.45;
   overflow: auto;
@@ -1596,7 +1598,6 @@ blockquote:before {
   overflow: visible;
   padding: 0;
   word-wrap: normal;
-  color: gainsboro;
 }
 .next-md-body .commit-tease-sha {
   color: #444d56;
@@ -1818,19 +1819,18 @@ blockquote:before {
   overflow-x: auto;
   padding: 0.5em;
   color: #333;
-  background: #23241f;
+  background: #202020;
 }
 .hljs-comment,
 .hljs-quote {
   color: #998;
-  font-style: normal;
-  font-size: 90%;
+  font-style: italic;
 }
 .hljs-keyword,
 .hljs-selector-tag,
 .hljs-subst {
   color: #333;
-  font-weight: normal;
+  font-weight: bold;
 }
 .hljs-number,
 .hljs-literal,
@@ -1847,7 +1847,7 @@ blockquote:before {
 .hljs-section,
 .hljs-selector-id {
   color: #900;
-  font-weight: normal;
+  font-weight: bold;
 }
 .hljs-subst {
   font-weight: normal;
@@ -1855,7 +1855,7 @@ blockquote:before {
 .hljs-type,
 .hljs-class .hljs-title {
   color: #458;
-  font-weight: normal;
+  font-weight: bold;
 }
 .hljs-tag,
 .hljs-name,
@@ -1877,7 +1877,7 @@ blockquote:before {
 }
 .hljs-meta {
   color: #999;
-  font-weight: normal;
+  font-weight: bold;
 }
 .hljs-deletion {
   background: #fdd;
@@ -1886,10 +1886,10 @@ blockquote:before {
   background: #dfd;
 }
 .hljs-emphasis {
-  font-style: normal;
+  font-style: italic;
 }
 .hljs-strong {
-  font-weight: normal;
+  font-weight: bold;
 }
 body {
       background-color: #eee;
@@ -1900,6 +1900,7 @@ body {
         width: 960px;
         margin: 0 auto;
       }
+
       .main-continer {
         width: 960px;
         margin: 0 auto;
@@ -1914,7 +1915,7 @@ body {
       border-bottom-color: #555;
     }
     .archive-timeline-box::after, .tag-timeline-wrapper::after {
-      background: #555;
+      background: #eee;
     }h1, h2, h3, h4, h5, h6 {
       color: #555;
     }
@@ -1950,6 +1951,7 @@ body {
       color: #ff8787;
       border-bottom-color: #ff8787;
     }
+
     .next-md-body a:hover, .friends-box a:hover {
       color: #ff8787;
       border-bottom-color: #ff8787;
@@ -1961,6 +1963,7 @@ body {
       }.nav-item-active {
       background: #f8f9fa;
     }
+
     .nav-item:hover {
       background: #f8f9fa;
       color: rgba(0, 0, 0, 0.98);

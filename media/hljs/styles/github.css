@@ -15,13 +15,13 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 .hljs-comment,
 .hljs-quote {
   color: #998;
-  font-style: normal;
+  font-style: italic;
 }
 
 .hljs-keyword,
 .hljs-selector-tag,
 .hljs-subst {
-  color: #CC6600;
+  color: #333;
   font-weight: bold;
 }
 
@@ -91,7 +91,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 }
 
 .hljs-emphasis {
-  font-style: normal;
+  font-style: italic;
 }
 
 .hljs-strong {
