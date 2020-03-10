@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://harriswilde.github.io</id>
     <title>TechZone</title>
-    <updated>2020-03-10T01:46:44.313Z</updated>
+    <updated>2020-03-10T01:50:14.741Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://harriswilde.github.io"/>
     <link rel="self" href="https://harriswilde.github.io/atom.xml"/>
@@ -146,7 +146,7 @@
 <hr class="footnotes-sep">
 <section class="footnotes">
 <ol class="footnotes-list">
-<li id="fn1" class="footnote-item"><p><strong>平台路径控制器</strong>（英语：<strong>Platform Controller Hub</strong>，<strong>PCH</strong>）是<a href="https://zh.wikipedia.org/wiki/%E8%8B%B1%E7%89%B9%E5%B0%94">英特尔</a>于2008年起所推出的一系列<a href="https://zh.wikipedia.org/wiki/%E6%99%B6%E7%89%87%E7%B5%84">芯片组</a>，取代以往的<a href="https://zh.wikipedia.org/wiki/I/O%E8%B7%AF%E5%BE%91%E6%8E%A7%E5%88%B6%E5%99%A8">I/O路径控制器</a>（I/O Controller Hub，缩写ICH）。在PCH出现之前，<a href="https://zh.wikipedia.org/wiki/%E4%B8%BB%E6%9D%BF">主板</a>通常有两块主要的芯片组——<a href="https://zh.wikipedia.org/wiki/%E5%8D%97%E6%A1%A5">南桥</a>和<a href="https://zh.wikipedia.org/wiki/%E5%8C%97%E6%A1%A5">北桥</a>。南桥主要负责低速的I/O，例如<a href="https://zh.wikipedia.org/wiki/SATA">SATA</a>和<a href="https://zh.wikipedia.org/wiki/LAN">LAN</a>；北桥负责较高速的<a href="https://zh.wikipedia.org/wiki/PCI-E">PCI-E</a>和<a href="https://zh.wikipedia.org/wiki/%E9%9A%A8%E6%A9%9F%E5%AD%98%E5%8F%96%E8%A8%98%E6%86%B6%E9%AB%94">RAM</a>的读取。现在，处理器的速度不断上升，但<a href="https://zh.wikipedia.org/wiki/FSB">FSB</a>的<a href="https://zh.wikipedia.org/wiki/%E9%A0%BB%E5%AF%AC">带宽</a>则不变，即<a href="https://zh.wikipedia.org/wiki/%E8%99%95%E7%90%86%E5%99%A8">处理器</a>与北桥的连接。PCH的设计就是用来解决此瓶颈问题。 它重新分配各项I/O功能，把<a href="https://zh.wikipedia.org/wiki/%E5%86%85%E5%AD%98%E6%8E%A7%E5%88%B6%E5%99%A8">内存控制器</a>、<a href="https://zh.wikipedia.org/wiki/%E6%A0%B8%E8%8A%AF%E6%98%BE%E5%8D%A1">核芯显卡</a>、<a href="https://zh.wikipedia.org/wiki/PCI-E">PCI-E控制器</a>整合至处理器，PCH负责原来南桥及北桥的一些功能集。处理器和PCH由<a href="https://zh.wikipedia.org/wiki/DMI">DMI</a>（Direct Media Interface）连接（部分高阶Intel芯片组还可通过uplink直接连接到CPU，以解决DMI总线的瓶颈问题）即原来北桥和南桥的连接方法。 大部分Intel <a href="https://zh.wikipedia.org/wiki/CULV">ULV</a>处理器都整合了PCH。 <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+<li id="fn1" class="footnote-item"><p>PCH：<strong>平台路径控制器</strong>（英语：<strong>Platform Controller Hub</strong>，<strong>PCH</strong>）是<a href="https://zh.wikipedia.org/wiki/%E8%8B%B1%E7%89%B9%E5%B0%94">英特尔</a>于2008年起所推出的一系列<a href="https://zh.wikipedia.org/wiki/%E6%99%B6%E7%89%87%E7%B5%84">芯片组</a>，取代以往的<a href="https://zh.wikipedia.org/wiki/I/O%E8%B7%AF%E5%BE%91%E6%8E%A7%E5%88%B6%E5%99%A8">I/O路径控制器</a>（I/O Controller Hub，缩写ICH）。在PCH出现之前，<a href="https://zh.wikipedia.org/wiki/%E4%B8%BB%E6%9D%BF">主板</a>通常有两块主要的芯片组——<a href="https://zh.wikipedia.org/wiki/%E5%8D%97%E6%A1%A5">南桥</a>和<a href="https://zh.wikipedia.org/wiki/%E5%8C%97%E6%A1%A5">北桥</a>。南桥主要负责低速的I/O，例如<a href="https://zh.wikipedia.org/wiki/SATA">SATA</a>和<a href="https://zh.wikipedia.org/wiki/LAN">LAN</a>；北桥负责较高速的<a href="https://zh.wikipedia.org/wiki/PCI-E">PCI-E</a>和<a href="https://zh.wikipedia.org/wiki/%E9%9A%A8%E6%A9%9F%E5%AD%98%E5%8F%96%E8%A8%98%E6%86%B6%E9%AB%94">RAM</a>的读取。现在，处理器的速度不断上升，但<a href="https://zh.wikipedia.org/wiki/FSB">FSB</a>的<a href="https://zh.wikipedia.org/wiki/%E9%A0%BB%E5%AF%AC">带宽</a>则不变，即<a href="https://zh.wikipedia.org/wiki/%E8%99%95%E7%90%86%E5%99%A8">处理器</a>与北桥的连接。PCH的设计就是用来解决此瓶颈问题。 它重新分配各项I/O功能，把<a href="https://zh.wikipedia.org/wiki/%E5%86%85%E5%AD%98%E6%8E%A7%E5%88%B6%E5%99%A8">内存控制器</a>、<a href="https://zh.wikipedia.org/wiki/%E6%A0%B8%E8%8A%AF%E6%98%BE%E5%8D%A1">核芯显卡</a>、<a href="https://zh.wikipedia.org/wiki/PCI-E">PCI-E控制器</a>整合至处理器，PCH负责原来南桥及北桥的一些功能集。处理器和PCH由<a href="https://zh.wikipedia.org/wiki/DMI">DMI</a>（Direct Media Interface）连接（部分高阶Intel芯片组还可通过uplink直接连接到CPU，以解决DMI总线的瓶颈问题）即原来北桥和南桥的连接方法。 大部分Intel <a href="https://zh.wikipedia.org/wiki/CULV">ULV</a>处理器都整合了PCH。 <a href="#fnref1" class="footnote-backref">↩︎</a></p>
 </li>
 </ol>
 </section>
@@ -1563,9 +1563,9 @@ size of test = 4
         <content type="html"><![CDATA[<p>有的时候，我们所遇到的数据结构，不仅仅是一群数字或者是字符串那么简单。比如我们每一个人的学籍信息，学号是一个长整数，名字却是字符；甚至有更复杂的情况，这种问题在现实生活中并不少见。我们之前学过一种叫数组的数据结构，它可以允许我们把很多同类型的数据集中在一起处理。相对于之前，这已经是一次极大的进步。但是，新的问题，往往又会出现，这个时候，我们就得上更高端的装备——结构体。</p>
 <p>相比于数组，结构体有以下的更强大的优势：</p>
 <ul class="contains-task-list">
-<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-2188569"><label class="task-list-item-label" for="task-item-2188569"> 批量存储数据</label></li>
-<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-1099370"><label class="task-list-item-label" for="task-item-1099370"> 存储不同类型的数据</label></li>
-<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-8709646"><label class="task-list-item-label" for="task-item-8709646"> 支持嵌套</label></li>
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-5964204"><label class="task-list-item-label" for="task-item-5964204"> 批量存储数据</label></li>
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-4242480"><label class="task-list-item-label" for="task-item-4242480"> 存储不同类型的数据</label></li>
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-4738435"><label class="task-list-item-label" for="task-item-4738435"> 支持嵌套</label></li>
 </ul>
 <h1 id="结构体的声明与定义">结构体的声明与定义</h1>
 <h2 id="声明">声明</h2>
