@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>http://localhost:4000</id>
+    <id>https://harriswilde.github.io</id>
     <title>TechZone</title>
-    <updated>2020-03-10T08:42:17.995Z</updated>
+    <updated>2020-03-10T08:47:14.522Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="http://localhost:4000"/>
-    <link rel="self" href="http://localhost:4000/atom.xml"/>
+    <link rel="alternate" href="https://harriswilde.github.io"/>
+    <link rel="self" href="https://harriswilde.github.io/atom.xml"/>
     <subtitle>HarrisWilde祝诸君元旦快乐🎉</subtitle>
-    <logo>http://localhost:4000/images/avatar.png</logo>
-    <icon>http://localhost:4000/favicon.ico</icon>
+    <logo>https://harriswilde.github.io/images/avatar.png</logo>
+    <icon>https://harriswilde.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, TechZone</rights>
     <entry>
         <title type="html"><![CDATA[雷电接口的前世今生]]></title>
-        <id>http://localhost:4000/post/-fhDaOSdR/</id>
-        <link href="http://localhost:4000/post/-fhDaOSdR/">
+        <id>https://harriswilde.github.io/post/-fhDaOSdR/</id>
+        <link href="https://harriswilde.github.io/post/-fhDaOSdR/">
         </link>
         <updated>2020-03-10T01:44:36.000Z</updated>
         <summary type="html"><![CDATA[<center>
@@ -22,7 +22,7 @@
 	src="https://s2.ax1x.com/2020/03/10/8C2ERg.png">
 	<br>
 	<div style="color:orange; border-bottom: 1px solid #d9d9d9;
-    display: inline-	block;
+    display: inline-block;
 	color: #999;
 	padding: 2px;">Thunderbolt LOGO</div>
 </center>
@@ -33,14 +33,14 @@
 	src="https://s2.ax1x.com/2020/03/10/8C2ERg.png">
 	<br>
 	<div style="color:orange; border-bottom: 1px solid #d9d9d9;
-    display: inline-	block;
+    display: inline-block;
 	color: #999;
 	padding: 2px;">Thunderbolt LOGO</div>
 </center>
 <!-- more -->
 <p><strong>Thunderbolt</strong>，民间译为“雷电接口”，苹果中国译为“雷雳接口”，是由英特尔发布的连接器标准。很多人都认为雷电接口是苹果发明的。之所以会产生这样的误解，是因为雷电接口最早由苹果带到产品之中。2011年2月24日，苹果公司发布新款MacBook Pro，搭载Thunderbolt技术，这是此项技术首次在商品上的运用，而且PC产品上苹果享有一年的独占期。既然是英特尔开发，那为何是苹果最先使用呢？</p>
 <h1 id="雷电的前世">雷电的前世</h1>
-<p>早在2009年，英特尔在**英特尔科技论坛（IDF）**上，展示出了雷电接口的原型，代号Light Peak。只不过当时的雷电，线缆采用的是光纤。恰好当时苹果也在这个论坛里边瞎转悠，顺便呢瞧瞧当时的黑科技。苹果转到雷电的这个展位的时候，感觉好像被击中了一样。原来英特尔的雷电技术，苹果非常感兴趣，就说：大哥，你这个技术啥时候能够商用？</p>
+<p>早在2009年，英特尔在<strong>英特尔科技论坛</strong>(IDF)上，展示出了雷电接口的原型，代号Light Peak。只不过当时的雷电，线缆采用的是光纤。恰好当时苹果也在这个论坛里边瞎转悠，顺便呢瞧瞧当时的黑科技。苹果转到雷电的这个展位的时候，感觉好像被击中了一样。原来英特尔的雷电技术，苹果非常感兴趣，就说：大哥，你这个技术啥时候能够商用？</p>
 <p>英特尔当时也拿不定主意，毕竟技术的研发，成本是巨大的。即便能商用，市场的接受度也不是很好把握。苹果见状，主动就给英特尔表示兴趣，还给了很多开发上的建议。就在这样的环境下，孕育出了雷电接口第一版。</p>
 <h1 id="正式发布">正式发布</h1>
 <p>早期的雷电线缆是光纤，而且并没有确定物理接口是什么。可以说，虽然主要的技术基本已经公关，但是由于这些细枝末节缺失严重，距离真正的商用还有些距离。时间来到了2011年，2月24日，苹果发布了旗下新款的MacBook Pro，宣布搭载了新一代的通用总线<strong>Thunderbolt</strong>。在苹果的建议下，英特尔对雷电进行了改进，线缆从光纤换成了同轴线，这样总线就可以给周边设备供电，只不过最大只支持10W，物理承载接口也换成了苹果常用的<strong>Mini DisplayPort</strong>。</p>
@@ -50,7 +50,7 @@
 	src="https://s2.ax1x.com/2020/03/10/8C6BFS.jpg">
 	<br>
 	<div style="color:orange; border-bottom: 1px solid #d9d9d9;
-    display: inline-	block;
+    display: inline-block;
 	color: #999;
 	padding: 2px;">雷电和Mini DP</div>
 </center>
@@ -70,7 +70,7 @@
 	src="https://s2.ax1x.com/2020/03/10/8C65YF.jpg">
 	<br>
 	<div style="color:orange; border-bottom: 1px solid #d9d9d9;
-    display: inline-	block;
+    display: inline-block;
 	color: #999;
 	padding: 2px;">雷电3</div>
 </center>
@@ -80,7 +80,7 @@
 	src="https://s2.ax1x.com/2020/03/10/8C2BFK.jpg">
 	<br>
 	<div style="color:orange; border-bottom: 1px solid #d9d9d9;
-    display: inline-	block;
+    display: inline-block;
 	color: #999;
 	padding: 2px;">雷电3</div>
 </center>
@@ -90,7 +90,7 @@
 	src="https://s2.ax1x.com/2020/03/10/8Ccefg.jpg">
 	<br>
 	<div style="color:orange; border-bottom: 1px solid #d9d9d9;
-    display: inline-	block;
+    display: inline-block;
 	color: #999;
 	padding: 2px;">搭载雷电3的设备(HP Elitebook X360)</div>
 </center>
@@ -101,7 +101,7 @@
 	src="https://s2.ax1x.com/2020/03/10/8C2zfU.png">
 	<br>
 	<div style="color:orange; border-bottom: 1px solid #d9d9d9;
-    display: inline-	block;
+    display: inline-block;
 	color: #999;
 	padding: 2px;">雷电3功能十分强大</div>
 </center>
@@ -124,7 +124,7 @@
 	src="https://s2.ax1x.com/2020/03/10/8CggaV.png">
 	<br>
 	<div style="color:orange; border-bottom: 1px solid #d9d9d9;
-    display: inline-	block;
+    display: inline-block;
 	color: #999;
 	padding: 2px;">支持USB-C的显示器</div>
 </center>
@@ -154,8 +154,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[线性代数：行列式计算]]></title>
-        <id>http://localhost:4000/post/zKsgFlYdr/</id>
-        <link href="http://localhost:4000/post/zKsgFlYdr/">
+        <id>https://harriswilde.github.io/post/zKsgFlYdr/</id>
+        <link href="https://harriswilde.github.io/post/zKsgFlYdr/">
         </link>
         <updated>2020-02-29T13:35:00.000Z</updated>
         <content type="html"><![CDATA[<p>线性代数是机器学习中非常重要的基础知识，但是，往往这句话，咱们开始是听不进去的。就好比说，小学的时候，没有哪一个老师不告诉你学习很重要，但是若干年后，大部分的人都会或多或少有些懊悔，觉得当时没有好好听话。同样的道理，在入门阶段，如果不学好线代，那么以后做相关方面的学习和开发的时候，看文档就会变得异常吃力，许多推导式都感觉看不懂，或者当时感觉看懂了，过一会儿又不会了。</p>
@@ -240,8 +240,8 @@ for i in range(n):
     </entry>
     <entry>
         <title type="html"><![CDATA[C语言之结构体（下）]]></title>
-        <id>http://localhost:4000/post/7BMq0j8UT/</id>
-        <link href="http://localhost:4000/post/7BMq0j8UT/">
+        <id>https://harriswilde.github.io/post/7BMq0j8UT/</id>
+        <link href="https://harriswilde.github.io/post/7BMq0j8UT/">
         </link>
         <updated>2020-02-29T04:25:58.000Z</updated>
         <content type="html"><![CDATA[<h1 id="动态申请结构体">动态申请结构体</h1>
@@ -1556,16 +1556,16 @@ size of test = 4
     </entry>
     <entry>
         <title type="html"><![CDATA[C语言之结构体（上）]]></title>
-        <id>http://localhost:4000/post/M4QwK7i-6/</id>
-        <link href="http://localhost:4000/post/M4QwK7i-6/">
+        <id>https://harriswilde.github.io/post/M4QwK7i-6/</id>
+        <link href="https://harriswilde.github.io/post/M4QwK7i-6/">
         </link>
         <updated>2020-02-17T13:29:26.000Z</updated>
         <content type="html"><![CDATA[<p>有的时候，我们所遇到的数据结构，不仅仅是一群数字或者是字符串那么简单。比如我们每一个人的学籍信息，学号是一个长整数，名字却是字符；甚至有更复杂的情况，这种问题在现实生活中并不少见。我们之前学过一种叫数组的数据结构，它可以允许我们把很多同类型的数据集中在一起处理。相对于之前，这已经是一次极大的进步。但是，新的问题，往往又会出现，这个时候，我们就得上更高端的装备——结构体。</p>
 <p>相比于数组，结构体有以下的更强大的优势：</p>
 <ul class="contains-task-list">
-<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-8597528"><label class="task-list-item-label" for="task-item-8597528"> 批量存储数据</label></li>
-<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-623974"><label class="task-list-item-label" for="task-item-623974"> 存储不同类型的数据</label></li>
-<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-6999990"><label class="task-list-item-label" for="task-item-6999990"> 支持嵌套</label></li>
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-1312320"><label class="task-list-item-label" for="task-item-1312320"> 批量存储数据</label></li>
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-4080103"><label class="task-list-item-label" for="task-item-4080103"> 存储不同类型的数据</label></li>
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-6735898"><label class="task-list-item-label" for="task-item-6735898"> 支持嵌套</label></li>
 </ul>
 <h1 id="结构体的声明与定义">结构体的声明与定义</h1>
 <h2 id="声明">声明</h2>
@@ -2088,8 +2088,8 @@ int main(void)
     </entry>
     <entry>
         <title type="html"><![CDATA[失传的结构体打包艺术]]></title>
-        <id>http://localhost:4000/post/qb0i5L7tn/</id>
-        <link href="http://localhost:4000/post/qb0i5L7tn/">
+        <id>https://harriswilde.github.io/post/qb0i5L7tn/</id>
+        <link href="https://harriswilde.github.io/post/qb0i5L7tn/">
         </link>
         <updated>2020-02-17T08:38:35.000Z</updated>
         <summary type="html"><![CDATA[<blockquote>
@@ -2377,8 +2377,8 @@ struct foo3 quad[4];
     </entry>
     <entry>
         <title type="html"><![CDATA[The Lost Art of Structure Packing]]></title>
-        <id>http://localhost:4000/post/LUjp1bkYi/</id>
-        <link href="http://localhost:4000/post/LUjp1bkYi/">
+        <id>https://harriswilde.github.io/post/LUjp1bkYi/</id>
+        <link href="https://harriswilde.github.io/post/LUjp1bkYi/">
         </link>
         <updated>2020-02-17T08:02:49.000Z</updated>
         <summary type="html"><![CDATA[<blockquote>
@@ -2772,8 +2772,8 @@ static_assert(sizeof(struct foo4) == 4, &quot;Check your assumptions&quot;);
     </entry>
     <entry>
         <title type="html"><![CDATA[排序算法：插入排序和希尔排序]]></title>
-        <id>http://localhost:4000/post/nTjkYzZnf/</id>
-        <link href="http://localhost:4000/post/nTjkYzZnf/">
+        <id>https://harriswilde.github.io/post/nTjkYzZnf/</id>
+        <link href="https://harriswilde.github.io/post/nTjkYzZnf/">
         </link>
         <updated>2020-02-14T08:57:50.000Z</updated>
         <content type="html"><![CDATA[<h1 id="插入排序">插入排序</h1>
@@ -2924,8 +2924,8 @@ def shell_sort(arr):
     </entry>
     <entry>
         <title type="html"><![CDATA[排序算法：选择排序]]></title>
-        <id>http://localhost:4000/post/FojWe45tS/</id>
-        <link href="http://localhost:4000/post/FojWe45tS/">
+        <id>https://harriswilde.github.io/post/FojWe45tS/</id>
+        <link href="https://harriswilde.github.io/post/FojWe45tS/">
         </link>
         <updated>2020-02-13T08:02:58.000Z</updated>
         <content type="html"><![CDATA[<p>所谓选择排序，就是每次将剩余区间内最大（或者最小）的数放在最右边（或者最左边），从而达到排序的算法。之所以叫做<strong>选择排序</strong>，是因为每一次都选出剩下的最大或者最小值来达到排序。</p>
@@ -2995,8 +2995,8 @@ def sort(arr):
     </entry>
     <entry>
         <title type="html"><![CDATA[排序算法：冒泡排序及其优化]]></title>
-        <id>http://localhost:4000/post/wi0begzME/</id>
-        <link href="http://localhost:4000/post/wi0begzME/">
+        <id>https://harriswilde.github.io/post/wi0begzME/</id>
+        <link href="https://harriswilde.github.io/post/wi0begzME/">
         </link>
         <updated>2020-02-13T04:21:33.000Z</updated>
         <content type="html"><![CDATA[<h1 id="冒泡排序">冒泡排序</h1>
@@ -3156,8 +3156,8 @@ public static void cocatailSortFlag(int[] array) {
     </entry>
     <entry>
         <title type="html"><![CDATA[Python序列、列表及其方法]]></title>
-        <id>http://localhost:4000/post/NEar5wUsO/</id>
-        <link href="http://localhost:4000/post/NEar5wUsO/">
+        <id>https://harriswilde.github.io/post/NEar5wUsO/</id>
+        <link href="https://harriswilde.github.io/post/NEar5wUsO/">
         </link>
         <updated>2020-02-11T13:40:02.000Z</updated>
         <content type="html"><![CDATA[<p>在上一节里面我们讲到了变量。但是，生活中也并不是哪里的数据都适合使用变量来存储。比如，一些成堆出现的数据。那么，本节就要引入一个新的概念：<strong>数据结构</strong>。</p>
