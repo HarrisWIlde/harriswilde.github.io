@@ -1905,7 +1905,13 @@ body {
         width: 960px;
         margin: 0 auto;
       }
-    body {
+    @font-face {
+      font-family: 'FiraCode-Regular';
+      src: url('/media/fonts/FiraCode-Regular.ttf');
+    }
+    * {
+        font-family: 'FiraCode-Regular';
+    }body {
       color: #555;
     }
     .next-md-body {
