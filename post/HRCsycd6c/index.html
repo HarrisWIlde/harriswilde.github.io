@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="keywords" content="TechZone">
+<meta name="description" content="HarrisWilde祝诸君元旦快乐🎉">
+<meta name="theme-color" content="#222222">
+<title>递归与分治 | TechZone</title>
+<link rel="shortcut icon" href="https://harriswilde.github.io/favicon.ico?v=1585734053262">
+<link rel="stylesheet" href="https://harriswilde.github.io/styles/main.css">
+
+<link rel="stylesheet" href="/media/css/pisces.css">
+
+<link rel="stylesheet" href="/media/fonts/font-awesome.css">
+<link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Rosario:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+<link href="/media/hljs/styles/prism.css" rel="stylesheet">  
+
+<script src="/media/hljs/highlight.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.ui.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+    <meta name="description" content="递归与分治" />
+    <meta name="keywords" content="Go,C,C++,Python,算法" />
+  </head>
+  <body>
+    <div class="head-top-line"></div>
+    <div class="header-box">
+      
+<div class=" pisces">
+  <header class="header bg-color ">
+    <div class="blog-header box-shadow-wrapper bg-color " id="header">
+      <div class="nav-toggle" id="nav_toggle">
+        <div class="toggle-box">
+          <div class="line line-top"></div>
+          <div class="line line-center"></div>
+          <div class="line line-bottom"></div>
+        </div>
+      </div>
+      <div class="site-meta">       
+        <div class="site-title">
+          
+            <a href="/" class="brand">
+              <span>TechZone</span>
+            </a>  
+          
+        </div>
+        
+          <p class="subtitle">HarrisWilde的官方个人博客</p>
+        
+      </div>
+      <nav class="site-nav" id="site_nav">
+        <ul id="nav_ul">
+          
+            <li class="nav-item ">
+              
+              
+                <a href="/" target="_self">
+                  <i class="fa fa-home"></i> 首页
+                </a>
+              
+            </li>
+          
+            <li class="nav-item ">
+              
+              
+                <a href="/archives" target="_self">
+                  <i class="fa fa-archive"></i> 归档
+                </a>
+              
+            </li>
+          
+            <li class="nav-item ">
+              
+              
+                <a href="/tags" target="_self">
+                  <i class="fa fa-tags"></i> 分类
+                </a>
+              
+            </li>
+          
+            <li class="nav-item ">
+              
+              
+                <a href="https://www.jianshu.com/u/766d2f134900" target="_blank">
+                  <i class="fa fa-globe"></i> 简书
+                </a>
+              
+            </li>
+          
+          <li class="nav-item">
+            <a>
+              <i class="fa fa-search"></i> 搜索
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+</div>
+
+<script type="text/javascript"> 
+ 
+  let showNav = true;
+
+  let navToggle = document.querySelector('#nav_toggle'),
+  siteNav = document.querySelector('#site_nav');
+  
+  function navClick() {
+    let sideBar = document.querySelector('.sidebar');
+    let navUl = document.querySelector('#nav_ul');
+    navToggle.classList.toggle('nav-toggle-active');
+    siteNav.classList.toggle('nav-menu-active');
+    if (siteNav.classList.contains('nav-menu-active')) {
+      siteNav.style = "height: " + (navUl.children.length * 42) +"px !important";
+    } else {
+      siteNav.style = "";
+    }
+  }
+
+  navToggle.addEventListener('click',navClick);  
+</script>
+    </div>
+    <div class="main-continer">
+      
+      <div class="section-layout pisces ">
+        <div class="section-layout-wrapper">
+          
+
+<div class="sidebar">
+  
+    <div class="sidebar-box box-shadow-wrapper bg-color right-motion" id="sidebar">
+      
+        <div class="post-list-sidebar">
+          <div class="sidebar-title">
+            <span id="tocSideBar" class="sidebar-title-item sidebar-title-active">文章目录</span>
+            <span id="metaSideBar" class="sidebar-title-item">站点概览</span>
+          </div>
+        </div>
+      
+      <div class="sidebar-body pisces" id="sidebar_body">
+        
+          
+            <div class="post-side-meta" id="post_side_meta">
+              
+<div class="sidebar-wrapper box-shadow-wrapper bg-color">
+  <div class="sidebar-item">
+    <img class="site-author-image right-motion" src="https://harriswilde.github.io/images/avatar.png"/>
+    <p class="site-author-name">TechZone</p>
+    <p class="site-description right-motion">2020，共同进步！</p>
+  </div>
+  <div class="sidebar-item side-item-stat right-motion">
+    <div class="sidebar-item-box">
+      <a href="/archives/">
+        
+        <span class="site-item-stat-count">30</span>
+        <span class="site-item-stat-name">文章</span>
+      </a>
+    </div>
+    <div class="sidebar-item-box">
+      <a href="">
+        <span class="site-item-stat-count">10</span>
+        <span class="site-item-stat-name">分类</span>
+      </a>
+    </div>
+    <div class="sidebar-item-box">
+      <a href="/tags/">
+        <span class="site-item-stat-count">10</span>
+        <span class="site-item-stat-name">标签</span>
+      </a>
+    </div>
+  </div>
+  
+    
+      <div class="sidebar-item">
+        <span class="site-item-rss">
+            <i class="fa fa-rss"></i>
+            <a href="https://harriswilde.github.io/atom.xml" target="_blank">RSS</a>
+        </span>
+      </div>
+    
+  
+  
+
+
+</div>
+            </div>
+            <div class="post-toc sidebar-body-active" id="post_toc" style="opacity: 1;">
+              <div class="toc-box right-motion">
+  <div class="toc-wrapper auto-number auto" id="toc_wrapper">
+    <ul class="markdownIt-TOC">
+<li><a href="#%E9%80%92%E5%BD%92%E6%98%AF%E4%BB%80%E4%B9%88">递归是什么</a>
+<ul>
+<li><a href="#%E9%98%B6%E4%B9%98">阶乘</a></li>
+<li><a href="#%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97">斐波那契数列</a></li>
+</ul>
+</li>
+<li><a href="#%E6%89%80%E8%B0%93%E5%88%86%E6%B2%BB">所谓分治</a>
+<ul>
+<li><a href="#%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E5%88%9D%E6%AD%A5">快速排序初步</a></li>
+</ul>
+</li>
+<li><a href="#%E5%BF%AB%E6%8E%92%E7%9A%84%E5%9F%BA%E5%87%86%E5%80%BC%E9%80%89%E5%8F%96">快排的基准值选取</a>
+<ul>
+<li><a href="#%E9%9A%8F%E6%9C%BA%E6%B3%95">随机法</a></li>
+<li><a href="#%E4%B8%89%E6%95%B0%E4%B8%AD%E5%80%BC%E6%B3%95">三数中值法</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</div>
+
+<script>
+
+let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1; 
+let active = 'active-show', activeClass = 'active-current';
+let tocWrapper = document.querySelector('#toc_wrapper');
+let tocContent = tocWrapper.children[0];
+let autoNumber = tocWrapper&&tocWrapper.classList.contains('auto-number');
+
+function addTocNumber(elem, deep) {
+  if (!elem) {
+    return;
+  }
+  let prop = elem.__proto__;
+
+  if (prop === HTMLUListElement.prototype) {
+    for (let i = 0; i < elem.children.length; i++) {
+      addTocNumber(elem.children[i], deep + (i + 1) + '.');
+    }
+  } else if (prop === HTMLLIElement.prototype) {
+    // 保存li元素
+    lList.push(elem);
+    for (let i = 0; i < elem.children.length; i++) {
+      let cur = elem.children[i];
+      if (cur.__proto__ === HTMLAnchorElement.prototype) {
+        if (autoNumber) {
+          cur.text =  deep + ' ' + cur.text;
+        }
+      } else if (cur.__proto__ === HTMLUListElement.prototype) {
+        addTocNumber(cur, deep);
+      }
+    }
+  }
+}
+
+
+document.addEventListener('scroll', function(e) {
+  if (lList.length <= 0) {
+    return;
+  }
+  let scrollTop = document.scrollingElement.scrollTop + 10;
+  let dir;
+
+  if (lastTop - scrollTop > 0) {
+    dir = 'up';
+  } else {
+    dir = 'down';
+  }
+
+  lastTop = scrollTop;
+  if (scrollTop <= 0) {
+    if (lastIndex >= 0 && lastIndex < hList.length) {
+      lList[lastIndex].classList.remove(activeClass);
+    }
+    return;
+  }
+
+  let current = 0, hasFind = false;
+  for (let i = 0; i < hList.length; i++) {
+    if (hList[i].offsetTop > scrollTop) {
+      current = i;
+      hasFind = true;
+      break;
+    }
+  }
+  if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
+    current = hList.length - 1;
+  } else {
+    current--;
+  }
+  if (dir === 'down') {
+    if (current > lastIndex) {
+      addActiveClass(current);
+      removeActiveClass(lastIndex) 
+      lastIndex = current;
+      removeParentActiveClass();
+      lList[current] && addActiveLiElemment(lList[current].parentElement,tocContent);
+    }
+  } else {
+    if (current < lastIndex) {
+      addActiveClass(current);
+      removeActiveClass(lastIndex);
+      lastIndex = current;
+      removeParentActiveClass();
+      lList[current] && addActiveLiElemment(lList[current].parentElement,tocContent);
+    }
+  }
+});
+
+function removeParentActiveClass() {
+  let parents = tocContent.querySelectorAll('.'+active)
+  parents.forEach(function(elem) {
+    elem.classList.remove(active);
+  });
+}
+
+function addActiveClass(index) {
+  if (index >= 0 && index < hList.length) {
+    lList[index].classList.add(activeClass);
+  }
+}
+
+function removeActiveClass(index) {
+  if (index >= 0 && index < hList.length) {
+    lList[index].classList.remove(activeClass);
+  }
+}
+
+function addActiveLiElemment(elem, parent) {
+  if (!elem || elem === parent) {
+    return;
+  } else {
+    if (elem.__proto__ === HTMLLIElement.prototype) {
+      elem.classList.add(active);
+    }
+    addActiveLiElemment(elem.parentElement, parent);
+  }
+}
+
+function showToc() {
+  if (tocWrapper) {
+    postBody = document.querySelector('#post_body');
+    for (let i = 0; i < postBody.children.length; i++) {
+      if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
+        hList.push(postBody.children[i]);
+      }
+    }
+    if (tocWrapper.classList.contains('compress')) {
+        tocContent.classList.add('closed');
+    } else if (tocWrapper.classList.contains('no_compress')){
+      tocContent.classList.add('expanded');
+    } else {
+      if (hList.length > 10) {
+        active = 'active-hidden'
+        tocContent.classList.add('closed');
+      } else {
+        tocContent.classList.add('expanded');
+      }
+    }
+  }
+}
+addTocNumber(tocContent, '');
+
+window.addEventListener('load', function() {
+  showToc();
+  document.querySelector('#sidebar').style='display: block;';
+  tocWrapper.classList.add('toc-active');
+  setTimeout(function() {
+    if ("createEvent" in document) {
+      let evt = document.createEvent("HTMLEvents");
+      evt.initEvent("scroll", false, true);
+      document.dispatchEvent(evt);
+    }
+    else {
+      document.fireEvent("scroll");
+    }
+  }, 500)
+})
+
+</script>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+</div>
+<script>
+  const SIDEBAR_TITLE_ACTIVE = 'sidebar-title-active';
+  const SIDEBAR_BODY_ACTIVE = 'sidebar-body-active';
+  const SLIDE_UP_IN = 'slide-up-in';
+
+  let sidebar = document.querySelector('#sidebar'),
+  tocSideBar = document.querySelector('#tocSideBar'),
+  metaSideBar = document.querySelector('#metaSideBar'),
+  postToc = document.querySelector('#post_toc'),
+  postSiteMeta = document.querySelector('#post_side_meta'),
+  sidebarTitle = document.querySelector('.sidebar-title'),
+  sidebarBody = document.querySelector('#sidebar_body');
+
+  tocSideBar && tocSideBar.addEventListener('click', (e) => {
+    toggleSidebar(e);
+  });
+
+  metaSideBar && metaSideBar.addEventListener('click', (e) => {
+    toggleSidebar(e);
+  });
+
+  function toggleSidebar(e) {
+    let currentTitle = document.querySelector("."+SIDEBAR_TITLE_ACTIVE);
+    if (currentTitle == e.srcElement) {
+      return ;
+    }
+    let current, showElement, hideElement;
+    if (e.srcElement == metaSideBar) {
+      showElement = postSiteMeta;
+      hideElement = postToc;
+    } else if (e.srcElement == tocSideBar){
+      showElement = postToc;
+      hideElement = postSiteMeta;
+    }
+    currentTitle.classList.remove(SIDEBAR_TITLE_ACTIVE);
+    e.srcElement.classList.add(SIDEBAR_TITLE_ACTIVE);
+
+    window.Velocity(hideElement, 'stop');
+    window.Velocity(hideElement, 'transition.slideUpOut', {
+      display: 'none',
+      duration: 200,
+      complete: function () {
+        window.Velocity(showElement, 'transition.slideDownIn', {
+          duration: 200
+        });
+      }
+    })
+    hideElement.classList.remove(SIDEBAR_BODY_ACTIVE);
+    showElement.classList.add(SIDEBAR_BODY_ACTIVE);
+  }
+
+  postToc && postToc.addEventListener('transitionend', function() {
+    this.classList.remove(SLIDE_UP_IN);
+  });
+
+  if (sidebarBody) {
+    if (sidebarBody.classList.contains('pisces') || sidebarBody.classList.contains('gemini')) {
+      let hasFix = false;
+      let scrollEl = document.querySelector('.main-continer');
+      let limitTop = document.querySelector('#nav_ul').children.length * 42 + 162;
+      window.addEventListener('scroll', function(e) {
+        if (document.scrollingElement.scrollTop >= limitTop) {
+          if (!hasFix) {
+            sidebar.classList.add('sidebar-fixed');
+            hasFix = true;
+          }
+        } else {
+          if (hasFix) {
+            sidebar.classList.remove('sidebar-fixed');
+            hasFix = false;
+          }
+        }
+      });
+    }
+  }
+  
+</script>
+          <div class="section-box box-shadow-wrapper">
+            <div class="section bg-color post post-page">
+              <header class="post-header">
+  <h1 class="post-title">
+    <a class="post-title-link" href="https://harriswilde.github.io/post/HRCsycd6c/">
+      递归与分治
+    </a>
+  </h1>
+  <div class="post-meta">
+    
+    <span class="meta-item pc-show">
+      <i class="fa fa-calendar-o"></i>
+      <span>发布于</span>
+      <span>2020-04-01</span>
+      <span class="post-meta-divider pc-show">|</span>
+    </span>
+    
+      <span class="meta-item">
+        <i class="fa fa-folder-o"></i>
+        <span class="pc-show">分类于</span>
+        
+          
+            <a href="https://harriswilde.github.io/tag/OTNsv6iHN/">
+              <span>Go</span>
+            </a>、
+          
+        
+          
+            <a href="https://harriswilde.github.io/tag/VC6KZQgdc/">
+              <span>C</span>
+            </a>、
+          
+        
+          
+            <a href="https://harriswilde.github.io/tag/wPpzBFBxL/">
+              <span>C++</span>
+            </a>、
+          
+        
+          
+            <a href="https://harriswilde.github.io/tag/XDlggbnix/">
+              <span>Python</span>
+            </a>、
+          
+        
+          
+            <a href="https://harriswilde.github.io/tag/-AyA1dZw-/">
+              <span>算法</span>
+            </a>
+          
+        
+      </span>
+      <span class="post-meta-divider">|</span>
+    
+    <span class="meta-item">
+      <i class="fa fa-clock-o"></i>
+      <span>10分钟</span>
+    </span>
+    <span class="meta-item">
+      <span class="post-meta-divider">|</span>
+      <i class="fa fa-file-word-o"></i>
+      <span>2339<span class="pc-show">字数</span></span>
+    </span>
+    
+      <span id="/post/HRCsycd6c/" class="meta-item pc-show leancloud_visitors">
+        <span class="post-meta-divider">|</span>
+        <i class="fa fa-eye"></i>
+        <span>浏览量：<span class="leancloud-visitors-count" ></span></span>
+      </span>
+    
+  </div>
+</header>
+              <div class="post-body next-md-body" id="post_body">
+                <h1 id="递归是什么">递归是什么</h1>
+<p>递归，其实就是指函数调用自身的行为，比较简单也比较好理解。类似于我们中学的时候学数列的时候用的递推公式。就拿两个经典的例子来说说。</p>
+<h2 id="阶乘">阶乘</h2>
+<p>我们中学的时候学的阶乘的定义是什么呢？大概是写成这样：</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mo>!</mo><mo>=</mo><mi>n</mi><mo>⋅</mo><mo>(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo>)</mo><mo>⋅</mo><mo>(</mo><mi>n</mi><mo>−</mo><mn>2</mn><mo>)</mo><mo>⋅</mo><mo>(</mo><mi>n</mi><mo>−</mo><mn>3</mn><mo>)</mo><mo>…</mo><mn>2</mn><mo>⋅</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n!=n\cdot(n-1)\cdot(n-2)\cdot(n-3)\ldots2\cdot1
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">n</span><span class="mclose">!</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.44445em;vertical-align:0em;"></span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">2</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">3</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span></span></p>
+<p>其实简单一点写也可以这样：</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mo>!</mo><mo>=</mo><munderover><mo>∏</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mi>i</mi></mrow><annotation encoding="application/x-tex">n!=\prod_{i=1}^ni
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">n</span><span class="mclose">!</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.929066em;vertical-align:-1.277669em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.6513970000000002em;"><span style="top:-1.872331em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.050005em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∏</span></span></span><span style="top:-4.3000050000000005em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.277669em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">i</span></span></span></span></span></p>
+<p>可以看到，每一个乘数都会减一，直到最后为1了为止。那么我们其实可以理解为：</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mo>!</mo><mo>=</mo><mi>n</mi><mo>⋅</mo><mo>(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo>)</mo><mo>!</mo><mspace width="1em"/><mo>(</mo><mi mathvariant="normal">当</mi><mi mathvariant="normal">然</mi><mi mathvariant="normal">，</mi><mi mathvariant="normal">减</mi><mi mathvariant="normal">到</mi><mn>1</mn><mi mathvariant="normal">的</mi><mi mathvariant="normal">时</mi><mi mathvariant="normal">候</mi><mi mathvariant="normal">就</mi><mi mathvariant="normal">停</mi><mi mathvariant="normal">止</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">n!=n\cdot(n-1)!\quad (当然，减到1的时候就停止)
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">n</span><span class="mclose">!</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.44445em;vertical-align:0em;"></span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mclose">!</span><span class="mspace" style="margin-right:1em;"></span><span class="mopen">(</span><span class="mord cjk_fallback">当</span><span class="mord cjk_fallback">然</span><span class="mord cjk_fallback">，</span><span class="mord cjk_fallback">减</span><span class="mord cjk_fallback">到</span><span class="mord">1</span><span class="mord cjk_fallback">的</span><span class="mord cjk_fallback">时</span><span class="mord cjk_fallback">候</span><span class="mord cjk_fallback">就</span><span class="mord cjk_fallback">停</span><span class="mord cjk_fallback">止</span><span class="mclose">)</span></span></span></span></span></p>
+<p>这样，随着后面的阶乘一层一层解包，最后就能够达到一个完整的阶乘式子。因此我们可以这么理解：一个数如果大于1，那么就乘以它-1的阶乘，如果等于1则停止。这样一来，你会发现如果还没有减到1的时候，就会调用一个新的阶乘。在阶乘中调用阶乘，符合递归的定义。</p>
+<p>代码演示：</p>
+<pre><code class="language-java">// Java
+public int Fac(int n)
+{
+    if (n &lt; 0) 
+    {
+        return -1;//条件不合法
+    }
+    else if (n == 0 || n == 1)
+    {
+        return 1;//递归结束的限定条件
+    }
+    else
+    {
+        return n*Fac(n - 1);
+    }
+}
+</code></pre>
+<pre><code class="language-cpp">// C/C++
+int Fac(int n)
+{
+    if (n &lt; 0)
+    {
+        return -1;//条件不合法
+    }
+    else if (n == 0 || n == 1)
+    {
+        return 1;//递归结束条件
+    }
+    else
+    {
+        return n*Fac(n - 1);
+    }
+}
+</code></pre>
+<pre><code class="language-python"># Python
+import sys
+sys.setrecursionlimit(100000) #括号中的值为最大递归深度
+#如果递归调用的深度超过了Python默认的深度，那么就会报错，加上上面的语句就可以人为改动最大递归深度
+def Fac(n:int) -&gt; int:
+    if n &lt; 0:
+        return -1 #条件不合法
+    elif n == 0 or n == 1:
+        return 1 #递归结束条件
+    else:
+        return n*Fac(n - 1)
+</code></pre>
+<pre><code class="language-go">// Go
+func Fac(n uint64) uint64
+{
+    if (n &lt; 0)
+    {
+        return -1 //条件不合法
+    }
+    else if (n == 0 || n == 1)
+    {
+        return 1 //递归结束条件
+    }
+    else
+    {
+        return n*Fac(n - 1)
+    }
+}
+</code></pre>
+<h2 id="斐波那契数列">斐波那契数列</h2>
+<p>比起阶乘，斐波那契数列就更能够说明递归的思路。上面的阶乘我们还可以通过循环来解决，但是斐波那契数列使用递归的方式来生成，比其他任何一种方式都容易理解。我们知道，斐波那契数列就是将前两项加起来作为当前项，第一项始终为<code>1</code>。</p>
+<p>那么我们就可以写出以下思路：</p>
+<ul>
+<li>判断输入的项数，1 或 2 则输出 1</li>
+<li>大于 2，则输出前两项之和</li>
+</ul>
+<p>写成代码就是：</p>
+<pre><code class="language-java">// Java
+public int Fibo(int n)
+{
+    if (n &lt; 0)
+    {
+        return -1;//条件不合法
+    }
+    else if (n &lt;= 2)
+    {
+        return 1;//递归终止条件
+    }
+    else
+    {
+        return Fibo(n - 2) + Fibo(n - 1);
+    }
+}
+</code></pre>
+<pre><code class="language-cpp">// C/C++
+int Fibo(int n)
+{
+    if (n &lt; 0)
+    {
+        return -1;//条件不合法
+    }
+    else if (n &lt;= 2)
+    {
+        return 1;
+    }
+    else
+    {
+        return Fibo(n - 2) + Fibo (n - 1)
+    }
+}
+</code></pre>
+<pre><code class="language-python"># Python
+def Fibo(n:int) -&gt; int:
+    if n &lt; 0:
+        return -1 #条件不合法
+    elif n &lt;= 2:
+        return 1 #递归结束条件
+    else:
+        return Fibo(n - 2) + Fibo(n - 1)
+</code></pre>
+<pre><code class="language-go">// Go
+func Fibo(n int) int
+{
+    if (n &lt; 0)
+    {
+        return -1 //条件不合法
+    }
+    else if (n &lt;= 2)
+    {
+        return 1 //递归终止条件
+    }
+    return Fibo(n - 2) + Fibo(n - 1)
+}
+</code></pre>
+<h1 id="所谓分治">所谓分治</h1>
+<p>分治法其实我觉得就一句话：大事化小，小事化了。对于一个解决起来很复杂的问题，我们可以按照一定的规则，把问题分解成小问题，这样就能够很快解决。</p>
+<p>不能理解？其实我们常用的<strong>二分法</strong>就是一个很典型的分治法。</p>
+<p>在一个有序的数列里面，要寻找一个数，不需要挨个比对，先把数列平均分成两部分，然后检查一下我们要寻找的数和分界点的大小关系，然后确定所在区间，对这个区间采用刚刚同样的办法去处理。这样很快就可以找到一个数。</p>
+<p>比如这里有个 1 到 100 的序列，我要找 80，那么就开始比。80 显然比 50 大，那么就在<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>[</mo><mn>51</mn><mo separator="true">,</mo><mn>100</mn><mo>]</mo></mrow><annotation encoding="application/x-tex">[51,100]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">5</span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span><span class="mclose">]</span></span></span></span>里面找。80 显然比 75 大，那么范围进一步缩小到<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>[</mo><mn>76</mn><mo separator="true">,</mo><mn>100</mn><mo>]</mo></mrow><annotation encoding="application/x-tex">[76,100]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">7</span><span class="mord">6</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span><span class="mclose">]</span></span></span></span>。继续，80 比 87 小，范围缩减到<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>[</mo><mn>76</mn><mo separator="true">,</mo><mn>87</mn><mo>]</mo></mrow><annotation encoding="application/x-tex">[76,87]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">7</span><span class="mord">6</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">8</span><span class="mord">7</span><span class="mclose">]</span></span></span></span>。80 比 81 小，范围缩减至<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>[</mo><mn>76</mn><mo separator="true">,</mo><mn>81</mn><mo>]</mo></mrow><annotation encoding="application/x-tex">[76,81]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">7</span><span class="mord">6</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">8</span><span class="mord">1</span><span class="mclose">]</span></span></span></span>。80 比  78 大，范围缩减至<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>[</mo><mn>79</mn><mo separator="true">,</mo><mn>81</mn><mo>]</mo></mrow><annotation encoding="application/x-tex">[79,81]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">7</span><span class="mord">9</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">8</span><span class="mord">1</span><span class="mclose">]</span></span></span></span>。80 和 80 相等，于是我们找到了 80 这个数。总共比较了 6 次就找到了，比挨个比较快多了。</p>
+<h2 id="快速排序初步">快速排序初步</h2>
+<p>如果你能够理解上面两种思维，那么快速排序对于你来说，就很简单了。</p>
+<p>快速排序，简单来说，就是先在序列里面选择一个基准值（选哪一个都可以），然后把比基准值大的数放在基准值的右边，把比基准值小的数放在基准值左边，然后再分别对左右两部分执行刚才的操作，直到不能再分了为止。这样出来就是一个从小到大排序的序列了。</p>
+<p>比如：</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>[</mo><mn>3</mn><mo separator="true">,</mo><mn>1</mn><mo separator="true">,</mo><mn>2</mn><mo separator="true">,</mo><mn>5</mn><mo separator="true">,</mo><mn>4</mn><mo>]</mo></mrow><annotation encoding="application/x-tex">[3,1,2,5,4]
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">3</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">2</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">5</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">4</span><span class="mclose">]</span></span></span></span></span></p>
+<p>这里为了方便，我们选择第一个数 3 作为基准值，排序一遍：</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>[</mo><mn>1</mn><mo separator="true">,</mo><mn>2</mn><mo>]</mo><mtext> </mtext><mo>[</mo><mn>3</mn><mo>]</mo><mtext> </mtext><mo>[</mo><mn>5</mn><mo separator="true">,</mo><mn>4</mn><mo>]</mo></mrow><annotation encoding="application/x-tex">[1,2]\ [3]\ [5,4]
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">2</span><span class="mclose">]</span><span class="mspace"> </span><span class="mopen">[</span><span class="mord">3</span><span class="mclose">]</span><span class="mspace"> </span><span class="mopen">[</span><span class="mord">5</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">4</span><span class="mclose">]</span></span></span></span></span></p>
+<p>左边的子序列选择第一个数作为基准值，排序第二遍：</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>[</mo><mn>1</mn><mo>]</mo><mtext> </mtext><mo>[</mo><mn>2</mn><mo>]</mo><mspace width="1em"/><mo>[</mo><mn>3</mn><mo>]</mo><mtext> </mtext><mo>[</mo><mn>5</mn><mo separator="true">,</mo><mn>4</mn><mo>]</mo></mrow><annotation encoding="application/x-tex">[1]\ [2]\quad[3]\ [5,4]
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">1</span><span class="mclose">]</span><span class="mspace"> </span><span class="mopen">[</span><span class="mord">2</span><span class="mclose">]</span><span class="mspace" style="margin-right:1em;"></span><span class="mopen">[</span><span class="mord">3</span><span class="mclose">]</span><span class="mspace"> </span><span class="mopen">[</span><span class="mord">5</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">4</span><span class="mclose">]</span></span></span></span></span></p>
+<p>左边子序列排序完成，开始排序右边，选择第一个数作为基准值，排序第三遍：</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>[</mo><mn>1</mn><mo>]</mo><mtext> </mtext><mo>[</mo><mn>2</mn><mo>]</mo><mspace width="1em"/><mo>[</mo><mn>3</mn><mo>]</mo><mspace width="1em"/><mo>[</mo><mn>4</mn><mo>]</mo><mtext> </mtext><mo>[</mo><mn>5</mn><mo>]</mo></mrow><annotation encoding="application/x-tex">[1]\ [2]\quad[3]\quad[4]\ [5]
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">1</span><span class="mclose">]</span><span class="mspace"> </span><span class="mopen">[</span><span class="mord">2</span><span class="mclose">]</span><span class="mspace" style="margin-right:1em;"></span><span class="mopen">[</span><span class="mord">3</span><span class="mclose">]</span><span class="mspace" style="margin-right:1em;"></span><span class="mopen">[</span><span class="mord">4</span><span class="mclose">]</span><span class="mspace"> </span><span class="mopen">[</span><span class="mord">5</span><span class="mclose">]</span></span></span></span></span></p>
+<p>右边子序列排序完成，原始序列排序完成：</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>[</mo><mn>1</mn><mo separator="true">,</mo><mn>2</mn><mo separator="true">,</mo><mn>3</mn><mo separator="true">,</mo><mn>4</mn><mo separator="true">,</mo><mn>5</mn><mo>]</mo></mrow><annotation encoding="application/x-tex">[1,2,3,4,5]
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">2</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">3</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">4</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">5</span><span class="mclose">]</span></span></span></span></span></p>
+<p>挺简单的吧。我们只需要设计一遍思路，剩下的让它去递归就行了。</p>
+<p>说到递归，知道递归的只有 3 种人：</p>
+<ul>
+<li>讨厌递归的</li>
+<li>喜欢递归的</li>
+<li>一开始讨厌，后来变得喜欢的</li>
+</ul>
+<p>笔者就是第三种人。其实递归只要get到了它的精髓，一点都不难，反而还会觉得很直观。当然凡事都无绝对，在不适合用递归的时候强行用递归，那估计很难有人能够理解你的代码了。正所谓“普通程序员用迭代，天才程序员用递归”，大概说的就是这个道理。合适的才是最好的。</p>
+<h1 id="快排的基准值选取">快排的基准值选取</h1>
+<p>当然，快速排序也是有很多门道在里面的。比如基准值的选取，这就会直接决定你的快速排序的运行时间。</p>
+<p>我们刚刚在例子中，都是以第一个数作为基准值，这其实是不太恰当的，只不过我恰好举了个比较好的例子。</p>
+<p>不信？看这个：</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>[</mo><mn>5</mn><mo separator="true">,</mo><mn>4</mn><mo separator="true">,</mo><mn>3</mn><mo separator="true">,</mo><mn>2</mn><mo separator="true">,</mo><mn>1</mn><mo>]</mo></mrow><annotation encoding="application/x-tex">[5,4,3,2,1]
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">5</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">4</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">3</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">2</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mclose">]</span></span></span></span></span></p>
+<p>要求从小到大排序。</p>
+<p>如果你还用第一个值作为基准值，那就傻眼了：因为这样就会导致每次的左边子序列都是一个空序列，这样，快速排序就被你硬生生地用成了瘸子，非常慢。</p>
+<p>我们知道，这个序列显然用 3 做基准值是比较好的，但是计算机不知道。那么我们来想点别的办法。</p>
+<h2 id="随机法">随机法</h2>
+<p>我们可以直接用一个随机位置的值来作为基准值，这样就比刚刚要安全一些。如果你调用的随机函数是正常的，那么生成的值一般不会太奇怪，至少比刚刚那个方案靠谱多了。但是偶尔还是会存在一些不稳定的情况。</p>
+<h2 id="三数中值法">三数中值法</h2>
+<p>我们知道，最佳的基准值应该是这个序列的<strong>中值</strong>，所谓中值，就是一个有序数列的中间值。那么原理上只有有序数列才能够求出中值。那我都有序了还要排序干嘛？</p>
+<p>因此，我们只能通过一些方法来近似逼近中值，来寻求我们力所能及的最佳基准值。</p>
+<p>我们可以沿用随机法的思路，随机出几个值，然后再选取它们的中值，作为整个数列排序的基准值。但是这个方法也要看着用，毕竟选取数值太多了会影响效率，太少了又会影响精度。因此人们一般随机出 3 个值，以它们的中值来作为整个排序的基准值。</p>
+<p>但是我们知道，一个乱序的序列，其实我们本身就可以认为它是随机的，因为我们采集的数据大多都是毫无规律，你无法通过这一组数据来推测出下一组会是个什么样的序列。因此，我们随机函数也可以省去，直接用这个乱序序列的首尾和中间的数值这三个来作为基准值的参考即可。</p>
+<p>至于代码，我将会在《快速排序：进阶》中详细讲解，敬请期待。</p>
+
+              </div>
+              <div class="post-footer">
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      TechZone
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://harriswilde.github.io/post/HRCsycd6c/" title="递归与分治">递归与分治</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，转载请注明出处！
+    </li>
+  </ul>
+  <div class="tags">
+    
+      <a href="https://harriswilde.github.io/tag/OTNsv6iHN/"># Go</a>
+    
+      <a href="https://harriswilde.github.io/tag/VC6KZQgdc/"># C</a>
+    
+      <a href="https://harriswilde.github.io/tag/wPpzBFBxL/"># C++</a>
+    
+      <a href="https://harriswilde.github.io/tag/XDlggbnix/"># Python</a>
+    
+      <a href="https://harriswilde.github.io/tag/-AyA1dZw-/"># 算法</a>
+    
+  </div>
+  <div class="nav">
+    <div class="nav-prev">
+      
+    </div>
+    <div class="nav-next">
+      
+        <a class="nav-pc-next" title="雷电接口的前世今生" href="https://harriswilde.github.io/post/-fhDaOSdR/">雷电接口的前世今生</a>
+        <a class="nav-mobile-next" title="雷电接口的前世今生" href="https://harriswilde.github.io/post/-fhDaOSdR/">下一篇</a>
+        <i class="fa fa-chevron-right"></i>
+      
+    </div>
+  </div>
+</div>
+              
+                
+<script src="https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+<script>
+new Valine({
+    el: '#vcomments' ,
+    appId: 'aSVp0OY6zw3Kbg9XOVQduoms-9Nh9j0Va',
+    appKey: 'gtOCC5WcbcusTKnIBuqh6zaa',
+    notify: 'true' === 'true', 
+    avatar:'', 
+    placeholder: '有错误或更好的建议？告诉我一起学习吧！',
+    pageSize: '',
+    lang: 'zh-cn',
+    visitor: 'true' === 'true',
+    highlight: 'true' === 'true',
+    avatarForce: 'true' === 'false',
+});
+</script>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-box">
+  <footer class="footer">
+    <div class="copyright">
+      © 2019-2020 TechZone
+    </div>
+    <div class="poweredby">
+      Powered by HarrisWilde
+    </div>
+  </footer>
+  
+  
+  <div class="pisces back-to-top" id="back_to_top">
+    <i class="fa fa-arrow-up"></i>
+    
+    <span class="scrollpercent">
+      <span id="back_to_top_text">0</span>%
+    </span>
+    
+  </div>
+  
+  
+  
+</div>
+<script>
+
+  let sideBarOpen = 'sidebar-open';
+  let body = document.body;
+  let back2Top = document.querySelector('#back_to_top'),
+  back2TopText = document.querySelector('#back_to_top_text'),
+  drawerBox = document.querySelector('#drawer_box'),
+  rightSideBar = document.querySelector('.sidebar'),
+  viewport = document.querySelector('body');
+
+  function scrollAnimation(currentY, targetY) {
+   
+    let needScrollTop = targetY - currentY
+    let _currentY = currentY
+    setTimeout(() => {
+      const dist = Math.ceil(needScrollTop / 10)
+      _currentY += dist
+      window.scrollTo(_currentY, currentY)
+      if (needScrollTop > 10 || needScrollTop < -10) {
+        scrollAnimation(_currentY, targetY)
+      } else {
+        window.scrollTo(_currentY, targetY)
+      }
+    }, 1)
+  }
+
+  back2Top.addEventListener("click", function(e) {
+    scrollAnimation(document.scrollingElement.scrollTop, 0);
+    e.stopPropagation();
+    return false;
+  });
+  
+  window.addEventListener('scroll', function(e) {
+    let percent = document.scrollingElement.scrollTop / (document.scrollingElement.scrollHeight - document.scrollingElement.clientHeight) * 100;
+    if (percent > 1 && !back2Top.classList.contains('back-top-active')) {
+      back2Top.classList.add('back-top-active');
+    }
+    if (percent == 0) {
+      back2Top.classList.remove('back-top-active');
+    }
+    if (back2TopText) {
+      back2TopText.textContent = Math.floor(percent);
+    }
+  });
+
+  
+  let hasCacu = false;
+  window.onresize = function() {
+    if (window.width > 991) {
+      calcuHeight();
+    } else {
+      hasCacu = false;
+    }
+  }
+
+  function calcuHeight() {
+    // 动态调整站点概览高度
+    if (!hasCacu && back2Top.classList.contains('pisces') || back2Top.classList.contains('gemini')) {
+      let sideBar = document.querySelector('.sidebar');
+      let navUl = document.querySelector('#site_nav');
+      sideBar.style = 'margin-top:' + (navUl.offsetHeight + navUl.offsetTop + 15) + 'px;';
+      hasCacu = true;
+    }
+  }
+  calcuHeight();
+  
+  let open = false, MOTION_TIME = 300, RIGHT_MOVE_DIS = '320px';
+
+  if (drawerBox) {
+    let rightMotions = document.querySelectorAll('.right-motion');
+    let right = drawerBox.classList.contains('right');
+
+    let transitionDir = right ? "transition.slideRightIn" : "transition.slideLeftIn";
+
+    let openProp, closeProp;
+    if (right) {
+      openProp = {
+        paddingRight: RIGHT_MOVE_DIS 
+      };
+      closeProp = {
+        paddingRight: '0px'
+      };
+    } else {
+      openProp = {
+        paddingLeft: RIGHT_MOVE_DIS 
+      };
+      closeProp = {
+        paddingLeft: '0px'
+      };
+    }
+
+    drawerBox.onclick = function() {
+      open = !open;
+      window.Velocity(rightSideBar, 'stop');
+      window.Velocity(viewport, 'stop');
+      window.Velocity(rightMotions, 'stop');
+      if (open) {
+        window.Velocity(rightSideBar, {
+          width: RIGHT_MOVE_DIS
+        }, {
+          duration: MOTION_TIME,
+          begin: function() {
+            window.Velocity(rightMotions, transitionDir,{ });
+          }
+        })
+        window.Velocity(viewport, openProp,{
+          duration: MOTION_TIME
+        });
+      } else {
+        window.Velocity(rightSideBar, {
+          width: '0px'
+        }, {
+          duration: MOTION_TIME,
+          begin: function() {
+            window.Velocity(rightMotions, {
+              opacity: 0
+            });
+          }
+        })
+        window.Velocity(viewport, closeProp ,{
+          duration: MOTION_TIME
+        });
+      }
+      for (let i = 0; i < drawerBox.children.length; i++) {
+        drawerBox.children[i].classList.toggle('muse-line');
+      }
+      drawerBox.classList.toggle(sideBarOpen);
+    }
+  }
+
+  // 代码高亮
+  hljs.initHighlightingOnLoad();
+
+</script>
+    </div>
+  </body>
+  <script src="/media/js/motion.js"></script>
+</html>
