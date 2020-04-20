@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://harriswilde.github.io</id>
     <title>TechZone</title>
-    <updated>2020-04-20T10:53:36.643Z</updated>
+    <updated>2020-04-20T10:54:56.274Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://harriswilde.github.io"/>
     <link rel="self" href="https://harriswilde.github.io/atom.xml"/>
@@ -12,8 +12,8 @@
     <rights>All rights reserved 2020, TechZone</rights>
     <entry>
         <title type="html"><![CDATA[C语言之位操作]]></title>
-        <id>https://harriswilde.github.io/post/_YZ-zJubD/</id>
-        <link href="https://harriswilde.github.io/post/_YZ-zJubD/">
+        <id>https://harriswilde.github.io/post/YZzJubD/</id>
+        <link href="https://harriswilde.github.io/post/YZzJubD/">
         </link>
         <updated>2020-04-20T02:03:02.000Z</updated>
         <content type="html"><![CDATA[<p>在《C语言之结构体》的最后，我们提到了有关位域的概念，我们可以发现C语言强大到精准到<strong>位</strong>的控制能力。这篇我们就来讲讲<strong>位操作</strong>。</p>
@@ -1941,9 +1941,9 @@ size of test = 4
         <content type="html"><![CDATA[<p>有的时候，我们所遇到的数据结构，不仅仅是一群数字或者是字符串那么简单。比如我们每一个人的学籍信息，学号是一个长整数，名字却是字符；甚至有更复杂的情况，这种问题在现实生活中并不少见。我们之前学过一种叫数组的数据结构，它可以允许我们把很多同类型的数据集中在一起处理。相对于之前，这已经是一次极大的进步。但是，新的问题，往往又会出现，这个时候，我们就得上更高端的装备——结构体。</p>
 <p>相比于数组，结构体有以下的更强大的优势：</p>
 <ul class="contains-task-list">
-<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-1496249"><label class="task-list-item-label" for="task-item-1496249"> 批量存储数据</label></li>
-<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-3025756"><label class="task-list-item-label" for="task-item-3025756"> 存储不同类型的数据</label></li>
-<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-6907859"><label class="task-list-item-label" for="task-item-6907859"> 支持嵌套</label></li>
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-2359878"><label class="task-list-item-label" for="task-item-2359878"> 批量存储数据</label></li>
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-7453155"><label class="task-list-item-label" for="task-item-7453155"> 存储不同类型的数据</label></li>
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-6958545"><label class="task-list-item-label" for="task-item-6958545"> 支持嵌套</label></li>
 </ul>
 <h1 id="结构体的声明与定义">结构体的声明与定义</h1>
 <h2 id="声明">声明</h2>
