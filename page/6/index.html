@@ -1,717 +1,195 @@
-<!DOCTYPE html>
-<html>
-  <head>
-      <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<meta name="keywords" content="TechZone">
-<meta name="description" content="HarrisWilde祝诸君元旦快乐🎉">
-<meta name="theme-color" content="#222222">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>TechZone</title>
-<link rel="shortcut icon" href="https://harriswilde.github.io/favicon.ico?v=1587380463772">
+<link rel="shortcut icon" href="https://harriswilde.github.io/favicon.ico">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css">
+<link rel="stylesheet" href="https://harriswilde.github.io/media/css/tailwind.css">
 <link rel="stylesheet" href="https://harriswilde.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="TechZone - Atom Feed" href="https://harriswilde.github.io/atom.xml">
 
-<link rel="stylesheet" href="/media/css/pisces.css">
+    
 
-<link rel="stylesheet" href="/media/fonts/font-awesome.css">
-<link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Rosario:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  <meta name="description" content="HarrisWilde祝诸君元旦快乐🎉" />
+</head>
+<body>
+  <div class="antialiased flex flex-col min-h-screen" id="app">
 
-<link href="/media/hljs/styles/prism.css" rel="stylesheet">  
-
-<script src="/media/hljs/highlight.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.ui.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
-    onload="renderMathInElement(document.body);"></script>
-
-  </head>
-  <body>
-    <div class="head-top-line"></div>
-    <div class="header-box">
-      
-<div class=" pisces">
-  <header class="header bg-color ">
-    <div class="blog-header box-shadow-wrapper bg-color " id="header">
-      <div class="nav-toggle" id="nav_toggle">
-        <div class="toggle-box">
-          <div class="line line-top"></div>
-          <div class="line line-center"></div>
-          <div class="line line-bottom"></div>
-        </div>
-      </div>
-      <div class="site-meta">       
-        <div class="site-title">
-          
-            <a href="/" class="brand">
-              <span>TechZone</span>
-            </a>  
-          
-        </div>
-        
-          <p class="subtitle">HarrisWilde的官方个人博客</p>
-        
-      </div>
-      <nav class="site-nav" id="site_nav">
-        <ul id="nav_ul">
-          
-            <li class="nav-item nav-item-active">
-              
-              
-                <a href="/" target="_self">
-                  <i class="fa fa-home"></i> 首页
-                </a>
-              
-            </li>
-          
-            <li class="nav-item ">
-              
-              
-                <a href="/archives" target="_self">
-                  <i class="fa fa-archive"></i> 归档
-                </a>
-              
-            </li>
-          
-            <li class="nav-item ">
-              
-              
-                <a href="/tags" target="_self">
-                  <i class="fa fa-tags"></i> 分类
-                </a>
-              
-            </li>
-          
-            <li class="nav-item ">
-              
-              
-                <a href="https://www.jianshu.com/u/766d2f134900" target="_blank">
-                  <i class="fa fa-globe"></i> 简书
-                </a>
-              
-            </li>
-          
-          <li class="nav-item">
-            <a>
-              <i class="fa fa-search"></i> 搜索
-            </a>
-          </li>
-        </ul>
-      </nav>
+    <div class="nav py-3 md:py-8 fixed w-full z-10 bg-gray-50 dark:bg-gray-700 transition-all duration-300" :class="{ 'scroll': scrolled }">
+  <div class="flex justify-end px-4">
+    <div class="w-8 h-8 flex justify-center items-center rounded-full md:hidden" @click="showMenu = !showMenu">
+      <i class="ri-close-line" v-show="showMenu"></i>
+      <i class="ri-menu-3-line" v-show="!showMenu"></i>
     </div>
-  </header>
+  </div>
+  <nav class="max-w-4xl w-full mx-auto text-center flex flex-col md:flex-row justify-center md:block" :class="`${ showMenu ? 'block' : 'hidden' }`">
+    
+      <a href="/" target="" class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+        首页
+      </a>
+    
+      <a href="/archives" target="" class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+        归档
+      </a>
+    
+      <a href="/tags" target="" class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+        分类
+      </a>
+    
+      <a href="https://www.jianshu.com/u/766d2f134900" target="_blank" class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+        简书
+      </a>
+    
+    <a href="https://harriswilde.github.io/atom.xml" target="_blank" class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      RSS
+    </a>
+  </nav>
 </div>
 
-<script type="text/javascript"> 
- 
-  let showNav = true;
+    <div class="max-w-4xl w-full mx-auto pt-32">
+      
 
-  let navToggle = document.querySelector('#nav_toggle'),
-  siteNav = document.querySelector('#site_nav');
-  
-  function navClick() {
-    let sideBar = document.querySelector('.sidebar');
-    let navUl = document.querySelector('#nav_ul');
-    navToggle.classList.toggle('nav-toggle-active');
-    siteNav.classList.toggle('nav-menu-active');
-    if (siteNav.classList.contains('nav-menu-active')) {
-      siteNav.style = "height: " + (navUl.children.length * 42) +"px !important";
-    } else {
-      siteNav.style = "";
-    }
-  }
-
-  navToggle.addEventListener('click',navClick);  
-</script>
-    </div>
-    <div class="main-continer">
-      
-      <div class="section-layout pisces ">
-        <div class="section-layout-wrapper">
-          <div id="sidebarMeta" class="sidebar">
+      <div class="shadow-box bg-white dark:bg-gray-600 border-gray-300 rounded-none md:rounded-lg -mx-1 md:mx-0 md:px-0">
+        
+  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
     
-<div class="sidebar-wrapper box-shadow-wrapper bg-color">
-  <div class="sidebar-item">
-    <img class="site-author-image right-motion" src="https://harriswilde.github.io/images/avatar.png"/>
-    <p class="site-author-name">TechZone</p>
-    <p class="site-description right-motion">2020，共同进步！</p>
-  </div>
-  <div class="sidebar-item side-item-stat right-motion">
-    <div class="sidebar-item-box">
-      <a href="/archives/">
-        
-        <span class="site-item-stat-count">31</span>
-        <span class="site-item-stat-name">文章</span>
-      </a>
-    </div>
-    <div class="sidebar-item-box">
-      <a href="">
-        <span class="site-item-stat-count">10</span>
-        <span class="site-item-stat-name">分类</span>
-      </a>
-    </div>
-    <div class="sidebar-item-box">
-      <a href="/tags/">
-        <span class="site-item-stat-count">10</span>
-        <span class="site-item-stat-name">标签</span>
-      </a>
-    </div>
-  </div>
-  
-    
-      <div class="sidebar-item">
-        <span class="site-item-rss">
-            <i class="fa fa-rss"></i>
-            <a href="https://harriswilde.github.io/atom.xml" target="_blank">RSS</a>
-        </span>
-      </div>
-    
-  
-  
-
-
-</div>
-</div>
-<script>
-  let sidebarMeta = document.querySelector('#sidebarMeta');
-  let scheme = 'pisces';
-  let sidebarWrapper = document.querySelector('.sidebar-wrapper');
-  if (sidebarMeta && (scheme === 'pisces' || scheme === 'gemini')) {
-    document.addEventListener('scroll', function(e) {
-      if (document.scrollingElement.scrollTop > parseInt(sidebarMeta.style.marginTop) + 10) {
-        sidebarWrapper.classList.add('home-sidebar-fixed')
-      } else {
-        sidebarWrapper.classList.remove('home-sidebar-fixed')
-      }
-    });
-  }
-  </script>
-          <div class="section-box pisces">
-            <section class="section bg-color posts-expand slide-down-in">
-              
-  <article class="post-list-box  post box-shadow-wrapper">
-    <div class="article-wrapper bg-color">
-      <header class="post-header">
-  <h1 class="post-title">
-    <a class="post-title-link" href="https://harriswilde.github.io/post/FixedFloatPoint/">
-      小数表示法(定点法、浮点法)
-    </a>
-  </h1>
-  <div class="post-meta">
-    
-    <span class="meta-item pc-show">
-      <i class="fa fa-calendar-o"></i>
-      <span>发布于</span>
-      <span>2019-10-22</span>
-      <span class="post-meta-divider pc-show">|</span>
-    </span>
-    
-      <span class="meta-item">
-        <i class="fa fa-folder-o"></i>
-        <span class="pc-show">分类于</span>
-        
-          
-            <a href="https://harriswilde.github.io/tag/i93z3Sui_/">
-              <span>计算机基础</span>
-            </a>
-          
-        
-      </span>
-      <span class="post-meta-divider">|</span>
-    
-    <span class="meta-item">
-      <i class="fa fa-clock-o"></i>
-      <span>10分钟</span>
-    </span>
-    <span class="meta-item">
-      <span class="post-meta-divider">|</span>
-      <i class="fa fa-file-word-o"></i>
-      <span>2508<span class="pc-show">字数</span></span>
-    </span>
-    
-  </div>
-</header>
-      <div class="post-body">
-        
-          
-        
-        
-        <div class="post-button text-center">
-          <a class="btn" href="https://harriswilde.github.io/post/FixedFloatPoint/" rel="contents">
-            阅读全文 »
-          </a>
-        </div>
-        
-      </div>
-      
-        <footer class="post-footer">
-          <div class="post-eof"></div>
-        </footer>
-      
-    </div>
-  </article>
-
-  <article class="post-list-box  post box-shadow-wrapper">
-    <div class="article-wrapper bg-color">
-      <header class="post-header">
-  <h1 class="post-title">
-    <a class="post-title-link" href="https://harriswilde.github.io/post/CodeTrans/">
-      进制转换以及原、反、补码
-    </a>
-  </h1>
-  <div class="post-meta">
-    
-    <span class="meta-item pc-show">
-      <i class="fa fa-calendar-o"></i>
-      <span>发布于</span>
-      <span>2019-10-15</span>
-      <span class="post-meta-divider pc-show">|</span>
-    </span>
-    
-      <span class="meta-item">
-        <i class="fa fa-folder-o"></i>
-        <span class="pc-show">分类于</span>
-        
-          
-            <a href="https://harriswilde.github.io/tag/i93z3Sui_/">
-              <span>计算机基础</span>
-            </a>
-          
-        
-      </span>
-      <span class="post-meta-divider">|</span>
-    
-    <span class="meta-item">
-      <i class="fa fa-clock-o"></i>
-      <span>8分钟</span>
-    </span>
-    <span class="meta-item">
-      <span class="post-meta-divider">|</span>
-      <i class="fa fa-file-word-o"></i>
-      <span>2021<span class="pc-show">字数</span></span>
-    </span>
-    
-  </div>
-</header>
-      <div class="post-body">
-        
-          
-        
-        
-        <div class="post-button text-center">
-          <a class="btn" href="https://harriswilde.github.io/post/CodeTrans/" rel="contents">
-            阅读全文 »
-          </a>
-        </div>
-        
-      </div>
-      
-        <footer class="post-footer">
-          <div class="post-eof"></div>
-        </footer>
-      
-    </div>
-  </article>
-
-  <article class="post-list-box  post box-shadow-wrapper">
-    <div class="article-wrapper bg-color">
-      <header class="post-header">
-  <h1 class="post-title">
-    <a class="post-title-link" href="https://harriswilde.github.io/post/CPrintf/">
-      C语言之printf函数的用法
-    </a>
-  </h1>
-  <div class="post-meta">
-    
-    <span class="meta-item pc-show">
-      <i class="fa fa-calendar-o"></i>
-      <span>发布于</span>
-      <span>2019-10-13</span>
-      <span class="post-meta-divider pc-show">|</span>
-    </span>
-    
-      <span class="meta-item">
-        <i class="fa fa-folder-o"></i>
-        <span class="pc-show">分类于</span>
-        
-          
-            <a href="https://harriswilde.github.io/tag/VC6KZQgdc/">
-              <span>C</span>
-            </a>
-          
-        
-      </span>
-      <span class="post-meta-divider">|</span>
-    
-    <span class="meta-item">
-      <i class="fa fa-clock-o"></i>
-      <span>6分钟</span>
-    </span>
-    <span class="meta-item">
-      <span class="post-meta-divider">|</span>
-      <i class="fa fa-file-word-o"></i>
-      <span>1615<span class="pc-show">字数</span></span>
-    </span>
-    
-  </div>
-</header>
-      <div class="post-body">
-        
-          
-        
-        
-        <div class="post-button text-center">
-          <a class="btn" href="https://harriswilde.github.io/post/CPrintf/" rel="contents">
-            阅读全文 »
-          </a>
-        </div>
-        
-      </div>
-      
-        <footer class="post-footer">
-          <div class="post-eof"></div>
-        </footer>
-      
-    </div>
-  </article>
-
-  <article class="post-list-box  post box-shadow-wrapper">
-    <div class="article-wrapper bg-color">
-      <header class="post-header">
-  <h1 class="post-title">
-    <a class="post-title-link" href="https://harriswilde.github.io/post/CPreStudy/">
-      C语言的一些基本知识
-    </a>
-  </h1>
-  <div class="post-meta">
-    
-    <span class="meta-item pc-show">
-      <i class="fa fa-calendar-o"></i>
-      <span>发布于</span>
-      <span>2019-10-13</span>
-      <span class="post-meta-divider pc-show">|</span>
-    </span>
-    
-      <span class="meta-item">
-        <i class="fa fa-folder-o"></i>
-        <span class="pc-show">分类于</span>
-        
-          
-            <a href="https://harriswilde.github.io/tag/VC6KZQgdc/">
-              <span>C</span>
-            </a>
-          
-        
-      </span>
-      <span class="post-meta-divider">|</span>
-    
-    <span class="meta-item">
-      <i class="fa fa-clock-o"></i>
-      <span>4分钟</span>
-    </span>
-    <span class="meta-item">
-      <span class="post-meta-divider">|</span>
-      <i class="fa fa-file-word-o"></i>
-      <span>852<span class="pc-show">字数</span></span>
-    </span>
-    
-  </div>
-</header>
-      <div class="post-body">
-        
-          
-        
-        
-        <div class="post-button text-center">
-          <a class="btn" href="https://harriswilde.github.io/post/CPreStudy/" rel="contents">
-            阅读全文 »
-          </a>
-        </div>
-        
-      </div>
-      
-        <footer class="post-footer">
-          <div class="post-eof"></div>
-        </footer>
-      
-    </div>
-  </article>
-
-  <article class="post-list-box  post box-shadow-wrapper">
-    <div class="article-wrapper bg-color">
-      <header class="post-header">
-  <h1 class="post-title">
-    <a class="post-title-link" href="https://harriswilde.github.io/post/FirstCProgram/">
-      第一个C语言程序
-    </a>
-  </h1>
-  <div class="post-meta">
-    
-    <span class="meta-item pc-show">
-      <i class="fa fa-calendar-o"></i>
-      <span>发布于</span>
-      <span>2019-10-11</span>
-      <span class="post-meta-divider pc-show">|</span>
-    </span>
-    
-      <span class="meta-item">
-        <i class="fa fa-folder-o"></i>
-        <span class="pc-show">分类于</span>
-        
-          
-            <a href="https://harriswilde.github.io/tag/VC6KZQgdc/">
-              <span>C</span>
-            </a>
-          
-        
-      </span>
-      <span class="post-meta-divider">|</span>
-    
-    <span class="meta-item">
-      <i class="fa fa-clock-o"></i>
-      <span>6分钟</span>
-    </span>
-    <span class="meta-item">
-      <span class="post-meta-divider">|</span>
-      <i class="fa fa-file-word-o"></i>
-      <span>1695<span class="pc-show">字数</span></span>
-    </span>
-    
-  </div>
-</header>
-      <div class="post-body">
-        
-          
-        
-        
-        <div class="post-button text-center">
-          <a class="btn" href="https://harriswilde.github.io/post/FirstCProgram/" rel="contents">
-            阅读全文 »
-          </a>
-        </div>
-        
-      </div>
-      
-        <footer class="post-footer">
-          <div class="post-eof"></div>
-        </footer>
-      
-    </div>
-  </article>
-  
-              
-              
-<div class="page bg-color">
-  <ul class="pagination-ul">
-    
-      <li class="pagination-dir">
-        <a href="https://harriswilde.github.io/page/5/">
-          <i class="fa fa-angle-left"></i>
+    <div class="flex-1 order-2 md:order-1">
+      <h2 class="text-2xl font-semibold mb-4">
+        <a href="https://harriswilde.github.io/post/FixedFloatPoint/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+          小数表示法(定点法、浮点法)
         </a>
-      </li>
-    
-    
-      <!-- 1 2 3 4 ... N -->
-      
-        <!-- 1 ... N-2 N-1 N-->
-        <li class="pagination-li">
-          <a href="/">1</a>
-        </li>
-        <li class="pagination-li">
-          …
-        </li>
-        
-          <li class="pagination-li ">
-            <a href="/page/5">
-              5
-            </a>
-          </li>
-        
-          <li class="pagination-li pagination-active">
-            <a href="#">
-              6
-            </a>
-          </li>
-        
-          <li class="pagination-li ">
-            <a href="/page/7">
-              7
-            </a>
-          </li>
-        
-      
-    
-    
-      <li class="pagination-dir">
-        <a href="/page/7">
-          <i class="fa fa-angle-right"></i>
-        </a>
-      </li>
-    
-  </ul>
-</div>
-            </section>
-          </div>
-        </div>
+      </h2>
+      <div class="mb-4 text-xs text-gray-500">2019-10-22</div>
+      <div class="mb-4 text-gray-500 dark:text-gray-300">
+        在计算机的数据存储里面，常规思路来看，是只能表示有限位数的整数的。但是，无论是在日常生活中，还是在科学研究领域，小数(严格来讲应该是分数)都是不可或缺的部分。那么，如何让计算机能够存储并使用小数呢？这篇文章就带大家一起来了解下两种常用的小数...
       </div>
-      <div class="footer-box">
-  <footer class="footer">
-    <div class="copyright">
-      © 2019-2020 TechZone
+      <a href="https://harriswilde.github.io/post/FixedFloatPoint/" class="btn">
+        Read more
+      </a>
     </div>
-    <div class="poweredby">
-      Powered by HarrisWilde
-    </div>
-  </footer>
-  
-  
-  <div class="pisces back-to-top" id="back_to_top">
-    <i class="fa fa-arrow-up"></i>
     
-    <span class="scrollpercent">
-      <span id="back_to_top_text">0</span>%
-    </span>
+      <img class="flex-shrink-0 self-start md:ml-4 mb-4 md:mb-0 rounded-sm object-cover featured-img order-1 md:order-2 w-full h-40 md:w-56 md:h-32" loading="lazy" src="https://s2.ax1x.com/2019/12/11/QrRY8J.jpg" alt="小数表示法(定点法、浮点法)">
+    
+  </div>
+
+  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+    
+    <div class="flex-1 order-2 md:order-1">
+      <h2 class="text-2xl font-semibold mb-4">
+        <a href="https://harriswilde.github.io/post/CodeTrans/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+          进制转换以及原、反、补码
+        </a>
+      </h2>
+      <div class="mb-4 text-xs text-gray-500">2019-10-15</div>
+      <div class="mb-4 text-gray-500 dark:text-gray-300">
+        可能有的小伙伴不理解了：为啥这节讲这些呢，不应该先把语法什么的学习一下吗？
+在之前的文章里面讲过，C语言的学习是需要了解一点计算机工作原理的。可能在初学时期用不到，但是如果真的要深入研究的话，是绝对避免不了的。况且这节的内容其实比较简单，我...
+      </div>
+      <a href="https://harriswilde.github.io/post/CodeTrans/" class="btn">
+        Read more
+      </a>
+    </div>
+    
+      <img class="flex-shrink-0 self-start md:ml-4 mb-4 md:mb-0 rounded-sm object-cover featured-img order-1 md:order-2 w-full h-40 md:w-56 md:h-32" loading="lazy" src="https://s2.ax1x.com/2019/12/11/Qr2j4e.jpg" alt="进制转换以及原、反、补码">
+    
+  </div>
+
+  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+    
+    <div class="flex-1 order-2 md:order-1">
+      <h2 class="text-2xl font-semibold mb-4">
+        <a href="https://harriswilde.github.io/post/CPrintf/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+          C语言之printf函数的用法
+        </a>
+      </h2>
+      <div class="mb-4 text-xs text-gray-500">2019-10-13</div>
+      <div class="mb-4 text-gray-500 dark:text-gray-300">
+        printf，即格式化输出，是C语言中常用的输出函数。本节内容咱们就来讲讲关于这个函数的一些用法。
+​		我们在《第一个C语言程序》中有粗略地提到了printf函数，小伙伴们应该也对这个函数有了一个大致的了解，大概知道了是用来输出数据用的。...
+      </div>
+      <a href="https://harriswilde.github.io/post/CPrintf/" class="btn">
+        Read more
+      </a>
+    </div>
+    
+      <img class="flex-shrink-0 self-start md:ml-4 mb-4 md:mb-0 rounded-sm object-cover featured-img order-1 md:order-2 w-full h-40 md:w-56 md:h-32" loading="lazy" src="https://s2.ax1x.com/2019/12/11/Qr259J.jpg" alt="C语言之printf函数的用法">
+    
+  </div>
+
+  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+    
+    <div class="flex-1 order-2 md:order-1">
+      <h2 class="text-2xl font-semibold mb-4">
+        <a href="https://harriswilde.github.io/post/CPreStudy/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+          C语言的一些基本知识
+        </a>
+      </h2>
+      <div class="mb-4 text-xs text-gray-500">2019-10-13</div>
+      <div class="mb-4 text-gray-500 dark:text-gray-300">
+        在正式开始学习C语言之前，我们先带大家来熟悉一下C语言的一些基本知识。只有熟悉了这些基本知识，后期的学习和实践中才不会因为一些简单的问题而卡格。
+编译型语言和解释性语言的区别
+​		我们之前说过，C语言是一种编译型语言，而像Python，R...
+      </div>
+      <a href="https://harriswilde.github.io/post/CPreStudy/" class="btn">
+        Read more
+      </a>
+    </div>
+    
+      <img class="flex-shrink-0 self-start md:ml-4 mb-4 md:mb-0 rounded-sm object-cover featured-img order-1 md:order-2 w-full h-40 md:w-56 md:h-32" loading="lazy" src="https://s2.ax1x.com/2019/12/11/Qr2N0f.jpg" alt="C语言的一些基本知识">
+    
+  </div>
+
+  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+    
+    <div class="flex-1 order-2 md:order-1">
+      <h2 class="text-2xl font-semibold mb-4">
+        <a href="https://harriswilde.github.io/post/FirstCProgram/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+          第一个C语言程序
+        </a>
+      </h2>
+      <div class="mb-4 text-xs text-gray-500">2019-10-11</div>
+      <div class="mb-4 text-gray-500 dark:text-gray-300">
+        是不是小伙伴们学习C语言，首先把教材摊开，电脑上装好环境，打开编辑器，对照着书本上第一段代码一丝不苟地敲起来，然后Run……Awesome！这是我独享的moment……
+​		如有雷同，我声明我没有监视你们的电脑屏幕&lt;(￣ c￣)y▂...
+      </div>
+      <a href="https://harriswilde.github.io/post/FirstCProgram/" class="btn">
+        Read more
+      </a>
+    </div>
+    
+      <img class="flex-shrink-0 self-start md:ml-4 mb-4 md:mb-0 rounded-sm object-cover featured-img order-1 md:order-2 w-full h-40 md:w-56 md:h-32" loading="lazy" src="https://s2.ax1x.com/2019/12/11/Qr2ElR.jpg" alt="第一个C语言程序">
     
   </div>
   
-  
-  
-</div>
-<script>
+      </div>
 
-  let sideBarOpen = 'sidebar-open';
-  let body = document.body;
-  let back2Top = document.querySelector('#back_to_top'),
-  back2TopText = document.querySelector('#back_to_top_text'),
-  drawerBox = document.querySelector('#drawer_box'),
-  rightSideBar = document.querySelector('.sidebar'),
-  viewport = document.querySelector('body');
+      
+  <div class="my-4 flex justify-between px-4 md:px-0">
+    
+      <a href="https://harriswilde.github.io/page/5/" class="btn btn-white">
+        <i class="ri-arrow-left-line mr-4"></i>
+        上一页
+      </a>
+    
+    
+      <a href="https://harriswilde.github.io/page/7/" class="btn btn-white">
+        下一页
+        <i class="ri-arrow-right-line ml-4"></i>
+      </a>
+    
+  </div>
 
-  function scrollAnimation(currentY, targetY) {
-   
-    let needScrollTop = targetY - currentY
-    let _currentY = currentY
-    setTimeout(() => {
-      const dist = Math.ceil(needScrollTop / 10)
-      _currentY += dist
-      window.scrollTo(_currentY, currentY)
-      if (needScrollTop > 10 || needScrollTop < -10) {
-        scrollAnimation(_currentY, targetY)
-      } else {
-        window.scrollTo(_currentY, targetY)
-      }
-    }, 1)
-  }
+      <footer class="py-12 text-center px-4 md:px-0" v-pre>
+  Powered by HarrisWilde
+</footer>
 
-  back2Top.addEventListener("click", function(e) {
-    scrollAnimation(document.scrollingElement.scrollTop, 0);
-    e.stopPropagation();
-    return false;
-  });
-  
-  window.addEventListener('scroll', function(e) {
-    let percent = document.scrollingElement.scrollTop / (document.scrollingElement.scrollHeight - document.scrollingElement.clientHeight) * 100;
-    if (percent > 1 && !back2Top.classList.contains('back-top-active')) {
-      back2Top.classList.add('back-top-active');
-    }
-    if (percent == 0) {
-      back2Top.classList.remove('back-top-active');
-    }
-    if (back2TopText) {
-      back2TopText.textContent = Math.floor(percent);
-    }
-  });
-
-  
-  let hasCacu = false;
-  window.onresize = function() {
-    if (window.width > 991) {
-      calcuHeight();
-    } else {
-      hasCacu = false;
-    }
-  }
-
-  function calcuHeight() {
-    // 动态调整站点概览高度
-    if (!hasCacu && back2Top.classList.contains('pisces') || back2Top.classList.contains('gemini')) {
-      let sideBar = document.querySelector('.sidebar');
-      let navUl = document.querySelector('#site_nav');
-      sideBar.style = 'margin-top:' + (navUl.offsetHeight + navUl.offsetTop + 15) + 'px;';
-      hasCacu = true;
-    }
-  }
-  calcuHeight();
-  
-  let open = false, MOTION_TIME = 300, RIGHT_MOVE_DIS = '320px';
-
-  if (drawerBox) {
-    let rightMotions = document.querySelectorAll('.right-motion');
-    let right = drawerBox.classList.contains('right');
-
-    let transitionDir = right ? "transition.slideRightIn" : "transition.slideLeftIn";
-
-    let openProp, closeProp;
-    if (right) {
-      openProp = {
-        paddingRight: RIGHT_MOVE_DIS 
-      };
-      closeProp = {
-        paddingRight: '0px'
-      };
-    } else {
-      openProp = {
-        paddingLeft: RIGHT_MOVE_DIS 
-      };
-      closeProp = {
-        paddingLeft: '0px'
-      };
-    }
-
-    drawerBox.onclick = function() {
-      open = !open;
-      window.Velocity(rightSideBar, 'stop');
-      window.Velocity(viewport, 'stop');
-      window.Velocity(rightMotions, 'stop');
-      if (open) {
-        window.Velocity(rightSideBar, {
-          width: RIGHT_MOVE_DIS
-        }, {
-          duration: MOTION_TIME,
-          begin: function() {
-            window.Velocity(rightMotions, transitionDir,{ });
-          }
-        })
-        window.Velocity(viewport, openProp,{
-          duration: MOTION_TIME
-        });
-      } else {
-        window.Velocity(rightSideBar, {
-          width: '0px'
-        }, {
-          duration: MOTION_TIME,
-          begin: function() {
-            window.Velocity(rightMotions, {
-              opacity: 0
-            });
-          }
-        })
-        window.Velocity(viewport, closeProp ,{
-          duration: MOTION_TIME
-        });
-      }
-      for (let i = 0; i < drawerBox.children.length; i++) {
-        drawerBox.children[i].classList.toggle('muse-line');
-      }
-      drawerBox.classList.toggle(sideBarOpen);
-    }
-  }
-
-  // 代码高亮
-  hljs.initHighlightingOnLoad();
-
-</script>
     </div>
-  </body>
-  <script src="/media/js/motion.js"></script>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://harriswilde.github.io/media/scripts/main.js"></script>
+</body>
+
 </html>
